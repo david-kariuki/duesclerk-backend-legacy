@@ -1,0 +1,147 @@
+<?php
+
+class ListGridFunctions{
+
+	// Connection status value variable
+	private $connectToDB;
+	private $fieldKeys;
+
+
+  // Constructor
+	function __construct() {
+
+		// Call required functions classes
+		require_once 'FieldKeys.php';
+    require_once 'Connection.php';
+
+    // Create and initialize required classes objects
+    $connection = new Connection();
+
+		// Initializing connection
+    $this->connectToDB 	= $connection->Connect();
+		$this->fieldKeys		= new FieldKeys();
+
+  }
+
+  // Destructor
+  function __destruct() {
+
+    // Close database connection
+		mysqli_close($this->connectToDB);
+  }
+
+
+		/**
+		 * Function To empty countries table
+		 * @param null
+		*/
+		public function emptyCountriesTable(){
+
+			// Check ff table has data
+			$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableCountries}");
+			$stmt->execute();
+			$result = $stmt->get_result()->fetch_assoc();
+			$stmt->close();
+
+			if ($result){
+				// Table not empty
+
+				// Empty table
+				$stmt = $this->connectToDB->prepare("DELETE FROM {$this->fieldKeys->keyTableCountries}");
+
+				// Check if query executed
+				if ($stmt->execute()){
+					// Table emptied
+
+					// Close statement
+					$stmt->close();
+
+					// Return true
+					return true;
+				} else {
+					// Table not emptied
+
+					// Close statement
+					$stmt->close();
+
+					// Return false
+					return false;
+				}
+			} else {
+				// Table is empty
+
+				// Return null
+				return null;
+			}
+		}
+
+
+		/**
+		 * Function to load countries data
+		 * @param countryId, @param countryName, @param countryCode, @param countryAlpha2, @param countryAlpha3, @param countryFlag
+		*/
+		public function loadCountriesTable($countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag){
+
+			// Insert into table
+			$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableCountries}(CountryId, CountryName, CountryCode, CountryAlpha2, CountryAlpha3, CountryFlag) VALUES( ?, ?, ?, ?, ?, ?)");
+			$stmt->bind_param("ssssss", $countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag);
+
+			// Check for query execution
+			if ($stmt->execute()){
+				// Query executed
+
+				// Close statement
+				$stmt->close();
+
+				// Return true
+				return true;
+			} else {
+				// Query failed
+
+				// Close statement
+				$stmt->close();
+
+				// Return false
+				return false;
+			}
+		}
+
+
+		/**
+		 * Function to fetch countries data
+		 * @param null
+		*/
+		public function fetchCountries(){
+
+			// Get countries data
+			$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableCountries}");
+			$stmt->execute();
+			$result = $stmt->get_result();
+			$stmt->close();
+
+			// Check for query execution
+			if ($result){
+				// Query executed
+
+				// Create countries array
+				$countries= array();
+
+				// Loop through result
+				while ($countryItem = $result->fetch_assoc()) {
+
+					// Add countryItem to array position
+					$countriesList[] = $countryItem;
+				}
+
+				// Return countries data
+				return $countriesList;
+			} else {
+				// Query failed
+
+				// Return false
+				return false;
+			}
+		}
+
+}
+?>
