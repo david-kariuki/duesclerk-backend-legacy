@@ -1,322 +1,265 @@
 <?php
-// Signup user
+// Signup client
 
 // Enable error reporting
 error_reporting(1);
 
 // Call required classes
 require_once 'classes/FieldKeys.php';
-require_once 'classes/UserAccountFunctions.php';
+require_once 'classes/ClientAccountFunctions.php';
 
 // Create Classes Objects
-$userAccountFunctions = new UserAccountFunctions();
+$clientAccountFunctions = new ClientAccountFunctions();
 $fieldKeys            = new FieldKeys();
 
-// Json Keys
-$fileType        = 'image';
-$namesExpressionPregMatch = $fieldKeys->namesExpressionPregMatch;
-
-$fnameMinLength     = $fieldKeys->fnameMinLength;
-$lnameMinLength     = $fieldKeys->lnameMinLength;
-$passwordMinLength  = $fieldKeys->passwordMinLength;
-$emailMaxLength     = $fieldKeys->emailMaxLength;
-$target_dir         = "../shared_res/img/profile_pictures/";
-
 // Create Json response array and initialize error to FALSE
-$response = array($fieldKeys->keyError => false);
+$response       = array($fieldKeys->keyError => false);
+$signUpDetails  = array(
 
-$supportedExtensions = array("jpeg","jpg","png");
-$uploadFileSize = (1048576 * 2);
+    $fieldKeys->keyFirstName => "",
+    $fieldKeys->keyLastName => "",
+    $fieldKeys->keyGender => "",
+    $fieldKeys->keyBusinessName => "",
+    $fieldKeys->keyCityName => "",
+    $fieldKeys->keyPhoneNumber => "",
+    $fieldKeys->keyEmailAddress => "",
+    $fieldKeys->keyCountryCode => "",
+    $fieldKeys->keyCountryAlpha2 => "",
+    $fieldKeys->keyPassword => "",
+    $fieldKeys->keyAccountType => ""
+);
 
 
 // Check for set POST params
- if (isset($_FILES[$fileType]['name']) || (isset($_POST[$fieldKeys->keyFirstName]) && isset($_POST[$fieldKeys->keyLastName]) && isset($_POST[$fieldKeys->keyUsername]) && isset($_POST[$fieldKeys->keyEmailAddress]) && isset($_POST[$fieldKeys->keyPassword]) &&
-        isset($_POST[$fieldKeys->keyCountryAlpha2]) && isset($_POST[$fieldKeys->keyPhoneNumber]) && isset($_POST[$fieldKeys->keyDateOfBirth]) && isset($_POST[$fieldKeys->keyGender]))){
+if (
+    isset($_POST[$fieldKeys->keyFirstName])     ||
+    isset($_POST[$fieldKeys->keyLastName])      ||
+    isset($_POST[$fieldKeys->keyGender])        ||
+    isset($_POST[$fieldKeys->keyBusinessName])  ||
+    isset($_POST[$fieldKeys->keyCityName])      ||
+    isset($_POST[$fieldKeys->keyPhoneNumber])   ||
+    isset($_POST[$fieldKeys->keyEmailAddress])  ||
+    isset($_POST[$fieldKeys->keyCountryCode])   ||
+    isset($_POST[$fieldKeys->keyCountryAlpha2]) ||
+    isset($_POST[$fieldKeys->keyPassword])      ||
+    isset($_POST[$fieldKeys->keyAccountType])
+) {
 
     // Get Vales From POST
-    $firstName        = $_POST[$fieldKeys->keyFirstName]      ? $_POST[$fieldKeys->keyFirstName]     : '';
-    $lastName 		    = $_POST[$fieldKeys->keyLastName]       ? $_POST[$fieldKeys->keyLastName]      : '';
-    $username 		    = $_POST[$fieldKeys->keyUsername]       ? $_POST[$fieldKeys->keyUsername]      : '';
-    $emailAddress 		= $_POST[$fieldKeys->keyEmailAddress]   ? $_POST[$fieldKeys->keyEmailAddress]  : '';
-    $password 		    = $_POST[$fieldKeys->keyPassword]       ? $_POST[$fieldKeys->keyPassword]      : '';
-    $countryAlpha2    = $_POST[$fieldKeys->keyCountryAlpha2]  ? $_POST[$fieldKeys->keyCountryAlpha2] : '';
-    $phoneNumber      = $_POST[$fieldKeys->keyPhoneNumber]    ? $_POST[$fieldKeys->keyPhoneNumber]   : '';
-    $dateOfBirth	    = $_POST[$fieldKeys->keyDateOfBirth]    ? $_POST[$fieldKeys->keyDateOfBirth]   : '';
-    $gender 			    = $_POST[$fieldKeys->keyGender]         ? $_POST[$fieldKeys->keyGender]        : '';
+    $firstName      = $_POST[$fieldKeys->keyFirstName]      ? $_POST[$fieldKeys->keyFirstName]      : '';
+    $lastName       = $_POST[$fieldKeys->keyLastName]       ? $_POST[$fieldKeys->keyLastName]       : '';
+    $phoneNumber    = $_POST[$fieldKeys->keyPhoneNumber]    ? $_POST[$fieldKeys->keyPhoneNumber]    : '';
+    $emailAddress   = $_POST[$fieldKeys->keyEmailAddress]   ? $_POST[$fieldKeys->keyEmailAddress]   : '';
+    $countryCode    = $_POST[$fieldKeys->keyCountryCode]    ? $_POST[$fieldKeys->keyCountryCode]    : '';
+    $countryAlpha2  = $_POST[$fieldKeys->keyCountryAlpha2]  ? $_POST[$fieldKeys->keyCountryAlpha2]  : '';
+    $password       = $_POST[$fieldKeys->keyPassword]       ? $_POST[$fieldKeys->keyPassword]       : '';
+    $gender         = $_POST[$fieldKeys->keyGender]         ? $_POST[$fieldKeys->keyGender]         : '';
+    $businessName   = $_POST[$fieldKeys->keyBusinessName]   ? $_POST[$fieldKeys->keyBusinessName]   : '';
+    $cityName       = $_POST[$fieldKeys->keyCityName]       ? $_POST[$fieldKeys->keyCityName]       : '';
+    $accountType    = $_POST[$fieldKeys->keyAccountType]    ? $_POST[$fieldKeys->keyAccountType]    : '';
 
 
-    // Check if first name is alphabetical
-    if (!preg_match($namesExpressionPregMatch, $firstName)){
-      // Invalid first name
+    // Check If A Client With The Same PhoneNumber Exists
+    if ($clientAccountFunctions->isPhoneNumberInClientsTable($phoneNumber)) {
+        // Phone Number Exists
 
-      // Set response error to true
-      $response[$fieldKeys->keyError]          = true;
-      $response[$fieldKeys->keyErrorMessage]   = 'The first name you entered does not appear to be valid!';
+        // Set response error to true
+        $response[$fieldKeys->keyError]         = true;
+        $response[$fieldKeys->keySignUp]        = $fieldKeys->keyPhoneNumber;
+        $response[$fieldKeys->keyErrorMessage]  = "An account with that phone number already exists!";
 
-      // Encode and echo Json response
-      echo json_encode($response);
+        // Encode and echo Json response
+        echo json_encode($response);
 
-      // Check If last name is alphabetical
-    } else if (!preg_match($namesExpressionPregMatch, $lastName)){
-      // Invalid Lastname
+        /**
+        * Check Email Address Validity
+        * Check The Maximum Allowed Length Of The Email Address (total length in RFC_3696 is 320 characters)
+        * The local part of the email address—your username—must not exceed 64 characters.
+        * The domain name is limited to 255 characters.
+        */
+    } else if ((!filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
+    || (strlen($emailAddress) > $fieldKeys->emailMaxLength)) {
+        // Invalid Email
 
-      // Set response error to true
-      $response[$fieldKeys->keyError]          = true;
-      $response[$fieldKeys->keyErrorMessage]   = 'The last name you entered does not appear to be valid!';
+        // Set response error to true
+        $response[$fieldKeys->keyError]         = true;
+        $response[$fieldKeys->keySignUp]        = $fieldKeys->keyEmailAddress;
+        $response[$fieldKeys->keyErrorMessage]  = "The email address you entered is invalid!";
 
-      // Encode and echo Json response
-      echo json_encode($response);
+        // Encode and echo Json response
+        echo json_encode($response);
 
-      // Check First Name Length
-    } else if (strlen($firstName) < $fnameMinLength){
-      // Firstname Too Short
 
-      // Set response error to true
-      $response[$fieldKeys->keyError]          = true;
-      $response["field"]                      = $fieldKeys->keyFirstName;
-      $response[$fieldKeys->keyErrorMessage]   = 'The first name you entered is too short!';
-
-      // Encode and echo Json response
-      echo json_encode($response);
-
-      // Check Last Name Length
-    } else if (strlen($lastName) < $lnameMinLength){
-      // Lastname Too Short
-
-      // Set response error to true
-      $response[$fieldKeys->keyError]          = true;
-      $response["field"]                      = $fieldKeys->keyLastName;
-      $response[$fieldKeys->keyErrorMessage]   = 'The last name you entered is too short!';
-
-      // Encode and echo Json response
-      echo json_encode($response);
-
-    } else if ($userAccountFunctions->isUsernameInUsersTable($username)) {
+    } else if ($clientAccountFunctions->isEmailAddressInClientsTable($emailAddress)) {
         // Email Address Exists
 
         // Set response error to true
-        $response[$fieldKeys->keyError]          = true;
-        $response["field"]                      = $fieldKeys->keyUsername;
-        $response[$fieldKeys->keyErrorMessage]  = "Sorry! That username is taken! Please try a different one.";
+        $response[$fieldKeys->keyError]         = true;
+        $response[$fieldKeys->keySignUp]                      = $fieldKeys->keyEmailAddress;
+        $response[$fieldKeys->keyErrorMessage]  = "An account with that email address already exists!";
 
         // Encode and echo Json response
         echo json_encode($response);
 
-      /**
-      *Check Email Address Validity
-      *Check The Maximum Allowed Length Of The Email Address (total length in RFC_3696 is 320 characters)
-      *The local part of the email address—your username—must not exceed 64 characters.
-      *The domain name is limited to 255 characters.
-      */
-    } else if ((!filter_var($emailAddress, FILTER_VALIDATE_EMAIL)) || (strlen($emailAddress) > $emailMaxLength)){
-      // Invalid Email
+        // Check Password Length
+    } else if (strlen($password) < $fieldKeys->passwordMinLength) {
+        // Password Too Short
 
-      // Set response error to true
-      $response[$fieldKeys->keyError]         = true;
-      $response["field"]                      = $fieldKeys->keyEmailAddress;
-      $response[$fieldKeys->keyErrorMessage]  = "The email address you entered is invalid!";
+        // Set response error to true
+        $response[$fieldKeys->keyError]         = true;
+        $response[$fieldKeys->keySignUp]        = $fieldKeys->keyPassword;
+        $response[$fieldKeys->keyErrorMessage]  = 'Passwords should be 8 characters or longer!';
 
-      // Encode and echo Json response
-      echo json_encode($response);
-
-
-    } else if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
-  		// Email Address Exists
-
-      // Set response error to true
-  		$response[$fieldKeys->keyError]          = true;
-      $response["field"]                      = $fieldKeys->keyEmailAddress;
-  		$response[$fieldKeys->keyErrorMessage]  = "An account with that email address already exists! Please try a different one.";
-
-      // Encode and echo Json response
-      echo json_encode($response);
-
-      // Check Password Length
-    } else if (strlen($password) < $passwordMinLength) {
-      // Password Too Short
-
-      // Set response error to true
-      $response[$fieldKeys->keyError]          = true;
-      $response["field"]                      = $fieldKeys->keyPassword;
-      $response[$fieldKeys->keyErrorMessage]   = 'Passwords should be 8 characters or longer!';
-
-      // Return Respons
-      echo json_encode($response);
-
-      // Check If A User With The Same PhoneNumber Exists
-  	} else if ($userAccountFunctions->isPhoneNumberInUsersTable($phoneNumber)) {
-      // Phone Number Exists
-
-      // Set response error to true
-      $response[$fieldKeys->keyError]            = true;
-      $response["field"]                      = $fieldKeys->keyPhoneNumber;
-      $response[$fieldKeys->keyErrorMessage]    = "An account with that phone number already exists! Please try a different one.";
-
-      // Encode and echo Json response
-      echo json_encode($response);
+        // Return Respons
+        echo json_encode($response);
 
     } else {
 
-      // Signup user
-      $signup = $userAccountFunctions->signupUser($firstName, $lastName, $username, $emailAddress, $password, $countryAlpha2, $phoneNumber, $dateOfBirth, $gender);
+        // Check if account type is personal so as to validate names expressions
+        if ($accountType == $fieldKeys->keyAccountTypePersonal) {
 
-      // Check If User Was Signed Up
-      if ($signup) {
-          // User Signed Up
-
-        // Check if profile picture was attached
-        if (!isset($_FILES[$fileType]['name'])){
-
-          // Set Response Error To False
-          $response[$fieldKeys->keyError] = false;
-
-        } else {
-          // Upload profile picture
-
-          // Get filename
-          $filename = $_FILES[$fileType]["name"];
-
-          // Concat path with baseName
-          $target_file = $target_dir . basename($filename);
-
-          // Get file type extension
-          $imageExtension = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-          // Check image size by ImageInfo parameter
-          $check = getimagesize($_FILES[$fileType]["tmp_name"]);
-          if ($check !== false) {
-
-            //$response[$fieldKeys->keyError] = true;
-            //$response[$fieldKeys->keyErrorMessage] = "File is an image - " . $check["mime"] . ".";
-          } else {
-
-              // Set response error to true
-              $response[$fieldKeys->keyError]        = true;
-              $response[$fieldKeys->keyErrorMessage] = "The file you selected is not an image!";
-
-              // Encode and echo json response
-              echo json_encode($response);
-          }
-
-          // Check file size
-          // MAX is 2MB
-          if ($_FILES[$fileType]["size"] > $uploadFileSize) {
-
-            // Set response error to true
-            $response[$fieldKeys->keyError] = true;
-            $response[$fieldKeys->keyErrorMessage] =  "The profile picture you selected is too large, maximum size allowed is " . round(abs($uploadFileSize / 1000000)) . "mb!";
-
-            // Encode and echo json response
-            echo json_encode($response);
-
-            // Allow specific file formats
-          } else if(in_array($imageExtension, $extensions) === false){
-
-            // Set response error to true
-            $response[$fieldKeys->keyError] = true;
-            $response[$fieldKeys->keyErrorMessage] = "Sorry, only JPG, JPEG, PNG & GIF files are supported.";
-
-            // Encode and echo json response
-            echo json_encode($response);
-
-          } else {
-            // Profile picture is OK
-
-            // Create File Name
-            $uniqueName = $userAccountFunctions->generateUniqueId("pp", $fieldKeys->keyTableProfilePictures, "ProfilePictureName");
-
-            $profilePictureName  = $uniqueName . "." . $imageExtension;
-            $pathFileName = strtolower($target_dir . $profilePictureName);
-
-            try {
-
-              // Uploaded image and check response
-              if (move_uploaded_file($_FILES[$fileType]["tmp_name"], $pathFileName)) {
-                // Profile Picture Uploaded
-
-                // Get UserId and SignupDate
-                $userId     = $signup[$fieldKeys->keyUserId];
-                $signupDate = $signup[$fieldKeys->keySignupDate];
-
-                // Update Profile Picture Path In Database
-                $update = $userAccountFunctions->updateProfilePicture($userId, $uniqueName, $signupDate, $imageExtension);
-
-                if (false !== $update){
-                    // Profile Path Update In Database
-
-                    // Set Response Error To False
-                    $response[$fieldKeys->keyError] = false;
-
-                    // Add profile picture Json Response Array
-                    $response[$fieldKeys->keyUser][$fieldKeys->keyProfilePictureName] = $update[$fieldKeys->keyProfilePictureName] . "." . $update[$fieldKeys->keyProfilePictureFileType];
-
-                } else {
-                  // Database Not Updated
-
-                  // Delete Uploaded Profile Picture
-                  unlink($pathFileName);
-
-                  // Set response error to true
-                  $response[$fieldKeys->keyError]        = true;
-                  $response[$fieldKeys->keyErrorMessage] = "Profile picture update failed!";
-
-                  // Encode and echo json response
-                  echo json_encode($response);
-                }
-              } else {
-                // Upload Failed
+            // Check if first name is alphabetical
+            if (!preg_match($fieldKeys->namesExpressionPregMatch, $firstName)) {
+                // Invalid first name
 
                 // Set response error to true
-                $response[$fieldKeys->keyError]        = true;
-                $response[$fieldKeys->keyErrorMessage] = "Profile picture upload failed!";
+                $response[$fieldKeys->keyError]         = true;
+                $response[$fieldKeys->keyErrorMessage]  = 'The first name you entered does not appear to be valid!';
 
-                // Encode and echo json response
+                // Encode and echo Json response
                 echo json_encode($response);
-              }
-            } catch (Exception $e) {
-              // Exception occurred.
 
-              // Set response error to true
-              $response[$fieldKeys->keyError]      = true;
-              $response['profile_picture_upload_error']  = $e->getMessage();
+                // Check If last name is alphabetical
+            } else if (!preg_match($fieldKeys->namesExpressionPregMatch, $lastName)) {
+                // Invalid last name
+
+                // Set response error to true
+                $response[$fieldKeys->keyError]         = true;
+                $response[$fieldKeys->keyErrorMessage]  = 'The last name you entered does not appear to be valid!';
+
+                // Encode and echo Json response
+                echo json_encode($response);
+
+                // Check First Name Length
+            } else if (strlen($firstName) < $fieldKeys->fnameMinLength) {
+                // Firstname too Short
+
+                // Set response error to true
+                $response[$fieldKeys->keyError]         = true;
+                $response[$fieldKeys->keySignUp]        = $fieldKeys->keyFirstName;
+                $response[$fieldKeys->keyErrorMessage]  = 'The first name you entered is too short!';
+
+                // Encode and echo Json response
+                echo json_encode($response);
+
+                // Check Last Name Length
+            } else if (strlen($lastName) < $fieldKeys->lnameMinLength) {
+                // Lastname Too Short
+
+                // Set response error to true
+                $response[$fieldKeys->keyError]         = true;
+                $response[$fieldKeys->keySignUp]        = $fieldKeys->keyLastName;
+                $response[$fieldKeys->keyErrorMessage]  = 'The last name you entered is too short!';
+
+                // Encode and echo Json response
+                echo json_encode($response);
+
             }
-          }
+
         }
 
-        // Add User Details Json Response Array
-        $response[$fieldKeys->keyUser][$fieldKeys->keyUserId] 			= $signup[$fieldKeys->keyUserId];
-        $response[$fieldKeys->keyUser][$fieldKeys->keyFirstName]    = $signup[$fieldKeys->keyFirstName];
-        $response[$fieldKeys->keyUser][$fieldKeys->keyLastName]     = $signup[$fieldKeys->keyLastName];
-        $response[$fieldKeys->keyUser][$fieldKeys->keyUsername]     = $signup[$fieldKeys->keyUsername];
-        $response[$fieldKeys->keyUser][$fieldKeys->keyEmailAddress] = $signup[$fieldKeys->keyEmailAddress];
-        $response[$fieldKeys->keyUser][$fieldKeys->keyPassword]     = $password;
+        //Check for required data and add to signup details array
+        if (isset($_POST[$fieldKeys->keyFirstName])) {
+            $signUpDetails[$fieldKeys->keyFirstName]= $firstName;
+        }
 
-        // Add success message
-        $response[$fieldKeys->keySuccessMessage]                    = "Signup successfull!";
+        if (isset($_POST[$fieldKeys->keyLastName])) {
+            $signUpDetails[$fieldKeys->keyLastName] = $lastName;
+        }
 
-        // Encode and echo Json response
-        echo json_encode($response);
+        if (isset($_POST[$fieldKeys->keyPhoneNumber])) {
+            $signUpDetails[$fieldKeys->keyPhoneNumber] = $phoneNumber;
+        }
 
-      } else {
-          // Signup Failed
+        if (isset($_POST[$fieldKeys->keyEmailAddress])) {
+            $signUpDetails[$fieldKeys->keyEmailAddress] = $emailAddress;
+        }
 
-          // Set response error to true
-          $response[$fieldKeys->keyError]         = true;
-          $response[$fieldKeys->keyErrorMessage]  = "Something went terribly wrong!";
+        if (isset($_POST[$fieldKeys->keyCountryCode])) {
+            $signUpDetails[$fieldKeys->keyCountryCode] = $countryCode;
+        }
 
-          // Encode and echo Json response
-          echo json_encode($response);
-      }
+        if (isset($_POST[$fieldKeys->keyCountryAlpha2])) {
+            $signUpDetails[$fieldKeys->keyCountryAlpha2] = $countryAlpha2;
+        }
+        if (isset($_POST[$fieldKeys->keyPassword])) {
+            $signUpDetails[$fieldKeys->keyPassword] = $password;
+        }
+
+        if (isset($_POST[$fieldKeys->keyGender])) {
+            $signUpDetails[$fieldKeys->keyGender] = $gender;
+        }
+
+        if (isset($_POST[$fieldKeys->keyBusinessName])) {
+            $signUpDetails[$fieldKeys->keyBusinessName] = $businessName;
+        }
+
+        if (isset($_POST[$fieldKeys->keyCityName])) {
+            $signUpDetails[$fieldKeys->keyCityName] = $cityName;
+        }
+
+        if (isset($_POST[$fieldKeys->keyAccountType])) {
+            $signUpDetails[$fieldKeys->keyAccountType] = $accountType;
+        }
+
+
+        // Signup user
+        $signupClient = $clientAccountFunctions->signUpClient($signUpDetails);
+
+        // Check If Client Was Signed Up
+        if ($signupClient) {
+            // Client Signed Up
+
+            // Add Client Details Json Response Array
+            $response[$fieldKeys->keySignUp][$fieldKeys->keyClientId]       = $signupClient[$fieldKeys->keyClientId];
+            $response[$fieldKeys->keySignUp][$fieldKeys->keyEmailAddress]
+            = $signupClient[$fieldKeys->keyEmailAddress];
+            $response[$fieldKeys->keySignUp][$fieldKeys->keyPassword]       = $password;
+
+            // Add success message
+            if ($accountType == $fieldKeys->keyAccountTypePersonal) {
+                $response[$fieldKeys->keySuccessMessage]
+                = "Welcome to " . $fieldKeys->companyName . ", " . $firstName . " " . $lastName . ".";
+
+            } else if ($accountType == $fieldKeys->keyAccountTypeBusiness) {
+                $response[$fieldKeys->keySuccessMessage]
+                = "Welcome to " . $fieldKeys->companyName . ", " . $businessName . ".";
+            }
+
+
+            // Encode and echo Json response
+            echo json_encode($response);
+
+        } else {
+            // Signup Failed
+
+            // Set response error to true
+            $response[$fieldKeys->keyError]         = true;
+            $response[$fieldKeys->keyErrorMessage]  = "Something went terribly wrong!";
+
+            // Encode and echo Json response
+            echo json_encode($response);
+        }
     }
 } else {
-  // Missing params
+    // Missing params
 
-  // Set response error to true
-  $response[$fieldKeys->keyError]        = true;
-  $response[$fieldKeys->keyErrorMessage] = "Something went terribly wrong!";
+    // Set response error to true
+    $response[$fieldKeys->keyError]        = true;
+    $response[$fieldKeys->keyErrorMessage] = "Something went terribly wrong!";
 
-  // Encode and echo json response
-  echo json_encode($response);
+    // Encode and echo json response
+    echo json_encode($response);
 }
 
 ?>

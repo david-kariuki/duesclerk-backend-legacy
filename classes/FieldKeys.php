@@ -12,7 +12,7 @@ class FieldKeys {
     private $domainFull;
     public $domainNoWW;
     public $websiteUrl;
-    public $siteName;
+    public $companyName;
 
     // Website Folders
     public $androidFolderUrl;
@@ -22,32 +22,36 @@ class FieldKeys {
     public $profilePicturesUrl;
 
     // Input Fields Json Keys
-    public $keyUserId;
+    public $keyClientId;
     public $keyFirstName;
     public $keyLastName;
-    public $keyUsername;
+    public $keyPhoneNumber;
     public $keyEmailAddress;
-    public $keyPassword;
     public $keyCountryName;
     public $keyCountryCode;
     public $keyCountryAlpha2;
     public $keyCountryAlpha3;
     public $keyCountryFlag;
-    public $keyPhoneNumber;
-    public $keyDateOfBirth;
+    public $keyPassword;
     public $keyGender;
-    public $keySignupDate;
-    public $keyUpdateDate;
-    public $keyAccountStatus;
+    public $keyBusinessName;
+    public $keyCityName;
+    public $keyAccountType;
+    public $keyAccountTypePersonal;
+    public $keyAccountTypeBusiness;
     public $keyEmailVerification;
     public $keyVerificationCode;
+    public $keySignupDateTime;
+    public $keySignUp;
+    public $keySignIn;
+
     public $keyProfilePictureName;
     public $keyProfilePictureDate;
     public $keyProfilePictureFileType;
     public $keyProfilePictureUrl;
 
     // User Profile
-    public $keyUser;
+    public $keyClient;
     public $defaultProfilePicture;
 
     // Shared JSON Response Keys
@@ -66,7 +70,7 @@ class FieldKeys {
 
 
     // Table Names
-    public $keyTableUsers;
+    public $keyTableClients;
     public $keyTableEmailVerification;
     public $keyTableUserLogs;
     public $keyTableCountries;
@@ -76,9 +80,9 @@ class FieldKeys {
 
 
     // User Acoount Actions
-    public $logTypeSignup;
-    public $logTypeSignin;
-    public $logTypeSignout;
+    public $logTypeSignUp;
+    public $logTypeSignIn;
+    public $logTypeSignOut;
 
 
     // Mail Config
@@ -89,105 +93,114 @@ class FieldKeys {
 
     // Email Verification
     public $tagUserAccountEmailVerf;
-		public $tagPasswordResetEmailVerf;
+    public $tagPasswordResetEmailVerf;
     public $verificationCodeExpiryTime;
     public $verificationCodeLength;
 
 
-  function __construct(){
+    function __construct(){
 
-    // Website Details
-    $this->protocol                               = "https://";
-    $this->domainFull                             = "www.duesclerk.com/";
-    $this->domainNoWW                             = "duesclerk.com";
-    $this->websiteUrl                             = $this->protocol . $this->domainFull;
-    $this->siteName                               = "DuesClerk";
-
-
-    // Website Folders
-    $this->androidFolderUrl                       = $this->websiteUrl . "android/";
-    $this->androidImagesFolderUrl                 = $this->androidFolderUrl . "images/";
-    $this->sharedResourcesUrl                     = $this->websiteUrl . "shared_res/";
-    $this->sharedImagesFolderUrl                  = $this->sharedResourcesUrl . "shared_images/";
-    $this->profilePicturesUrl                     = $this->sharedImagesFolderUrl . "profile_pictures/";
+        // Website Details
+        $this->protocol                     = "https://";
+        $this->domainFull                   = "www.duesclerk.com/";
+        $this->domainNoWW                   = "duesclerk.com";
+        $this->websiteUrl                   = $this->protocol . $this->domainFull;
+        $this->companyName                  = "DuesClerk";
 
 
-    // Input Fields Json Keys
-    $this->keyUserId                              = "UserId";
-    $this->keyFirstName                           = "FirstName";
-    $this->keyLastName                            = "LastName";
-    $this->keyUsername                            = "Username";
-    $this->keyEmailAddress                        = "EmailAddress";
-    $this->keyPassword                            = "Password";
-    $this->keyCountryName                         = "CountryName";
-    $this->keyCountryCode                         = "CountryCode";
-    $this->keyCountryAlpha2                       = "CountryAlpha2";
-    $this->keyCountryAlpha3                       = "CountryAlpha3";
-    $this->keyCountryFlag                         = "CountryFlag";
-    $this->keyPhoneNumber                         = "PhoneNumber";
-    $this->keyDateOfBirth                         = "DateOfBirth";
-    $this->keyGender                              = "Gender";
-    $this->keySignupDate                          = "SignupDate";
-    $this->keyUpdateDate                          = "UpdateDate";
-    $this->keyAccountStatus                       = "AccountStatus";
-    $this->keyEmailVerification                   = "EmailVerification";
-    $this->keyVerificationCode                    = "VerificationCode";
-    $this->keyProfilePictureName                  = "ProfilePictureName";
-    $this->keyProfilePictureDate                  = "ProfilePictureDate";
-    $this->keyProfilePictureFileType              = "ProfilePictureFileType";
-    $this->keyProfilePictureUrl                   = "ProfilePictureUrl";
+        // Website Folders
+        $this->androidFolderUrl             = $this->websiteUrl . "andr/";
+        $this->androidImagesFolderUrl       = $this->androidFolderUrl . "images/";
+        $this->sharedResourcesUrl           = $this->websiteUrl . "shared_res/";
+        $this->sharedImagesFolderUrl        = $this->sharedResourcesUrl . "shared_images/";
+        $this->profilePicturesUrl           = $this->sharedImagesFolderUrl . "profile_pictures/";
 
 
-    // Shared JSON keys
-    $this->keyError                               = "error";
-    $this->keyErrorMessage                        = "error_message";
-    $this->keySuccessMessage                      = "success_message";
-    $this->keyStatus                              = "status";
-    $this->keyRequestTime                         = "requestTime";
-    $this->namesExpressionPregMatch               = "/^[A-Za-z .'-]+$/";
-    $this->fnameMinLength                         = 1;
-    $this->lnameMinLength                         = 1;
-    $this->passwordMinLength                      = 8;
-    $this->emailMaxLength                         = 320;
+        // Input Fields Json Keys
+        $this->keyClientId                  = "ClientId";
+        $this->keyFirstName                 = "FirstName";
+        $this->keyLastName                  = "LastName";
+        $this->keyPhoneNumber               = "PhoneNumber";
+        $this->keyEmailAddress              = "EmailAddress";
+        $this->keyCountryName               = "CountryName";
+        $this->keyCountryCode               = "CountryCode";
+        $this->keyCountryAlpha2             = "CountryAlpha2";
+        $this->keyCountryAlpha3             = "CountryAlpha3";
+        $this->keyCountryFlag               = "CountryFlag";
+        $this->keyPassword                  = "Password";
+        $this->keyGender                    = "Gender";
+        $this->keyBusinessName              = "BusinessName";
+        $this->keyCityName                  = "CityName";
+        $this->keyAccountType               = "AccountType";
+        $this->keyAccountTypePersonal       = "AccountTypePersonal";
+        $this->keyAccountTypeBusiness       = "AccountTypeBusiness";
+        $this->keyEmailVerification         = "EmailVerification";
+        $this->keyVerificationCode          = "VerificationCode";
+        $this->keySignupDateTime            = "SignupDateTime";
+        $this->keySignUp                    = "SignUp";
+        $this->keySignIn                    = "SignIn";
+
+        $this->keyUpdateDate                = "UpdateDate";
+        $this->keyProfilePictureName        = "ProfilePictureName";
+        $this->keyProfilePictureDate        = "ProfilePictureDate";
+        $this->keyProfilePictureFileType    = "ProfilePictureFileType";
+        $this->keyProfilePictureUrl         = "ProfilePictureUrl";
 
 
-    // User Profile
-    $this->keyUser                                = "user";
-    $this->defaultProfilePicture                  = "defaultProfilePicture.png";
+        // SignUp and SignIn
+        $this->keySignUpDetails             = "SignUpDetails";
+        $this->keySignInDetails             = "SignInDetails";
 
 
-    $this->keyCountriesData                       = "CountriesData";
+        // Shared JSON keys
+        $this->keyError                     = "Error";
+        $this->keyErrorMessage              = "ErrorMessage";
+        $this->keySuccessMessage            = "SuccessMessage";
+        $this->keyStatus                    = "Status";
+        $this->keyRequestTime               = "RequestTime";
+        $this->namesExpressionPregMatch     = "/^[A-Za-z .'-]+$/";
+        $this->fnameMinLength               = 1;
+        $this->lnameMinLength               = 1;
+        $this->passwordMinLength            = 8;
+        $this->emailMaxLength               = 320;
 
 
-    // Initializing Table Names
-		$this->keyTableUsers							            = "Users";
-		$this->keyTableEmailVerification	            = "EmailVerification";
-		$this->keyTableUserLogs						            = "UserLogs";
-    $this->keyTableCountries                      = "Countries";
-    $this->keyTableProfilePictures                = "ProfilePictures";
-    $this->keyTableSessions                       = "UserSessions";
-    $this->tableIdsLength                         = 15;
+        // User Profile
+        $this->keyClient                    = "Client";
+        $this->defaultProfilePicture        = "defaultProfilePicture.png";
 
 
-    $this->logTypeSignup                         = "logTypeSignup";
-    $this->logTypeSignin                         = "logTypeSignin";
-    $this->logTypeSignout                        = "logTypeSignout";
+        $this->keyCountriesData             = "CountriesData";
 
 
-    // Mail Config
-    $this->mailHost                               = "mail." . $this->domainNoWW . ";" . "webdisk." . $this->domainNoWW;  // Specify main and backup SMTP servers
-    $this->SMTPSecure                             = 'tls';
-    $this->mailPort                               = 25;
+        // Initializing Table Names
+        $this->keyTableClients				= "Clients";
+        $this->keyTableEmailVerification	= "EmailVerification";
+        $this->keyTableClientLogs			= "ClientLogs";
+        $this->keyTableCountries            = "Countries";
+        $this->keyTableProfilePictures      = "ProfilePictures";
+        $this->keyTableSessions             = "UserSessions";
+        $this->tableIdsLength               = 15;
+
+        $this->logTypeSignUp                = "logTypeSignUp";
+        $this->logTypeSignIn                = "logTypeSignIn";
+        $this->logTypeSignOut               = "logTypeSignOut";
 
 
-    // Email Verification
-    $this->tagUserAccountEmailVerf		            = "UserAccountEmailVerification";
-		$this->tagPasswordResetEmailVerf              = "PasswordResetEmailVerification";
-    $this->verificationCodeExpiryTime             = 1;
-    $this->verificationCodeLength                 = 6;
+        // Mail Config
+        $this->mailHost                     = "mail." . $this->domainNoWW . ";" . "webdisk." . $this->domainNoWW;  // Specify main and backup SMTP servers
+        $this->SMTPSecure                   = 'tls';
+        $this->mailPort                     = 25;
 
-  }
 
-  function __destruct(){}
-}
-?>
+        // Email Verification
+        $this->tagUserAccountEmailVerf      = "UserAccountEmailVerification";
+        $this->tagPasswordResetEmailVerf    = "PasswordResetEmailVerification";
+        $this->verificationCodeExpiryTime   = 1;
+        $this->verificationCodeLength       = 6;
+
+    }
+
+    function __destruct(){}
+    }
+    ?>
