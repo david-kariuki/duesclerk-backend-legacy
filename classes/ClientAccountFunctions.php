@@ -120,6 +120,7 @@ class ClientAccountFunctions {
 		}
 	}
 
+
 	/**
 	* Check if email address is in clients table.
 	* @param emailAddress
@@ -150,6 +151,7 @@ class ClientAccountFunctions {
 			return false;
 		}
 	}
+
 
 	/**
 	* Check if phone number is in clients table.
@@ -182,200 +184,246 @@ class ClientAccountFunctions {
 		}
 	}
 
+
 	/**
-	* Function to check if profile picture exists for ClientId
-	* @param ClientId
+	* Function to get client by email address and password
+	* @param emailAddress - Clients email address
+	* @param password - Clients password
 	*/
-	public function checkForProfilePicture($clientId) {
+	public function getClientByEmailAddressAndPassword($emailAddress, $password){
 
-		// Check if profile picture exists for client
-		$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableProfilePictures} AS ProfilePictures WHERE ProfilePictures.ClientId = ?");
-		$stmt->bind_param("s", $clientId);
-		$stmt->execute(); // Execute SQL statement
-		$stmt->store_result();
+		// Check for email in Table Clients
+		$stmt = $this->connectToDB->prepare("SELECT Clients.*, Countries.* FROM {$this->fieldKeys->keyTableClients} AS
+			Clients LEFT OUTER JOIN {$this->fieldKeys->keyTableCountries} AS Countries ON
+			Countries.CountryAlpha2 = Clients.CountryAlpha2 AND Countries.CountryCode = Clients.CountryCode
+			WHERE Clients.EmailAddress = ?");
+			$stmt->bind_param("s", $emailAddress);
 
-		// Check for affected rows
-		if ($stmt->num_rows > 0) {
-			// Previous profile picture found
+			// Check for query execution
+			if ($stmt->execute()){
+				$client = $stmt->get_result()->fetch_assoc();
+				$stmt->close(); // Close statement
 
-			$stmt->close(); // Close statement
+				// Get password hash from client details array
+				$hash = $client[$this->fieldKeys->keyHash];
 
-			// Return true
-			return true;
-		} else {
-			// Profile picture not found
+				// Verify password
+				$verify = $this->verifyPassword($password, $hash);
 
-			$stmt->close(); // Close statement
+				// Check password validity
+				if ($verify == true){
+					// Pasword matches hash
 
-			// Return false
-			return false;
+					return $client; // Return client details array
+				} else {
+					// Password mismatch
+
+					return false;
+				}
+			} else {
+				// Client not found
+
+				return null;
+			}
 		}
-	}
 
-	/**
-	* Function to update profile picture
-	* @param profilePictureName, @param clientId
-	*/
-	public function updateProfilePicture($clientId, $profilePictureName, $updateDate, $profilePictureFileType) {
 
-		// Store new profile picture
-		$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableProfilePictures}(`ClientId`, `ProfilePictureName`, `ProfilePictureDate`, `ProfilePictureFileType`)
-		VALUES ( ?, ?, ?, ?)");
-		$stmt->bind_param("ssss", $clientId, $profilePictureName, $updateDate, $profilePictureFileType);
-		$update = $stmt->execute(); // Execute SQL statement
-		$stmt->close(); // Close statement
+		/**
+		* Function to check if profile picture exists for ClientId
+		* @param ClientId
+		*/
+		public function checkForProfilePicture($clientId) {
 
-		// Check if query executed
-		if ($update) {
-			// Profile picture updated
-
-			// Get profile picture details
-			$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableProfilePictures} AS ProfilePicture WHERE ProfilePicture.ClientId = ?");
+			// Check if profile picture exists for client
+			$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableProfilePictures} AS ProfilePictures WHERE ProfilePictures.ClientId = ?");
 			$stmt->bind_param("s", $clientId);
-			$stmt->execute(); // Execute SQL statement
-			$profilePicture = $stmt->get_result()->fetch_assoc();
-
-			// Return profile picture array
-			return $profilePicture;
-		} else {
-			// Profile picture update failed
-
-			// Return false
-			return false;
-		}
-	}
-
-	/**
-	* Function to store client logs
-	* @param clientLogType, @param logTime, @param clientId
-	*/
-	private function storeClientLog($clientLogType, $logTime, $clientId) {
-
-		// Create ClientLogId
-		$clientLogId = $this->generateUniqueId("clientLog", $this->fieldKeys->keyTableClientLogs, "ClientLogId");
-
-		$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableClientLogs}(`ClientLogId`,`ClientLogType`,`ClientLogTime`,`ClientId`) VALUES( ?, ?, ?, ?)");
-		$stmt->bind_param("ssss", $clientLogId, $clientLogType, $logTime, $clientId);
-
-		if ($stmt->execute()) {
-
-			$stmt->close(); // Close statement
-
-			// Return true
-			return true;
-		} else {
-
-			$stmt->close(); // Close statement
-
-			// Return false
-			return false;
-		}
-	}
-
-	/**
-	* Function to generate ClientId
-	* @param uniqueIdKey, @param tableName, @param idFieldName
-	*/
-	public function generateUniqueId($uniqueIdKey, $tableName, $idFieldName) {
-
-		while (1 == 1) {
-
-			// Create clientId
-			$uniqueId = substr($uniqueIdKey . md5(mt_rand()), 0, $this->fieldKeys->tableIdsLength);
-
-			// Check if unique id is in associate table
-			$stmt = $this->connectToDB->prepare("SELECT * FROM {$tableName} WHERE " . $idFieldName . " = ?");
-			$stmt->bind_param("s", $uniqueId);
 			$stmt->execute(); // Execute SQL statement
 			$stmt->store_result();
 
-			if ($stmt->num_rows == 0) {
-				// UniqueId does not exist
+			// Check for affected rows
+			if ($stmt->num_rows > 0) {
+				// Previous profile picture found
 
 				$stmt->close(); // Close statement
 
-				// Break from loop
-				return $uniqueId;
+				// Return true
+				return true;
+			} else {
+				// Profile picture not found
+
+				$stmt->close(); // Close statement
+
+				// Return false
+				return false;
 			}
+		}
 
+		/**
+		* Function to update profile picture
+		* @param profilePictureName,
+		* @param clientId
+		*/
+		public function updateProfilePicture($clientId, $profilePictureName, $updateDate, $profilePictureFileType) {
+
+			// Store new profile picture
+			$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableProfilePictures}(`ClientId`, `ProfilePictureName`, `ProfilePictureDate`, `ProfilePictureFileType`)
+			VALUES ( ?, ?, ?, ?)");
+			$stmt->bind_param("ssss", $clientId, $profilePictureName, $updateDate, $profilePictureFileType);
+			$update = $stmt->execute(); // Execute SQL statement
 			$stmt->close(); // Close statement
+
+			// Check if query executed
+			if ($update) {
+				// Profile picture updated
+
+				// Get profile picture details
+				$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableProfilePictures} AS ProfilePicture WHERE ProfilePicture.ClientId = ?");
+				$stmt->bind_param("s", $clientId);
+				$stmt->execute(); // Execute SQL statement
+				$profilePicture = $stmt->get_result()->fetch_assoc();
+
+				// Return profile picture array
+				return $profilePicture;
+			} else {
+				// Profile picture update failed
+
+				// Return false
+				return false;
+			}
+		}
+
+		/**
+		* Function to store client logs
+		* @param clientLogType, @param logTime, @param clientId
+		*/
+		private function storeClientLog($clientLogType, $logTime, $clientId) {
+
+			// Create ClientLogId
+			$clientLogId = $this->generateUniqueId("clientLog", $this->fieldKeys->keyTableClientLogs, "ClientLogId");
+
+			$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableClientLogs}(`ClientLogId`,`ClientLogType`,`ClientLogTime`,`ClientId`) VALUES( ?, ?, ?, ?)");
+			$stmt->bind_param("ssss", $clientLogId, $clientLogType, $logTime, $clientId);
+
+			if ($stmt->execute()) {
+
+				$stmt->close(); // Close statement
+
+				// Return true
+				return true;
+			} else {
+
+				$stmt->close(); // Close statement
+
+				// Return false
+				return false;
+			}
+		}
+
+		/**
+		* Function to generate ClientId
+		* @param uniqueIdKey, @param tableName, @param idFieldName
+		*/
+		public function generateUniqueId($uniqueIdKey, $tableName, $idFieldName) {
+
+			while (1 == 1) {
+
+				// Create clientId
+				$uniqueId = substr($uniqueIdKey . md5(mt_rand()), 0, $this->fieldKeys->tableIdsLength);
+
+				// Check if unique id is in associate table
+				$stmt = $this->connectToDB->prepare("SELECT * FROM {$tableName} WHERE " . $idFieldName . " = ?");
+				$stmt->bind_param("s", $uniqueId);
+				$stmt->execute(); // Execute SQL statement
+				$stmt->store_result();
+
+				if ($stmt->num_rows == 0) {
+					// UniqueId does not exist
+
+					$stmt->close(); // Close statement
+
+					// Break from loop
+					return $uniqueId;
+				}
+
+				$stmt->close(); // Close statement
+			}
+		}
+
+		/**
+		* Function To Encrypt Password
+		* @param password
+		* Returns Salt And Encrypted Password
+		*/
+		private function hashPassword($password) {
+
+			// Using BCRYPT, which will always be 60 characters.
+			$options = [
+
+				// Setting Server Cost
+				'cost' => 10,
+			];
+
+			// Generate Hash
+			$hash = password_hash($password, PASSWORD_BCRYPT, $options);
+
+			// Return hash
+			return $hash;
+		}
+
+		/**
+		* Function To Decrypt password
+		* @param password, @param hash
+		*/
+		private function verifyPassword($password, $hash) {
+
+			if (password_verify($password, $hash)) {
+				// Password is valid
+
+				return true;
+			} else {
+				// Invalid password
+
+				return false;
+			}
+		}
+
+		/**
+		* Function to get clients' timeStamp
+		* @param countryAlpha2
+		*/
+		public function getClientTimestamp($countryAlpha2) {
+
+			// Get client timeZone
+			$timeZone = $this->getClientTimezone($countryAlpha2);
+
+			// Get Default Set Server TimeZone
+			date_default_timezone_set($timeZone);
+
+			// Get current date and time from the server
+			$timeStamp 	= date("l") . " " . date('d') . ", " . date('F Y') . " " . date('H:i:s');
+
+			// Return client timestamp
+			return $timeStamp;
+		}
+
+		/**
+		* Function to get client timezone by alpha2
+		* @param countryAlpha2
+		*/
+		public function getClientTimezone($countryAlpha2) {
+
+			// Create timezone array
+			$timeZone = array();
+
+			// Get timezone by country alpha2
+			$timeZone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, strtoupper($countryAlpha2));
+
+			// Get timezone in array at current position incase of multiple timezones in array
+			$current = current($timeZone);
+
+			// Return TimeZone
+			return $current;
 		}
 	}
 
-	/**
-	* Function To Encrypt Password
-	* @param password
-	* Returns Salt And Encrypted Password
-	*/
-	private function hashPassword($password) {
-
-		// Using BCRYPT, which will always be 60 characters.
-		$options = [
-
-			// Setting Server Cost
-			'cost' => 10,
-		];
-
-		// Generate Hash
-		$hash = password_hash($password, PASSWORD_BCRYPT, $options);
-
-		// Return hash
-		return $hash;
-	}
-
-	/**
-	* Function To Decrypt password
-	* @param password, @param hash
-	*/
-	private function verifyPassword($password, $hash) {
-
-		if (password_verify($password, $hash)) {
-			// Password is valid
-			
-			return true;
-		} else {
-			// Invalid password
-
-			return false;
-		}
-	}
-
-	/**
-	* Function to get clients' timeStamp
-	* @param countryAlpha2
-	*/
-	public function getClientTimestamp($countryAlpha2) {
-
-		// Get client timeZone
-		$timeZone = $this->getClientTimezone($countryAlpha2);
-
-		// Get Default Set Server TimeZone
-		date_default_timezone_set($timeZone);
-
-		// Get current date and time from the server
-		$timeStamp 	= date("l") . " " . date('d') . ", " . date('F Y') . " " . date('H:i:s');
-
-		// Return client timestamp
-		return $timeStamp;
-	}
-
-	/**
-	* Function to get client timezone by alpha2
-	* @param countryAlpha2
-	*/
-	public function getClientTimezone($countryAlpha2) {
-
-		// Create timezone array
-		$timeZone = array();
-
-		// Get timezone by country alpha2
-		$timeZone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, strtoupper($countryAlpha2));
-
-		// Get timezone in array at current position incase of multiple timezones in array
-		$current = current($timeZone);
-
-		// Return TimeZone
-		return $current;
-	}
-
-}?>
+	?>

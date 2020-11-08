@@ -1,6 +1,6 @@
 <?php
 
-//DataKeys Class
+// FieldKeys Class
 
 // Disable Error Reporting
 error_reporting(1);
@@ -33,6 +33,7 @@ class FieldKeys {
     public $keyCountryAlpha3;
     public $keyCountryFlag;
     public $keyPassword;
+    public $keyHash;
     public $keyGender;
     public $keyBusinessName;
     public $keyCityName;
@@ -128,6 +129,7 @@ class FieldKeys {
         $this->keyCountryAlpha3             = "CountryAlpha3";
         $this->keyCountryFlag               = "CountryFlag";
         $this->keyPassword                  = "Password";
+        $this->keyHash                      = "Hash";
         $this->keyGender                    = "Gender";
         $this->keyBusinessName              = "BusinessName";
         $this->keyCityName                  = "CityName";
@@ -203,4 +205,5 @@ class FieldKeys {
 
     function __destruct(){}
     }
+
     ?>
