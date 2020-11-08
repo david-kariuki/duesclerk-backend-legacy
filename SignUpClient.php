@@ -31,17 +31,20 @@ $signUpDetails  = array(
 
 
 // Check for set POST params
-if (
-    isset($_POST[$fieldKeys->keyFirstName])     ||
-    isset($_POST[$fieldKeys->keyLastName])      ||
-    isset($_POST[$fieldKeys->keyGender])        ||
-    isset($_POST[$fieldKeys->keyBusinessName])  ||
-    isset($_POST[$fieldKeys->keyCityName])      ||
-    isset($_POST[$fieldKeys->keyPhoneNumber])   ||
-    isset($_POST[$fieldKeys->keyEmailAddress])  ||
-    isset($_POST[$fieldKeys->keyCountryCode])   ||
-    isset($_POST[$fieldKeys->keyCountryAlpha2]) ||
-    isset($_POST[$fieldKeys->keyPassword])      ||
+if ((
+        isset($_POST[$fieldKeys->keyFirstName])     &&
+        isset($_POST[$fieldKeys->keyLastName])      &&
+        isset($_POST[$fieldKeys->keyGender])
+    ) ||
+    (
+        isset($_POST[$fieldKeys->keyBusinessName])  &&
+        isset($_POST[$fieldKeys->keyCityName])
+    )                                               ||
+    isset($_POST[$fieldKeys->keyPhoneNumber])       ||
+    isset($_POST[$fieldKeys->keyEmailAddress])      ||
+    isset($_POST[$fieldKeys->keyCountryCode])       ||
+    isset($_POST[$fieldKeys->keyCountryAlpha2])     ||
+    isset($_POST[$fieldKeys->keyPassword])          &&
     isset($_POST[$fieldKeys->keyAccountType])
 ) {
 
@@ -221,21 +224,27 @@ if (
             // Client Signed Up
 
             // Add Client Details Json Response Array
-            $response[$fieldKeys->keySignUp][$fieldKeys->keyClientId]       = $signupClient[$fieldKeys->keyClientId];
-            $response[$fieldKeys->keySignUp][$fieldKeys->keyEmailAddress]
-            = $signupClient[$fieldKeys->keyEmailAddress];
-            $response[$fieldKeys->keySignUp][$fieldKeys->keyPassword]       = $password;
+            $response[$fieldKeys->keySignUp][$fieldKeys->keyClientId]   = $signupClient[$fieldKeys->keyClientId];
 
-            // Add success message
+            // Check account type
             if ($accountType == $fieldKeys->keyAccountTypePersonal) {
-                $response[$fieldKeys->keySuccessMessage]
-                = "Welcome to " . $fieldKeys->companyName . ", " . $firstName . " " . $lastName . ".";
+                // Personal account
 
-            } else if ($accountType == $fieldKeys->keyAccountTypeBusiness) {
-                $response[$fieldKeys->keySuccessMessage]
-                = "Welcome to " . $fieldKeys->companyName . ", " . $businessName . ".";
+                $response[$fieldKeys->keySignUp][$fieldKeys->keyFirstName]
+                    = $signupClient[$fieldKeys->keyFirstName];
+                $response[$fieldKeys->keySignUp][$fieldKeys->keyLastName]
+                    = $signupClient[$fieldKeys->keyLastName];
+
+            } else if ($accountType == $fieldKeys->keyAccountTypeBusiness){
+                // Business account
+
+                $response[$fieldKeys->keySignUp][$fieldKeys->keyBusinessName]
+                    = $signupClient[$fieldKeys->keyBusinessName];
             }
 
+            $response[$fieldKeys->keySignUp][$fieldKeys->keyEmailAddress]
+                = $signupClient[$fieldKeys->keyEmailAddress];
+            $response[$fieldKeys->keySignUp][$fieldKeys->keyPassword]   = $password;
 
             // Encode and echo Json response
             echo json_encode($response);
