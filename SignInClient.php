@@ -1,84 +1,81 @@
 <?php
 
-// User Signin
+// Client Signin
 
 // Enable Error Reporting
 error_reporting(1);
 
 // Call Required Functions Classes
-require_once 'classes/UserAccountFunctions.php';
+require_once 'classes/ClientAccountFunctions.php';
 require_once 'classes/FieldKeys.php';
 
 
 // Create Classes Objects
-$userAccountFunctions = new UserAccountFunctions();
-$fieldKeys						= new FieldKeys();
+$clientAccountFunctions	= new ClientAccountFunctions();
+$fieldKeys				= new FieldKeys();
 
 // Create Json Response Array And Initialize Error To FALSE
 $response = array($fieldKeys->keyError => false);
 
 // Receive Email Address And Password
-if (isset($_POST[$fieldKeys->keyUsername]) && isset($_POST[$fieldKeys->keyPassword])) {
+if (isset($_POST[$fieldKeys->keyEmailAddress]) && isset($_POST[$fieldKeys->keyPassword])) {
 
-    // Get Values From POST
-		$username = $_POST[$fieldKeys->keyUsername]	? $_POST[$fieldKeys->keyUsername] : '';
-    $password = $_POST[$fieldKeys->keyPassword] ? $_POST[$fieldKeys->keyPassword]	: '';
+	// Get Values From POST
+	$emailAddress 	= $_POST[$fieldKeys->keyEmailAddress]	? $_POST[$fieldKeys->keyEmailAddress]	: '';
+	$password 		= $_POST[$fieldKeys->keyPassword] 		? $_POST[$fieldKeys->keyPassword]		: '';
 
-    // Get user by email address and password
-    $getUser = $userAccountFunctions->getUserByUsernameAndPassword($username, $password);
+	// Get client by email address and password
+	$getClient = $clientAccountFunctions->getClientByEmailAddressAndPassword($emailAddress, $password);
 
-    // Check if user was found
-    if ($getUser !== false) {
-        // User found
+	// Check if client was found
+	if ($getClient !== false) {
+		// Client found
 
-        // Set response error to false
-        $response[$fieldKeys->keyError] = false;
+		// Set response error to false
+		$response[$fieldKeys->keyError] = false;
 
-        // Add User Details To Response Array
-        $response[$fieldKeys->keyUser][$fieldKeys->keyUserId]   		= $getUser[$fieldKeys->keyUserId];
-				$response[$fieldKeys->keyUser][$fieldKeys->keyFirstName]		= $getUser[$fieldKeys->keyFirstName];
-				$response[$fieldKeys->keyUser][$fieldKeys->keyLastName]			= $getUser[$fieldKeys->keyLastName];
-				$response[$fieldKeys->keyUser][$fieldKeys->keyUsername]			= $getUser[$fieldKeys->keyUsername];
-				$response[$fieldKeys->keyUser][$fieldKeys->keyEmailAddress]	= $getUser[$fieldKeys->keyEmailAddress];
-        $response[$fieldKeys->keyUser][$fieldKeys->keyPassword] 		= $password;
+		// Add Client Details To Response Array
+		$response[$fieldKeys->keySignIn][$fieldKeys->keyClientId]   	= $getClient[$fieldKeys->keyClientId];
+		$response[$fieldKeys->keySignIn][$fieldKeys->keyEmailAddress]	= $getClient[$fieldKeys->keyEmailAddress];
+		$response[$fieldKeys->keySignIn][$fieldKeys->keyPassword] 		= $password;
 
-        // Encode and echo Json response
-        echo json_encode($response);
+		// Encode and echo Json response
+		echo json_encode($response);
 
-    } else {
-      // User Not Found
+	} else {
+		// Client Not Found
 
-      // Check For Wrong Password (Credentials Mismatch)
-  		if ($userAccountFunctions->isUsernameInUsersTable($username)) {
-          // User with the emailAddress exists in the database
+		// Check For Wrong Password (Credentials Mismatch)
+		if ($clientAccountFunctions->isEmailAddressInClientsTable($emailAddress)) {
+			// Client with the emailAddress exists in the database
 
-          // Set response error to true
-          $response[$fieldKeys->keyError]        = true;
-          $response[$fieldKeys->keyErrorMessage] = "Incorrect password for @" . $username;
+			// Set response error to true
+			$response[$fieldKeys->keyError]        = true;
+			$response[$fieldKeys->keyErrorMessage] = "Incorrect email address or password!";
 
-          // Encode and echo Json response
-          echo json_encode($response);
+			// Encode and echo Json response
+			echo json_encode($response);
 
-  		} else {
-    			// User not found
+		} else {
+			// Client not found
 
-          // Set response error to true
-    			$response[$fieldKeys->keyError]         = true;
-    			$response[$fieldKeys->keyErrorMessage]  = "We didn't find a user with that username!";
+			// Set response error to true
+			$response[$fieldKeys->keyError]         = true;
+			$response[$fieldKeys->keyErrorMessage]  = "We didn't find an account with that emailAddress!";
 
-          // Encode and echo Json response
-    			echo json_encode($response);
-  		}
-    }
+			// Encode and echo Json response
+			echo json_encode($response);
+		}
+	}
 } else {
-    // Mising Fields
+	// Mising Fields
 
-    // Set response error to true
-    $response[$fieldKeys->keyError]          = true;
-    $response[$fieldKeys->keyErrorMessage]   = "Something went terribly wrong!";
+	// Set response error to true
+	$response[$fieldKeys->keyError]          = true;
+	$response[$fieldKeys->keyErrorMessage]   = "Something went terribly wrong!";
 
-    //Return Response
-    echo json_encode($response);
+	//Return Response
+	echo json_encode($response);
 }
 
 ?>
