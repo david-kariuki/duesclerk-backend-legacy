@@ -1,5 +1,9 @@
 <?php
 
+//    Copyright (c) 2020 by David Kariuki (dk).
+//    All Rights Reserved.
+
+
 // Client Signin
 
 // Enable Error Reporting

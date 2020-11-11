@@ -1,5 +1,9 @@
 <?php
 
+//    Copyright (c) 2020 by David Kariuki (dk).
+//    All Rights Reserved.
+
+
 // FieldKeys Class
 
 // Disable Error Reporting
@@ -40,7 +44,7 @@ class FieldKeys {
     public $keyAccountType;
     public $keyAccountTypePersonal;
     public $keyAccountTypeBusiness;
-    public $keyEmailVerification;
+    public $keyEmailVerified;
     public $keyVerificationCode;
     public $keySignupDateTime;
     public $keySignUp;
@@ -99,7 +103,7 @@ class FieldKeys {
     public $verificationCodeLength;
 
 
-    function __construct(){
+    function __construct() {
 
         // Website Details
         $this->protocol                     = "https://";
@@ -136,7 +140,7 @@ class FieldKeys {
         $this->keyAccountType               = "AccountType";
         $this->keyAccountTypePersonal       = "AccountTypePersonal";
         $this->keyAccountTypeBusiness       = "AccountTypeBusiness";
-        $this->keyEmailVerification         = "EmailVerification";
+        $this->keyEmailVerified             = "EmailVerified";
         $this->keyVerificationCode          = "VerificationCode";
         $this->keySignupDateTime            = "SignupDateTime";
         $this->keySignUp                    = "SignUp";
@@ -203,7 +207,7 @@ class FieldKeys {
 
     }
 
-    function __destruct(){}
+    function __destruct() {}
     }
 
     ?>

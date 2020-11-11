@@ -1,4 +1,9 @@
 <?php
+
+//    Copyright (c) 2020 by David Kariuki (dk).
+//    All Rights Reserved.
+
+
 // Client account functions class
 
 error_reporting(1);
@@ -190,7 +195,7 @@ class ClientAccountFunctions {
 	* @param emailAddress - Clients email address
 	* @param password - Clients password
 	*/
-	public function getClientByEmailAddressAndPassword($emailAddress, $password){
+	public function getClientByEmailAddressAndPassword($emailAddress, $password) {
 
 		// Check for email in Table Clients
 		$stmt = $this->connectToDB->prepare("SELECT Clients.*, Countries.* FROM {$this->fieldKeys->keyTableClients} AS
@@ -200,7 +205,7 @@ class ClientAccountFunctions {
 			$stmt->bind_param("s", $emailAddress);
 
 			// Check for query execution
-			if ($stmt->execute()){
+			if ($stmt->execute()) {
 				$client = $stmt->get_result()->fetch_assoc();
 				$stmt->close(); // Close statement
 
@@ -211,7 +216,7 @@ class ClientAccountFunctions {
 				$verify = $this->verifyPassword($password, $hash);
 
 				// Check password validity
-				if ($verify == true){
+				if ($verify == true) {
 					// Pasword matches hash
 
 					return $client; // Return client details array

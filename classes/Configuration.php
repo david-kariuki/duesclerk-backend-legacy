@@ -1,5 +1,9 @@
 <?php
 
+//    Copyright (c) 2020 by David Kariuki (dk).
+//    All Rights Reserved.
+
+
 /**
  * Database   Configuration
  */

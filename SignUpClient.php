@@ -1,4 +1,9 @@
 <?php
+
+//    Copyright (c) 2020 by David Kariuki (dk).
+//    All Rights Reserved.
+
+
 // Signup client
 
 // Enable error reporting
@@ -31,21 +36,19 @@ $signUpDetails  = array(
 
 
 // Check for set POST params
-if ((
-        isset($_POST[$fieldKeys->keyFirstName])     &&
+if ((   isset($_POST[$fieldKeys->keyFirstName])     &&
         isset($_POST[$fieldKeys->keyLastName])      &&
-        isset($_POST[$fieldKeys->keyGender])
-    ) ||
+        isset($_POST[$fieldKeys->keyGender]))       ||
     (
         isset($_POST[$fieldKeys->keyBusinessName])  &&
         isset($_POST[$fieldKeys->keyCityName])
     )                                               ||
-    isset($_POST[$fieldKeys->keyPhoneNumber])       ||
-    isset($_POST[$fieldKeys->keyEmailAddress])      ||
-    isset($_POST[$fieldKeys->keyCountryCode])       ||
-    isset($_POST[$fieldKeys->keyCountryAlpha2])     ||
-    isset($_POST[$fieldKeys->keyPassword])          &&
-    isset($_POST[$fieldKeys->keyAccountType])
+        isset($_POST[$fieldKeys->keyPhoneNumber])   ||
+        isset($_POST[$fieldKeys->keyEmailAddress])  ||
+        isset($_POST[$fieldKeys->keyCountryCode])   ||
+        isset($_POST[$fieldKeys->keyCountryAlpha2]) ||
+        isset($_POST[$fieldKeys->keyPassword])      &&
+        isset($_POST[$fieldKeys->keyAccountType])
 ) {
 
     // Get Vales From POST
@@ -235,7 +238,7 @@ if ((
                 $response[$fieldKeys->keySignUp][$fieldKeys->keyLastName]
                     = $signupClient[$fieldKeys->keyLastName];
 
-            } else if ($accountType == $fieldKeys->keyAccountTypeBusiness){
+            } else if ($accountType == $fieldKeys->keyAccountTypeBusiness) {
                 // Business account
 
                 $response[$fieldKeys->keySignUp][$fieldKeys->keyBusinessName]
