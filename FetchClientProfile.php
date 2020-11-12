@@ -66,6 +66,7 @@ if (isset($_POST[$fieldKeys->keyEmailAddress]) && isset($_POST[$fieldKeys->keyPa
         $response[$fieldKeys->keyClient][$fieldKeys->keyPhoneNumber] 	= $client[$fieldKeys->keyPhoneNumber];
         $response[$fieldKeys->keyClient][$fieldKeys->keyEmailAddress] 	= $client[$fieldKeys->keyEmailAddress];
         $response[$fieldKeys->keyClient][$fieldKeys->keyCountryCode]    = $client[$fieldKeys->keyCountryCode];
+        $response[$fieldKeys->keyClient][$fieldKeys->keyCountryAlpha2]  = $client[$fieldKeys->keyCountryAlpha2];
         $response[$fieldKeys->keyClient][$fieldKeys->keyCountryName]    = $client[$fieldKeys->keyCountryName];
         $response[$fieldKeys->keyClient][$fieldKeys->keyEmailVerified]  = $client[$fieldKeys->keyEmailVerified];
         $response[$fieldKeys->keyClient][$fieldKeys->keyAccountType]    = $accountType;
