@@ -24,7 +24,7 @@ $response = array($fieldKeys->keyError => false);
 // Receive email address and password
 if (isset($_POST[$fieldKeys->keyEmailAddress]) && isset($_POST[$fieldKeys->keyPassword])) {
 
-    // Receiving Values From Post
+    // Get values from Post
     $emailAddress 	= $_POST[$fieldKeys->keyEmailAddress];
     $password 		= $_POST[$fieldKeys->keyPassword];
 
@@ -65,11 +65,13 @@ if (isset($_POST[$fieldKeys->keyEmailAddress]) && isset($_POST[$fieldKeys->keyPa
         $response[$fieldKeys->keyClient][$fieldKeys->keyClientId]       = $client[$fieldKeys->keyClientId];
         $response[$fieldKeys->keyClient][$fieldKeys->keyPhoneNumber] 	= $client[$fieldKeys->keyPhoneNumber];
         $response[$fieldKeys->keyClient][$fieldKeys->keyEmailAddress] 	= $client[$fieldKeys->keyEmailAddress];
+        $response[$fieldKeys->keyClient][$fieldKeys->keyCountryName]    = $client[$fieldKeys->keyCountryName];
         $response[$fieldKeys->keyClient][$fieldKeys->keyCountryCode]    = $client[$fieldKeys->keyCountryCode];
         $response[$fieldKeys->keyClient][$fieldKeys->keyCountryAlpha2]  = $client[$fieldKeys->keyCountryAlpha2];
         $response[$fieldKeys->keyClient][$fieldKeys->keyCountryName]    = $client[$fieldKeys->keyCountryName];
         $response[$fieldKeys->keyClient][$fieldKeys->keyEmailVerified]  = $client[$fieldKeys->keyEmailVerified];
         $response[$fieldKeys->keyClient][$fieldKeys->keyAccountType]    = $accountType;
+        $response[$fieldKeys->keyClient][$fieldKeys->keySignUpDateTime] = $client[$fieldKeys->keySignUpDateTime];
 
         // Encode and echo json response
         echo json_encode($response);
