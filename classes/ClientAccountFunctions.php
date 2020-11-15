@@ -7,6 +7,9 @@
 // Client account functions class
 
 error_reporting(1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 
 class ClientAccountFunctions {
 
@@ -33,96 +36,6 @@ class ClientAccountFunctions {
 	function __destruct() {
 		// Close database connection
 		mysqli_close($this->connectToDB);
-	}
-
-
-	/**
-	* Function to signup client
-	*
-	* @param $signUpDetails - array with signup details
-	* @return $client(signup details on success) or boolean(on failure)
-	*/
-	public function signUpClient($signUpDetails) {
-
-		// Get phoneNumber, emailAddress, countryCode, countryAlpha2, password,
-		// accountType from SignUpDetails array
-		$phoneNumber = $signUpDetails[$this->fieldKeys->keyPhoneNumber];
-		$emailAddress = $signUpDetails[$this->fieldKeys->keyEmailAddress];
-		$countryCode = $signUpDetails[$this->fieldKeys->keyCountryCode];
-		$countryAlpha2 = $signUpDetails[$this->fieldKeys->keyCountryAlpha2];
-		$password = $signUpDetails[$this->fieldKeys->keyPassword];
-		$accountType = $signUpDetails[$this->fieldKeys->keyAccountType];
-
-		json_encode("haha");
-		// Create clientId
-		$clientId = $this->generateUniqueId("client", $this->fieldKeys->keyTableClients, "ClientId");
-
-		// Hash password
-		$hash = $this->hashPassword($password);
-
-		// Get account creation date
-		$signupDateTime = $this->getClientTimestamp($countryAlpha2);
-
-		$result;
-		// Insert into Clients
-		if ($accountType == $this->fieldKeys->keyAccountTypePersonal) {
-
-			global $stmt;
-
-			// Get first name, last name and gender
-			$firstName = $signUpDetails[$this->fieldKeys->keyFirstName];
-			$lastName = $signUpDetails[$this->fieldKeys->keyLastName];
-			$gender = $signUpDetails[$this->fieldKeys->keyGender];
-
-			// Personal account
-			$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableClients}(`ClientId`,`FirstName`,`LastName`,`PhoneNumber`,`EmailAddress`,`CountryCode`,`CountryAlpha2`,`Hash`,`Gender`,`AccountType`, `SignupDateTime`)
-			VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			$stmt->bind_param("sssssssssss", $clientId, $firstName, $lastName, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
-			$result = $stmt->execute(); // Execute SQL statement
-			$stmt->close(); // Close statement
-
-		} else if ($accountType == $this->fieldKeys->keyAccountTypeBusiness) {
-
-			// Get business nae and city
-			$businessName = $signUpDetails[$this->fieldKeys->keyBusinessName];
-			$cityName = $signUpDetails[$this->fieldKeys->$keyCityName];
-
-			// Business account
-			$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableClients}(`ClientId`,`PhoneNumber`,`EmailAddress`,`CountryCode`,`CountryAlpha2`,`Hash`,`BusinessName`,`CityName`,`AccountType`, `SignupDateTime`)
-			VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
-			$stmt->bind_param("ssssssssss", $clientId, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $cityName, $accountType, $signupDateTime);
-			$result = $stmt->execute(); // Execute SQL statement
-			$stmt->close(); // Close statement
-		}
-
-		// Check for query execution
-		if ($result) {
-			// Signup successful
-
-			// Store signup log
-			if ($this->storeClientLog($this->fieldKeys->logTypeSignUp, $signupDateTime, $clientId)) {
-
-				// Get stored values
-				$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableClients} AS Clients WHERE Clients.ClientId = ? AND Clients.EmailAddress = ?");
-				$stmt->bind_param("ss", $clientId, $emailAddress);
-				$stmt->execute();
-				$client = $stmt->get_result()->fetch_assoc();
-				$stmt->close(); // Close statement
-
-				// Return client details
-				return $client;
-			} else {
-				// Logging failed
-
-				// Return null
-				return null;
-			}
-		} else {
-			// Client details not stored
-
-			// Return false
-			return false;
-		}
 	}
 
 
@@ -228,14 +141,220 @@ class ClientAccountFunctions {
 			} else {
 				// Client not found
 
+				$stmt->close(); // Close statement
+
 				return null;
 			}
 		}
 
 
 		/**
+		* Function to signup client
+		*
+		* @param $signUpDetails - array with signup details
+		* @return $client(signup details on success) or boolean(on failure)
+		*/
+		public function signUpClient($signUpDetails) {
+
+			// Get phoneNumber, emailAddress, countryCode, countryAlpha2, password,
+			// accountType from SignUpDetails array
+			$phoneNumber = $signUpDetails[$this->fieldKeys->keyPhoneNumber];
+			$emailAddress = $signUpDetails[$this->fieldKeys->keyEmailAddress];
+			$countryCode = $signUpDetails[$this->fieldKeys->keyCountryCode];
+			$countryAlpha2 = $signUpDetails[$this->fieldKeys->keyCountryAlpha2];
+			$password = $signUpDetails[$this->fieldKeys->keyPassword];
+			$accountType = $signUpDetails[$this->fieldKeys->keyAccountType];
+
+			// Create clientId
+			$clientId = $this->generateUniqueId("client", $this->fieldKeys->keyTableClients, "ClientId");
+
+			// Hash password
+			$hash = $this->hashPassword($password);
+
+			// Get account creation date
+			$signupDateTime = $this->getClientTimestamp($countryAlpha2);
+
+			$result;
+			// Insert into Clients
+			if ($accountType == $this->fieldKeys->keyAccountTypePersonal) {
+
+				global $stmt;
+
+				// Get first name, last name and gender
+				$firstName = $signUpDetails[$this->fieldKeys->keyFirstName];
+				$lastName = $signUpDetails[$this->fieldKeys->keyLastName];
+				$gender = $signUpDetails[$this->fieldKeys->keyGender];
+
+				// Personal account
+				$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableClients}(`ClientId`,`FirstName`,`LastName`,`PhoneNumber`,`EmailAddress`,`CountryCode`,`CountryAlpha2`,`Hash`,`Gender`,`AccountType`, `SignUpDateTime`)
+				VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				$stmt->bind_param("sssssssssss", $clientId, $firstName, $lastName, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
+				$result = $stmt->execute(); // Execute SQL statement
+				$stmt->close(); // Close statement
+
+			} else if ($accountType == $this->fieldKeys->keyAccountTypeBusiness) {
+
+				// Get business nae and city
+				$businessName = $signUpDetails[$this->fieldKeys->keyBusinessName];
+				$cityName = $signUpDetails[$this->fieldKeys->$keyCityName];
+
+				// Business account
+				$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableClients}(`ClientId`,`PhoneNumber`,`EmailAddress`,`CountryCode`,`CountryAlpha2`,`Hash`,`BusinessName`,`CityName`,`AccountType`, `SignUpDateTime`)
+				VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )");
+				$stmt->bind_param("ssssssssss", $clientId, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $cityName, $accountType, $signupDateTime);
+				$result = $stmt->execute(); // Execute SQL statement
+				$stmt->close(); // Close statement
+			}
+
+			// Check for query execution
+			if ($result) {
+				// Signup successful
+
+				// Store signup log
+				if ($this->storeClientLog($this->fieldKeys->logTypeSignUp, $signupDateTime, $clientId)) {
+
+					// Get stored values
+					$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableClients} AS Clients WHERE Clients.ClientId = ? AND Clients.EmailAddress = ?");
+					$stmt->bind_param("ss", $clientId, $emailAddress);
+					$stmt->execute();
+					$client = $stmt->get_result()->fetch_assoc();
+					$stmt->close(); // Close statement
+
+					// Return client details
+					return $client;
+				} else {
+					// Logging failed
+
+					// Return null
+					return null;
+				}
+			} else {
+				// Client details not stored
+
+				// Return false
+				return false;
+			}
+		}
+
+
+		/**
+		* Function to update client profile
+		* @param
+		*/
+		public function updateClientProfile($clientId, $accountType, $updateDetails) {
+			// Get details from array
+
+			// Get phoneNumber, emailAddress, countryCode, countryAlpha2, password,
+			// accountType from update details array
+			$updateParams = "";
+			$phoneNumber = $updateDetails[$this->fieldKeys->keyPhoneNumber];
+			$emailAddress = $updateDetails[$this->fieldKeys->keyEmailAddress];
+			$countryCode = $updateDetails[$this->fieldKeys->keyCountryCode];
+			$countryAlpha2 = $updateDetails[$this->fieldKeys->keyCountryAlpha2];
+			$firstName = "";
+			$lastName = "";
+			$gender = "";
+			$businessName = "";
+			$cityName = "";
+			$bindParamValue = array();
+
+			// Insert into Clients
+			if ($accountType == $this->fieldKeys->keyAccountTypePersonal) {
+				// Personal account
+
+				// Get first name, last name and gender
+				$firstName = $updateDetails[$this->fieldKeys->keyFirstName];
+				$lastName = $updateDetails[$this->fieldKeys->keyLastName];
+				$gender = $updateDetails[$this->fieldKeys->keyGender];
+
+				if ($firstName != '') {
+					$updateParams .= ", {$this->fieldKeys->keyFirstName} = ?";
+				}
+
+				if ($lastName != '') {
+					$updateParams .= ", {$this->fieldKeys->keyLastName} = ?";
+				}
+
+				if ($gender != '') {
+					$updateParams .= ", {$this->fieldKeys->keyGender} = ?";
+				}
+
+			} else if ($accountType == $this->fieldKeys->keyAccountTypeBusiness) {
+				// Business account
+
+				// Get business nae and city
+				$businessName = $updateDetails[$this->fieldKeys->keyBusinessName];
+				$cityName = $updateDetails[$this->fieldKeys->$keyCityName];
+
+				if ($businessName != '') {
+					$updateParams .= ", {$this->fieldKeys->keyBusinessName} = ?";
+				}
+
+				if ($cityName != '') {
+					$updateParams .= ", {$this->fieldKeys->keyCityName} = ?";
+				}
+			}
+
+			// Other shared params
+			if ($phoneNumber != '') {
+				$updateParams .= ", {$this->fieldKeys->keyPhoneNumber} = ?";
+			}
+
+			if ($emailAddress != '') {
+				$updateParams .= ", {$this->fieldKeys->keyEmailAddress} = ?";
+			}
+
+			if ($countryCode != '') {
+				$updateParams .= ", {$this->fieldKeys->keyCountryCode} = ?";
+			}
+
+			if ($countryAlpha2 != '') {
+				$updateParams .= ", {$this->fieldKeys->keyCountryAlpha2} = ?";
+			}
+
+			// Combine UPDATE command with update params
+			$sqlCommand = "UPDATE {$this->fieldKeys->keyTableClients} SET {$updateParams} WHERE
+			{$this->fieldKeys->keyTableClients}.{$this->fieldKeys->keyClientId} = '$clientId'";
+
+			$updateProfileSQLStatement = str_replace("SET ,", "SET", $sqlCommand); // Remove comma after SET
+
+			$count = 0; // Loop count variable
+			// Get bind param value from associative array
+			foreach ($updateDetails as $key => $value) {
+				if ($count < count($updateDetails)) {
+
+					// Add value to value array
+					$bindParamValue[$count] = $value;
+					$count++; // Increment loop count variable
+				}
+			}
+
+			// Prepare statement
+			$stmt = $this->connectToDB->prepare($updateProfileSQLStatement);
+			$types = str_repeat("s", count($bindParamValue));
+			$stmt->bind_param($types, ...$bindParamValue);
+
+			// Check for query execution
+			if ($stmt->execute()) {
+				// Update successful
+
+				$stmt->close(); // Close statement
+
+				return true; // Return true
+			} else {
+				// Update field
+
+				$stmt->close(); // Close statement
+
+				return false; // Return false
+			}
+		}
+
+
+		/**
 		* Function to check if profile picture exists for ClientId
-		* @param ClientId
+		*
+		* @param clientId
 		*/
 		public function checkForProfilePicture($clientId) {
 

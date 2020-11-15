@@ -46,7 +46,7 @@ class FieldKeys {
     public $keyAccountTypeBusiness;
     public $keyEmailVerified;
     public $keyVerificationCode;
-    public $keySignupDateTime;
+    public $keySignUpDateTime;
     public $keySignUp;
     public $keySignIn;
 
@@ -57,6 +57,7 @@ class FieldKeys {
 
     // User Profile
     public $keyClient;
+    public $keyUpdateProfile;
     public $defaultProfilePicture;
 
     // Shared JSON Response Keys
@@ -121,7 +122,7 @@ class FieldKeys {
         $this->profilePicturesUrl           = $this->sharedImagesFolderUrl . "profile_pictures/";
 
 
-        // Input Fields Json Keys
+        // Client/User Fields Json Keys
         $this->keyClientId                  = "ClientId";
         $this->keyFirstName                 = "FirstName";
         $this->keyLastName                  = "LastName";
@@ -142,7 +143,7 @@ class FieldKeys {
         $this->keyAccountTypeBusiness       = "AccountTypeBusiness";
         $this->keyEmailVerified             = "EmailVerified";
         $this->keyVerificationCode          = "VerificationCode";
-        $this->keySignupDateTime            = "SignupDateTime";
+        $this->keySignUpDateTime            = "SignUpDateTime";
         $this->keySignUp                    = "SignUp";
         $this->keySignIn                    = "SignIn";
 
@@ -153,7 +154,7 @@ class FieldKeys {
         $this->keyProfilePictureUrl         = "ProfilePictureUrl";
 
 
-        // SignUp and SignIn
+        // SignUp and SignIn Keys
         $this->keySignUpDetails             = "SignUpDetails";
         $this->keySignInDetails             = "SignInDetails";
 
@@ -173,13 +174,14 @@ class FieldKeys {
 
         // User Profile
         $this->keyClient                    = "Client";
+        $this->keyUpdateProfile             = "UpdateProfile";
         $this->defaultProfilePicture        = "defaultProfilePicture.png";
 
 
         $this->keyCountriesData             = "CountriesData";
 
 
-        // Initializing Table Names
+        // Table Names
         $this->keyTableClients				= "Clients";
         $this->keyTableEmailVerification	= "EmailVerification";
         $this->keyTableClientLogs			= "ClientLogs";
@@ -193,13 +195,13 @@ class FieldKeys {
         $this->logTypeSignOut               = "logTypeSignOut";
 
 
-        // Mail Config
+        // Mail Config Keys
         $this->mailHost                     = "mail." . $this->domainNoWW . ";" . "webdisk." . $this->domainNoWW;  // Specify main and backup SMTP servers
         $this->SMTPSecure                   = 'tls';
         $this->mailPort                     = 25;
 
 
-        // Email Verification
+        // Email Verification Keys
         $this->tagUserAccountEmailVerf      = "UserAccountEmailVerification";
         $this->tagPasswordResetEmailVerf    = "PasswordResetEmailVerification";
         $this->verificationCodeExpiryTime   = 1;

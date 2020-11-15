@@ -51,7 +51,7 @@ if ((   isset($_POST[$fieldKeys->keyFirstName])     &&
         isset($_POST[$fieldKeys->keyAccountType])
 ) {
 
-    // Get Vales From POST
+    // Get Values From POST
     $firstName      = $_POST[$fieldKeys->keyFirstName]      ? $_POST[$fieldKeys->keyFirstName]      : '';
     $lastName       = $_POST[$fieldKeys->keyLastName]       ? $_POST[$fieldKeys->keyLastName]       : '';
     $phoneNumber    = $_POST[$fieldKeys->keyPhoneNumber]    ? $_POST[$fieldKeys->keyPhoneNumber]    : '';
