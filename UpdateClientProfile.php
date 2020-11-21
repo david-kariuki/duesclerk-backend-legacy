@@ -11,113 +11,112 @@ error_reporting(1);
 
 // Call required functions classes
 require_once 'classes/ClientAccountFunctions.php';
-require_once 'classes/FieldKeys.php';
+require_once 'classes/Keys.php';
 
 
 // Create classes objects
 $clientAccountFunctions = new ClientAccountFunctions();
-$fieldKeys		        = new FieldKeys();
 
 // Create Json response array and initialize error to false
-$response = array($fieldKeys->keyError => false);
+$response = array(KEY_ERROR => false);
 
 // Required fields
-$firstName = "";
-$lastName = "";
-$businessName = "";
-$phoneNumber = "";
-$emailAddress = "";
-$countryCode = "";
-$countryAlpha2 = "";
-$cityName = "";
-$gender = "";
+$firstName      = "";
+$lastName       = "";
+$businessName   = "";
+$phoneNumber    = "";
+$emailAddress   = "";
+$countryCode    = "";
+$countryAlpha2  = "";
+$cityName       = "";
+$gender         = "";
 
 // Update details associative array
 $updateDetails  = array(
-    $fieldKeys->keyFirstName => "",
-    $fieldKeys->keyLastName => "",
-    $fieldKeys->keyGender => "",
-    $fieldKeys->keyBusinessName => "",
-    $fieldKeys->keyCityName => "",
-    $fieldKeys->keyPhoneNumber => "",
-    $fieldKeys->keyEmailAddress => "",
-    $fieldKeys->keyCountryCode => "",
-    $fieldKeys->keyCountryAlpha2 => "",
-    $fieldKeys->keyPassword => "",
-    $fieldKeys->keyAccountType => ""
+    FIELD_FIRST_NAME        => "",
+    FIELD_LAST_NAME         => "",
+    FIELD_GENDER            => "",
+    FIELD_BUSINESS_NAME     => "",
+    FIELD_CITY_NAME         => "",
+    FIELD_PHONE_NUMBER      => "",
+    FIELD_EMAIL_ADDRESS     => "",
+    FIELD_COUNTRY_CODE      => "",
+    FIELD_COUNTRY_ALPHA2    => "",
+    FIELD_PASSWORD          => "",
+    FIELD_ACCOUNT_TYPE      => ""
 );
 
 // Check for set POST params
-if (isset($_POST[$fieldKeys->keyClientId]) && isset($_POST[$fieldKeys->keyAccountType])) {
+if (isset($_POST[FIELD_CLIENT_ID]) && isset($_POST[FIELD_ACCOUNT_TYPE])) {
 
     // Get Values From POST
-    $clientId       = $_POST[$fieldKeys->keyClientId]       ? $_POST[$fieldKeys->keyClientId]    : '';
-    $accountType    = $_POST[$fieldKeys->keyAccountType]    ? $_POST[$fieldKeys->keyAccountType] : '';
+    $clientId       = $_POST[FIELD_CLIENT_ID]       ? $_POST[FIELD_CLIENT_ID]    : '';
+    $accountType    = $_POST[FIELD_ACCOUNT_TYPE]    ? $_POST[FIELD_ACCOUNT_TYPE] : '';
 
     // Check for personal account params
-    if ($accountType == $fieldKeys->keyAccountTypePersonal) {
+    if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
 
         // Check for and get first name
-        if (isset($_POST[$fieldKeys->keyFirstName])) {
-            $firstName = $_POST[$fieldKeys->keyFirstName] ? $_POST[$fieldKeys->keyFirstName] : '';
-            $updateDetails[$fieldKeys->keyFirstName] = $firstName; // Add firstName to details array
+        if (isset($_POST[FIELD_FIRST_NAME])) {
+            $firstName = $_POST[FIELD_FIRST_NAME] ? $_POST[FIELD_FIRST_NAME] : '';
+            $updateDetails[FIELD_FIRST_NAME] = $firstName; // Add firstName to details array
         }
 
         // Check for and get last name
-        if (isset($_POST[$fieldKeys->keyLastName])) {
-            $lastName = $_POST[$fieldKeys->keyLastName] ? $_POST[$fieldKeys->keyLastName] : '';
-            $updateDetails[$fieldKeys->keyLastName] = $lastName; // Add lastName to details array
+        if (isset($_POST[FIELD_LAST_NAME])) {
+            $lastName = $_POST[FIELD_LAST_NAME] ? $_POST[FIELD_LAST_NAME] : '';
+            $updateDetails[FIELD_LAST_NAME] = $lastName; // Add lastName to details array
         }
 
         // Check for and get gender
-        if (isset($_POST[$fieldKeys->keyGender])) {
-            $gender = $_POST[$fieldKeys->keyGender] ? $_POST[$fieldKeys->keyGender] : '';
-            $updateDetails[$fieldKeys->keyGender] = $gender; // Add gender to details array
+        if (isset($_POST[FIELD_GENDER])) {
+            $gender = $_POST[FIELD_GENDER] ? $_POST[FIELD_GENDER] : '';
+            $updateDetails[FIELD_GENDER] = $gender; // Add gender to details array
         }
 
         // Check for busimess account params
-    } else if ($accountType == $fieldKeys->keyAccountTypeBusiness) {
+    } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
 
         // Check for and get business name
-        if (isset($_POST[$fieldKeys->keyBusinessName])) {
-            $businessName = $_POST[$fieldKeys->keyBusinessName] ? $_POST[$fieldKeys->keyBusinessName] : '';
-            $updateDetails[$fieldKeys->keyBusinessName] = $businessName; // Add businessName to details array
+        if (isset($_POST[FIELD_BUSINESS_NAME])) {
+            $businessName = $_POST[FIELD_BUSINESS_NAME] ? $_POST[FIELD_BUSINESS_NAME] : '';
+            $updateDetails[FIELD_BUSINESS_NAME] = $businessName; // Add businessName to details array
         }
 
         // Check for and get city name
-        if (isset($_POST[$fieldKeys->keyCityName])) {
-            $cityName = $_POST[$fieldKeys->keyCityName] ? $_POST[$fieldKeys->keyCityName] : '';
-            $updateDetails[$fieldKeys->keyCityName] = $cityName; // Add cityName to details array
+        if (isset($_POST[FIELD_CITY_NAME])) {
+            $cityName = $_POST[FIELD_CITY_NAME] ? $_POST[FIELD_CITY_NAME] : '';
+            $updateDetails[FIELD_CITY_NAME] = $cityName; // Add cityName to details array
         }
     }
 
     // Check for the shared account params
 
     // Check for and get phone number
-    if (isset($_POST[$fieldKeys->keyPhoneNumber])) {
-        $phoneNumber = $_POST[$fieldKeys->keyPhoneNumber] ? $_POST[$fieldKeys->keyPhoneNumber] : '';
-        $updateDetails[$fieldKeys->keyPhoneNumber] = $phoneNumber; // Add phoneNumber to details array
+    if (isset($_POST[FIELD_PHONE_NUMBER])) {
+        $phoneNumber = $_POST[FIELD_PHONE_NUMBER] ? $_POST[FIELD_PHONE_NUMBER] : '';
+        $updateDetails[FIELD_PHONE_NUMBER] = $phoneNumber; // Add phoneNumber to details array
     }
 
     // Check for and get email address
-    if (isset($_POST[$fieldKeys->keyEmailAddress])) {
-        $emailAddress = $_POST[$fieldKeys->keyEmailAddress] ? $_POST[$fieldKeys->keyEmailAddress] : '';
-        $updateDetails[$fieldKeys->keyEmailAddress] = $emailAddress; // Add emailAddress to details array
+    if (isset($_POST[FIELD_EMAIL_ADDRESS])) {
+        $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
+        $updateDetails[FIELD_EMAIL_ADDRESS] = $emailAddress; // Add emailAddress to details array
     }
 
     // Check for and get country code and country alpha2
-    if (isset($_POST[$fieldKeys->keyCountryCode]) && isset($_POST[$fieldKeys->keyCountryAlpha2])) {
+    if (isset($_POST[FIELD_COUNTRY_CODE]) && isset($_POST[FIELD_COUNTRY_ALPHA2])) {
 
-        $countryCode = $_POST[$fieldKeys->keyCountryCode] ? $_POST[$fieldKeys->keyCountryCode] : '';
-        $updateDetails[$fieldKeys->keyCountryCode] = $countryCode; // Add to details array
+        $countryCode = $_POST[FIELD_COUNTRY_CODE] ? $_POST[FIELD_COUNTRY_CODE] : '';
+        $updateDetails[FIELD_COUNTRY_CODE] = $countryCode; // Add to details array
 
-        $countryAlpha2 = $_POST[$fieldKeys->keyCountryAlpha2] ? $_POST[$fieldKeys->keyCountryAlpha2] : '';
-        $updateDetails[$fieldKeys->keyCountryAlpha2] = $countryAlpha2; // Add to details array
+        $countryAlpha2 = $_POST[FIELD_COUNTRY_ALPHA2] ? $_POST[FIELD_COUNTRY_ALPHA2] : '';
+        $updateDetails[FIELD_COUNTRY_ALPHA2] = $countryAlpha2; // Add to details array
     }
 
 
     // Loop through array removing null key value pairs
-    foreach($updateDetails as $key => $value) {
+    foreach ($updateDetails as $key => $value) {
 
         // Check for null
         if (is_null($value) || $value == '') {
@@ -128,15 +127,18 @@ if (isset($_POST[$fieldKeys->keyClientId]) && isset($_POST[$fieldKeys->keyAccoun
     }
 
     // Update profile details
-    $update = $clientAccountFunctions->updateClientProfile($clientId, $accountType, $updateDetails);
+    $update = $clientAccountFunctions->updateClientProfile(
+        $clientId,
+        $accountType,
+        $updateDetails);
 
     // Check if update was successful
-    if ($update != false){
+    if ($update != false) {
         // Update successful
 
         // Set error to false
-        $response[$fieldKeys->keyError]             = false;
-        $response[$fieldKeys->keySuccessMessage]    = "Update successful!";
+        $response[KEY_ERROR]            = false;
+        $response[KEY_SUCCESS_MESSAGE]  = "Update successful!";
 
         // Encode and echo Json response
         echo json_encode($response);
@@ -145,8 +147,8 @@ if (isset($_POST[$fieldKeys->keyClientId]) && isset($_POST[$fieldKeys->keyAccoun
         // Update unsuccessful
 
             // Set error to true
-            $response[$fieldKeys->keyError]			= true;
-            $response[$fieldKeys->keyErrorMessage] 	= "Something went terribly wrong!";
+            $response[KEY_ERROR]			= true;
+            $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
             // Encode and echo Json response
             echo json_encode($response);
@@ -156,8 +158,8 @@ if (isset($_POST[$fieldKeys->keyClientId]) && isset($_POST[$fieldKeys->keyAccoun
     // Missing clientId
 
     // Set error to true
-    $response[$fieldKeys->keyError]			= true;
-    $response[$fieldKeys->keyErrorMessage] 	= "Something went terribly wrong!";
+    $response[KEY_ERROR]			= true;
+    $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
     // Encode and echo Json response
     echo json_encode($response);
