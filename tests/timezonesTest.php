@@ -1,19 +1,19 @@
 <?php
 
-if (isset($_GET['countryAlpha2'])){
-    
+if (isset($_GET['countryAlpha2'])) {
+
     echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="refresh" content=".1"/></head></html>';
     $countryAlpha2 = $_GET['countryAlpha2'];
-    
+
     // Create timezone array
      $timezone = array();
-    
+
     // Get timezone by country iso 2
      $timezone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, strtoupper($countryAlpha2));
-    
+
      // Get timezone in array at current position incase of multiple choices
      $current = current($timezone);
-    
+
     // Get Default Set Server TimeZone
 	date_default_timezone_set($current);
 
@@ -36,28 +36,28 @@ if (isset($_GET['countryAlpha2'])){
 	                    <td align="center">Time Zone</td>
 	                    <td align="center">Date and Time</td>
 	                </tr>';
-	$count = 1; 
-	
+	$count = 1;
+
     // Return TimeZone
-    if (strtoupper($countryAlpha2) == "US"){
-		
-		             
-        foreach($timezone as $singleTimezone){
-            
+    if (strtoupper($countryAlpha2) == "US") {
+
+
+        foreach ($timezone as $singleTimezone) {
+
 	        date_default_timezone_set($singleTimezone);
 	        $timeStamp 	= date("l") . " " . date('d') . ", " . date('F Y') . " " . date('H:i:s');
-			
+
 			echo '
-			    <tr style = "color:#000000; line-height: 35px; font-weight: normal;">       
+			    <tr style = "color:#000000; line-height: 35px; font-weight: normal;">
                     <td align="center">' . $count . '</td>
                     <td align="center"> ' . strtoupper($countryAlpha2) . '</td>
                     <td align="center"> ' . json_encode($singleTimezone)  . ' </td>
                     <td align="center"> ' . $timeStamp . '</td>
                 </tr>';
-			$count++;            
+			$count++;
         }
-        
-        
+
+
     } else {
         echo "The time for timezone " . $current . " in country alpha " . $countryAlpha2 . " is " . $timeStamp . "<br><br>";
 
@@ -69,15 +69,15 @@ if (isset($_GET['countryAlpha2'])){
                 <td align="center"> ' . $timeStamp . '</td>
             </tr>';
     }
-    
-    
+
+
     echo '</table>
 		        </body>
-		    </html>        
+		    </html>
 		';
-        	
+
 } else {
-    
+
     echo 'Alpha2 not set';
 }
 ?>

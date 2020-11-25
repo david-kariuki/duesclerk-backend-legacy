@@ -42,4 +42,4 @@ class MailConfiguration
 
 }
 
-?>
+// EOF: MailConfiguration.php

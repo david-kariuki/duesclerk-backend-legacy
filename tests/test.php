@@ -16,9 +16,8 @@ $myarray  = array(
     "AccountType" => "AccountTypePersonal"
 );
 
-foreach($myarray as $key=>$value)
-{
-    if(is_null($value) || $value == '')
+foreach ($myarray as $key=>$value) {
+    if (is_null($value) || $value == '')
         unset($myarray[$key]);
 }
 

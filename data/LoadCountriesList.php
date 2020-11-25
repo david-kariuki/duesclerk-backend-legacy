@@ -6,20 +6,12 @@ error_reporting(1);
 
 // Call Required Functions Classes
 require_once '../classes/ListGridFunctions.php';
-require_once '../classes/FieldKeys.php';
+require_once '../classes/Keys.php';
 
 
 // Create Classes Objects
 $listGridFunctions    = new ListGridFunctions();
-$fieldKeys            = new FieldKeys();
-
-// JSON Keys
-$keyCountryId         = "countryId";
-$keyCountryName       = "countryName";
-$keyCountryCode       = "countryCode";
-$keyCountryAlpha2     = "countryAlpha2";
-$keyCountryAlpha3     = "countryAlpha3";
-$keyCountryFlag       = "countryFlag";
+$keys            = new Keys();
 
 // Count Rows Affected
 $count = 0;
@@ -32,7 +24,7 @@ echo "<hr><br> Inserting Countries Data<br><br>";
 $clearTable = $listGridFunctions->emptyCountriesTable();
 
 // Check if countries table is empty
-if (($clearTable == true) || ($clearTable == null)){
+if (($clearTable == true) || ($clearTable == null)) {
   // Table Cleared Or Was Initially Empty
 
     // Show message
@@ -43,43 +35,43 @@ if (($clearTable == true) || ($clearTable == null)){
     //print_r($countriesDataXml);
 
     // Check if xml was read
-    if ($countriesDataXml){
+    if ($countriesDataXml) {
 
       // Show message
       echo "Reading xml</br></br>";
 
       // Loop through array
-      foreach($countriesDataXml->children() as $countries) {
+      foreach ($countriesDataXml->children() as $countries) {
 
-        $countryId      = $countries->$keyCountryId;
-        $countryName    = $countries->$keyCountryName;
-        $countryCode    = $countries->$keyCountryCode;
-        $countryAlpha2  = $countries->$keyCountryAlpha2;
-        $countryAlpha3  = $countries->$keyCountryAlpha3;
-        $countryFlag    = $countries->$keyCountryFlag;
+        $countryId      = $countries->$keys->fieldCountryId;
+        $countryName    = $countries->$keys->fieldCountryName;
+        $countryCode    = $countries->$keys->fieldCountryCode;
+        $countryAlpha2  = $countries->$keys->fieldCountryAlpha2;
+        $countryAlpha3  = $countries->$keys->fieldCountryAlpha3;
+        $countryFlag    = $countries->$keys->fieldCountryFlag;
 
-        if (strlen($countryId) == 0 ){
+        if (strlen($countryId) == 0 ) {
 
            // Echo Error Message
            echo "Country Id is null <br/>";
 
-        } else if (strlen($countryName) == 0 ){
+        } else if (strlen($countryName) == 0 ) {
 
            // Echo Error Message
            echo "Country Name is null <br/>";
-        } else if (strlen($countryCode) == 0 ){
+        } else if (strlen($countryCode) == 0 ) {
 
            // Echo Error Message
            echo "Country Code is null <br/>";
-         } else if (strlen($countryAlpha2) == 0 ){
+         } else if (strlen($countryAlpha2) == 0 ) {
 
            // Echo Error Message
            echo "Country Iso2 is null <br/>";
-         } else if (strlen($countryAlpha3) == 0 ){
+         } else if (strlen($countryAlpha3) == 0 ) {
 
            // Echo Error Message
            echo "Country Iso3 is null <br/>";
-         } else if (strlen($countryFlag) == 0 ){
+         } else if (strlen($countryFlag) == 0 ) {
 
            // Echo Error Message
            echo "Country Flag is null <br/>";
@@ -91,7 +83,7 @@ if (($clearTable == true) || ($clearTable == null)){
            $loadCountriesData = $listGridFunctions->loadCountriesTable($countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag);
 
             // Check If Data Was Inserted Into Countries Data Table
-            if (true == $loadCountriesData){
+            if (true == $loadCountriesData) {
               // Inserted
 
               // Increment Data Items Count
@@ -114,7 +106,7 @@ if (($clearTable == true) || ($clearTable == null)){
               $countryAlpha3  = null;
               $countryFlag    = null;
 
-            } else if (false == $loadCountriesData){
+            } else if (false == $loadCountriesData) {
               // Countries Data Not Inserted
 
               // Show Error Message
@@ -136,7 +128,7 @@ if (($clearTable == true) || ($clearTable == null)){
 
     // Exit Script
     exit;
-} else if ($clearTable == false){
+} else if ($clearTable == false) {
   // Table Emptying Failed
 
   // Show Error Message

@@ -2,146 +2,147 @@
 
 class ListGridFunctions{
 
-	// Connection status value variable
-	private $connectToDB;
-	private $fieldKeys;
+    // Connection status value variable
+    private $connectToDB;
+    private $keys;
 
 
-  // Constructor
-	function __construct() {
+    // Constructor
+    function __construct() {
 
-		// Call required functions classes
-		require_once 'FieldKeys.php';
-    require_once 'Connection.php';
+        // Call required functions classes
+        require_once 'Keys.php';
+        require_once 'Connection.php';
 
-    // Create and initialize required classes objects
-    $connection = new Connection();
+        // Create and initialize required classes objects
+        $connection = new Connection();
 
-		// Initializing connection
-    $this->connectToDB 	= $connection->Connect();
-		$this->fieldKeys		= new FieldKeys();
+        // Initializing connection
+        $this->connectToDB 	= $connection->Connect();
+        $this->keys	= new Keys();
 
-  }
+    }
 
-  // Destructor
-  function __destruct() {
+    // Destructor
+    function __destruct() {
 
-    // Close database connection
-		mysqli_close($this->connectToDB);
-  }
-
-
-		/**
-		 * Function To empty countries table
-		 * @param null
-		*/
-		public function emptyCountriesTable(){
-
-			// Check ff table has data
-			$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableCountries}");
-			$stmt->execute();
-			$result = $stmt->get_result()->fetch_assoc();
-			$stmt->close();
-
-			if ($result){
-				// Table not empty
-
-				// Empty table
-				$stmt = $this->connectToDB->prepare("DELETE FROM {$this->fieldKeys->keyTableCountries}");
-
-				// Check if query executed
-				if ($stmt->execute()){
-					// Table emptied
-
-					// Close statement
-					$stmt->close();
-
-					// Return true
-					return true;
-				} else {
-					// Table not emptied
-
-					// Close statement
-					$stmt->close();
-
-					// Return false
-					return false;
-				}
-			} else {
-				// Table is empty
-
-				// Return null
-				return null;
-			}
-		}
+        // Close database connection
+        mysqli_close($this->connectToDB);
+    }
 
 
-		/**
-		 * Function to load countries data
-		 * @param countryId, @param countryName, @param countryCode, @param countryAlpha2, @param countryAlpha3, @param countryFlag
-		*/
-		public function loadCountriesTable($countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag){
+    /**
+    * Function To empty countries table
+    * @param null
+    */
+    public function emptyCountriesTable() {
 
-			// Insert into table
-			$stmt = $this->connectToDB->prepare("INSERT INTO {$this->fieldKeys->keyTableCountries}(CountryId, CountryName, CountryCode, CountryAlpha2, CountryAlpha3, CountryFlag) VALUES( ?, ?, ?, ?, ?, ?)");
-			$stmt->bind_param("ssssss", $countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag);
+        // Check ff table has data
+        $stmt = $this->connectToDB->prepare("SELECT * FROM {$this->keys->tableCountries}");
+        $stmt->execute();
+        $result = $stmt->get_result()->fetch_assoc();
+        $stmt->close();
 
-			// Check for query execution
-			if ($stmt->execute()){
-				// Query executed
+        if ($result) {
+            // Table not empty
 
-				// Close statement
-				$stmt->close();
+            // Empty table
+            $stmt = $this->connectToDB->prepare("DELETE FROM {$this->keys->tableCountries}");
 
-				// Return true
-				return true;
-			} else {
-				// Query failed
+            // Check if query executed
+            if ($stmt->execute()) {
+                // Table emptied
 
-				// Close statement
-				$stmt->close();
+                // Close statement
+                $stmt->close();
 
-				// Return false
-				return false;
-			}
-		}
+                // Return true
+                return true;
+            } else {
+                // Table not emptied
+
+                // Close statement
+                $stmt->close();
+
+                // Return false
+                return false;
+            }
+        } else {
+            // Table is empty
+
+            // Return null
+            return null;
+        }
+    }
 
 
-		/**
-		 * Function to fetch countries data
-		 * @param null
-		*/
-		public function fetchCountries(){
+    /**
+    * Function to load countries data
+    * @param countryId, @param countryName, @param countryCode, @param countryAlpha2, @param countryAlpha3, @param countryFlag
+    */
+    public function loadCountriesTable($countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag) {
 
-			// Get countries data
-			$stmt = $this->connectToDB->prepare("SELECT * FROM {$this->fieldKeys->keyTableCountries}");
-			$stmt->execute();
-			$result = $stmt->get_result();
-			$stmt->close();
+        // Insert into table
+        $stmt = $this->connectToDB->prepare("INSERT INTO {$this->keys->tableCountries}(CountryId, CountryName, CountryCode, CountryAlpha2, CountryAlpha3, CountryFlag) VALUES( ?, ?, ?, ?, ?, ?)");
+        $stmt->bind_param("ssssss", $countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag);
 
-			// Check for query execution
-			if ($result){
-				// Query executed
+        // Check for query execution
+        if ($stmt->execute()) {
+            // Query executed
 
-				// Create countries array
-				$countries= array();
+            // Close statement
+            $stmt->close();
 
-				// Loop through result
-				while ($countryItem = $result->fetch_assoc()) {
+            // Return true
+            return true;
+        } else {
+            // Query failed
 
-					// Add countryItem to array position
-					$countriesList[] = $countryItem;
-				}
+            // Close statement
+            $stmt->close();
 
-				// Return countries data
-				return $countriesList;
-			} else {
-				// Query failed
+            // Return false
+            return false;
+        }
+    }
 
-				// Return false
-				return false;
-			}
-		}
+
+    /**
+    * Function to fetch countries data
+    * @param null
+    */
+    public function fetchCountries() {
+
+        // Get countries data
+        $stmt = $this->connectToDB->prepare("SELECT * FROM {$this->keys->tableCountries}");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $stmt->close();
+
+        // Check for query execution
+        if ($result) {
+            // Query executed
+
+            // Create countries array
+            $countries= array();
+
+            // Loop through result
+            while ($countryItem = $result->fetch_assoc()) {
+
+                // Add countryItem to array position
+                $countriesList[] = $countryItem;
+            }
+
+            // Return countries data
+            return $countriesList;
+        } else {
+            // Query failed
+
+            // Return false
+            return false;
+        }
+    }
 
 }
-?>
+
+// EOF: ListGridFunctions.php
