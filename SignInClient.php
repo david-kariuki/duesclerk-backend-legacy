@@ -43,7 +43,6 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 		// Add Client Details To Response Array
 		$response[KEY_SIGN_IN][FIELD_CLIENT_ID]      = $getClient[FIELD_CLIENT_ID];
 		$response[KEY_SIGN_IN][FIELD_EMAIL_ADDRESS]  = $getClient[FIELD_EMAIL_ADDRESS];
-		$response[KEY_SIGN_IN][FIELD_PASSWORD]       = $password;
 
 		// Encode and echo Json response
 		echo json_encode($response);
@@ -84,4 +83,4 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	echo json_encode($response);
 }
 
-?>
+// EOF: SignInClient.php

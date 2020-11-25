@@ -165,4 +165,4 @@ if (isset($_POST[FIELD_CLIENT_ID]) && isset($_POST[FIELD_ACCOUNT_TYPE])) {
     echo json_encode($response);
 }
 
-?>
+// EOF: UpdateClientProfile.php

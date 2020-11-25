@@ -78,8 +78,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         // Client not found
 
         // Set response error to true
-        $response[KEY_ERROR] 		   = true;
-        $response[KEY_ERROR_Message]  = "Please sign in to continue!";
+        $response[KEY_ERROR]            = true;
+        $response[KEY_ERROR_MESSAGE]    = "Please sign in to continue!";
 
         // Encode and echo json response
         echo json_encode($response);
@@ -90,10 +90,10 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
     // Set error to true
     $response[KEY_ERROR]			= true;
-    $response[KEY_ERROR_Message] 	= "Something went terribly wrong!";
+    $response[KEY_ERROR_MESSAGE] 	= "Something went terribly wrong!";
 
     // Encode and echo Json response
     echo json_encode($response);
 }
 
-?>
+// EOF: FetchClientDetails.php

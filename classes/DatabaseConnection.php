@@ -22,9 +22,7 @@ class DatabaseConnection
     * Class destructor
     */
     function __destruct()
-    {
-		mysqli_close($this->connectToDB); // Close database connection
-    }
+    {}
 
 
     // Connecting to database

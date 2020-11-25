@@ -277,4 +277,4 @@ if (
     echo json_encode($response);
 }
 
-?>
+// EOF: SignUpClient.php

@@ -37,9 +37,9 @@
         {
 
             // Call required functions classes
-            require_once 'Connection.php';      // Connection class
-            require_once 'Keys.php';            // Keys class
-            require_once 'MailFunctions.php';   // Mail functions class
+            require_once 'DatabaseConnection.php';          // Connection class
+            require_once 'configs/MailConfiguration.php';   // Mail configuration
+            require_once 'Keys.php';                        // Keys class
 
 
             // Import PHPMailer classes
@@ -48,26 +48,28 @@
             require 'PHPMailer-6.1.8/src/SMTP.php';         // PHPMailer SMTP class
 
             // Creating objects of the required Classes
-            $connection 		= new Connection();
+            $connection 		= new DatabaseConnection();
 
             // Initializing objects
-            $this->connectToDB	= $connection->Connect(); // Conection object
-            $this->keys   	= new Keys(); // Keys object
+            $this->connectToDB	= $connection->Connect();   // Conection object
+            $this->keys         = new Keys();               // Keys class object
 
             // Create JSON response array and initialize error to false
-            $this->response  = array($this->keys->keyError => false);
+            $this->response  = array(KEY_ERROR => false);
 
-            /**
-            * Initializing PHPMailer. Passing true enables exceptions
-            */
+
+            // Initializing PHPMailer. Passing true enables exceptions
             $this->phpMailer = new PHPMailer();
 
             try {
 
                 // Set mail SMTP options
-                $this->phpMailer->SMTPOptions = array('ssl' => array(   'verify_peer' => false,
-                'verify_peer_name' => false,
-                'allow_self_signed' => true));
+                $this->phpMailer->SMTPOptions = array(
+                    'ssl' => array(
+                        'verify_peer' => false,
+                        'verify_peer_name' => false,
+                        'allow_self_signed' => true)
+                );
 
                 // Server settings
                 $this->phpMailer->SMTPDebug  = 0; // Disable verbose
@@ -92,29 +94,30 @@
                 $this->phpMailer->isSMTP(); // Set mailer to use SMTP
 
                 // Specify main and backup SMTP servers
-                $this->phpMailer->Host = $this->keys->mailHost;
+                $this->phpMailer->Host = MAIL_HOST;
                 $this->phpMailer->SMTPAuth = true; // Enable SMTP authentication
 
                 // SMTP client name and password
-                $this->phpMailer->Username = 'noreply@' . $this->keys->domainNoWW;
-                $this->phpMailer->Password = '4Ms0G2+SiUzy!4';
+                $this->phpMailer->Username = EMAIL_ADDRESS_NO_REPLY_USERNAME;
+                $this->phpMailer->Password = EMAIL_ADDRESS_NO_REPLY_PASSWORD;
 
 
                 // Enable TLS encryption, `ssl` also accepted
-                $this->phpMailer->SMTPSecure = $this->keys->SMTPSecure;
+                $this->phpMailer->SMTPSecure = SMTP_SECURE;
 
                 // TCP port to connect to. the port for TLS is 587, for SSL is 465 and non-secure
                 // is 25
-                $this->phpMailer->Port = $this->keys->mailPort;
+                $this->phpMailer->Port = MAIL_PORT;
 
                 // Recipients
                 $this->phpMailer->setFrom(
-                    $this->keys->mailAddressNoReply,
-                    $this->keys->companyName
+                    EMAIL_ADDRESS_NO_REPLY_USERNAME,
+                    COMPANY_NAME
                 );
+
                 $this->phpMailer->addReplyTo(
-                    $this->keys->mailAddressInfo,
-                    'Info Team -> (' . $this->keys->companyName . ')'
+                    EMAIL_ADDRESS_INFO_USERNAME,
+                    'Info Team -> (' . COMPANY_NAME . ')'
                 );
                 // $this->phpMailer->addCC('cc@example.com');
                 // $this->phpMailer->addBCC('bcc@example.com');
@@ -242,14 +245,14 @@
                             </td>
                             <td>
                                 <h3 style = "margin-start:10px;"> '
-                                . $this->keys->mailAddressInfo . '</h3>
+                                . EMAIL_ADDRESS_INFO_USERNAME . '</h3>
                             </td>
                         </tr>
                         <tr>
                             <td></td>
                             <td>
                                 <h3 style = "margin-start:10px;"> '
-                                . $this->keys->mailAddressSupport .'</h3>
+                                . EMAIL_ADDRESS_SUPPORT_USERNAME .'</h3>
                             </td>
                         </tr>
                     </table>
@@ -259,10 +262,10 @@
             } catch (\Exception $e) {
 
                 // Set response error to true
-                $response[$this->keys->keyError] = true;
+                $response[KEY_ERROR] = true;
 
                 // echo 'Message could not be sent. Mailer Error: ', $phpMailer->ErrorInfo;
-                $response[$this->keys->keyErrorMessage] = "Something went terribly wrong!";
+                $response[KEY_ERRORMessage] = "Something went terribly wrong!";
 
                 // Return response
                 echo json_encode($response);
@@ -314,7 +317,7 @@
                     <table align = "center" id = "table">
                         <tr>
                             <th>
-                                <h1><b>' . $this->keys->companyName . '</b></h1>
+                                <h1><b>' . COMPANY_NAME . '</b></h1>
                                 <br>
                                 <img src="cid:emailVerificationImg" alt = "loading..."/>
                                 </th>
@@ -323,13 +326,13 @@
                             <td>
                                 <div id = "message">
                                     <h2> Hello <b>' . $firstName .'</b>,</h2>
-                                    <h2> To get started on ' . $this->keys->companyName . ', kindly verify your email address.<br>Your email verification code is: </h2><h1><u>' . $verificationCode . '</u></h1><h2> Enter the code on our website or android app when queried to verify your email address and continue enjoying our amazing lessons.<b>This code will expire after ' .
-                                        $this->keys->verificationCodeExpiryTime . ' hour.</b>
+                                    <h2> To get started on ' . COMPANY_NAME . ', kindly verify your email address.<br>Your email verification code is: </h2><h1><u>' . $verificationCode . '</u></h1><h2> Enter the code on our website or android app when queried to verify your email address and continue enjoying our amazing lessons.<b>This code will expire after ' .
+                                        KEY_VERIFICATION_CODE_EXPIRY_TIME . ' hour.</b>
                                     </h2>
                                     <br>
                                     <h2> <b>P.S.</b> We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
                                     </h2>
-                                    <h3>Kind Regards,<br><b> ' . $this->keys->companyName . ' Team.</b>
+                                    <h3>Kind Regards,<br><b> ' . COMPANY_NAME . ' Team.</b>
                                     </h3>
                                 </div>' . $this->mailSupportDIV .
                             '</td>
@@ -346,8 +349,8 @@
 
         // This is the body in plain text for non-HTML mail clients
         $this->phpMailer->AltBody = 'Hello ' . $firstName .', to get started on
-         ' . $this->keys->companyName . ', kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and contine enjoying our amazing lessons. P.S. We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
-        Kind Regards, '  . $this->keys->companyName . ' Team';
+         ' . COMPANY_NAME . ', kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and contine enjoying our amazing lessons. P.S. We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
+        Kind Regards, '  . COMPANY_NAME . ' Team';
 
         $this->phpMailer->addAddress($emailAddress, $firstName);     // Add a recipient
         // $this->phpMailer->addAddress('ellen@example.com');         // Name is optional
@@ -407,7 +410,7 @@
                         <table align = "center" id = "table">
                             <tr>
                                 <th>
-                                    <h1><b>' . $this->keys->companyName . '</b></h1>
+                                    <h1><b>' . COMPANY_NAME . '</b></h1>
                                     <br>
                                     <img src="cid:passwordResetEmailVerificationImg" alt = "loading..."/>
                                 </th>
@@ -420,13 +423,13 @@
                                         </h2>
                                         <h1><u>' . $verificationCode . '</u></h1>
                                         <h2> Enter the code on our website or android app when queried to verify your email address and reset your password. <b>This code will expire after '
-                                        . $this->keys->verificationCodeExpiryTime . ' hour.</b>
+                                        . KEY_VERIFICATION_CODE_EXPIRY_TIME . ' hour.</b>
                                         </h2>
                                         <h2> If you did not request a password reset please ignore this email or reply to let us know.</h2>
                                         <h2>
                                             <b>P.S.</b> We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
                                         </h2>
-                                        <h3>We cannot wait to have you back! <br>Kind Regards,<br><b> ' . $this->keys->companyName . ' Team.</b>
+                                        <h3>We cannot wait to have you back! <br>Kind Regards,<br><b> ' . COMPANY_NAME . ' Team.</b>
                                         </h3>
                                     </div>' . $this->mailSupportDIV .'
                                 </td>
@@ -444,7 +447,7 @@
             // This is the body in plain text for non-HTML mail clients
             $this->phpMailer->AltBody = 'Hello ' . $firstName .', to reset your account password, kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and reset you password.
             If you did not request a password reset please ignore this email or reply to let us know. P.S. We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
-            We cannot wait to have you back! Kind Regards, ' . $this->keys->companyName . ' Team.';
+            We cannot wait to have you back! Kind Regards, ' . COMPANY_NAME . ' Team.';
 
             $this->phpMailer->addAddress($emailAddress, $firstName);     // Add a recipient
             // $this->phpMailer->addAddress('ellen@example.com');         // Name is optional
@@ -497,7 +500,7 @@
                             <tr>
                                 <th>
                                     <br>
-                                    <h1><b>' . $this->keys->companyName . '</b></h1>
+                                    <h1><b>' . COMPANY_NAME . '</b></h1>
                                     <br>
                                 </th>
                             </tr>
@@ -512,7 +515,7 @@
                                         <br>
                                         <h2><b>P.S.</b> We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you '. 'have any questions.
                                         </h2>
-                                        <h3> Kind Regards,<b> ' . $this->keys->companyName
+                                        <h3> Kind Regards,<b> ' . COMPANY_NAME
                                         . ' Team</b></h3>
                                     </div>'. $this->mailSupportDIV .'
                                 </td>
@@ -530,16 +533,16 @@
             // This is the body in plain text for non-HTML mail clients
             $this->phpMailer->AltBody = 'Hello ' . $firstName .', Your account password has been changed successfully. If this was you, then you can safely ignore this email. If you didn\'t change your account password, please let us know immediately by replying to this email. P.S.
             We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
-            Kind Regards, ' . $this->keys->companyName . ' Team';
+            Kind Regards, ' . COMPANY_NAME . ' Team';
 
             $this->phpMailer->addAddress($emailAddress, $firstName); // Add a recipient
             // $this->phpMailer->addAddress('ellen@example.com'); // Name is optional
 
             // Attachments
             // $this->phpMailer->addAttachment('/tmp/static_images/client_email_verification.png',
-            //                                  'client_email_verification.png');    // Optional name
-            // $this->phpMailer->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-            // $this->phpMailer->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+            //                                  'client_email_verification.png'); // Optional name
+            // $this->phpMailer->addAttachment('/tmp/image.jpg', 'new.jpg'); // Optional name
+            // $this->phpMailer->addAttachment('/var/tmp/file.tar.gz');   // Add attachments
 
             // Send mail and check if it was sent
             if ($this->phpMailer->send()) {
@@ -565,10 +568,13 @@
         public function revokeEmailVerification($clientId)
         {
 
-            $emailVerified = "false";
+            $emailVerified = "FALSE"; // Email verified new value
             $stmt = $this->connectToDB->prepare(
-                "UPDATE {$this->keys->tableClients} SET {$this->keys->fieldEmailVerified} = ?
-                 WHERE {$this->keys->tableClients}.{$this->keys->fieldClientId} = ?"
+                "UPDATE {$this->keys->constValueOf(TABLE_CLIENTS)}
+                SET {$this->keys->constValueOf(FIELD_EMAIL_VERIFIED)} = ?
+                WHERE {$this->keys->constValueOf(TABLE_CLIENTS)}
+                .{$this->keys->constValueOf(FIELD_CLIENT_ID)}
+                = ?"
             );
             $stmt->bind_param("ss", $emailVerified, $clientId);
             $execute = $stmt->execute(); // Execute statement
@@ -580,9 +586,13 @@
 
                 // Check if EmailVerified value is false
                 $stmt = $this->connectToDB->prepare(
-                    "SELECT * FROM {$this->keys->tableClients} AS {$this->keys->keyClient}
-                     WHERE {$this->keys->keyClient}.{$this->keys->fieldClientId} = ?
-                     AND {$this->keys->keyClient}.{$this->keys->fieldEmailVerified} = ?"
+                    "SELECT * FROM {$this->keys->constValueOf(TABLE_CLIENTS)}
+                    AS {$this->keys->constValueOf(KEY_CLIENT)}
+                    WHERE {$this->keys->constValueOf(KEY_CLIENT)}
+                    .{$this->keys->constValueOf(FIELD_CLIENT_ID)} = ?
+                    AND {$this->keys->constValueOf(KEY_CLIENT)}
+                    .{$this->keys->constValueOf(FIELD_EMAIL_VERIFIED)}
+                    = ?"
                 );
                 $stmt->bind_param("ss", $clientId, $emailVerified); // Bind parameters
                 $stmt->execute(); // Execute statement
@@ -592,19 +602,87 @@
                 if ($stmt->num_rows > 0) {
                     // Record found thus email verification revoked
 
-                    return true; // Return true
+                    $stmt->close(); // Close statement
+
+                    // Delete any existing email verification records for the changed email
+                    // address from the email verificatio table
+                    if ($this->cleanUpEmailVerificationTable($clientId) !== false) {
+                        return true;
+                    } else {
+                        return false;
+                    }
 
                 } else {
                     // Record not found thus email verification not revoked
+
+                    $stmt->close(); // Close statement
 
                     return false; // Return false
                 }
             } else {
                 // Query execution failed
 
-                return null; // Return null
+                return false; // Return false
             }
         }
 
+
+        /**
+        * Function to clean up EmailVerification table.
+        * This will be called after updating email address so as to delete any previously pending
+        * email address verification details for the old email
+        * Client will be asked to verify the newly updated email address
+        *
+        * @param clientId - Clients id
+        */
+        public function cleanUpEmailVerificationTable($clientId)
+        {
+            // Check for email address record for ClientId
+            $stmt = $this->connectToDB->prepare(
+                "SELECT {$this->keys->constValueOf(KEY_VERIFICATION)}.*
+                FROM {$this->keys->constValueOf(TABLE_EMAIL_VERIFICATION)}
+                AS {$this->keys->constValueOf(KEY_VERIFICATION)}
+                WHERE {$this->keys->constValueOf(KEY_VERIFICATION)}
+                .{$this->keys->constValueOf(FIELD_CLIENT_ID)} = ?"
+            );
+            $stmt->bind_param("s", $clientId); // Bind parameter
+            $stmt->execute(); // Execute statement
+            $stmt->store_result(); // Store result
+
+            // Chec for record
+            if ($stmt->num_rows > 0) {
+                // Record found
+
+                $stmt->close(); // Close statement
+
+                // Delete record
+                $stmt = $this->connectToDB->prepare(
+                    "DELETE FROM {$this->keys->constValueOf(TABLE_EMAIL_VERIFICATION)}
+                    WHERE {$this->keys->constValueOf(TABLE_EMAIL_VERIFICATION)}
+                    .{$this->keys->constValueOf(FIELD_CLIENT_ID)} = ?");
+                $stmt->bind_param("s", $clientId); // Bind parameter
+                $delete = $stmt->execute(); // Execute statement
+                $stmt->close(); // Close statement
+
+                // Check for query execution
+                if ($delete) {
+                    // Record deleted
+
+                    return true;
+
+                } else {
+                    // Record not deleted
+
+                    return false;
+                }
+            } else {
+                // Record found
+
+                $stmt->close(); // Close statement
+
+                return null; // Return null since no record not found.
+            }
+        }
     }
-    ?>
+
+// EOF: MailFunctions.php
