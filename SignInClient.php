@@ -7,7 +7,7 @@
 // Client Signin
 
 // Enable Error Reporting
-error_reporting(1);
+error_reporting(0);
 
 // Call Required Functions Classes
 require_once 'classes/ClientAccountFunctions.php';
@@ -20,7 +20,7 @@ $clientAccountFunctions	= new ClientAccountFunctions();
 // Create Json Response Array And Initialize Error To FALSE
 $response = array(KEY_ERROR => false);
 
-// Receive Email Address And Password
+// Check for set POST params
 if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
 	// Get Values From POST

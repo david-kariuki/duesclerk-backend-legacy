@@ -7,7 +7,7 @@
 // Update Client Profile Details
 
 // Enable Error Reporting
-error_reporting(1);
+error_reporting(0);
 
 // Call required functions classes
 require_once 'classes/ClientAccountFunctions.php';
@@ -52,7 +52,7 @@ if (
 ){
 
     // Get Values From POST
-    $clientId   = $_POST[FIELD_CLIENT_ID]       ? $_POST[FIELD_CLIENT_ID]    : '';
+    $clientId   = $_POST[FIELD_CLIENT_ID] ? $_POST[FIELD_CLIENT_ID]    : '';
     $update     = "";
 
     // Check for password

@@ -6,7 +6,7 @@
 // Signup client
 
 // Enable error reporting
-error_reporting(1);
+error_reporting(0);
 
 // Call required classes
 require_once 'classes/Keys.php';

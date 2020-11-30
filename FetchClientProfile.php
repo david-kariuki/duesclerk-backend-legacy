@@ -7,7 +7,7 @@
 // Fetch Client Profile Details
 
 // Enable Error Reporting
-error_reporting(1);
+error_reporting(0);
 
 // Call required functions classes
 require_once 'classes/ClientAccountFunctions.php';
@@ -20,12 +20,12 @@ $clientAccountFunctions = new ClientAccountFunctions();
 // Create Json response array and initialize error to false
 $response = array(KEY_ERROR => false);
 
-// Receive email address and password
+// Check for set POST params
 if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
     // Get values from Post
-    $emailAddress 	= $_POST[FIELD_EMAIL_ADDRESS];
-    $password 		= $_POST[FIELD_PASSWORD];
+    $emailAddress   = $_POST[FIELD_EMAIL_ADDRESS]   ? $_POST[FIELD_EMAIL_ADDRESS]	: '';
+    $password 		= $_POST[FIELD_PASSWORD]        ? $_POST[FIELD_PASSWORD]        : '';
 
 
     // Get client by emailAddress and password
