@@ -220,7 +220,7 @@ class ClientAccountFunctions
     * @return array - cleint details
     * @return boolean - false - (fetch failure)
     */
-    public function getClientByClientId($clientId)
+    private function getClientByClientId($clientId)
     {
 
         // Check for email in Table Clients
@@ -353,8 +353,7 @@ class ClientAccountFunctions
                     WHERE {$this->keys->constValueOf(KEY_CLIENT)}
                     .{$this->keys->constValueOf(FIELD_CLIENT_ID)} = ?
                     AND {$this->keys->constValueOf(KEY_CLIENT)}
-                    .{$this->keys->constValueOf(FIELD_EMAIL_ADDRESS)}
-                    = ?"
+                    .{$this->keys->constValueOf(FIELD_EMAIL_ADDRESS)} = ?"
                 );
                 $stmt->bind_param("ss", $clientId, $emailAddress);
                 $stmt->execute();
@@ -385,8 +384,9 @@ class ClientAccountFunctions
     * @param accountType - clients account type
     * @param updateDetails - array with associative array of fields key value pair to be updated
     *
-    * @return boolean - true/false (on revokation success/revokation failure)
-    * @return - null/0 (on logging failed/on update failure/)
+    * @return boolean - true/false (on revokation success / revokation failure)
+    * @return boolean - true/false (on email sent / email not sent)
+    * @return - null/0 (on logging failed/on update failure)
     */
     public function updateClientProfile($clientId, $accountType, $updateDetails) {
         // Get details from array
@@ -481,8 +481,7 @@ class ClientAccountFunctions
         // Construct SQL command with the update params above
         $sqlCommand = "UPDATE {$this->keys->constValueOf(TABLE_CLIENTS)}
         SET {$updateParams} WHERE {$this->keys->constValueOf(TABLE_CLIENTS)}
-        .{$this->keys->constValueOf(FIELD_CLIENT_ID)}
-        = '$clientId'";
+        .{$this->keys->constValueOf(FIELD_CLIENT_ID)} = '$clientId'";
 
         // Remove the comma after SET keyword
         $updateProfileSQLStatement = str_replace("SET ,", "SET", $sqlCommand);
@@ -515,30 +514,66 @@ class ClientAccountFunctions
             // Update successful
 
             // Log update event
-            if ($this->storeClientLog(LOG_TYPE_UPDATE, $updateDateTime, $clientId)) {
-                // Log stored
+            if (array_key_exists(FIELD_HASH, $updateDetails)) {
 
-                // Check if email address was updated so as to revoke email address
-                // verification after updating to a new one for re-verification
-                if (array_key_exists(FIELD_EMAIL_ADDRESS, $updateDetails)) {
-                    // Email address was updated
+                // Log password change
+                if ($this->storeClientLog(LOG_TYPE_UPDATE_PASSWORD, $updateDateTime, $clientId)) {
+                    // Log stored
 
-                    // Revoke email address verification and check for failure
-                    if (!$this->mailFunctions->revokeEmailVerification($clientId)) {
-                        // Email revoking failed
+                    // Get client details
+                    $client = $this->getClientByClientId($clientId);
 
-                        return false; // Return false on revokation failure
+                    // Get firsnName and email address
+                    $firstName      = $client[FIELD_FIRST_NAME];
+                    $emailAddress   = $client[FIELD_EMAIL_ADDRESS];
+
+                    // Notify user of password change on email
+                    if ($this->mailFunctions->sendPasswordChangeNotificationMail(
+                        $firstName,
+                        $emailAddress
+                        ) !== false
+                    ) {
+                        // Email sent
+
+                        return true; // Return true
+
+                    } else {
+                        // Email not sent
+
+                        return false; // Return false
                     }
+                } else {
+                    // Logging failed
+
+                    return null; // Return null
                 }
-
-                return true; // Return true on successful update
-
             } else {
-                // Logging failed
 
-                return null; // Return null
+                // Log profile update
+                if ($this->storeClientLog(LOG_TYPE_UPDATE_PROFILE, $updateDateTime, $clientId)) {
+                    // Log stored
+
+                    // Check if email address was updated so as to revoke email address
+                    // verification after updating to a new one for re-verification
+                    if (array_key_exists(FIELD_EMAIL_ADDRESS, $updateDetails)) {
+                        // Email address was updated
+
+                        // Revoke email address verification and check for failure
+                        if (!$this->mailFunctions->revokeEmailVerification($clientId)) {
+                            // Email revoking failed
+
+                            return false; // Return false on revokation failure
+                        }
+                    }
+
+                    return true; // Return true on successful update
+
+                } else {
+                    // Logging failed
+
+                    return null; // Return null
+                }
             }
-
         } else {
             // Update field
 

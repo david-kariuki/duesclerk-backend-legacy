@@ -97,7 +97,8 @@ define("LENGTH_VERIFICATION_CODE",          6);
 define("LOG_TYPE_SIGN_UP",                  "LogTypeSignUp");
 define("LOG_TYPE_SIGN_IN",                  "LogTypeSignIn");
 define("LOG_TYPE_SIGN_OUT",                 "LogTypeSignOut");
-define("LOG_TYPE_UPDATE",                   "LogTypeUpdate");
+define("LOG_TYPE_UPDATE_PROFILE",           "LogTypeUpdateProfile");
+define("LOG_TYPE_UPDATE_PASSWORD",          "LogTypeUpdatePassword");
 
 // Date formats
 define("FORMAT_DATE_TIME_FULL",             "l d, F Y H:i:s");

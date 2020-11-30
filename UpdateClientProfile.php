@@ -47,10 +47,8 @@ $updateDetails  = array(
 
 // Check for set POST params
 if (
-    (isset($_POST[FIELD_CLIENT_ID]) && isset($_POST[FIELD_ACCOUNT_TYPE]))
-    ||
-    (isset($_POST[FIELD_CLIENT_ID]) && isset($_POST[FIELD_PASSWORD])
-    && isset($_POST[FIELD_NEW_PASSWORD]))
+    isset($_POST[FIELD_CLIENT_ID]) &&
+    (isset($_POST[FIELD_ACCOUNT_TYPE]) || (isset($_POST[FIELD_PASSWORD]) && isset($_POST[FIELD_NEW_PASSWORD])))
 ){
 
     // Get Values From POST
