@@ -38,6 +38,7 @@ class MailFunctions
 
         // Call required functions classes
         require_once 'DatabaseConnection.php';          // Database connection file
+        require_once 'ClientFunctions.php';             // Client functions file
         require_once 'configs/MailConfiguration.php';   // Mail configuration file
         require_once 'Keys.php';                        // Keys file
         require_once 'Paths.php';                       // Paths file
@@ -49,10 +50,11 @@ class MailFunctions
         require 'PHPMailer-6.1.8/src/SMTP.php';         // PHPMailer SMTP class
 
         // Creating objects of the required Classes
-        $connection 		= new DatabaseConnection();
+        $connection 		= new DatabaseConnection(); // Connection object
+        $clientAccountFunctions = new ClientAccountFunctions(); // Client account functions object
 
         // Initializing objects
-        $this->connectToDB	= $connection->Connect();   // Conection object
+        $this->connectToDB	= $connection->Connect();   // Conection function
         $this->keys         = new Keys();               // Keys class object
 
         // Create JSON response array and initialize error to false

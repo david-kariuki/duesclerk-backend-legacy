@@ -291,7 +291,7 @@ class ClientAccountFunctions
         $accountType      = $signUpDetails[FIELD_ACCOUNT_TYPE];
 
         // Create clientId
-        $clientId = $this->generateUniqueId(
+        $clientId = $this->sharedFunctions->generateUniqueId(
             strtolower(KEY_CLIENT),
             TABLE_CLIENTS,
             FIELD_CLIENT_ID
@@ -343,7 +343,12 @@ class ClientAccountFunctions
             // Signup successful
 
             // Log signup event
-            if ($this->storeClientLog(LOG_TYPE_SIGN_UP, $signupDateTime, $clientId)) {
+            if ($this->sharedFunctions->createStoreClientLogs(
+                LOG_TYPE_SIGN_UP,
+                $signupDateTime,
+                $clientId
+                )
+            ) {
                 // Loging successful
 
                 // Get stored values
@@ -517,7 +522,12 @@ class ClientAccountFunctions
             if (array_key_exists(FIELD_HASH, $updateDetails)) {
 
                 // Log password change
-                if ($this->storeClientLog(LOG_TYPE_UPDATE_PASSWORD, $updateDateTime, $clientId)) {
+                if ($this->sharedFunctions->createStoreClientLogs(
+                    LOG_TYPE_UPDATE_PASSWORD,
+                    $updateDateTime,
+                    $clientId
+                    )
+                ) {
                     // Log stored
 
                     // Get client details
@@ -550,7 +560,12 @@ class ClientAccountFunctions
             } else {
 
                 // Log profile update
-                if ($this->storeClientLog(LOG_TYPE_UPDATE_PROFILE, $updateDateTime, $clientId)) {
+                if ($this->sharedFunctions->createStoreClientLogs(
+                    LOG_TYPE_UPDATE_PROFILE,
+                    $updateDateTime,
+                    $clientId
+                    )
+                ) {
                     // Log stored
 
                     // Check if email address was updated so as to revoke email address
@@ -632,87 +647,6 @@ class ClientAccountFunctions
             // Client details fetching failed
 
             return null; // Return null
-        }
-    }
-
-
-    /**
-    * Function to log client actions
-    *
-    * @param clientLogType - action to be logged
-    * @param logTime - Time of logging
-    * @param clientId - clients Id
-    *
-    * @return boolean - true/fasle - (log stored / not stored)
-    */
-    private function storeClientLog($clientLogType, $logDateTime, $clientId) {
-
-        // Create ClientLogId
-        $clientLogId = $this->generateUniqueId(
-            "clientLog",
-            TABLE_CLIENT_LOGS,
-            "ClientLogId"
-        );
-
-        $stmt = $this->connectToDB->prepare(
-            "INSERT INTO {$this->keys->constValueOf(TABLE_CLIENT_LOGS)}(`ClientLogId`, `ClientLogType`, `ClientLogTime`, `ClientId`) VALUES( ?, ?, ?, ?)"
-        );
-        $stmt->bind_param("ssss", $clientLogId, $clientLogType, $logDateTime, $clientId);
-        $store = $stmt->execute();
-        $stmt->close(); // Close statement
-
-        if ($store) {
-
-            // Return true
-            return true; // Return false
-        } else {
-
-            // Return false
-            return false; // Return false
-        }
-    }
-
-
-    /**
-    * Function to generate ClientId
-    *
-    * @param uniqueIdKey    - key to be concatenated to uniqueId
-    * @param tableName      - table name to check for existing uniqueId
-    * @param idFieldName    - table field name to check of existing uniqueId
-    *
-    * @return string uniqueId
-    */
-    public function generateUniqueId($uniqueIdKey, $tableName, $idFieldName) {
-
-        // Loop infinitely
-        while (1 == 1) {
-
-            // Create clientId
-            $uniqueId = substr(
-                $uniqueIdKey . md5(mt_rand()),
-                0,
-                LENGTH_TABLE_IDS
-            );
-
-            // Check if unique id is in associate table
-            $stmt = $this->connectToDB->prepare(
-                "SELECT * FROM {$tableName} WHERE " . $idFieldName . " = ?"
-            );
-            $stmt->bind_param("s", $uniqueId);
-            $stmt->execute(); // Execute SQL statement
-            $stmt->store_result();
-
-            // Check if id does/was exists/found
-            if ($stmt->num_rows == 0) {
-                // UniqueId does not exist
-
-                $stmt->close(); // Close statement
-
-                // Break from loop
-                return $uniqueId;
-            }
-
-            $stmt->close(); // Close statement
         }
     }
 
