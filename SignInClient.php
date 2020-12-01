@@ -79,7 +79,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	$response[KEY_ERROR]           = true;
 	$response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
 
-	//Return Response
+	// Encode and echo Json response
 	echo json_encode($response);
 }
 

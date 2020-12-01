@@ -143,7 +143,7 @@ class ClientAccountFunctions
     * @param emailAddress - clients email address
     * @param password - clients password
     *
-    * @return array - client details
+    * @return array - Associative array (client details)
     * @return boolean - false - (on password mismatch)
     * @return null - on fetch failure
     */
@@ -217,7 +217,7 @@ class ClientAccountFunctions
     *
     * @param clientId - clients id
     *
-    * @return array - cleint details
+    * @return array - Associative array (client details)
     * @return boolean - false - (fetch failure)
     */
     private function getClientByClientId($clientId)
@@ -275,7 +275,7 @@ class ClientAccountFunctions
     *
     * @param signUpDetails - array with signup details
     *
-    * @return array - client details
+    * @return array - Associative array (client details)
     * @return boolean - false (on signup failure)
     * @return null - on logging failed
     */

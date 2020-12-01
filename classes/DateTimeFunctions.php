@@ -38,7 +38,7 @@ class DateTimeFunctions
     * @param dateTimeStamp - Date and time stamp
     * @param countryAlpha2 -Country alpha2 for getting time zone
     */
-    function getLocalTime($dateTimeStamp, $countryAlpha2)
+    public function getLocalTime($dateTimeStamp, $countryAlpha2)
     {
         // Create date from format
         $dateTime = DateTime::createFromFormat(
@@ -63,8 +63,10 @@ class DateTimeFunctions
     * Function to get client timezone by alpha2
     *
     * @param countryAlpha2 - country alpha2
+    *
+    * @return timeZone
     */
-    public function getLocalTimezone($countryAlpha2)
+    private function getLocalTimezone($countryAlpha2)
     {
 
         // Create timezone array
@@ -83,8 +85,10 @@ class DateTimeFunctions
 
     /**
     * Function to get the default time zone date and time
+    *
+    * @return dateTime - (Default timezone date and time)
     */
-    function getDefaultTimeZoneDateTime()
+    public function getDefaultTimeZoneDateTime()
     {
 
         date_default_timezone_set('UTC'); // Set time zone to UTC
