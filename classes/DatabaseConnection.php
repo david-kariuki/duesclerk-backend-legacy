@@ -1,12 +1,15 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
-
-
 /**
-* Mysql database class - only one connection alowed
+* Database connection class
+* This class contains all the functions required for database connection
+* Only one connection is allowed through class instance
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
+
+
 class DatabaseConnection
 {
 
@@ -42,7 +45,6 @@ class DatabaseConnection
                 E_USER_ERROR
             );
         }
-
     }
 
 
@@ -69,7 +71,7 @@ class DatabaseConnection
             self::$connectionInstance = new self();
         }
 
-        return self::$connectionInstance; // Return instance
+        return self::$connectionInstance; // Return connection instance
     }
 
 

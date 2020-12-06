@@ -1,10 +1,12 @@
 <?php
 
-// Copyright (c) 2020 by David Kariuki (dk).
-// All Rights Reserved.
-
-
-// Fetch Client Profile Details
+/**
+* Fetch client profile details file
+* This file fetches clients profile and returns response in json
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
 // Enable Error Reporting
 error_reporting(0);
@@ -63,7 +65,11 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         $response[KEY_CLIENT][FIELD_CLIENT_ID]        = $client[FIELD_CLIENT_ID];
         $response[KEY_CLIENT][FIELD_PHONE_NUMBER]     = $client[FIELD_PHONE_NUMBER];
         $response[KEY_CLIENT][FIELD_EMAIL_ADDRESS]    = $client[FIELD_EMAIL_ADDRESS];
-        $response[KEY_CLIENT][FIELD_COUNTRY_FLAG]     = $client[FIELD_COUNTRY_FLAG];
+
+        // Get country flag and strip out extension type to get flag name
+        $countryFlagName = str_replace(FILE_TYPE_PNG, "", $client[FIELD_COUNTRY_FLAG]);
+        $response[KEY_CLIENT][FIELD_COUNTRY_FLAG]     = $countryFlagName;
+
         $response[KEY_CLIENT][FIELD_COUNTRY_NAME]     = $client[FIELD_COUNTRY_NAME];
         $response[KEY_CLIENT][FIELD_COUNTRY_CODE]     = $client[FIELD_COUNTRY_CODE];
         $response[KEY_CLIENT][FIELD_COUNTRY_ALPHA2]   = $client[FIELD_COUNTRY_ALPHA2];

@@ -1,8 +1,12 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
-
+/**
+* Paths file
+* This file contains defined paths to required project resources
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
 // Paths Class
 

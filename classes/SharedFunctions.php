@@ -1,18 +1,27 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
 
-
-// Client account functions class
+/**
+* Shared functions class
+* This class contains all the functions that will be shared by differebt other classes
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
 error_reporting(1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
-class ClientAccountFunctions
+class SharedFunctions
 {
+
+    // Connection status value variable
+    private $databaseConnectionToDB;       // Create DatabaseConnection object
+    private $keys;              // Create Keys object
+    private $mailFunctions;     // Create MailFunctions object
+    private $dateTimeFunctions; // Create DateTimeFunctions object
 
     /**
     * Class constructor
@@ -25,9 +34,12 @@ class ClientAccountFunctions
         require_once 'Keys.php'; // Call keys file
         require_once 'DateTimeFunctions.php'; // Call date and time functions
 
-        // Creating objects of the required Classes
-        $connect                  = new DatabaseConnection(); // Initialize variable connection
-        $this->connectToDB        = $connect->Connect();      // Initialize connection object
+        // Initialize database connection class instance
+        $connectionInstance       = DatabaseConnection::getConnectionInstance();
+
+        // Initialize connection object
+        $this->connectToDB        = $connectionInstance->getDatabaseConnection();
+
         $this->keys               = new Keys();               // Initialize keys object
         $this->dateTimeFunctions  = new DateTimeFunctions();  // Initialize DateTimeFunctions object
     }
@@ -97,7 +109,7 @@ class ClientAccountFunctions
     *
     * @return boolean - true/fasle - (log stored / not stored)
     */
-    private function createStoreClientLogs($clientLogType, $logDateTime, $clientId) {
+    public function createStoreClientLogs($clientLogType, $logDateTime, $clientId) {
 
         // Create ClientLogId
         $clientLogId = $this->generateUniqueId(

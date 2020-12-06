@@ -1,10 +1,14 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
+/**
+* Update client profile details file
+*
+* This file updates clients profile, password and returns response in json
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
-
-// Update Client Profile Details
 
 // Enable Error Reporting
 error_reporting(0);

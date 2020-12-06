@@ -1,9 +1,12 @@
 <?php
 
-//  Copyright (c) 2020 by David Kariuki (dk).
-//  All Rights Reserved.
-
-// Signup client
+/**
+* Client Sign Up file
+* This file Signs Up clients / creates clients accounts and returns response in json
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
 // Enable error reporting
 error_reporting(0);

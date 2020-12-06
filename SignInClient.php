@@ -1,10 +1,12 @@
 <?php
 
-//  Copyright (c) 2020 by David Kariuki (dk).
-//  All Rights Reserved.
-
-
-// Client Signin
+/**
+* Client Sign In file
+* This file Signs In / logs in clients and returns response in json
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
 // Enable Error Reporting
 error_reporting(0);

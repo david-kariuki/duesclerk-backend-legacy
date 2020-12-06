@@ -1,7 +1,13 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
+/**
+* Date and time functions class
+* This class contains all the date, time and TimeZone functions required for time
+* and date processing
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
 error_reporting(1);
 ini_set('display_errors', 1);
@@ -26,8 +32,7 @@ class DateTimeFunctions
     */
     function __destruct()
     {
-        // Close database connection
-        //mysqli_close($this->connectToDB);
+
     }
 
 
