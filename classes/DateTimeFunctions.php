@@ -22,6 +22,7 @@ class DateTimeFunctions
     */
     function __construct()
     {
+
         // Call required functions classes
         require_once 'Keys.php'; // Call keys file
     }
@@ -45,6 +46,7 @@ class DateTimeFunctions
     */
     public function getLocalTime($dateTimeStamp, $countryAlpha2)
     {
+
         // Create date from format
         $dateTime = DateTime::createFromFormat(
             FORMAT_DATE_TIME_FULL,      // Set date format
@@ -53,11 +55,7 @@ class DateTimeFunctions
         );
 
         // Set dateTimes' objects' time zone to local time zone
-        $dateTime->setTimeZone(
-            new DateTimeZone(
-                $this->getLocalTimezone($countryAlpha2)
-            )
-        );
+        $dateTime->setTimeZone(new DateTimeZone($this->getLocalTimezone($countryAlpha2)));
 
         // Format and return date time object
         return $dateTime->format(FORMAT_DATE_TIME_FULL);
@@ -78,7 +76,10 @@ class DateTimeFunctions
         $timeZone = array();
 
         // Get timezone by country alpha2
-        $timeZone = \DateTimeZone::listIdentifiers(\DateTimeZone::PER_COUNTRY, strtoupper($countryAlpha2));
+        $timeZone = \DateTimeZone::listIdentifiers(
+            \DateTimeZone::PER_COUNTRY,
+            strtoupper($countryAlpha2)
+        );
 
         // Get timezone in array at current position incase of multiple timezones in array
         $current = current($timeZone);
@@ -89,16 +90,101 @@ class DateTimeFunctions
 
 
     /**
-    * Function to get the default time zone date and time
+    * Function to get the default time zone numerical date and time
     *
-    * @return dateTime - (Default timezone date and time)
+    * @return dateTime - (Default timezone numerical date and time)
     */
-    public function getDefaultTimeZoneDateTime()
+    public function getDefaultTimeZoneNumericalDateTime()
+    {
+
+        $this->setTimeZoneUTC(); // Set time zone to UTC
+        return strtotime(
+            date(FORMAT_DATE_TIME_NUMERICAL, time())
+        ); // Return numerical time stamp
+    }
+
+
+    /**
+    * Function to get the default time zone textual date and time
+    *
+    * @return dateTime - (Default timezone textual date and time)
+    */
+    public function getDefaultTimeZoneTextualDateTime()
+    {
+
+        $this->setTimeZoneUTC(); // Set time zone to UTC
+
+        return date(FORMAT_DATE_TIME_FULL); // Return full date and time
+    }
+
+
+    /**
+    * Function to get time difference
+    *
+    * @param recentTime - Recent / new time
+    * @param oldTime - Old time
+    *
+    * @return integer - time difference
+    */
+    public function getNumericalTimeDifferenceInHours($recentTime, $oldTime)
+    {
+
+        // Check if recent time is numeric
+        if (!is_numeric($recentTime)) {
+
+            // Convert date time format
+            $recentTime = $this->convertDateTimeFormat($recentTime, FORMAT_DATE_TIME_NUMERICAL);
+        }
+
+        // Check if old time is numeric
+        if (!is_numeric($oldTime)) {
+
+            // Convert date time format
+            $oldTime = $this->convertDateTimeFormat($oldTime, FORMAT_DATE_TIME_NUMERICAL);
+        }
+
+        // Return time difference
+        return (abs($recentTime - $oldTime) / 3600);
+    }
+
+
+    /**
+    * Function to convert date and time formats
+    *
+    * @param dateAndTime - Date and time to be converted
+    * @param newFormat - New date and time format
+    *
+    * @return DateTime - converted date and time
+    */
+    private function convertDateTimeFormat($dateAndTime, $newFormat)
+    {
+
+        // Create date from format
+        $dateTime = DateTime::createFromFormat(
+            FORMAT_DATE_TIME_FULL,  // Set date format
+            $dateAndTime,           // Date time stamp
+            new DateTimeZone('UTC') // Set time zone to UTC
+        );
+
+        // Switch new format
+        switch ($newFormat) {
+
+            case FORMAT_DATE_TIME_NUMERICAL:
+            return strtotime($dateTime->format(FORMAT_DATE_TIME_NUMERICAL)); // Numerical
+
+            default:
+            return $dateTime->format($newFormat); // Other formats
+        }
+    }
+
+
+    /**
+    * Function to set TimeZone to UTC
+    */
+    private function setTimeZoneUTC()
     {
 
         date_default_timezone_set('UTC'); // Set time zone to UTC
-
-        return date(FORMAT_DATE_TIME_FULL); // Return full date and time
     }
 
 }

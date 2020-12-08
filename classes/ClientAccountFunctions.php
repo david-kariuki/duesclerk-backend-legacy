@@ -1,10 +1,13 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
+/**
+* Client account functions class
+* This class contains all the functions required to process a clients account
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
-
-// Client account functions class
 
 error_reporting(1);
 ini_set('display_errors', 1);
@@ -15,10 +18,11 @@ class ClientAccountFunctions
 {
 
     // Connection status value variable
-    private $connectToDB;
-    //private $keys;
-    private $mailFunctions;
-    private $dateTimeFunctions;
+    private $connectToDB;       // Create DatabaseConnection class object
+    private $keys;              // Create Keys class object
+    private $mailFunctions;     // Create MailFunctions class object
+    private $dateTimeFunctions; // Create DateTimeFunctions class object
+    private $sharedFunctions;   // Create SharedFunctions class object
 
     /**
     * Class constructor
@@ -27,18 +31,33 @@ class ClientAccountFunctions
     {
 
         // Call required functions classes
-        require_once 'DatabaseConnection.php'; // Call database connection class
-        require_once 'Keys.php'; // Call keys file
-        require_once 'MailFunctions.php'; // Call mail functions class
-        require_once 'DateTimeFunctions.php'; // Call date and time functions
+        require_once 'DatabaseConnection.php';  // Call database connection php file
+        require_once 'Keys.php';                // Call keys php file
+        require_once 'MailFunctions.php';       // Call mail functions php file
+        require_once 'DateTimeFunctions.php';   // Call date and time functions php file
+        require_once 'SharedFunctions.php';     // Call shared functions php file
 
-        // Creating objects of the required Classes
-        $connect                  = new DatabaseConnection(); // Initialize variable connection
-        $this->connectToDB        = $connect->Connect();      // Initialize connection object
-        $this->keys               = new Keys();               // Initialize keys object
-        $this->mailFunctions      = new MailFunctions();      // Initialize MailFunctions object
-        $this->dateTimeFunctions  = new DateTimeFunctions();  // Initialize DateTimeFunctions object
+
+        // Creating objects of the required classes
+
+        // Initialize database connection class instance
+        $connectionInstance         = DatabaseConnection::getConnectionInstance();
+
+        // Initialize connection object
+        $this->connectToDB          = $connectionInstance->getDatabaseConnection();
+
+        $this->keys                 = new Keys(); // Initialize keys object
+
+        // Initialize MailFunctions class object
+        $this->mailFunctions        = new MailFunctions();
+
+        // Initialize DateTimeFunctions class object
+        $this->dateTimeFunctions    = new DateTimeFunctions();
+
+        // Initialize SharedFunctions class object
+        $this->sharedFunctions      = new SharedFunctions();
     }
+
 
     /**
     * Class destructor
@@ -46,8 +65,6 @@ class ClientAccountFunctions
     function __destruct()
     {
 
-        // Close database connection
-        mysqli_close($this->connectToDB);
     }
 
 
@@ -62,17 +79,18 @@ class ClientAccountFunctions
     {
 
         // Check for email address in clients table
+        // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_EMAIL_ADDRESS)}
-            FROM {$this->keys->constValueOf(TABLE_CLIENTS)}
-            AS {$this->keys->constValueOf(KEY_CLIENT)}
-            WHERE {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_EMAIL_ADDRESS)} = ?"
+            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
+            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
+            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
         );
-        $stmt->bind_param("s", $emailAddress);
-        $stmt->execute(); // Execute SQL statement
-        $stmt->store_result();
+        $stmt->bind_param("s", $emailAddress); // Bind parameters
+        $stmt->execute(); // Execute statement
+        $stmt->store_result(); // Store result
 
         // Check if records found
         if ($stmt->num_rows > 0) {
@@ -105,17 +123,18 @@ class ClientAccountFunctions
     {
 
         // Check for phone number in clients table
+        // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_PHONE_NUMBER)}
-            FROM {$this->keys->constValueOf(TABLE_CLIENTS)}
-            AS {$this->keys->constValueOf(KEY_CLIENT)}
-            WHERE {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_PHONE_NUMBER)} = ?"
+            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_PHONE_NUMBER)}
+            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
+            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_PHONE_NUMBER)} = ?"
         );
-        $stmt->bind_param("s", $phoneNumber);
-        $stmt->execute(); // Execute SQL statement
-        $stmt->store_result();
+        $stmt->bind_param("s", $phoneNumber); // Bind parameters
+        $stmt->execute(); // Execute statement
+        $stmt->store_result(); // Store result
 
         // Check if records found
         if ($stmt->num_rows > 0) {
@@ -151,31 +170,33 @@ class ClientAccountFunctions
     {
 
         // Check for email in Table Clients
+        // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->constValueOf(KEY_CLIENT)}.*,
-            {$this->keys->constValueOf(KEY_COUNTRY)}.*
-            FROM {$this->keys->constValueOf(TABLE_CLIENTS)}
-            AS {$this->keys->constValueOf(KEY_CLIENT)}
-            LEFT OUTER JOIN {$this->keys->constValueOf(TABLE_COUNTRIES)}
-            AS {$this->keys->constValueOf(KEY_COUNTRY)}
-            ON {$this->keys->constValueOf(KEY_COUNTRY)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_ALPHA2)}
-            AND {$this->keys->constValueOf(KEY_COUNTRY)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_CODE)}
-            = {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_EMAIL_ADDRESS)}
+            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}.*,
+            {$this->keys->valueOfConst(KEY_COUNTRY)}.*
+            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
+            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
+            AS {$this->keys->valueOfConst(KEY_COUNTRY)}
+            ON {$this->keys->valueOfConst(KEY_COUNTRY)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            AND {$this->keys->valueOfConst(KEY_COUNTRY)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
+            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
+            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
             = ?"
         );
-        $stmt->bind_param("s", $emailAddress);
+        $stmt->bind_param("s", $emailAddress); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
-            $client = $stmt->get_result()->fetch_assoc();
+            // Query executed
 
+            $client = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
 
             // Get password hash from client details array
@@ -220,35 +241,37 @@ class ClientAccountFunctions
     * @return array - Associative array (client details)
     * @return boolean - false - (fetch failure)
     */
-    private function getClientByClientId($clientId)
+    public function getClientByClientId($clientId)
     {
 
         // Check for email in Table Clients
+        // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->constValueOf(KEY_CLIENT)}.*,
-            {$this->keys->constValueOf(KEY_COUNTRY)}.*
-            FROM {$this->keys->constValueOf(TABLE_CLIENTS)}
-            AS {$this->keys->constValueOf(KEY_CLIENT)}
-            LEFT OUTER JOIN {$this->keys->constValueOf(TABLE_COUNTRIES)}
-            AS {$this->keys->constValueOf(KEY_COUNTRY)}
-            ON {$this->keys->constValueOf(KEY_COUNTRY)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_ALPHA2)}
-            AND {$this->keys->constValueOf(KEY_COUNTRY)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_CODE)}
-            = {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->constValueOf(KEY_CLIENT)}
-            .{$this->keys->constValueOf(FIELD_CLIENT_ID)}
+            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}.*,
+            {$this->keys->valueOfConst(KEY_COUNTRY)}.*
+            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
+            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
+            AS {$this->keys->valueOfConst(KEY_COUNTRY)}
+            ON {$this->keys->valueOfConst(KEY_COUNTRY)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            AND {$this->keys->valueOfConst(KEY_COUNTRY)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
+            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
+            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_CLIENT_ID)}
             = ?"
         );
-        $stmt->bind_param("s", $clientId);
+        $stmt->bind_param("s", $clientId); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
-            $client = $stmt->get_result()->fetch_assoc();
+            // Query executed
 
+            $client = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
 
             // Get current sign up date and time
@@ -306,35 +329,47 @@ class ClientAccountFunctions
         $result;
         // Insert into Clients
         if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
+            // Personal account
 
-            global $stmt;
+            $stmt; // Statement variable
 
             // Get first name, last name and gender
             $firstName   = $signUpDetails[FIELD_FIRST_NAME];
             $lastName    = $signUpDetails[FIELD_LAST_NAME];
             $gender      = $signUpDetails[FIELD_GENDER];
 
-            // Personal account
+            // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->constValueOf(TABLE_CLIENTS)}(`ClientId`, `FirstName`, `LastName`, `PhoneNumber`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `Gender`, `AccountType`, `SignUpDateTime`) VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `FirstName`, `LastName`, `PhoneNumber`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `Gender`, `AccountType`, `SignUpDateTime`)
+                VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
+
+            // Bind parameters
             $stmt->bind_param("sssssssssss", $clientId, $firstName, $lastName, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
-            $result = $stmt->execute(); // Execute SQL statement
+
+            $result = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
 
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
+            // Business account
 
             // Get business name and city
             $businessName    = $signUpDetails[FIELD_BUSINESS_NAME];
             $cityName        = $signUpDetails[FIELD_CITY_NAME];
 
-            // Business account
+            // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->constValueOf(TABLE_CLIENTS)}(`ClientId`, `PhoneNumber`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `CityName`, `AccountType`, `SignUpDateTime`)
+                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `PhoneNumber`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `CityName`, `AccountType`, `SignUpDateTime`)
                 VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
             );
-            $stmt->bind_param("ssssssssss", $clientId, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $cityName, $accountType, $signupDateTime);
-            $result = $stmt->execute(); // Execute SQL statement
+
+            // Bind parameters
+            $stmt->bind_param(
+                "ssssssssss",
+                $clientId, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $cityName, $accountType, $signupDateTime
+            );
+
+            $result = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
         }
 
@@ -352,17 +387,19 @@ class ClientAccountFunctions
                 // Loging successful
 
                 // Get stored values
+                // Prepare statement
                 $stmt = $this->connectToDB->prepare(
-                    "SELECT * FROM {$this->keys->constValueOf(TABLE_CLIENTS)}
-                    AS {$this->keys->constValueOf(KEY_CLIENT)}
-                    WHERE {$this->keys->constValueOf(KEY_CLIENT)}
-                    .{$this->keys->constValueOf(FIELD_CLIENT_ID)} = ?
-                    AND {$this->keys->constValueOf(KEY_CLIENT)}
-                    .{$this->keys->constValueOf(FIELD_EMAIL_ADDRESS)} = ?"
+                    "SELECT * FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
+                    AS {$this->keys->valueOfConst(KEY_CLIENT)}
+                    WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+                    .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?
+                    AND {$this->keys->valueOfConst(KEY_CLIENT)}
+                    .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
                 );
-                $stmt->bind_param("ss", $clientId, $emailAddress);
-                $stmt->execute();
-                $client = $stmt->get_result()->fetch_assoc();
+
+                $stmt->bind_param("ss", $clientId, $emailAddress); // Bind parameters
+                $stmt->execute(); // Execute statement
+                $client = $stmt->get_result()->fetch_assoc(); // Get result array
                 $stmt->close(); // Close statement
 
                 // Return client details
@@ -398,14 +435,15 @@ class ClientAccountFunctions
 
         // Get phoneNumber, emailAddress, countryCode, countryAlpha2, password,
         // accountType from update details array
-        $updateParams = "";
+
+        $updateParams = ""; // Update params
 
         $firstName = "";
         $lastName = "";
         $gender = "";
         $businessName = "";
         $cityName = "";
-        $bindParamValue = array();
+        $bindParamValues = array();
 
         // Insert into Clients
         if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
@@ -415,21 +453,21 @@ class ClientAccountFunctions
             if (array_key_exists(FIELD_FIRST_NAME, $updateDetails)) {
 
                 // Add last name to update params
-                $updateParams .= ", {$this->keys->constValueOf(FIELD_FIRST_NAME)} = ?";
+                $updateParams .= ", {$this->keys->valueOfConst(FIELD_FIRST_NAME)} = ?";
             }
 
             // Check for last name
             if (array_key_exists(FIELD_LAST_NAME, $updateDetails)) {
 
                 // Add last name to update params
-                $updateParams .= ", {$this->keys->constValueOf(FIELD_LAST_NAME)} = ?";
+                $updateParams .= ", {$this->keys->valueOfConst(FIELD_LAST_NAME)} = ?";
             }
 
             // Check for gender
             if (array_key_exists(FIELD_GENDER, $updateDetails)) {
 
                 // Add gender to update params
-                $updateParams .= ", {$this->keys->constValueOf(FIELD_GENDER)} = ?";
+                $updateParams .= ", {$this->keys->valueOfConst(FIELD_GENDER)} = ?";
             }
 
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
@@ -439,14 +477,14 @@ class ClientAccountFunctions
             if (array_key_exists(FIELD_BUSINESS_NAME, $updateDetails)) {
 
                 // Add business name to update params
-                $updateParams .= ", {$this->keys->constValueOf(FIELD_BUSINESS_NAME)} = ?";
+                $updateParams .= ", {$this->keys->valueOfConst(FIELD_BUSINESS_NAME)} = ?";
             }
 
             // Check for city name
             if (array_key_exists(FIELD_CITY_NAME, $updateDetails)) {
 
                 // Add city name to update params
-                $updateParams .= ", {$this->keys->constValueOf(FIELD_CITY_NAME)} = ?";
+                $updateParams .= ", {$this->keys->valueOfConst(FIELD_CITY_NAME)} = ?";
             }
         }
 
@@ -454,7 +492,7 @@ class ClientAccountFunctions
         if (array_key_exists(FIELD_PHONE_NUMBER, $updateDetails)) {
 
             // Add phone number to update params
-            $updateParams .= ", {$this->keys->constValueOf(FIELD_PHONE_NUMBER)} = ?";
+            $updateParams .= ", {$this->keys->valueOfConst(FIELD_PHONE_NUMBER)} = ?";
 
         }
 
@@ -462,7 +500,7 @@ class ClientAccountFunctions
         if (array_key_exists(FIELD_EMAIL_ADDRESS, $updateDetails)) {
 
             // Add email address to update params
-            $updateParams .= ", {$this->keys->constValueOf(FIELD_EMAIL_ADDRESS)} = ?";
+            $updateParams .= ", {$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?";
         }
 
         // Check for country code and country alpha2
@@ -470,26 +508,33 @@ class ClientAccountFunctions
         && array_key_exists(FIELD_COUNTRY_ALPHA2, $updateDetails)) {
 
             // Add country code to update params
-            $updateParams .= ", {$this->keys->constValueOf(FIELD_COUNTRY_CODE)} = ?";
+            $updateParams .= ", {$this->keys->valueOfConst(FIELD_COUNTRY_CODE)} = ?";
 
             // Add country alpha2 to update params
-            $updateParams .= ", {$this->keys->constValueOf(FIELD_COUNTRY_ALPHA2)} = ?";
+            $updateParams .= ", {$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)} = ?";
         }
 
         // Check for password hash
         if (array_key_exists(FIELD_HASH, $updateDetails)) {
 
             // Add password hash to update params
-            $updateParams .= ", {$this->keys->constValueOf(FIELD_HASH)} = ?";
+            $updateParams .= ", {$this->keys->valueOfConst(FIELD_HASH)} = ?";
+        }
+
+        // Check for email verified field
+        if (array_key_exists(FIELD_EMAIL_VERIFIED, $updateDetails)) {
+
+            // Add password hash to update params
+            $updateParams .= ", {$this->keys->valueOfConst(FIELD_EMAIL_VERIFIED)} = ?";
         }
 
         // Construct SQL command with the update params above
-        $sqlCommand = "UPDATE {$this->keys->constValueOf(TABLE_CLIENTS)}
-        SET {$updateParams} WHERE {$this->keys->constValueOf(TABLE_CLIENTS)}
-        .{$this->keys->constValueOf(FIELD_CLIENT_ID)} = '$clientId'";
+        $updateStatement = "UPDATE {$this->keys->valueOfConst(TABLE_CLIENTS)}
+        SET {$updateParams} WHERE {$this->keys->valueOfConst(TABLE_CLIENTS)}
+        .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = '$clientId'";
 
         // Remove the comma after SET keyword
-        $updateProfileSQLStatement = str_replace("SET ,", "SET", $sqlCommand);
+        $updateStatement = str_replace("SET ,", "SET", $updateStatement);
 
         $count = 0; // Loop count variable
         // Get bind param value from associative array
@@ -497,22 +542,21 @@ class ClientAccountFunctions
             if ($count < count($updateDetails)) {
 
                 // Add value to value array
-                $bindParamValue[$count] = $value;
+                $bindParamValues[$count] = $value;
                 $count++; // Increment loop count variable
             }
         }
 
-        // Prepare statement
-        $stmt = $this->connectToDB->prepare($updateProfileSQLStatement);
-        $bind_types = str_repeat("s", count($bindParamValue));
+        $stmt = $this->connectToDB->prepare($updateStatement);  // Prepare statement
+        $bind_types = str_repeat("s", count($bindParamValues)); // Repeat bind data type
 
         // Bind params to prepared statement
-        $stmt->bind_param($bind_types, ...$bindParamValue);
-        $update = $stmt->execute();
+        $stmt->bind_param($bind_types, ...$bindParamValues); // Bind parameters
+        $update = $stmt->execute(); // Execute statement
         $stmt->close(); // Close statement
 
         // Get update time
-        $updateDateTime = $this->dateTimeFunctions->getDefaultTimeZoneDateTime();
+        $updateDateTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime();
 
         // Check for query execution
         if ($update) {
@@ -694,6 +738,5 @@ class ClientAccountFunctions
         }
     }
 }
-
 
 // EOF : ClientAccountFunctions.php

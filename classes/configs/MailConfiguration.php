@@ -1,12 +1,16 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
+/**
+* Mail configurations file
+* This file contains all the constants required for mail processing
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
-// Mail Configuration Keys
 
-// Call keys file
-require_once(realpath($_SERVER["DOCUMENT_ROOT"]) .'/andr/classes/Keys.php');
+$DOCUMENT_ROOT = realpath($_SERVER["DOCUMENT_ROOT"]);       // Document root path
+require_once($DOCUMENT_ROOT . '/andr/classes/Keys.php');    // Call Keys.php file
 
 // SMTP Email address usernames
 define("EMAIL_ADDRESS_INFO_USERNAME",       "info@"     . ROOT_DOMAIN);
@@ -14,14 +18,13 @@ define("EMAIL_ADDRESS_SUPPORT_USERNAME",    "support@"  . ROOT_DOMAIN);
 define("EMAIL_ADDRESS_NO_REPLY_USERNAME",   "noreply@"  . ROOT_DOMAIN);
 
 // SMTP Email address passwords
-define("EMAIL_ADDRESS_INFO_PASSWORD",       "PYo6}?;yemR~9=cOQ.");
-define("EMAIL_ADDRESS_SUPPORT_PASSWORD",    "-^A2+X=?)P,&pj&1Tt");
-define("EMAIL_ADDRESS_NO_REPLY_PASSWORD",   "EX&r#fjPA_U=K4V&y[");
+define("EMAIL_ADDRESS_INFO_PASSWORD",       "Z+&Yb#c-rl+v!1m*tl");
+define("EMAIL_ADDRESS_SUPPORT_PASSWORD",    "LH+.g1AdpOL3+YyCL9");
+define("EMAIL_ADDRESS_NO_REPLY_PASSWORD",   "vW5S1l~rBP0.~{TiI5");
 
 // Set main(mail) and backup SMTP(webdisk) servers.
-define("MAIL_HOST",         "mail."     . ROOT_DOMAIN . ";" . "webdisk."  . ROOT_DOMAIN);
+define("MAIL_HOST",         "mail." . ROOT_DOMAIN . ";" . "webdisk." . ROOT_DOMAIN);
 
-define("SMTP_SECURE",       "tls");
 define("MAIL_PORT",         587); // 587 (Non ssl)
 
 // Peers

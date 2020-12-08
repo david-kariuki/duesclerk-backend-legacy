@@ -1,10 +1,12 @@
 <?php
 
-//    Copyright (c) 2020 by David Kariuki (dk).
-//    All Rights Reserved.
-
-
-// Keys Class
+/**
+* Keys class
+* This class contains all the constants required by all project files
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
 
 // Disable Error Reporting
 error_reporting(1);
@@ -41,7 +43,7 @@ define("FIELD_SIGN_UP_DATE_TIME",           "SignUpDateTime");
 define("FIELD_EMAIL_VERIFIED",              "EmailVerified");
 define("FIELD_VERIFICATION_CODE",           "VerificationCode");
 define("FIELD_UPDATE_DATE_TIME",            "UpdateDateTime");
-define("FIELD_REQUEST_NAME",                "RequestTime");
+define("FIELD_CODE_REQUEST_TIME",           "CodeRequestTime");
 
 
 // Table Names
@@ -75,10 +77,11 @@ define("KEY_UPDATE_PROFILE",                "UpdateProfile");
 
 
 // Email verification keys
-define("KEY_ACCOUNT_EMAIL_VERIFICATION",    "AccountEmailVerification");
-define("KEY_PASSWORD_RESET_EMAIL_VERIFICATION", "PasswordResetEmailVerification");
-define("KEY_VERIFICATION_CODE_EXPIRY_TIME",  1);
-define("KEY_VERIFICATION",                  "Verification");
+define("FIELD_VERIFICATION_TYPE",               "VerificationType");
+define("KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT",   "VerificationEmailAccount");
+define("KEY_VERIFICATION_TYPE_PASSWORD_RESET",  "VerificationPasswordReset");
+define("KEY_VERIFICATION_CODE_EXPIRY_TIME",     1); // 1 hour
+define("KEY_EMAIL_VERIFICATION",                "EmailVerification");
 
 
 // Expressions (preg match)
@@ -102,31 +105,54 @@ define("LOG_TYPE_UPDATE_PASSWORD",          "LogTypeUpdatePassword");
 
 // Date formats
 define("FORMAT_DATE_TIME_FULL",             "l d, F Y H:i:s");
+define("FORMAT_DATE_TIME_NUMERICAL",        "m/d/Y h:i:s a");
+
+// File types
+define("FILE_TYPE_PNG",                     ".png");
 
 
 class Keys
 {
 
     /**
-    * Class destructor
+    * Class constructor
     */
     function __construct()
-    {}
+    {
+
+    }
 
 
     /**
     * Class destructor
     */
     function __destruct()
-    {}
+    {
+
+    }
+
 
     /**
     * Function to return constant value within SQL statements
     *
     * @param constant - Constants value
     */
-    public function constValueOf($constant){
-        return $constant;
+    public function valueOfConst($constant)
+    {
+
+        if (!empty($constant)) {
+            // Constant not empty
+
+            return $constant; // Return constant
+
+        } else {
+            // Constant empty
+
+            // Throw exception
+            throw new Exception(
+                'Method '.__METHOD__.' failed : The required constant is null or undefined'
+            );
+        }
     }
 }
 

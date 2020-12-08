@@ -1,25 +1,25 @@
 <?php
 
 
-$myarray  = array(
+// Call required php files
+require_once '../classes/ClientAccountFunctions.php';
+require_once '../classes/MailFunctions.php';
+require_once '../classes/DateTimeFunctions.php';
+require_once '../classes/SharedFunctions.php';
 
-    "FirstName" => "David",
-    "LastName" => "Kariuki",
-    "Gender" => "Male",
-    "BusinessName" => "",
-    "CityName" => "",
-    "PhoneNumber" => "+254700619045",
-    "EmailAddress" => "dkaris.k@gmail.com",
-    "CountryCode" => "254",
-    "CountryAlpha2" => "KE",
-    "Password" => "password",
-    "AccountType" => "AccountTypePersonal"
-);
+// Create required classes objects
+$clientAccountFunctions = new ClientAccountFunctions();
+$mailFunctions = new MailFunctions();
+$dateTimeFunctions = new DateTimeFunctions();
+$sharedFunctions = new SharedFunctions();
 
-foreach ($myarray as $key=>$value) {
-    if (is_null($value) || $value == '')
-        unset($myarray[$key]);
-}
+// Common fields
+$emailAddress = "dkaris.k@gmail.com";
+$password = "password";
+$clientId = "clientdb3f6fb90";
+$verificationTypeEmail = "VerificationEmailAccount";
+$verificationTypeReset = "VerificationPasswordReset";
 
-
+$check = $mailFunctions->checkForOldVerificationCode($clientId, $verificationType);
+echo "Check Response : " . json_encode($check);
 ?>

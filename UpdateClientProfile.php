@@ -120,12 +120,16 @@ if (
 
             // Check for and get business name
             if (isset($_POST[FIELD_BUSINESS_NAME])) {
+
                 $businessName = $_POST[FIELD_BUSINESS_NAME] ? $_POST[FIELD_BUSINESS_NAME] : '';
-                $updateDetails[FIELD_BUSINESS_NAME] = $businessName; // Add businessName to details array
+
+                // Add businessName to details array
+                $updateDetails[FIELD_BUSINESS_NAME] = $businessName;
             }
 
             // Check for and get city name
             if (isset($_POST[FIELD_CITY_NAME])) {
+
                 $cityName = $_POST[FIELD_CITY_NAME] ? $_POST[FIELD_CITY_NAME] : '';
                 $updateDetails[FIELD_CITY_NAME] = $cityName; // Add cityName to details array
             }
@@ -135,14 +139,19 @@ if (
 
         // Check for and get phone number
         if (isset($_POST[FIELD_PHONE_NUMBER])) {
+
             $phoneNumber = $_POST[FIELD_PHONE_NUMBER] ? $_POST[FIELD_PHONE_NUMBER] : '';
-            $updateDetails[FIELD_PHONE_NUMBER] = $phoneNumber; // Add phoneNumber to details array
+
+            // Add phoneNumber to details array
+            $updateDetails[FIELD_PHONE_NUMBER] = $phoneNumber;
         }
 
         // Check for and get email address
         if (isset($_POST[FIELD_EMAIL_ADDRESS])) {
             $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
-            $updateDetails[FIELD_EMAIL_ADDRESS] = $emailAddress; // Add emailAddress to details array
+
+            // Add emailAddress to details array
+            $updateDetails[FIELD_EMAIL_ADDRESS] = $emailAddress;
         }
 
         // Check for and get country code and country alpha2

@@ -78,12 +78,13 @@ class SharedFunctions
             );
 
             // Check if unique id is in associate table
+            // Prepare statement
             $stmt = $this->connectToDB->prepare(
                 "SELECT * FROM {$tableName} WHERE " . $idFieldName . " = ?"
             );
-            $stmt->bind_param("s", $uniqueId);
+            $stmt->bind_param("s", $uniqueId); // Bind parameters
             $stmt->execute(); // Execute SQL statement
-            $stmt->store_result();
+            $stmt->store_result(); // Store result
 
             // Check if id does/was exists/found
             if ($stmt->num_rows == 0) {
@@ -91,8 +92,7 @@ class SharedFunctions
 
                 $stmt->close(); // Close statement
 
-                // Break from loop
-                return $uniqueId;
+                return $uniqueId; // Break from loop returning uniqueId
             }
 
             $stmt->close(); // Close statement
@@ -118,11 +118,14 @@ class SharedFunctions
             "ClientLogId"
         );
 
+        // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "INSERT INTO {$this->keys->constValueOf(TABLE_CLIENT_LOGS)}(`ClientLogId`, `ClientLogType`, `ClientLogTime`, `ClientId`) VALUES( ?, ?, ?, ?)"
+            "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENT_LOGS)}(`ClientLogId`, `ClientLogType`, `ClientLogTime`, `ClientId`) VALUES( ?, ?, ?, ?)"
         );
+
+        // Bind parameters
         $stmt->bind_param("ssss", $clientLogId, $clientLogType, $logDateTime, $clientId);
-        $store = $stmt->execute();
+        $store = $stmt->execute(); // Execute statement
         $stmt->close(); // Close statement
 
         if ($store) {
