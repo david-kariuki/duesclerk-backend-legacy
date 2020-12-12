@@ -113,50 +113,6 @@ class ClientAccountFunctions
 
 
     /**
-    * Check if phone number is in clients table.
-    *
-    * @param phoneNumber - clients phone number
-    *
-    * @return boolean - true/false - (if/not found)
-    */
-    public function isPhoneNumberInClientsTable($phoneNumber)
-    {
-
-        // Check for phone number in clients table
-        // Prepare statement
-        $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}
-            .{$this->keys->valueOfConst(FIELD_PHONE_NUMBER)}
-            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
-            AS {$this->keys->valueOfConst(KEY_CLIENT)}
-            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
-            .{$this->keys->valueOfConst(FIELD_PHONE_NUMBER)} = ?"
-        );
-        $stmt->bind_param("s", $phoneNumber); // Bind parameters
-        $stmt->execute(); // Execute statement
-        $stmt->store_result(); // Store result
-
-        // Check if records found
-        if ($stmt->num_rows > 0) {
-            // Phone number found
-
-            $stmt->close(); // Close statement
-
-            // Return true
-            return true; // Return false
-
-        } else {
-            // Phone number not found
-
-            $stmt->close(); // Close statement
-
-            // Return false
-            return false; // Return false
-        }
-    }
-
-
-    /**
     * Function to get client by email address and password
     *
     * @param emailAddress - clients email address
@@ -364,9 +320,8 @@ class ClientAccountFunctions
     */
     public function signUpClient($signUpDetails) {
 
-        // Get phoneNumber, emailAddress, countryCode, countryAlpha2, password,
+        // Get emailAddress, countryCode, countryAlpha2, password,
         // accountType from SignUpDetails array
-        $phoneNumber      = $signUpDetails[FIELD_PHONE_NUMBER];
         $emailAddress     = $signUpDetails[FIELD_EMAIL_ADDRESS];
         $countryCode      = $signUpDetails[FIELD_COUNTRY_CODE];
         $countryAlpha2    = $signUpDetails[FIELD_COUNTRY_ALPHA2];
@@ -400,12 +355,12 @@ class ClientAccountFunctions
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `FirstName`, `LastName`, `PhoneNumber`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `Gender`, `AccountType`, `SignUpDateTime`)
-                VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `Gender`, `AccountType`, `SignUpDateTime`)
+                VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
 
             // Bind parameters
-            $stmt->bind_param("sssssssssss", $clientId, $firstName, $lastName, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
+            $stmt->bind_param("ssssssssss", $clientId, $firstName, $lastName, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
 
             $result = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
@@ -413,20 +368,19 @@ class ClientAccountFunctions
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
             // Business account
 
-            // Get business name and city
+            // Get business name
             $businessName    = $signUpDetails[FIELD_BUSINESS_NAME];
-            $cityName        = $signUpDetails[FIELD_CITY_NAME];
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `PhoneNumber`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `CityName`, `AccountType`, `SignUpDateTime`)
-                VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )"
+                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `AccountType`, `SignUpDateTime`)
+                VALUES( ?, ?, ?, ?, ?, ?, ?, ? )"
             );
 
             // Bind parameters
             $stmt->bind_param(
-                "ssssssssss",
-                $clientId, $phoneNumber, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $cityName, $accountType, $signupDateTime
+                "ssssssss",
+                $clientId, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $accountType, $signupDateTime
             );
 
             $result = $stmt->execute(); // Execute statement
@@ -493,7 +447,7 @@ class ClientAccountFunctions
     public function updateClientProfile($clientId, $accountType, $updateDetails) {
         // Get details from array
 
-        // Get phoneNumber, emailAddress, countryCode, countryAlpha2, password,
+        // Get emailAddress, countryCode, countryAlpha2, password,
         // accountType from update details array
 
         $updateParams = ""; // Update params
@@ -502,7 +456,6 @@ class ClientAccountFunctions
         $lastName = "";
         $gender = "";
         $businessName = "";
-        $cityName = "";
         $bindParamValues = array();
 
         // Insert into Clients
@@ -539,21 +492,6 @@ class ClientAccountFunctions
                 // Add business name to update params
                 $updateParams .= ", {$this->keys->valueOfConst(FIELD_BUSINESS_NAME)} = ?";
             }
-
-            // Check for city name
-            if (array_key_exists(FIELD_CITY_NAME, $updateDetails)) {
-
-                // Add city name to update params
-                $updateParams .= ", {$this->keys->valueOfConst(FIELD_CITY_NAME)} = ?";
-            }
-        }
-
-        // Check fo phone number
-        if (array_key_exists(FIELD_PHONE_NUMBER, $updateDetails)) {
-
-            // Add phone number to update params
-            $updateParams .= ", {$this->keys->valueOfConst(FIELD_PHONE_NUMBER)} = ?";
-
         }
 
         // Check for email address

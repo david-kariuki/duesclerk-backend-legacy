@@ -28,11 +28,9 @@ $response = array(KEY_ERROR => false);
 $firstName      = "";
 $lastName       = "";
 $businessName   = "";
-$phoneNumber    = "";
 $emailAddress   = "";
 $countryCode    = "";
 $countryAlpha2  = "";
-$cityName       = "";
 $gender         = "";
 
 // Update details associative array
@@ -41,8 +39,6 @@ $updateDetails  = array(
     FIELD_LAST_NAME         => "",
     FIELD_GENDER            => "",
     FIELD_BUSINESS_NAME     => "",
-    FIELD_CITY_NAME         => "",
-    FIELD_PHONE_NUMBER      => "",
     FIELD_EMAIL_ADDRESS     => "",
     FIELD_COUNTRY_CODE      => "",
     FIELD_COUNTRY_ALPHA2    => "",
@@ -127,25 +123,9 @@ if (
                 // Add businessName to details array
                 $updateDetails[FIELD_BUSINESS_NAME] = $businessName;
             }
-
-            // Check for and get city name
-            if (isset($_POST[FIELD_CITY_NAME])) {
-
-                $cityName = $_POST[FIELD_CITY_NAME] ? $_POST[FIELD_CITY_NAME] : '';
-                $updateDetails[FIELD_CITY_NAME] = $cityName; // Add cityName to details array
-            }
         }
 
-        // Check for the shared account params
-
-        // Check for and get phone number
-        if (isset($_POST[FIELD_PHONE_NUMBER])) {
-
-            $phoneNumber = $_POST[FIELD_PHONE_NUMBER] ? $_POST[FIELD_PHONE_NUMBER] : '';
-
-            // Add phoneNumber to details array
-            $updateDetails[FIELD_PHONE_NUMBER] = $phoneNumber;
-        }
+        // Check for the other account params
 
         // Check for and get email address
         if (isset($_POST[FIELD_EMAIL_ADDRESS])) {

@@ -58,12 +58,10 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
             // Business account
 
             $response[KEY_CLIENT][FIELD_BUSINESS_NAME] = $client[FIELD_BUSINESS_NAME];
-            $response[KEY_CLIENT][FIELD_CITY_NAME]     = $client[FIELD_CITY_NAME];
         }
 
         // Add client Details To Response Array
         $response[KEY_CLIENT][FIELD_CLIENT_ID]        = $client[FIELD_CLIENT_ID];
-        $response[KEY_CLIENT][FIELD_PHONE_NUMBER]     = $client[FIELD_PHONE_NUMBER];
         $response[KEY_CLIENT][FIELD_EMAIL_ADDRESS]    = $client[FIELD_EMAIL_ADDRESS];
 
         // Get country flag and strip out extension type to get flag name
