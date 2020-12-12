@@ -234,7 +234,7 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to get client by email address and password
+    * Function to get client by clientId
     *
     * @param clientId - clients id
     *
@@ -266,6 +266,66 @@ class ClientAccountFunctions
             = ?"
         );
         $stmt->bind_param("s", $clientId); // Bind parameters
+
+        // Check for query execution
+        if ($stmt->execute()) {
+            // Query executed
+
+            $client = $stmt->get_result()->fetch_assoc(); // Get result array
+            $stmt->close(); // Close statement
+
+            // Get current sign up date and time
+            $signUpDateTime = $client[FIELD_SIGN_UP_DATE_TIME];
+            $countryAlpha2  = $client[FIELD_COUNTRY_ALPHA2];
+
+            // Update signup date to clients local time
+            $client[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
+
+            return $client; // Return client details array
+
+        } else {
+            // Client not found
+
+            $stmt->close(); // Close statement
+
+            return false; // Return false
+        }
+    }
+
+
+    /**
+    * Function to get client by email address
+    *
+    * @param emailAddress - clients email address
+    *
+    * @return array - Associative array (client details)
+    * @return boolean - false - (fetch failure)
+    */
+    public function getClientByEmailAddress($emailAddress)
+    {
+
+        // Check for email in Table Clients
+        // Prepare statement
+        $stmt = $this->connectToDB->prepare(
+            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}.*,
+            {$this->keys->valueOfConst(KEY_COUNTRY)}.*
+            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
+            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
+            AS {$this->keys->valueOfConst(KEY_COUNTRY)}
+            ON {$this->keys->valueOfConst(KEY_COUNTRY)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            AND {$this->keys->valueOfConst(KEY_COUNTRY)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
+            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
+            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
+            = ?"
+        );
+        $stmt->bind_param("s", $emailAddress); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
@@ -642,55 +702,65 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to update clients password
+    * Function to update and reset clients password
     *
     * @param clientId - Clients id
     * @param currentPassword - Clients current password for verification
     * @param newPassword - Clients new password
     *
-    * @return boolean true/false/0 - password updated/not updated/ password not verified
+    * @return boolean - true/false/0 - password updated/not updated
+    * @return null - on client details fetching failed
+    * @return int - 0 - (on password not verified)
     */
     public function updateClientPassword($clientId, $currentPassword, $newPassword)
     {
-        // Get clients profile details
-        $client = $this->getClientByClientId($clientId);
 
-        // Check if client details were fetched
-        if ($client !== false) {
-            // Client details fetched
+        // Associative array to store update details
+        $updateDetails = array(FIELD_HASH => "");
 
-            // Get hash from client details
-            $hash = $client[FIELD_HASH];
+        // Check if current password is empty
+        if (!empty($currentPassword)) {
+            // Password update
 
-            // Verify password and check validity
-            if ($this->verifyPassword($currentPassword, $hash)) {
-                // Pasword matches hash
+            // Get clients profile details
+            $client = $this->getClientByClientId($clientId);
 
-                // Hash new password
-                $hash = $this->hashPassword($newPassword);
+            // Check if client details were fetched
+            if ($client !== false) {
+                // Client details fetched
 
-                // Create clientDetails array and add hash
-                $clientDetails = array(FIELD_HASH => $hash);
+                // Get hash from client details
+                $hash = $client[FIELD_HASH];
 
-                // Update hash in database
-                if ($this->updateClientProfile($clientId, "", $clientDetails) !== false) {
-                    // Password updated successfully
+                // Verify password and check validity
+                if (!$this->verifyPassword($currentPassword, $hash)) {
+                    // Pasword mismatch
 
-                    return true; // Return true
-                } else {
-                    // Password update unsuccessful
-
-                    return false; // Return false
+                    return 0; // Return zero
                 }
             } else {
-                // Password mismatch
+                // Client details fetching failed
 
-                return 0; // Return zero
+                return null; // Return null
             }
-        } else {
-            // Client details fetching failed
+        }
 
-            return null; // Return null
+        // Hash new password
+        $hash = $this->hashPassword($newPassword);
+
+        // Create updateDetails array and add hash
+        $updateDetails = array(FIELD_HASH => $hash);
+
+        // Update hash in database
+        if ($this->updateClientProfile($clientId, "", $updateDetails) !== false) {
+            // Password updated successfully
+
+            return true; // Return true
+
+        } else {
+            // Password update unsuccessful
+
+            return false; // Return false
         }
     }
 

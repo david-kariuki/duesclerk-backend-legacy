@@ -108,8 +108,8 @@ class MailFunctions
             //$this->phpMailer->isSMTP(); // Set mailer to use SMTP
 
             // Specify main and backup SMTP servers
-            $this->phpMailer->Host = MAIL_HOST;
-            $this->phpMailer->SMTPAuth = SMTP_AUTH; // Enable SMTP authentication
+            $this->phpMailer->Host      = MAIL_HOST;
+            $this->phpMailer->SMTPAuth  = SMTP_AUTH; // Enable SMTP authentication
 
             // Enable TLS encryption, `ssl` also accepted
             $this->phpMailer->SMTPSecure = "tls";
@@ -130,7 +130,7 @@ class MailFunctions
 
             #table{
                 table-layout: auto;
-                width: 65%; padding: 3px;
+                width: 60%; padding: 3px;
                 border-spacing: 15px 25px;
                 empty-cells: hide;
                 border: 1px solid #1565C0;
@@ -445,12 +445,12 @@ class MailFunctions
         if ($this->phpMailer->send()) {
             // Mail Sent
 
-            // Return True
+            // Return true
             return true;
 
         } else {
 
-            // Return False
+            // Return false
             return false;
         }
     }
@@ -829,10 +829,9 @@ class MailFunctions
     * @return array - Associative array (verification details for client if found)
     * @return boolean - false - (if client verification details not found)
     */
-    public function checkForVerificationRequestRecord($clientId, $verificationType)
-    {
+    public function checkForVerificationRequestRecord($clientId, $verificationType){
 
-        // Check if A Previous Verification Record Exists
+        // Check if a previous verification record exists
         $selectStatement = "SELECT {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}.*
         FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
         AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
@@ -846,7 +845,7 @@ class MailFunctions
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store statement execution result
 
-        // Check For Query Execution
+        // Check for query execution
         if ($stmt->num_rows > 0) {
             // Record found
 
@@ -866,12 +865,11 @@ class MailFunctions
                 return $check;
             }
         } else {
-            // Record Not Found
+            // Record not found
 
-            $stmt->close(); // Close Statement
+            $stmt->close(); // Close statement
 
-            // Return False
-            return false;
+            return false; // Return false
         }
     }
 
@@ -940,7 +938,7 @@ class MailFunctions
         $result = $stmt->execute(); // Execute statement
         $stmt->close(); // Close statement
 
-        // Check For Query Execution
+        // Check for query execution
         if ($result){
 
             // Get Email Verification Details
@@ -965,7 +963,7 @@ class MailFunctions
         } else {
             // Verification code generation and storing failed
 
-            // Return False
+            // Return false
             return false;
         }
     }

@@ -75,6 +75,9 @@ define("KEY_SUCCESS_MESSAGE",               "SuccessMessage");
 define("KEY_CLIENT",                        "Client");
 define("KEY_UPDATE_PROFILE",                "UpdateProfile");
 
+// Password reset
+define("KEY_PASSWORD_RESET",                "PasswordReset");
+
 
 // Email verification keys
 define("FIELD_VERIFICATION_TYPE",               "VerificationType");

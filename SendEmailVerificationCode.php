@@ -28,20 +28,62 @@ $mailFunctions          = new MailFunctions();
 $response = array(KEY_ERROR => false);
 
 // Check for set POST params
-if (isset($_POST[FIELD_CLIENT_ID]) && isset($_POST[FIELD_VERIFICATION_TYPE])){
+if (isset($_POST[FIELD_VERIFICATION_TYPE])
+&& (isset($_POST[FIELD_CLIENT_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS]))) {
 
-    // Get values from POST params
-    $clientId           = $_POST[FIELD_CLIENT_ID]           ? $_POST[FIELD_CLIENT_ID] : '';
+    // Get Values From POST
+    $clientId       = ""; // Client id
+    $emailAddress   = ""; // Clients email address
+    $client         = array(); // Client details array
+
+    // Get verification code from POST params
     $verificationType   = $_POST[FIELD_VERIFICATION_TYPE]   ? $_POST[FIELD_VERIFICATION_TYPE] : '';
 
-    // Get client details
-    $client = $clientAccountFunctions->getClientByClientId($clientId);
+    // Check verification code type
+    if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
+        // Verifying email account
+
+        // Check for client id in POST params
+        if (isset($_POST[FIELD_CLIENT_ID])) {
+
+            // Get client id from POST params
+            $clientId = $_POST[FIELD_CLIENT_ID] ? $_POST[FIELD_CLIENT_ID] : '';
+
+            // Get client details
+            $client = $clientAccountFunctions->getClientByClientId($clientId);
+        }
+
+    } else if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
+        // Email verification for password reset
+
+        // Check for email address in POST params
+        if (isset($_POST[FIELD_EMAIL_ADDRESS])) {
+
+            // Get email address from POST params
+            $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
+
+            // Get client details
+            $client = $clientAccountFunctions->getClientByEmailAddress($emailAddress);
+        }
+    }
+
 
     // Check for client details
     if ($client !== false) {
         // Client details fetched
 
-        $emailAddress   = $client[FIELD_EMAIL_ADDRESS]; // Get email address from array
+        // Check for email address
+        if (empty($emailAddress)) {
+
+            $emailAddress   = $client[FIELD_EMAIL_ADDRESS]; // Get email address from array
+        }
+
+        // Check for client id
+        if (empty($clientId)) {
+
+            $clientId = $client[FIELD_CLIENT_ID]; // Get client id from array
+        }
+
         $accountType    = $client[FIELD_ACCOUNT_TYPE];  // Get account type from array
         $name           = ""; // Variable to hold business or persons first name
 
@@ -61,9 +103,9 @@ if (isset($_POST[FIELD_CLIENT_ID]) && isset($_POST[FIELD_VERIFICATION_TYPE])){
         if ((!empty($emailAddress)) && (!empty($name))) {
             // Email address and first name not empty
 
-            $verificationCode = ""; // Verification code
+            $verificationCode   = ""; // Verification code
 
-            // Check if client had requested for verification code earlier
+            // Check if client had requested for email account verification code earlier
             $checkForOldCode = $mailFunctions->checkForVerificationRequestRecord(
                 $clientId,
                 $verificationType
@@ -98,7 +140,7 @@ if (isset($_POST[FIELD_CLIENT_ID]) && isset($_POST[FIELD_VERIFICATION_TYPE])){
                             $clientId,
                             $verificationType
                         )) {
-                            // Code deleted faied
+                            // Code deletion failed
 
                             // Set response error to true
                             $response[KEY_ERROR]            = true;

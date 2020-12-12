@@ -49,6 +49,7 @@ $updateDetails  = array(
     FIELD_ACCOUNT_TYPE      => ""
 );
 
+
 // Check for set POST params
 if (
     isset($_POST[FIELD_CLIENT_ID]) &&
