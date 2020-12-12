@@ -43,8 +43,9 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 		$response[KEY_ERROR] = false;
 
 		// Add Client Details To Response Array
-		$response[KEY_SIGN_IN][FIELD_CLIENT_ID]      = $getClient[FIELD_CLIENT_ID];
-		$response[KEY_SIGN_IN][FIELD_EMAIL_ADDRESS]  = $getClient[FIELD_EMAIL_ADDRESS];
+		$response[KEY_SIGN_IN][FIELD_CLIENT_ID]       = $getClient[FIELD_CLIENT_ID];
+		$response[KEY_SIGN_IN][FIELD_ACCOUNT_TYPE]    = $getClient[FIELD_ACCOUNT_TYPE];
+		$response[KEY_SIGN_IN][FIELD_EMAIL_ADDRESS]   = $getClient[FIELD_EMAIL_ADDRESS];
 
 		// Encode and echo Json response
 		echo json_encode($response);

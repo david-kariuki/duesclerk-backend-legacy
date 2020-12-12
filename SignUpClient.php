@@ -237,6 +237,9 @@ if (
         if ($signupClient) {
             // Client Signed Up
 
+            // Set response error to false
+            $response[KEY_ERROR] = false;
+
             // Add Client Details Json Response Array
             $response[KEY_SIGN_UP][FIELD_CLIENT_ID] = $signupClient[FIELD_CLIENT_ID];
 
@@ -253,7 +256,8 @@ if (
                 $response[KEY_SIGN_UP][FIELD_BUSINESS_NAME] = $signupClient[FIELD_BUSINESS_NAME];
             }
 
-            $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS]     = $signupClient[FIELD_EMAIL_ADDRESS];
+            $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupClient[FIELD_EMAIL_ADDRESS];
+            $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupClient[FIELD_ACCOUNT_TYPE];
 
             // Encode and echo Json response
             echo json_encode($response);

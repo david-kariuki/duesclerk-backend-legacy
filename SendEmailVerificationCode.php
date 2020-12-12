@@ -214,7 +214,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                 // Set Response Error To False
                 $response[KEY_ERROR] = false;
-                $response[KEY_EMAIL_VERIFICATION][FIELD_VERIFICATION_CODE] = $verificationCode;
+                $response[KEY_SEND_VERIFICATION_CODE][FIELD_VERIFICATION_CODE] = $verificationCode;
 
                 // Encode and echo Json response
                 echo json_encode($response);

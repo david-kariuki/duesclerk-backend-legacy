@@ -74,7 +74,6 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         $response[KEY_CLIENT][FIELD_COUNTRY_CODE]     = $client[FIELD_COUNTRY_CODE];
         $response[KEY_CLIENT][FIELD_COUNTRY_ALPHA2]   = $client[FIELD_COUNTRY_ALPHA2];
         $response[KEY_CLIENT][FIELD_EMAIL_VERIFIED]   = $client[FIELD_EMAIL_VERIFIED];
-        $response[KEY_CLIENT][FIELD_ACCOUNT_TYPE]     = $client[FIELD_ACCOUNT_TYPE];
         $response[KEY_CLIENT][FIELD_SIGN_UP_DATE_TIME] = $client[FIELD_SIGN_UP_DATE_TIME];
 
         // Encode and echo json response

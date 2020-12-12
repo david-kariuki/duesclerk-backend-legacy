@@ -153,8 +153,9 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
             // Password reset verification code verified
 
             // Set response error to false
-            $response[KEY_ERROR]            = false;
-            $response[KEY_SUCCESS_MESSAGE]  = "Email address verified!";
+            $response[KEY_ERROR] = false;
+
+            $response[KEY_EMAIL_VERIFICATION][KEY_SUCCESS_MESSAGE] = "Email address verified!";
 
             // Encode and echo json response
             echo json_encode($response);
@@ -182,6 +183,9 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                 if ($update !== false) {
                     // Email verified field update successful
 
+                    // Get client details
+                    $client = $clientAccountFunctions->getClientByClientId($clientId);
+
                     // Get email verified field value
                     $emailVerified = $client[FIELD_EMAIL_VERIFIED];
 
@@ -190,8 +194,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                         // Email verified field updated successfully
 
                         // Set response error to false
-                        $response[KEY_ERROR]            = false;
-                        $response[KEY_SUCCESS_MESSAGE]  = "Your email address has been verified!";
+                        $response[KEY_ERROR] = false;
+                        $response[KEY_EMAIL_VERIFICATION][KEY_SUCCESS_MESSAGE]  = "Your email address has been verified!";
 
                         // Encode and echo json response
                         echo json_encode($response);

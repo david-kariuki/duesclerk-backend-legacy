@@ -85,6 +85,7 @@ define("KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT",   "VerificationEmailAccount");
 define("KEY_VERIFICATION_TYPE_PASSWORD_RESET",  "VerificationPasswordReset");
 define("KEY_VERIFICATION_CODE_EXPIRY_TIME",     1); // 1 hour
 define("KEY_EMAIL_VERIFICATION",                "EmailVerification");
+define("KEY_SEND_VERIFICATION_CODE",            "SendVerificationCode");
 
 
 // Expressions (preg match)
