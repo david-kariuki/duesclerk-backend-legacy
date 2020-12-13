@@ -17,7 +17,7 @@ require_once 'classes/Keys.php';
 
 
 // Create Classes Objects
-$userAccountFunctions	= new UserAccountFunctions();
+$userAccountFunctions = new UserAccountFunctions();
 
 // Create Json Response Array And Initialize Error To FALSE
 $response = array(KEY_ERROR => false);

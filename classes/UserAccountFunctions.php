@@ -733,17 +733,7 @@ class UserAccountFunctions
     */
     public function verifyPassword($password, $hash) {
 
-        // Verify password
-        if (password_verify($password, $hash)) {
-            // Password matches hash
-
-            return true; // Return false
-
-        } else {
-            // Password doesn't match hash
-
-            return false; // Return false
-        }
+        return password_verify($password, $hash); // Verify password and return boolean
     }
 }
 
