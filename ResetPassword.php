@@ -14,12 +14,12 @@
 error_reporting(1);
 
 // Call Required Functions Classes
-require_once 'classes/ClientAccountFunctions.php';  // Client account functions php file
+require_once 'classes/UserAccountFunctions.php';  // User account functions php file
 require_once 'classes/MailFunctions.php';           // MailFunctions php file
 require_once 'classes/Keys.php';
 
 // Create Classes Objects
-$clientAccountFunctions = new ClientAccountFunctions();
+$userAccountFunctions = new UserAccountFunctions();
 $mailFunctions          = new MailFunctions();
 
 // Create Json Response Array And Initialize Error o FALSE
@@ -30,26 +30,26 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
 && isset($_POST[FIELD_VERIFICATION_TYPE])) {
 
     // Get Values From POST
-    $clientId           = "";
+    $userId           = "";
     $emailAddress       = $_POST[FIELD_EMAIL_ADDRESS]     ? $_POST[FIELD_EMAIL_ADDRESS]      : '';
     $newPassword        = $_POST[FIELD_NEW_PASSWORD]      ? $_POST[FIELD_NEW_PASSWORD]       : '';
     $verificationType   = $_POST[FIELD_VERIFICATION_TYPE] ? $_POST[FIELD_VERIFICATION_TYPE]  : '';
 
-    // Get client details
-    $client = $clientAccountFunctions->getClientByEmailAddress($emailAddress);
+    // Get user details
+    $user = $userAccountFunctions->getUserByEmailAddress($emailAddress);
 
-    // Check for client details
-    if ($client !== false) {
-        // Client details fetched
+    // Check for user details
+    if ($user !== false) {
+        // User details fetched
 
         // Get first name and email address for mail notification
-        $clientId       = $client[FIELD_CLIENT_ID]; // Get ClientId from array
-        $firstName      = $client[FIELD_FIRST_NAME]; // Get FirstName from array
-        $emailAddress   = $client[FIELD_EMAIL_ADDRESS]; // Get EmailAddress from array
+        $userId       = $user[FIELD_USER_ID]; // Get UserId from array
+        $firstName      = $user[FIELD_FIRST_NAME]; // Get FirstName from array
+        $emailAddress   = $user[FIELD_EMAIL_ADDRESS]; // Get EmailAddress from array
 
         // Update password
-        $update = $clientAccountFunctions->updateClientPassword(
-            $clientId,
+        $update = $userAccountFunctions->updateUserPassword(
+            $userId,
             "",
             $newPassword
         );
@@ -60,14 +60,14 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
 
             // Delete password update email verification code
             if ($mailFunctions->deleteEmailVerificationDetails(
-                $clientId,
+                $userId,
                 $verificationType
             )) {
                 // Verification code deleted
 
                 // Set response error to false
                 $response[KEY_ERROR] = false;
-                $response[KEY_PASSWORD_RESET][FIELD_CLIENT_ID] = $clientId;
+                $response[KEY_PASSWORD_RESET][FIELD_USER_ID] = $userId;
                 $response[KEY_PASSWORD_RESET][KEY_SUCCESS_MESSAGE]  = "Password reset successful!";
 
                 // Encode and echo Json response

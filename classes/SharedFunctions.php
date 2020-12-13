@@ -56,7 +56,7 @@ class SharedFunctions
 
 
     /**
-    * Function to generate ClientId
+    * Function to generate UserId
     *
     * @param uniqueIdKey    - key to be concatenated to uniqueId
     * @param tableName      - table name to check for existing uniqueId
@@ -70,7 +70,7 @@ class SharedFunctions
         // Loop infinitely
         while (1 == 1) {
 
-            // Create clientId
+            // Create userId
             $uniqueId = substr(
                 $uniqueIdKey . md5(mt_rand()),
                 0,
@@ -101,30 +101,30 @@ class SharedFunctions
 
 
     /**
-    * Function to log client actions
+    * Function to log user actions
     *
-    * @param clientLogType - action to be logged
+    * @param userLogType - action to be logged
     * @param logTime - Time of logging
-    * @param clientId - clients Id
+    * @param userId - users Id
     *
     * @return boolean - true/fasle - (log stored / not stored)
     */
-    public function createStoreClientLogs($clientLogType, $logDateTime, $clientId) {
+    public function createStoreUserLogs($userLogType, $logDateTime, $userId) {
 
-        // Create ClientLogId
-        $clientLogId = $this->generateUniqueId(
+        // Create UserLogId
+        $userLogId = $this->generateUniqueId(
             "eventLog",
-            TABLE_CLIENT_LOGS,
-            "ClientLogId"
+            TABLE_USER_LOGS,
+            "UserLogId"
         );
 
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENT_LOGS)}(`ClientLogId`, `ClientLogType`, `ClientLogTime`, `ClientId`) VALUES( ?, ?, ?, ?)"
+            "INSERT INTO {$this->keys->valueOfConst(TABLE_USER_LOGS)}(`UserLogId`, `UserLogType`, `UserLogTime`, `UserId`) VALUES( ?, ?, ?, ?)"
         );
 
         // Bind parameters
-        $stmt->bind_param("ssss", $clientLogId, $clientLogType, $logDateTime, $clientId);
+        $stmt->bind_param("ssss", $userLogId, $userLogType, $logDateTime, $userId);
         $store = $stmt->execute(); // Execute statement
         $stmt->close(); // Close statement
 

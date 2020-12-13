@@ -1,9 +1,9 @@
 <?php
 
 /**
-* Update client profile details file
+* Update user profile details file
 *
-* This file updates clients profile, password and returns response in json
+* This file updates users profile, password and returns response in json
 *
 * @author David Kariuki (dk)
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
@@ -14,12 +14,12 @@
 error_reporting(0);
 
 // Call required functions classes
-require_once 'classes/ClientAccountFunctions.php';
+require_once 'classes/UserAccountFunctions.php';
 require_once 'classes/Keys.php';
 
 
 // Create classes objects
-$clientAccountFunctions = new ClientAccountFunctions();
+$userAccountFunctions = new UserAccountFunctions();
 
 // Create Json response array and initialize error to false
 $response = array(KEY_ERROR => false);
@@ -48,12 +48,12 @@ $updateDetails  = array(
 
 // Check for set POST params
 if (
-    isset($_POST[FIELD_CLIENT_ID]) &&
+    isset($_POST[FIELD_USER_ID]) &&
     (isset($_POST[FIELD_ACCOUNT_TYPE]) || (isset($_POST[FIELD_PASSWORD]) && isset($_POST[FIELD_NEW_PASSWORD])))
 ){
 
     // Get Values From POST
-    $clientId   = $_POST[FIELD_CLIENT_ID] ? $_POST[FIELD_CLIENT_ID]    : '';
+    $userId   = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID]    : '';
     $update     = "";
 
     // Check for password
@@ -79,8 +79,8 @@ if (
             // New passwprd
 
             // Update password
-            $update = $clientAccountFunctions->updateClientPassword(
-                $clientId,
+            $update = $userAccountFunctions->updateUserPassword(
+                $userId,
                 $currentPassword,
                 $newPassword
             );
@@ -158,8 +158,8 @@ if (
         }
 
         // Update profile details
-        $update = $clientAccountFunctions->updateClientProfile(
-            $clientId,
+        $update = $userAccountFunctions->updateUserProfile(
+            $userId,
             $accountType,
             $updateDetails
         );
@@ -188,7 +188,7 @@ if (
     }
 
 } else {
-    // Missing clientId
+    // Missing userId
 
     // Set error to true
     $response[KEY_ERROR]			= true;
@@ -198,4 +198,4 @@ if (
     echo json_encode($response);
 }
 
-// EOF: UpdateClientProfile.php
+// EOF: UpdateUserProfile.php

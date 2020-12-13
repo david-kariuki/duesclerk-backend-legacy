@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Client Sign Up file
-* This file Signs Up clients / creates clients accounts and returns response in json
+* User Sign Up file
+* This file Signs Up users / creates users accounts and returns response in json
 *
 * @author David Kariuki (dk)
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
@@ -13,10 +13,10 @@ error_reporting(0);
 
 // Call required classes
 require_once 'classes/Keys.php';
-require_once 'classes/ClientAccountFunctions.php';
+require_once 'classes/UserAccountFunctions.php';
 
 // Create Classes Objects
-$clientAccountFunctions = new ClientAccountFunctions();
+$userAccountFunctions = new UserAccountFunctions();
 
 // Create Json response array and initialize error to FALSE
 $response       = array(KEY_ERROR => false);
@@ -101,7 +101,7 @@ if (
         echo json_encode($response);
 
 
-    } else if ($clientAccountFunctions->isEmailAddressInClientsTable($emailAddress)) {
+    } else if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
         // Email Address Exists
 
         // Set response error to true
@@ -209,34 +209,34 @@ if (
     $signUpDetails[FIELD_ACCOUNT_TYPE]      = $accountType;
 
 
-    // Signup client
-    $signupClient = $clientAccountFunctions->signUpClient($signUpDetails);
+    // Signup user
+    $signupUser = $userAccountFunctions->signUpUser($signUpDetails);
 
-    // Check If Client Was Signed Up
-    if ($signupClient) {
-        // Client Signed Up
+    // Check If User Was Signed Up
+    if ($signupUser) {
+        // User Signed Up
 
         // Set response error to false
         $response[KEY_ERROR] = false;
 
-        // Add Client Details Json Response Array
-        $response[KEY_SIGN_UP][FIELD_CLIENT_ID] = $signupClient[FIELD_CLIENT_ID];
+        // Add User Details Json Response Array
+        $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
 
         // Check account type
         if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
             // Personal account
 
-            $response[KEY_SIGN_UP][FIELD_FIRST_NAME]    = $signupClient[FIELD_FIRST_NAME];
-            $response[KEY_SIGN_UP][FIELD_LAST_NAME]     = $signupClient[FIELD_LAST_NAME];
+            $response[KEY_SIGN_UP][FIELD_FIRST_NAME]    = $signupUser[FIELD_FIRST_NAME];
+            $response[KEY_SIGN_UP][FIELD_LAST_NAME]     = $signupUser[FIELD_LAST_NAME];
 
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
             // Business account
 
-            $response[KEY_SIGN_UP][FIELD_BUSINESS_NAME] = $signupClient[FIELD_BUSINESS_NAME];
+            $response[KEY_SIGN_UP][FIELD_BUSINESS_NAME] = $signupUser[FIELD_BUSINESS_NAME];
         }
 
-        $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupClient[FIELD_EMAIL_ADDRESS];
-        $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupClient[FIELD_ACCOUNT_TYPE];
+        $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupUser[FIELD_EMAIL_ADDRESS];
+        $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupUser[FIELD_ACCOUNT_TYPE];
 
         // Encode and echo Json response
         echo json_encode($response);
@@ -263,4 +263,4 @@ if (
     echo json_encode($response);
 }
 
-// EOF: SignUpClient.php
+// EOF: SignUpUser.php

@@ -14,13 +14,13 @@
 error_reporting(1);
 
 // Call Required Functions Classes
-require_once 'classes/ClientAccountFunctions.php';  // Client account functions php file
+require_once 'classes/UserAccountFunctions.php';  // User account functions php file
 require_once 'classes/DateTimeFunctions.php';       // DateTimeFunctions php class
 require_once 'classes/MailFunctions.php';           // MailFunctions php file
 require_once 'classes/Keys.php';
 
 // Create Classes Objects
-$clientAccountFunctions = new ClientAccountFunctions();
+$userAccountFunctions = new UserAccountFunctions();
 $dateTimeFunctions      = new DateTimeFunctions();
 $mailFunctions          = new MailFunctions();
 
@@ -32,13 +32,13 @@ $updateDetails = array(FIELD_EMAIL_VERIFIED => "false");
 
 // Check for set POST params
 if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_TYPE]))
-|| isset($_POST[FIELD_CLIENT_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS])) {
+|| isset($_POST[FIELD_USER_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS])) {
 
     // Get values from POST params
-    $clientId           = "";
+    $userId           = "";
     $verificationType   = $_POST[FIELD_VERIFICATION_TYPE]   ? $_POST[FIELD_VERIFICATION_TYPE] : '';
     $verificationCode   = $_POST[FIELD_VERIFICATION_CODE]   ? $_POST[FIELD_VERIFICATION_CODE] : '';
-    $client             = array(); // Client details array
+    $user             = array(); // User details array
     $check              = array(); // Array to store verification request record response
 
     // Check verification code type
@@ -51,34 +51,34 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
             // Get email address from POST params
             $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
 
-            // Get client details
-            $client = $clientAccountFunctions->getClientByEmailAddress($emailAddress);
+            // Get user details
+            $user = $userAccountFunctions->getUserByEmailAddress($emailAddress);
 
-            $clientId = $client[FIELD_CLIENT_ID]; // Get clientId from array
+            $userId = $user[FIELD_USER_ID]; // Get userId from array
         }
 
     } else if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
         // Email account verification code
 
-        // Check for ClientId in POST params
-        if (isset($_POST[FIELD_CLIENT_ID])) {
+        // Check for UserId in POST params
+        if (isset($_POST[FIELD_USER_ID])) {
 
-            // Get ClientId from POST params
-            $clientId = $_POST[FIELD_CLIENT_ID] ? $_POST[FIELD_CLIENT_ID] : '';
+            // Get UserId from POST params
+            $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
 
-            // Get client details
-            $client = $clientAccountFunctions->getClientByClientId($clientId);
+            // Get user details
+            $user = $userAccountFunctions->getUserByUserId($userId);
         }
     }
 
 
-    // Check if client had requested for email account verification code earlier
+    // Check if user had requested for email account verification code earlier
     $check = $mailFunctions->checkForVerificationRequestRecord(
-        $clientId,
+        $userId,
         $verificationType
     );
 
-    // Check for client verification details
+    // Check for user verification details
     if ($check !== false) {
         // Email verification code exist for Id
 
@@ -104,7 +104,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
                 // Delete old verification code
                 if (!$mailFunctions->deleteEmailVerificationDetails(
-                    $clientId,
+                    $userId,
                     $verificationType
                 )) {
                     // Code deleted faied
@@ -140,13 +140,13 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
     }
 
 
-    // Verify clients verification code
+    // Verify users verification code
     if ($mailFunctions->verifyEmaiVerificationCode(
-        $clientId,
+        $userId,
         $verificationType,
         $verificationCode
     )) {
-        // Verification code matched ClientId
+        // Verification code matched UserId
 
         // Check verification code type
         if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
@@ -165,16 +165,16 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
             // Delete email verification record
             if ($mailFunctions->deleteEmailVerificationDetails(
-                $clientId,
+                $userId,
                 $verificationType
             )) {
                 // Email verification details deleted successfully
 
                 $updateDetails[FIELD_EMAIL_VERIFIED] = "true"; // Set email verified value
 
-                // Update email verified field in clients table
-                $update = $clientAccountFunctions->updateClientProfile(
-                    $clientId,
+                // Update email verified field in users table
+                $update = $userAccountFunctions->updateUserProfile(
+                    $userId,
                     "",
                     $updateDetails
                 );
@@ -183,11 +183,11 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                 if ($update !== false) {
                     // Email verified field update successful
 
-                    // Get client details
-                    $client = $clientAccountFunctions->getClientByClientId($clientId);
+                    // Get user details
+                    $user = $userAccountFunctions->getUserByUserId($userId);
 
                     // Get email verified field value
-                    $emailVerified = $client[FIELD_EMAIL_VERIFIED];
+                    $emailVerified = $user[FIELD_EMAIL_VERIFIED];
 
                     // Check if email verified value is true
                     if ($emailVerified == "true") {

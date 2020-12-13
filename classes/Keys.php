@@ -21,7 +21,7 @@ define("COMPANY_NAME",                      "DuesClerk");
 
 
 // Database fields keys
-define("FIELD_CLIENT_ID",                   "ClientId");
+define("FIELD_USER_ID",                   "UserId");
 define("FIELD_FIRST_NAME",                  "FirstName");
 define("FIELD_LAST_NAME",                   "LastName");
 define("FIELD_EMAIL_ADDRESS",               "EmailAddress");
@@ -37,6 +37,7 @@ define("FIELD_HASH",                        "Hash");
 define("FIELD_GENDER",                      "Gender");
 define("FIELD_BUSINESS_NAME",               "BusinessName");
 define("FIELD_ACCOUNT_TYPE",                "AccountType");
+define("FIELD_NEW_ACCOUNT_TYPE",            "NewAccountType");
 define("FIELD_SIGN_UP_DATE_TIME",           "SignUpDateTime");
 define("FIELD_EMAIL_VERIFIED",              "EmailVerified");
 define("FIELD_VERIFICATION_CODE",           "VerificationCode");
@@ -45,9 +46,9 @@ define("FIELD_CODE_REQUEST_TIME",           "CodeRequestTime");
 
 
 // Table Names
-define("TABLE_CLIENTS",                     "Clients");
+define("TABLE_USERS",                     "Users");
 define("TABLE_EMAIL_VERIFICATION",          "EmailVerification");
-define("TABLE_CLIENT_LOGS",                 "ClientLogs");
+define("TABLE_USER_LOGS",                 "UserLogs");
 define("TABLE_COUNTRIES",                   "Countries");
 
 // Country keys
@@ -69,8 +70,8 @@ define("KEY_ERROR_MESSAGE",                 "ErrorMessage");
 define("KEY_SUCCESS_MESSAGE",               "SuccessMessage");
 
 
-// Client profile keys
-define("KEY_CLIENT",                        "Client");
+// User profile keys
+define("KEY_USER",                        "User");
 define("KEY_UPDATE_PROFILE",                "UpdateProfile");
 
 // Password reset

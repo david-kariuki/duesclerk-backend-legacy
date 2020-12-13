@@ -13,14 +13,14 @@
 error_reporting(1);
 
 // Call Required Functions Classes
-require_once 'classes/ClientAccountFunctions.php';  // Client account functions php file
+require_once 'classes/UserAccountFunctions.php';  // User account functions php file
 require_once 'classes/DateTimeFunctions.php';       // DateTimeFunctions php class
 require_once 'classes/MailFunctions.php';           // MailFunctions php file
 require_once 'classes/Keys.php';                    // Keys php file
 
 
 // Create Classes Objects
-$clientAccountFunctions = new ClientAccountFunctions();
+$userAccountFunctions = new UserAccountFunctions();
 $dateTimeFunctions      = new DateTimeFunctions();
 $mailFunctions          = new MailFunctions();
 
@@ -29,12 +29,12 @@ $response = array(KEY_ERROR => false);
 
 // Check for set POST params
 if (isset($_POST[FIELD_VERIFICATION_TYPE])
-&& (isset($_POST[FIELD_CLIENT_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS]))) {
+&& (isset($_POST[FIELD_USER_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS]))) {
 
     // Get Values From POST
-    $clientId       = ""; // Client id
-    $emailAddress   = ""; // Clients email address
-    $client         = array(); // Client details array
+    $userId       = ""; // User id
+    $emailAddress   = ""; // Users email address
+    $user         = array(); // User details array
 
     // Get verification code from POST params
     $verificationType   = $_POST[FIELD_VERIFICATION_TYPE]   ? $_POST[FIELD_VERIFICATION_TYPE] : '';
@@ -43,14 +43,14 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
     if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
         // Verifying email account
 
-        // Check for client id in POST params
-        if (isset($_POST[FIELD_CLIENT_ID])) {
+        // Check for user id in POST params
+        if (isset($_POST[FIELD_USER_ID])) {
 
-            // Get client id from POST params
-            $clientId = $_POST[FIELD_CLIENT_ID] ? $_POST[FIELD_CLIENT_ID] : '';
+            // Get user id from POST params
+            $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
 
-            // Get client details
-            $client = $clientAccountFunctions->getClientByClientId($clientId);
+            // Get user details
+            $user = $userAccountFunctions->getUserByUserId($userId);
         }
 
     } else if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
@@ -62,41 +62,41 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
             // Get email address from POST params
             $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
 
-            // Get client details
-            $client = $clientAccountFunctions->getClientByEmailAddress($emailAddress);
+            // Get user details
+            $user = $userAccountFunctions->getUserByEmailAddress($emailAddress);
         }
     }
 
 
-    // Check for client details
-    if ($client !== false) {
-        // Client details fetched
+    // Check for user details
+    if ($user !== false) {
+        // User details fetched
 
         // Check for email address
         if (empty($emailAddress)) {
 
-            $emailAddress   = $client[FIELD_EMAIL_ADDRESS]; // Get email address from array
+            $emailAddress   = $user[FIELD_EMAIL_ADDRESS]; // Get email address from array
         }
 
-        // Check for client id
-        if (empty($clientId)) {
+        // Check for user id
+        if (empty($userId)) {
 
-            $clientId = $client[FIELD_CLIENT_ID]; // Get client id from array
+            $userId = $user[FIELD_USER_ID]; // Get user id from array
         }
 
-        $accountType    = $client[FIELD_ACCOUNT_TYPE];  // Get account type from array
+        $accountType    = $user[FIELD_ACCOUNT_TYPE];  // Get account type from array
         $name           = ""; // Variable to hold business or persons first name
 
         // Check account type to get first name or business name
         if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
             // Personal account
 
-            $name = $client[FIELD_FIRST_NAME]; // Get first name from array
+            $name = $user[FIELD_FIRST_NAME]; // Get first name from array
 
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
             // Business account
 
-            $name = $client[FIELD_BUSINESS_NAME]; // Get business name from array
+            $name = $user[FIELD_BUSINESS_NAME]; // Get business name from array
         }
 
         // Check if email address and first name are empty
@@ -105,13 +105,13 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
             $verificationCode   = ""; // Verification code
 
-            // Check if client had requested for email account verification code earlier
+            // Check if user had requested for email account verification code earlier
             $checkForOldCode = $mailFunctions->checkForVerificationRequestRecord(
-                $clientId,
+                $userId,
                 $verificationType
             );
 
-            // Check for client verification details
+            // Check for user verification details
             if ($checkForOldCode !== false) {
                 // Email verification code exist for Id
 
@@ -137,7 +137,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                         // Delete old verification code
                         if (!$mailFunctions->deleteEmailVerificationDetails(
-                            $clientId,
+                            $userId,
                             $verificationType
                         )) {
                             // Code deletion failed
@@ -164,7 +164,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                 // Generate new verification code
                 $generateCode = $mailFunctions->generateNewEmailVerificationCode(
-                    $clientId,
+                    $userId,
                     $emailAddress,
                     $verificationType
                 );
@@ -189,20 +189,20 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
             // Check verification type
             if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
-                // Client account email verification
+                // User account email verification
 
                 // Send email account verification mail
-                $sendMail = $mailFunctions->sendClientEmailAccountVerificationCodeMail(
+                $sendMail = $mailFunctions->sendUserEmailAccountVerificationCodeMail(
                     $name,
                     $emailAddress,
                     $verificationCode
                 );
 
             } else if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
-                // Client password email verification
+                // User password email verification
 
                 // Send password reset email verification
-                $sendMail = $mailFunctions->sendClientPasswordResetEmailVerificationCodeMail(
+                $sendMail = $mailFunctions->sendUserPasswordResetEmailVerificationCodeMail(
                     $name,
                     $emailAddress,
                     $verificationCode

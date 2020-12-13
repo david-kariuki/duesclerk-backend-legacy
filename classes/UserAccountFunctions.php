@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Client account functions class
-* This class contains all the functions required to process a clients account
+* User account functions class
+* This class contains all the functions required to process a users account
 *
 * @author David Kariuki (dk)
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
@@ -14,7 +14,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
-class ClientAccountFunctions
+class UserAccountFunctions
 {
 
     // Connection status value variable
@@ -69,23 +69,23 @@ class ClientAccountFunctions
 
 
     /**
-    * Check if email address is in clients table.
+    * Check if email address is in users table.
     *
     * @param emailAddress
     *
     * @return boolean - true/false - (if/not found)
     */
-    public function isEmailAddressInClientsTable($emailAddress)
+    public function isEmailAddressInUsersTable($emailAddress)
     {
 
-        // Check for email address in clients table
+        // Check for email address in users table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}
+            "SELECT {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
-            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
-            AS {$this->keys->valueOfConst(KEY_CLIENT)}
-            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            FROM {$this->keys->valueOfConst(TABLE_USERS)}
+            AS {$this->keys->valueOfConst(KEY_USER)}
+            WHERE {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
         );
         $stmt->bind_param("s", $emailAddress); // Bind parameters
@@ -113,36 +113,36 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to get client by email address and password
+    * Function to get user by email address and password
     *
-    * @param emailAddress - clients email address
-    * @param password - clients password
+    * @param emailAddress - users email address
+    * @param password - users password
     *
-    * @return array - Associative array (client details)
+    * @return array - Associative array (user details)
     * @return boolean - false - (on password mismatch)
     * @return null - on fetch failure
     */
-    public function getClientByEmailAddressAndPassword($emailAddress, $password)
+    public function getUserByEmailAddressAndPassword($emailAddress, $password)
     {
 
-        // Check for email in Table Clients
+        // Check for email in Table Users
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}.*,
+            "SELECT {$this->keys->valueOfConst(KEY_USER)}.*,
             {$this->keys->valueOfConst(KEY_COUNTRY)}.*
-            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
-            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            FROM {$this->keys->valueOfConst(TABLE_USERS)}
+            AS {$this->keys->valueOfConst(KEY_USER)}
             LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
             AS {$this->keys->valueOfConst(KEY_COUNTRY)}
             ON {$this->keys->valueOfConst(KEY_COUNTRY)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            = {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
             AND {$this->keys->valueOfConst(KEY_COUNTRY)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            = {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            WHERE {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
             = ?"
         );
@@ -152,11 +152,11 @@ class ClientAccountFunctions
         if ($stmt->execute()) {
             // Query executed
 
-            $client = $stmt->get_result()->fetch_assoc(); // Get result array
+            $user = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
 
-            // Get password hash from client details array
-            $hash = $client[FIELD_HASH];
+            // Get password hash from user details array
+            $hash = $user[FIELD_HASH];
 
             // Verify password
             $verify = $this->verifyPassword($password, $hash);
@@ -166,13 +166,13 @@ class ClientAccountFunctions
                 // Pasword matches hash
 
                 // Get current sign up date and time
-                $signUpDateTime = $client[FIELD_SIGN_UP_DATE_TIME];
-                $countryAlpha2  = $client[FIELD_COUNTRY_ALPHA2];
+                $signUpDateTime = $user[FIELD_SIGN_UP_DATE_TIME];
+                $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
 
-                // Update signup date to clients local time
-                $client[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
+                // Update signup date to users local time
+                $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
 
-                return $client; // Return client details array
+                return $user; // Return user details array
 
             } else {
                 // Password mismatch
@@ -180,7 +180,7 @@ class ClientAccountFunctions
                 return false; // Return false
             }
         } else {
-            // Client not found
+            // User not found
 
             $stmt->close(); // Close statement
 
@@ -190,57 +190,57 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to get client by clientId
+    * Function to get user by userId
     *
-    * @param clientId - clients id
+    * @param userId - users id
     *
-    * @return array - Associative array (client details)
+    * @return array - Associative array (user details)
     * @return boolean - false - (fetch failure)
     */
-    public function getClientByClientId($clientId)
+    public function getUserByUserId($userId)
     {
 
-        // Check for email in Table Clients
+        // Check for email in Table Users
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}.*,
+            "SELECT {$this->keys->valueOfConst(KEY_USER)}.*,
             {$this->keys->valueOfConst(KEY_COUNTRY)}.*
-            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
-            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            FROM {$this->keys->valueOfConst(TABLE_USERS)}
+            AS {$this->keys->valueOfConst(KEY_USER)}
             LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
             AS {$this->keys->valueOfConst(KEY_COUNTRY)}
             ON {$this->keys->valueOfConst(KEY_COUNTRY)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            = {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
             AND {$this->keys->valueOfConst(KEY_COUNTRY)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            = {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
-            .{$this->keys->valueOfConst(FIELD_CLIENT_ID)}
+            WHERE {$this->keys->valueOfConst(KEY_USER)}
+            .{$this->keys->valueOfConst(FIELD_USER_ID)}
             = ?"
         );
-        $stmt->bind_param("s", $clientId); // Bind parameters
+        $stmt->bind_param("s", $userId); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
             // Query executed
 
-            $client = $stmt->get_result()->fetch_assoc(); // Get result array
+            $user = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
 
             // Get current sign up date and time
-            $signUpDateTime = $client[FIELD_SIGN_UP_DATE_TIME];
-            $countryAlpha2  = $client[FIELD_COUNTRY_ALPHA2];
+            $signUpDateTime = $user[FIELD_SIGN_UP_DATE_TIME];
+            $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
 
-            // Update signup date to clients local time
-            $client[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
+            // Update signup date to users local time
+            $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
 
-            return $client; // Return client details array
+            return $user; // Return user details array
 
         } else {
-            // Client not found
+            // User not found
 
             $stmt->close(); // Close statement
 
@@ -250,34 +250,34 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to get client by email address
+    * Function to get user by email address
     *
-    * @param emailAddress - clients email address
+    * @param emailAddress - users email address
     *
-    * @return array - Associative array (client details)
+    * @return array - Associative array (user details)
     * @return boolean - false - (fetch failure)
     */
-    public function getClientByEmailAddress($emailAddress)
+    public function getUserByEmailAddress($emailAddress)
     {
 
-        // Check for email in Table Clients
+        // Check for email in Table Users
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_CLIENT)}.*,
+            "SELECT {$this->keys->valueOfConst(KEY_USER)}.*,
             {$this->keys->valueOfConst(KEY_COUNTRY)}.*
-            FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
-            AS {$this->keys->valueOfConst(KEY_CLIENT)}
+            FROM {$this->keys->valueOfConst(TABLE_USERS)}
+            AS {$this->keys->valueOfConst(KEY_USER)}
             LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
             AS {$this->keys->valueOfConst(KEY_COUNTRY)}
             ON {$this->keys->valueOfConst(KEY_COUNTRY)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            = {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
             AND {$this->keys->valueOfConst(KEY_COUNTRY)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            = {$this->keys->valueOfConst(KEY_CLIENT)}
+            = {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
+            WHERE {$this->keys->valueOfConst(KEY_USER)}
             .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
             = ?"
         );
@@ -287,20 +287,20 @@ class ClientAccountFunctions
         if ($stmt->execute()) {
             // Query executed
 
-            $client = $stmt->get_result()->fetch_assoc(); // Get result array
+            $user = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
 
             // Get current sign up date and time
-            $signUpDateTime = $client[FIELD_SIGN_UP_DATE_TIME];
-            $countryAlpha2  = $client[FIELD_COUNTRY_ALPHA2];
+            $signUpDateTime = $user[FIELD_SIGN_UP_DATE_TIME];
+            $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
 
-            // Update signup date to clients local time
-            $client[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
+            // Update signup date to users local time
+            $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
 
-            return $client; // Return client details array
+            return $user; // Return user details array
 
         } else {
-            // Client not found
+            // User not found
 
             $stmt->close(); // Close statement
 
@@ -310,15 +310,15 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to signup client
+    * Function to signup user
     *
     * @param signUpDetails - array with signup details
     *
-    * @return array - Associative array (client details)
+    * @return array - Associative array (user details)
     * @return boolean - false (on signup failure)
     * @return null - on logging failed
     */
-    public function signUpClient($signUpDetails) {
+    public function signUpUser($signUpDetails) {
 
         // Get emailAddress, countryCode, countryAlpha2, password,
         // accountType from SignUpDetails array
@@ -328,11 +328,11 @@ class ClientAccountFunctions
         $password         = $signUpDetails[FIELD_PASSWORD];
         $accountType      = $signUpDetails[FIELD_ACCOUNT_TYPE];
 
-        // Create clientId
-        $clientId = $this->sharedFunctions->generateUniqueId(
-            strtolower(KEY_CLIENT),
-            TABLE_CLIENTS,
-            FIELD_CLIENT_ID
+        // Create userId
+        $userId = $this->sharedFunctions->generateUniqueId(
+            strtolower(KEY_USER),
+            TABLE_USERS,
+            FIELD_USER_ID
         );
 
         // Hash password
@@ -342,7 +342,7 @@ class ClientAccountFunctions
         $signupDateTime = $this->dateTimeFunctions->getDefaultTimeZoneDateTime();
 
         $result;
-        // Insert into Clients
+        // Insert into Users
         if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
             // Personal account
 
@@ -355,12 +355,12 @@ class ClientAccountFunctions
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `Gender`, `AccountType`, `SignUpDateTime`)
+                "INSERT INTO {$this->keys->valueOfConst(TABLE_USERS)}(`UserId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `Gender`, `AccountType`, `SignUpDateTime`)
                 VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
 
             // Bind parameters
-            $stmt->bind_param("ssssssssss", $clientId, $firstName, $lastName, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
+            $stmt->bind_param("ssssssssss", $userId, $firstName, $lastName, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
 
             $result = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
@@ -373,14 +373,14 @@ class ClientAccountFunctions
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->valueOfConst(TABLE_CLIENTS)}(`ClientId`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `AccountType`, `SignUpDateTime`)
+                "INSERT INTO {$this->keys->valueOfConst(TABLE_USERS)}(`UserId`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `AccountType`, `SignUpDateTime`)
                 VALUES( ?, ?, ?, ?, ?, ?, ?, ? )"
             );
 
             // Bind parameters
             $stmt->bind_param(
                 "ssssssss",
-                $clientId, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $accountType, $signupDateTime
+                $userId, $emailAddress, $countryCode, $countryAlpha2, $hash, $businessName, $accountType, $signupDateTime
             );
 
             $result = $stmt->execute(); // Execute statement
@@ -392,10 +392,10 @@ class ClientAccountFunctions
             // Signup successful
 
             // Log signup event
-            if ($this->sharedFunctions->createStoreClientLogs(
+            if ($this->sharedFunctions->createStoreUserLogs(
                 LOG_TYPE_SIGN_UP,
                 $signupDateTime,
-                $clientId
+                $userId
                 )
             ) {
                 // Loging successful
@@ -403,21 +403,21 @@ class ClientAccountFunctions
                 // Get stored values
                 // Prepare statement
                 $stmt = $this->connectToDB->prepare(
-                    "SELECT * FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
-                    AS {$this->keys->valueOfConst(KEY_CLIENT)}
-                    WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
-                    .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?
-                    AND {$this->keys->valueOfConst(KEY_CLIENT)}
+                    "SELECT * FROM {$this->keys->valueOfConst(TABLE_USERS)}
+                    AS {$this->keys->valueOfConst(KEY_USER)}
+                    WHERE {$this->keys->valueOfConst(KEY_USER)}
+                    .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
+                    AND {$this->keys->valueOfConst(KEY_USER)}
                     .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
                 );
 
-                $stmt->bind_param("ss", $clientId, $emailAddress); // Bind parameters
+                $stmt->bind_param("ss", $userId, $emailAddress); // Bind parameters
                 $stmt->execute(); // Execute statement
-                $client = $stmt->get_result()->fetch_assoc(); // Get result array
+                $user = $stmt->get_result()->fetch_assoc(); // Get result array
                 $stmt->close(); // Close statement
 
-                // Return client details
-                return $client;
+                // Return user details
+                return $user;
 
             } else {
                 // Logging failed
@@ -426,7 +426,7 @@ class ClientAccountFunctions
                 return null; // Return null
             }
         } else {
-            // Client details not stored
+            // User details not stored
 
             return false; // Return false
         }
@@ -434,17 +434,17 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to update client profile
+    * Function to update user profile
     *
-    * @param clientId - clients Id
-    * @param accountType - clients account type
+    * @param userId - users Id
+    * @param accountType - users account type
     * @param updateDetails - array with associative array of fields key value pair to be updated
     *
     * @return boolean - true/false (on revokation success / revokation failure)
     * @return boolean - true/false (on email sent / email not sent)
     * @return - null/0 (on logging failed/on update failure)
     */
-    public function updateClientProfile($clientId, $accountType, $updateDetails) {
+    public function updateUserProfile($userId, $accountType, $updateDetails) {
         // Get details from array
 
         // Get emailAddress, countryCode, countryAlpha2, password,
@@ -458,7 +458,7 @@ class ClientAccountFunctions
         $businessName = "";
         $bindParamValues = array();
 
-        // Insert into Clients
+        // Insert into Users
         if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
             // Personal account
 
@@ -527,9 +527,9 @@ class ClientAccountFunctions
         }
 
         // Construct SQL command with the update params above
-        $updateStatement = "UPDATE {$this->keys->valueOfConst(TABLE_CLIENTS)}
-        SET {$updateParams} WHERE {$this->keys->valueOfConst(TABLE_CLIENTS)}
-        .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = '$clientId'";
+        $updateStatement = "UPDATE {$this->keys->valueOfConst(TABLE_USERS)}
+        SET {$updateParams} WHERE {$this->keys->valueOfConst(TABLE_USERS)}
+        .{$this->keys->valueOfConst(FIELD_USER_ID)} = '$userId'";
 
         // Remove the comma after SET keyword
         $updateStatement = str_replace("SET ,", "SET", $updateStatement);
@@ -564,20 +564,20 @@ class ClientAccountFunctions
             if (array_key_exists(FIELD_HASH, $updateDetails)) {
 
                 // Log password change
-                if ($this->sharedFunctions->createStoreClientLogs(
+                if ($this->sharedFunctions->createStoreUserLogs(
                     LOG_TYPE_UPDATE_PASSWORD,
                     $updateDateTime,
-                    $clientId
+                    $userId
                     )
                 ) {
                     // Log stored
 
-                    // Get client details
-                    $client = $this->getClientByClientId($clientId);
+                    // Get user details
+                    $user = $this->getUserByUserId($userId);
 
                     // Get firsnName and email address
-                    $firstName      = $client[FIELD_FIRST_NAME];
-                    $emailAddress   = $client[FIELD_EMAIL_ADDRESS];
+                    $firstName      = $user[FIELD_FIRST_NAME];
+                    $emailAddress   = $user[FIELD_EMAIL_ADDRESS];
 
                     // Notify user of password change on email
                     if ($this->mailFunctions->sendPasswordChangeNotificationMail(
@@ -602,10 +602,10 @@ class ClientAccountFunctions
             } else {
 
                 // Log profile update
-                if ($this->sharedFunctions->createStoreClientLogs(
+                if ($this->sharedFunctions->createStoreUserLogs(
                     LOG_TYPE_UPDATE_PROFILE,
                     $updateDateTime,
-                    $clientId
+                    $userId
                     )
                 ) {
                     // Log stored
@@ -616,7 +616,7 @@ class ClientAccountFunctions
                         // Email address was updated
 
                         // Revoke email address verification and check for failure
-                        if (!$this->mailFunctions->revokeEmailVerification($clientId)) {
+                        if (!$this->mailFunctions->revokeEmailVerification($userId)) {
                             // Email revoking failed
 
                             return false; // Return false on revokation failure
@@ -640,17 +640,17 @@ class ClientAccountFunctions
 
 
     /**
-    * Function to update and reset clients password
+    * Function to update and reset users password
     *
-    * @param clientId - Clients id
-    * @param currentPassword - Clients current password for verification
-    * @param newPassword - Clients new password
+    * @param userId - Users id
+    * @param currentPassword - Users current password for verification
+    * @param newPassword - Users new password
     *
     * @return boolean - true/false/0 - password updated/not updated
-    * @return null - on client details fetching failed
+    * @return null - on user details fetching failed
     * @return int - 0 - (on password not verified)
     */
-    public function updateClientPassword($clientId, $currentPassword, $newPassword)
+    public function updateUserPassword($userId, $currentPassword, $newPassword)
     {
 
         // Associative array to store update details
@@ -660,15 +660,15 @@ class ClientAccountFunctions
         if (!empty($currentPassword)) {
             // Password update
 
-            // Get clients profile details
-            $client = $this->getClientByClientId($clientId);
+            // Get users profile details
+            $user = $this->getUserByUserId($userId);
 
-            // Check if client details were fetched
-            if ($client !== false) {
-                // Client details fetched
+            // Check if user details were fetched
+            if ($user !== false) {
+                // User details fetched
 
-                // Get hash from client details
-                $hash = $client[FIELD_HASH];
+                // Get hash from user details
+                $hash = $user[FIELD_HASH];
 
                 // Verify password and check validity
                 if (!$this->verifyPassword($currentPassword, $hash)) {
@@ -677,7 +677,7 @@ class ClientAccountFunctions
                     return 0; // Return zero
                 }
             } else {
-                // Client details fetching failed
+                // User details fetching failed
 
                 return null; // Return null
             }
@@ -690,7 +690,7 @@ class ClientAccountFunctions
         $updateDetails = array(FIELD_HASH => $hash);
 
         // Update hash in database
-        if ($this->updateClientProfile($clientId, "", $updateDetails) !== false) {
+        if ($this->updateUserProfile($userId, "", $updateDetails) !== false) {
             // Password updated successfully
 
             return true; // Return true
@@ -706,7 +706,7 @@ class ClientAccountFunctions
     /**
     * Function To Encrypt Password
     *
-    * @param password - clients password
+    * @param password - users password
     *
     * @return string - Hashed Password
     */
@@ -731,7 +731,7 @@ class ClientAccountFunctions
     *
     * @return boolean - true/false (password verified / not verified)
     */
-    private function verifyPassword($password, $hash) {
+    public function verifyPassword($password, $hash) {
 
         // Verify password
         if (password_verify($password, $hash)) {
@@ -747,4 +747,4 @@ class ClientAccountFunctions
     }
 }
 
-// EOF : ClientAccountFunctions.php
+// EOF : UserAccountFunctions.php

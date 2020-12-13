@@ -88,11 +88,11 @@ class MailFunctions
             // Server settings
             $this->phpMailer->SMTPDebug  = SMTP::DEBUG_SERVER; // Disable verbose
             // = 0 => off (for production use, No debug messages)
-            // = 1 => client messages
-            // = 2 => client and server messages
+            // = 1 => user messages
+            // = 2 => user and server messages
             // = SMTP::DEBUG_OFF; - as 0, Disable debugging (you can also leave this out completely,
             // 0 is the default).
-            // = SMTP::DEBUG_CLIENT; - Output messages sent by the client.
+            // = SMTP::DEBUG_USER; - Output messages sent by the user.
 
             //As 1, plus responses received from the server (most  useful setting).
             // = SMTP::DEBUG_SERVER;
@@ -283,7 +283,7 @@ class MailFunctions
 
 
     /**
-    * Function to set SMTP client username and password for authentication
+    * Function to set SMTP user username and password for authentication
     *
     * @param emailUsername
     */
@@ -294,7 +294,7 @@ class MailFunctions
         switch($emailUsername){
 
             case EMAIL_ADDRESS_INFO_USERNAME:
-            // SMTP client(INFO) name and password
+            // SMTP user(INFO) name and password
 
             $this->phpMailer->Username = EMAIL_ADDRESS_INFO_USERNAME;
             $this->phpMailer->Password = EMAIL_ADDRESS_INFO_PASSWORD;
@@ -313,7 +313,7 @@ class MailFunctions
             break;
 
             case EMAIL_ADDRESS_SUPPORT_USERNAME:
-            // SMTP client(SUPPORT) name and password
+            // SMTP user(SUPPORT) name and password
 
             $this->phpMailer->Username = EMAIL_ADDRESS_SUPPORT_USERNAME;
             $this->phpMailer->Password = EMAIL_ADDRESS_SUPPORT_PASSWORD;
@@ -332,7 +332,7 @@ class MailFunctions
             break;
 
             case EMAIL_ADDRESS_NO_REPLY_USERNAME:
-            // SMTP client(NO REPLY) name and password
+            // SMTP user(NO REPLY) name and password
 
             $this->phpMailer->Username = EMAIL_ADDRESS_NO_REPLY_USERNAME;
             $this->phpMailer->Password = EMAIL_ADDRESS_NO_REPLY_PASSWORD;
@@ -346,7 +346,7 @@ class MailFunctions
             break;
 
             default:
-            // SMTP client(NO REPLY) name and password
+            // SMTP user(NO REPLY) name and password
 
             $this->phpMailer->Username = EMAIL_ADDRESS_NO_REPLY_USERNAME;
             $this->phpMailer->Password = EMAIL_ADDRESS_NO_REPLY_PASSWORD;
@@ -364,13 +364,13 @@ class MailFunctions
     /**
     * Function to send email verification for password reset
     *
-    * @param firstName              - Clients first name
-    * @param emailAddress           - Clients email address
+    * @param firstName              - Users first name
+    * @param emailAddress           - Users email address
     * @param verificationCode       - Generated verification code
     *
     * @return boolean               - true/false - (if/not mail sent)
     */
-    public function sendClientEmailAccountVerificationCodeMail(
+    public function sendUserEmailAccountVerificationCodeMail(
         $firstName,
         $emailAddress,
         $verificationCode
@@ -382,7 +382,7 @@ class MailFunctions
         // Set email subject
         $this->phpMailer->Subject = 'User Verification';
 
-        // Attach file client_email_verification.png, and later link to it using identfier emailVerificationImg
+        // Attach file user_email_verification.png, and later link to it using identfier emailVerificationImg
         $this->phpMailer->AddEmbeddedImage(
             PATH_IMAGE_ACCOUNT_EMAIL_VERIFICATION,
             'emailVerificationImg',
@@ -427,7 +427,7 @@ class MailFunctions
         </body>
         </html>';
 
-        // This is the body in plain text for non-HTML mail clients
+        // This is the body in plain text for non-HTML mail users
         $this->phpMailer->AltBody = 'Hello ' . $firstName .', to get started on
         ' . COMPANY_NAME . ', kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and contine enjoying our amazing features. P.S. We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
         Kind Regards, '  . COMPANY_NAME . ' Team';
@@ -436,8 +436,8 @@ class MailFunctions
         // $this->phpMailer->addAddress('ellen@example.com');         // Name is optional
 
         // Attachments
-        // $this->phpMailer->addAttachment('/tmp/static_images/client_email_verification.png',
-        //                                 'client_email_verification.png'); // Optional name
+        // $this->phpMailer->addAttachment('/tmp/static_images/user_email_verification.png',
+        //                                 'user_email_verification.png'); // Optional name
         // $this->phpMailer->addAttachment('/tmp/image.jpg', 'new.jpg');     // Optional name
         // $this->phpMailer->addAttachment('/var/tmp/file.tar.gz');          // Add attachments
 
@@ -459,13 +459,13 @@ class MailFunctions
     /**
     * Function to send email verification/ for password reset
     *
-    * @param firstName          - Clients first name
-    * @param emailAddress,      - Clients email address
+    * @param firstName          - Users first name
+    * @param emailAddress,      - Users email address
     * @param verificationCode   - Generated verification code
     *
     * @return boolean           - true/false - (if/not mail sent)
     */
-    public function sendClientPasswordResetEmailVerificationCodeMail(
+    public function sendUserPasswordResetEmailVerificationCodeMail(
         $firstName,
         $emailAddress,
         $verificationCode
@@ -527,7 +527,7 @@ class MailFunctions
         </body>
         </html>';
 
-        // This is the body in plain text for non-HTML mail clients
+        // This is the body in plain text for non-HTML mail users
         $this->phpMailer->AltBody = 'Hello ' . $firstName .', to reset your account password, kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and reset you password.
         If you did not request a password reset please ignore this email or reply to let us know. P.S. We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
         We cannot wait to have you back! Kind Regards, ' . COMPANY_NAME . ' Team.';
@@ -536,8 +536,8 @@ class MailFunctions
         // $this->phpMailer->addAddress('ellen@example.com');         // Name is optional
 
         // Attachments
-        // $this->phpMailer->addAttachment('/tmp/static_images/client_email_verification.png',
-        //                                  'client_email_verification.png');  // Optional name
+        // $this->phpMailer->addAttachment('/tmp/static_images/user_email_verification.png',
+        //                                  'user_email_verification.png');  // Optional name
         // $this->phpMailer->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
         // $this->phpMailer->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
 
@@ -557,10 +557,10 @@ class MailFunctions
 
 
     /**
-    * Function to notify Client of password reset event by mail
+    * Function to notify User of password reset event by mail
     *
-    * @param firstName      - Clients firt name
-    * @param emailAddress   - Clients email address
+    * @param firstName      - Users firt name
+    * @param emailAddress   - Users email address
     *
     * @return boolean       - (true/false - if/not mail sent)
     */
@@ -573,10 +573,10 @@ class MailFunctions
         // Set email subject
         $this->phpMailer->Subject = 'Account Password Change';
 
-        // Attach file client_email_verification.png, and later link to it using identfier passwordChangeImg
-        // $this->phpMailer->AddEmbeddedImage('images/php_mailer_images/client_email_verification.png',
+        // Attach file user_email_verification.png, and later link to it using identfier passwordChangeImg
+        // $this->phpMailer->AddEmbeddedImage('images/php_mailer_images/user_email_verification.png',
         //                                      'passwordChangeImg',
-        //                                      'images/php_mailer_images/client_email_verification.png');
+        //                                      'images/php_mailer_images/user_email_verification.png');
 
         $this->phpMailer->Body = '
         <html>
@@ -617,7 +617,7 @@ class MailFunctions
         </body>
         </html>';
 
-        // This is the body in plain text for non-HTML mail clients
+        // This is the body in plain text for non-HTML mail users
         $this->phpMailer->AltBody = 'Hello ' . $firstName .', Your account password has been changed successfully. If this was you, then you can safely ignore this email. If you didn\'t change your account password, please let us know immediately by replying to this email. P.S.
         We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
         Kind Regards, ' . COMPANY_NAME . ' Team';
@@ -626,8 +626,8 @@ class MailFunctions
         // $this->phpMailer->addAddress('ellen@example.com'); // Name is optional
 
         // Attachments
-        // $this->phpMailer->addAttachment('/tmp/static_images/client_email_verification.png',
-        //                                  'client_email_verification.png'); // Optional name
+        // $this->phpMailer->addAttachment('/tmp/static_images/user_email_verification.png',
+        //                                  'user_email_verification.png'); // Optional name
         // $this->phpMailer->addAttachment('/tmp/image.jpg', 'new.jpg'); // Optional name
         // $this->phpMailer->addAttachment('/var/tmp/file.tar.gz');   // Add attachments
 
@@ -649,25 +649,25 @@ class MailFunctions
     /**
     * Function to revoke email verification on email update
     *
-    * @param ClientId   - Clients id
+    * @param UserId   - Users id
     *
     * @return boolean   - true/false - (if/not revoked)
     */
-    public function revokeEmailVerification($clientId)
+    public function revokeEmailVerification($userId)
     {
 
         $emailVerified = "FALSE"; // Email verified new value
 
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "UPDATE {$this->keys->valueOfConst(TABLE_CLIENTS)}
+            "UPDATE {$this->keys->valueOfConst(TABLE_USERS)}
             SET {$this->keys->valueOfConst(FIELD_EMAIL_VERIFIED)} = ?
-            WHERE {$this->keys->valueOfConst(TABLE_CLIENTS)}
-            .{$this->keys->valueOfConst(FIELD_CLIENT_ID)}
+            WHERE {$this->keys->valueOfConst(TABLE_USERS)}
+            .{$this->keys->valueOfConst(FIELD_USER_ID)}
             = ?"
         );
 
-        $stmt->bind_param("ss", $emailVerified, $clientId); // Bind parameters
+        $stmt->bind_param("ss", $emailVerified, $userId); // Bind parameters
         $execute = $stmt->execute(); // Execute statement
         $stmt->close(); // Close statement
 
@@ -678,15 +678,15 @@ class MailFunctions
             // Check if EmailVerified value is false
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "SELECT * FROM {$this->keys->valueOfConst(TABLE_CLIENTS)}
-                AS {$this->keys->valueOfConst(KEY_CLIENT)}
-                WHERE {$this->keys->valueOfConst(KEY_CLIENT)}
-                .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?
-                AND {$this->keys->valueOfConst(KEY_CLIENT)}
+                "SELECT * FROM {$this->keys->valueOfConst(TABLE_USERS)}
+                AS {$this->keys->valueOfConst(KEY_USER)}
+                WHERE {$this->keys->valueOfConst(KEY_USER)}
+                .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
+                AND {$this->keys->valueOfConst(KEY_USER)}
                 .{$this->keys->valueOfConst(FIELD_EMAIL_VERIFIED)}
                 = ?"
             );
-            $stmt->bind_param("ss", $clientId, $emailVerified); // Bind parameters
+            $stmt->bind_param("ss", $userId, $emailVerified); // Bind parameters
             $stmt->execute(); // Execute statement
             $stmt->store_result(); // Store resultt
 
@@ -699,8 +699,8 @@ class MailFunctions
                 // Delete any existing email verification records for the changed email
                 // address from the email verificatio table
 
-                // Pass ClientId without VerificationType
-                if ($this->deleteEmailVerificationDetails($clientId, "") !== false) {
+                // Pass UserId without VerificationType
+                if ($this->deleteEmailVerificationDetails($userId, "") !== false) {
                     // Existing email record deletion failed
 
                     return true; // Return true
@@ -725,37 +725,37 @@ class MailFunctions
 
 
     /**
-    * Function to delete email verification details for ClientId based on verification type.
+    * Function to delete email verification details for UserId based on verification type.
     *
-    * @param ClientId - Clients id
+    * @param UserId - Users id
     * @param VerificationType - Verification code type
     *
     * @return boolean - true/false (on record deletion / failure)
     * @return null - on record not found
     */
-    public function deleteEmailVerificationDetails($clientId, $verificationType)
+    public function deleteEmailVerificationDetails($userId, $verificationType)
     {
 
-        // Select params with ClientId only
+        // Select params with UserId only
         $selectParams = ", {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-        .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?";
+        .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?";
 
-        // Delete params with ClientId only
+        // Delete params with UserId only
         $deleteParams = ", {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-        .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?";
+        .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?";
 
         $bindParamTypes = ""; // Bind param values
         $bindParamValues = array(); // Bind param value array
 
-        $bindParamValues[0] = $clientId; // Add ClientId to bind param array
+        $bindParamValues[0] = $userId; // Add UserId to bind param array
 
         if (!empty($verificationType)) {
 
-            // Select params with ClientId and VerificationType
+            // Select params with UserId and VerificationType
             $selectParams .= ", {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
             .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
 
-            // Delete params with ClientId and VerificationType
+            // Delete params with UserId and VerificationType
             $deleteParams .= ", {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
             .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
 
@@ -795,7 +795,7 @@ class MailFunctions
             $stmt->close(); // Close statement
 
             $stmt = $this->connectToDB->prepare($deleteCommand); // Prepare DELETE statement
-            $stmt->bind_param($bindParamTypes, ...$bindParamValues); // Bind ClientId parameter
+            $stmt->bind_param($bindParamTypes, ...$bindParamValues); // Bind UserId parameter
             $delete = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
 
@@ -821,27 +821,27 @@ class MailFunctions
 
 
     /**
-    * Function to check if client had requested for a verification code earlier
+    * Function to check if user had requested for a verification code earlier
     *
-    * @param ClientId - Clients Id
+    * @param UserId - Users Id
     * @param VerificationType - Verification code type
     *
-    * @return array - Associative array (verification details for client if found)
-    * @return boolean - false - (if client verification details not found)
+    * @return array - Associative array (verification details for user if found)
+    * @return boolean - false - (if user verification details not found)
     */
-    public function checkForVerificationRequestRecord($clientId, $verificationType){
+    public function checkForVerificationRequestRecord($userId, $verificationType){
 
         // Check if a previous verification record exists
         $selectStatement = "SELECT {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}.*
         FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
         AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
         WHERE {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-        .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?
+        .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
         AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
         .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
 
         $stmt = $this->connectToDB->prepare($selectStatement); // Prepare statement
-        $stmt->bind_param("ss", $clientId, $verificationType); // Bind parameters
+        $stmt->bind_param("ss", $userId, $verificationType); // Bind parameters
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store statement execution result
 
@@ -852,7 +852,7 @@ class MailFunctions
             $stmt->close(); // Close statement
 
             $stmt = $this->connectToDB->prepare($selectStatement); // Prepare statement
-            $stmt->bind_param("ss", $clientId, $verificationType); // Bind parameters
+            $stmt->bind_param("ss", $userId, $verificationType); // Bind parameters
 
             // Check for query execution
             if ($stmt->execute()) {
@@ -877,14 +877,14 @@ class MailFunctions
     /**
     * Function generate, store to database and return verification code
     *
-    * @param ClientId - Clients Id
-    * @param EmailAddress - Clients emailAddress
+    * @param UserId - Users Id
+    * @param EmailAddress - Users emailAddress
     * @param VerificationType - Associative array - (verification code type)
     *
     * @return array - verification details
     * @return boolean - false - (Verification code generation and storing failed)
     */
-    public function generateNewEmailVerificationCode($clientId, $emailAddress, $verificationType)
+    public function generateNewEmailVerificationCode($userId, $emailAddress, $verificationType)
     {
 
         // Get current date and time
@@ -897,7 +897,7 @@ class MailFunctions
 
         // Check for verification code type
         if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
-            // Client email account verification
+            // User email account verification
 
             $codeIdentifier = "ua"; // User account
 
@@ -921,14 +921,14 @@ class MailFunctions
         // Insert Verification Details
         $stmt = $this->connectToDB->prepare(
             "INSERT INTO {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-            (VerificationId, ClientId, EmailAddress, VerificationCode, CodeRequestTime, VerificationType) VALUES(?, ?, ?, ?, ?, ?)"
+            (VerificationId, UserId, EmailAddress, VerificationCode, CodeRequestTime, VerificationType) VALUES(?, ?, ?, ?, ?, ?)"
         );
 
         // Bind paramaters
         $stmt->bind_param(
             "ssssss",
             $verificationId,
-            $clientId,
+            $userId,
             $emailAddress,
             $verificationCode,
             $currentNumericalTimeStamp,
@@ -946,13 +946,13 @@ class MailFunctions
                 "SELECT * FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
                 AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
                 WHERE {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-                .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?
+                .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
                 AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
                 .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?
                 AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
                 .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?"
             );
-            $stmt->bind_param("sss", $clientId, $emailAddress, $verificationType);
+            $stmt->bind_param("sss", $userId, $emailAddress, $verificationType);
             $stmt->execute(); // Execute statement
             $verificationDetails = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
@@ -972,26 +972,26 @@ class MailFunctions
     /**
     * Function to verify email verification code
     *
-    * @param ClientId - Clients Id
-    * @param VerificationCode - Clients verification code
-    * @param VerificationType - Clients verification code type
+    * @param UserId - Users Id
+    * @param VerificationCode - Users verification code
+    * @param VerificationType - Users verification code type
     *
     * @return boolean - true/false - (Record found / not found)
     */
-    public function verifyEmaiVerificationCode($clientId, $verificationType, $verificationCode)
+    public function verifyEmaiVerificationCode($userId, $verificationType, $verificationCode)
     {
         // Get Email Verification Details
         $stmt = $this->connectToDB->prepare(
             "SELECT * FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
             AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
             WHERE {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-            .{$this->keys->valueOfConst(FIELD_CLIENT_ID)} = ?
+            .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
             AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
             .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?
             AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
             .{$this->keys->valueOfConst(FIELD_VERIFICATION_CODE)} = ?"
         );
-        $stmt->bind_param("sss", $clientId, $verificationType, $verificationCode);
+        $stmt->bind_param("sss", $userId, $verificationType, $verificationCode);
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store statement execution result
 

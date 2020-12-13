@@ -63,7 +63,7 @@ class DateTimeFunctions
 
 
     /**
-    * Function to get client timezone by alpha2
+    * Function to get user timezone by alpha2
     *
     * @param countryAlpha2 - country alpha2
     *
