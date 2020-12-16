@@ -142,7 +142,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                         )) {
                             // Code deletion failed
 
-                            // Set response error to true
+                            // Set response error to true and add error message
                             $response[KEY_ERROR]            = true;
                             $response[KEY_ERROR_MESSAGE]    = "Old verification code deletion failed!";
 
@@ -178,7 +178,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                 } else {
                     // Verification code generation failed
 
-                    // Set response error to true
+                    // Set response error to true and add error message
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Verification code generation failed!";
 
@@ -212,8 +212,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
             // Check If Mail Was Sent
             if ($sendMail !== false) {
 
-                // Set Response Error To False
-                $response[KEY_ERROR] = false;
+                // Set verification code
                 $response[KEY_SEND_VERIFICATION_CODE][FIELD_VERIFICATION_CODE] = $verificationCode;
 
                 // Encode and echo Json response
@@ -221,7 +220,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
             } else {
 
-                // Set Response Error To True
+                // Set response error to true and add error message
                 $response[KEY_ERROR]          = true;
                 $response[KEY_ERROR_MESSAGE]  = "Verification code not sent";
 
@@ -233,7 +232,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 } else {
     // Missing params
 
-    // Set response error to true
+    // Set response error to true and add error message
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 

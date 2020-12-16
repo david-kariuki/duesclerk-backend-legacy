@@ -9,6 +9,7 @@
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
+// Enable error reporting
 error_reporting(1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -41,8 +42,8 @@ class DateTimeFunctions
     * Function to get local time from default time zone time
     * This function is used to convert UTC to local time and display it correctly
     *
-    * @param dateTimeStamp - Date and time stamp
-    * @param countryAlpha2 -Country alpha2 for getting time zone
+    * @param dateTimeStamp  - Date and time stamp
+    * @param countryAlpha2  - Country alpha2 for getting time zone
     */
     public function getLocalTime($dateTimeStamp, $countryAlpha2)
     {
@@ -65,9 +66,9 @@ class DateTimeFunctions
     /**
     * Function to get user timezone by alpha2
     *
-    * @param countryAlpha2 - country alpha2
+    * @param countryAlpha2  - Country's alpha2
     *
-    * @return timeZone
+    * @return timeZone      - Country's time zone
     */
     private function getLocalTimezone($countryAlpha2)
     {
@@ -122,9 +123,9 @@ class DateTimeFunctions
     * Function to get time difference
     *
     * @param recentTime - Recent / new time
-    * @param oldTime - Old time
+    * @param oldTime    - Old time
     *
-    * @return integer - time difference
+    * @return integer   - Time difference
     */
     public function getNumericalTimeDifferenceInHours($recentTime, $oldTime)
     {
@@ -151,10 +152,10 @@ class DateTimeFunctions
     /**
     * Function to convert date and time formats
     *
-    * @param dateAndTime - Date and time to be converted
-    * @param newFormat - New date and time format
+    * @param dateAndTime    - Date and time to be converted
+    * @param newFormat      - New date and time format
     *
-    * @return DateTime - converted date and time
+    * @return DateTime      - Converted date and time
     */
     private function convertDateTimeFormat($dateAndTime, $newFormat)
     {

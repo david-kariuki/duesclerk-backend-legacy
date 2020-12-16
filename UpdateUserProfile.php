@@ -68,7 +68,7 @@ if (
         if ($newPassword == $currentPassword) {
             // Password did not change
 
-            // Set response error to true
+            // Set response error to true and add error message
             $response[KEY_ERROR]         = true;
             $response[KEY_ERROR_MESSAGE] = "Please choose a different password other than the current one!";
 
@@ -169,9 +169,8 @@ if (
     if ($update != false) {
         // Update successful
 
-        // Set error to false
-        $response[KEY_ERROR]            = false;
-        $response[KEY_SUCCESS_MESSAGE]  = "Update successful!";
+        // Set success message
+        $response[KEY_UPDATE_PROFILE][KEY_SUCCESS_MESSAGE] = "Update successful!";
 
         // Encode and echo Json response
         echo json_encode($response);

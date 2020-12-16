@@ -65,8 +65,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
             )) {
                 // Verification code deleted
 
-                // Set response error to false
-                $response[KEY_ERROR] = false;
+                // Set user id and success message
                 $response[KEY_PASSWORD_RESET][FIELD_USER_ID] = $userId;
                 $response[KEY_PASSWORD_RESET][KEY_SUCCESS_MESSAGE]  = "Password reset successful!";
 
@@ -76,7 +75,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
             } else {
                 // Code deletion failed
 
-                // Set response error to true
+                // Set response error to true and add error message
                 $response[KEY_ERROR]            = true;
                 $response[KEY_ERROR_MESSAGE]    = "Verification code deletion failed!";
 
@@ -86,7 +85,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
         } else {
             // Password update failed
 
-            // Set response error to true
+            // Set response error to true and add error message
             $response[KEY_ERROR]            = true;
             $response[KEY_ERROR_MESSAGE]    = "Password reset failed!";
 
@@ -97,7 +96,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
 } else {
     // Missing params
 
-    // Set response error to true
+    // Set response error to true and add error message
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 

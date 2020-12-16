@@ -92,7 +92,7 @@ if (
     || (strlen($emailAddress) > LENGTH_MAX_EMAIL_ADDRESS)) {
         // Invalid Email
 
-        // Set response error to true
+        // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
         $response[KEY_SIGN_UP]          = FIELD_EMAIL_ADDRESS;
         $response[KEY_ERROR_MESSAGE]    = "The email address you entered is invalid!";
@@ -104,7 +104,7 @@ if (
     } else if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
         // Email Address Exists
 
-        // Set response error to true
+        // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
         $response[KEY_SIGN_UP]          = FIELD_EMAIL_ADDRESS;
         $response[KEY_ERROR_MESSAGE]    = "An account with that email address already exists!";
@@ -116,7 +116,7 @@ if (
     } else if (strlen($password) < LENGTH_MIN_PASSWORD) {
         // Password too hhort
 
-        // Set response error to true
+        // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
         $response[KEY_SIGN_UP]          = FIELD_PASSWORD;
         $response[KEY_ERROR_MESSAGE]    = 'Passwords should be 8 characters or longer!';
@@ -133,7 +133,7 @@ if (
             if (!preg_match(EXPRESSION_NAMES, $firstName)) {
                 // Invalid first name
 
-                // Set response error to true
+                // Set response error to true and add error message
                 $response[KEY_ERROR]            = true;
                 $response[KEY_ERROR_MESSAGE]    = 'The first name you entered does not appear to
                 be valid!';
@@ -145,7 +145,7 @@ if (
             } else if (!preg_match(EXPRESSION_NAMES, $lastName)) {
                 // Invalid last name
 
-                // Set response error to true
+                // Set response error to true and add error message
                 $response[KEY_ERROR]            = true;
                 $response[KEY_ERROR_MESSAGE]    = 'The last name you entered does not appear to
                 be valid!';
@@ -157,7 +157,7 @@ if (
             } else if (strlen($firstName) < LENGTH_MIN_SINGLE_NAME) {
                 // First name too Short
 
-                // Set response error to true
+                // Set response error to true and add error message
                 $response[KEY_ERROR]            = true;
                 $response[KEY_SIGN_UP]          = FIELD_FIRST_NAME;
                 $response[KEY_ERROR_MESSAGE]    = 'The first name you entered is too short!';
@@ -169,7 +169,7 @@ if (
             } else if (strlen($lastName) < LENGTH_MIN_SINGLE_NAME) {
                 // Last name too Short
 
-                // Set response error to true
+                // Set response error to true and add error message
                 $response[KEY_ERROR]         = true;
                 $response[KEY_SIGN_UP]        = FIELD_LAST_NAME;
                 $response[KEY_ERROR_MESSAGE]  = 'The last name you entered is too short!';
@@ -216,9 +216,6 @@ if (
     if ($signupUser) {
         // User Signed Up
 
-        // Set response error to false
-        $response[KEY_ERROR] = false;
-
         // Add User Details Json Response Array
         $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
 
@@ -244,7 +241,7 @@ if (
     } else {
         // Signup Failed
 
-        // Set response error to true
+        // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
@@ -255,7 +252,7 @@ if (
 } else {
     // Missing params
 
-    // Set response error to true
+    // Set response error to true and add error message
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 

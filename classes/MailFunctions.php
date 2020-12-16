@@ -22,6 +22,7 @@ require 'PHPMailer-6.1.8/src/PHPMailer.php';    // PHPMailer class
 require 'PHPMailer-6.1.8/src/Exception.php';    // PHPMailer exception class
 require 'PHPMailer-6.1.8/src/SMTP.php';         // PHPMailer SMTP class
 
+// Enable error reporting
 error_reporting(1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -285,7 +286,7 @@ class MailFunctions
     /**
     * Function to set SMTP user username and password for authentication
     *
-    * @param emailUsername
+    * @param emailUsername - Email login username
     */
     private function configureSMTPUsernameAndPassword($emailUsername)
     {
@@ -364,11 +365,11 @@ class MailFunctions
     /**
     * Function to send email verification for password reset
     *
-    * @param firstName              - Users first name
-    * @param emailAddress           - Users email address
-    * @param verificationCode       - Generated verification code
+    * @param firstName          - Users first name
+    * @param emailAddress       - Users email address
+    * @param verificationCode   - Generated verification code
     *
-    * @return boolean               - true/false - (if/not mail sent)
+    * @return boolean           - true/false - (if/not mail sent)
     */
     public function sendUserEmailAccountVerificationCodeMail(
         $firstName,
@@ -649,7 +650,7 @@ class MailFunctions
     /**
     * Function to revoke email verification on email update
     *
-    * @param UserId   - Users id
+    * @param UserId     - Users id
     *
     * @return boolean   - true/false - (if/not revoked)
     */
@@ -727,11 +728,11 @@ class MailFunctions
     /**
     * Function to delete email verification details for UserId based on verification type.
     *
-    * @param UserId - Users id
-    * @param VerificationType - Verification code type
+    * @param UserId             - Users id
+    * @param VerificationType   - Verification code type
     *
-    * @return boolean - true/false (on record deletion / failure)
-    * @return null - on record not found
+    * @return boolean           - true/false (on record deletion / failure)
+    * @return null              - On record not found
     */
     public function deleteEmailVerificationDetails($userId, $verificationType)
     {
@@ -788,7 +789,7 @@ class MailFunctions
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store result
 
-        // Chec for record
+        // Check for record
         if ($stmt->num_rows > 0) {
             // Record found
 
@@ -823,11 +824,11 @@ class MailFunctions
     /**
     * Function to check if user had requested for a verification code earlier
     *
-    * @param UserId - Users Id
-    * @param VerificationType - Verification code type
+    * @param UserId             - Users Id
+    * @param VerificationType   - Verification code type
     *
-    * @return array - Associative array (verification details for user if found)
-    * @return boolean - false - (if user verification details not found)
+    * @return array             - Associative array (verification details for user if found)
+    * @return boolean           - false - (if user verification details not found)
     */
     public function checkForVerificationRequestRecord($userId, $verificationType){
 
@@ -877,12 +878,12 @@ class MailFunctions
     /**
     * Function generate, store to database and return verification code
     *
-    * @param UserId - Users Id
-    * @param EmailAddress - Users emailAddress
-    * @param VerificationType - Associative array - (verification code type)
+    * @param UserId             - Users Id
+    * @param EmailAddress       - Users emailAddress
+    * @param VerificationType   - Associative array - (verification code type)
     *
-    * @return array - verification details
-    * @return boolean - false - (Verification code generation and storing failed)
+    * @return array             - Verification details
+    * @return boolean           - false - (Verification code generation and storing failed)
     */
     public function generateNewEmailVerificationCode($userId, $emailAddress, $verificationType)
     {
@@ -972,11 +973,11 @@ class MailFunctions
     /**
     * Function to verify email verification code
     *
-    * @param UserId - Users Id
-    * @param VerificationCode - Users verification code
-    * @param VerificationType - Users verification code type
+    * @param UserId             - Users Id
+    * @param VerificationCode   - Users verification code
+    * @param VerificationType   - Users verification code type
     *
-    * @return boolean - true/false - (Record found / not found)
+    * @return boolean           - true/false - (Record found / not found)
     */
     public function verifyEmaiVerificationCode($userId, $verificationType, $verificationCode)
     {

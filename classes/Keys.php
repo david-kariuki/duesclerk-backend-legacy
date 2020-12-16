@@ -71,7 +71,7 @@ define("KEY_SUCCESS_MESSAGE",               "SuccessMessage");
 
 
 // User profile keys
-define("KEY_USER",                        "User");
+define("KEY_USER",                          "User");
 define("KEY_UPDATE_PROFILE",                "UpdateProfile");
 
 // Password reset

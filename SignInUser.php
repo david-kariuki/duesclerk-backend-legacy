@@ -39,9 +39,6 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	if ($getUser !== false) {
 		// User found
 
-		// Set response error to false
-		$response[KEY_ERROR] = false;
-
 		// Add User Details To Response Array
 		$response[KEY_SIGN_IN][FIELD_USER_ID]       = $getUser[FIELD_USER_ID];
 		$response[KEY_SIGN_IN][FIELD_ACCOUNT_TYPE]    = $getUser[FIELD_ACCOUNT_TYPE];
@@ -57,7 +54,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 		if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
 			// User with the emailAddress exists in the database
 
-			// Set response error to true
+			// Set response error to true and add error message
 			$response[KEY_ERROR]         = true;
 			$response[KEY_ERROR_MESSAGE] = "Incorrect email address or password!";
 
@@ -67,7 +64,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 		} else {
 			// User not found
 
-			// Set response error to true
+			// Set response error to true and add error message
 			$response[KEY_ERROR]         = true;
 			$response[KEY_ERROR_MESSAGE] = "We didn't find an account with that emailAddress!";
 
@@ -78,7 +75,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 } else {
 	// Mising Fields
 
-	// Set response error to true
+	// Set response error to true and add error message
 	$response[KEY_ERROR]           = true;
 	$response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
 

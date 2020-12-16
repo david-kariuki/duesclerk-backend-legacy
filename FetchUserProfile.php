@@ -40,9 +40,6 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
     if ($user != false) {
         // User details found
 
-        // Set response error to false
-        $response[KEY_ERROR] = false;
-
         // Get account type
         $accountType = $user[FIELD_ACCOUNT_TYPE];
 
@@ -80,7 +77,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
     } else {
         // User not found
 
-        // Set response error to true
+        // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "Please sign in to continue!";
 

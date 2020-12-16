@@ -109,7 +109,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                 )) {
                     // Code deleted faied
 
-                    // Set response error to true
+                    // Set response error to true and add error message
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Old verification code deletion failed!";
 
@@ -119,7 +119,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                 } else {
                     // Verification code expired
 
-                    // Set response error to true
+                    // Set response error to true and add error message
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Expired code. Click resend to get a new one!";
 
@@ -131,7 +131,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
     } else {
         // Verification code record not found
 
-        // Set response error to true
+        // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "You have not requested an email verification!";
 
@@ -152,9 +152,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
         if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
             // Password reset verification code verified
 
-            // Set response error to false
-            $response[KEY_ERROR] = false;
-
+            // Set success message
             $response[KEY_EMAIL_VERIFICATION][KEY_SUCCESS_MESSAGE] = "Email address verified!";
 
             // Encode and echo json response
@@ -193,8 +191,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                     if ($emailVerified == "true") {
                         // Email verified field updated successfully
 
-                        // Set response error to false
-                        $response[KEY_ERROR] = false;
+                        // Set success message
                         $response[KEY_EMAIL_VERIFICATION][KEY_SUCCESS_MESSAGE]  = "Your email address has been verified!";
 
                         // Encode and echo json response
@@ -203,7 +200,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                 } else {
                     // Email verified field update failed
 
-                    // Set response error to true
+                    // Set response error to true and add error message
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Email address verification failed!";
 
@@ -213,7 +210,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
             } else {
                 // Email verification details deletion failed
 
-                // Set response error to true
+                // Set response error to true and add error message
                 $response[KEY_ERROR]            = true;
                 $response[KEY_ERROR_MESSAGE]    = "Email verification details not deleted!";
 
@@ -224,7 +221,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
     } else {
         //  Wrong verification code passed
 
-        // Set response error to true
+        // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "Your verification code does not exist or has already been used!";
 
@@ -234,7 +231,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 } else {
     // Missing params
 
-    // Set response error to true
+    // Set response error to true and add error message
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
