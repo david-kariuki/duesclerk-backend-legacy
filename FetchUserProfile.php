@@ -49,7 +49,6 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
             $response[KEY_USER][FIELD_FIRST_NAME]   = $user[FIELD_FIRST_NAME];
             $response[KEY_USER][FIELD_LAST_NAME]    = $user[FIELD_LAST_NAME];
-            $response[KEY_USER][FIELD_GENDER]       = $user[FIELD_GENDER];
 
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
             // Business account

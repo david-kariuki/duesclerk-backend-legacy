@@ -24,7 +24,6 @@ $signUpDetails  = array(
 
     FIELD_FIRST_NAME        => "",
     FIELD_LAST_NAME         => "",
-    FIELD_GENDER            => "",
     FIELD_BUSINESS_NAME     => "",
     FIELD_EMAIL_ADDRESS     => "",
     FIELD_COUNTRY_CODE      => "",
@@ -40,13 +39,11 @@ $businessName   = "";
 $emailAddress   = "";
 $countryCode    = "";
 $countryAlpha2  = "";
-$gender         = "";
 
 // Check for set POST params
 if (
     (isset($_POST[FIELD_FIRST_NAME])        &&
-    isset($_POST[FIELD_LAST_NAME])          &&
-    isset($_POST[FIELD_GENDER]))
+    isset($_POST[FIELD_LAST_NAME]))
     ||
     isset($_POST[FIELD_BUSINESS_NAME])
     ||
@@ -65,7 +62,6 @@ if (
 
         $firstName  = $_POST[FIELD_FIRST_NAME]  ? $_POST[FIELD_FIRST_NAME]  : '';
         $lastName   = $_POST[FIELD_LAST_NAME]   ? $_POST[FIELD_LAST_NAME]   : '';
-        $gender     = $_POST[FIELD_GENDER]      ? $_POST[FIELD_GENDER]      : '';
 
     } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
         // Business account
@@ -180,75 +176,72 @@ if (
             }
 
             // Check for set params
-            if (isset($_POST[FIELD_FIRST_NAME]) && isset($_POST[FIELD_LAST_NAME])
-            && isset($_POST[FIELD_GENDER])
-        ) {
+            if (isset($_POST[FIELD_FIRST_NAME]) && isset($_POST[FIELD_LAST_NAME])) {
 
-            // Add first name, last name and gender to associative array
-            $signUpDetails[FIELD_FIRST_NAME]    = $firstName;
-            $signUpDetails[FIELD_LAST_NAME]     = $lastName;
-            $signUpDetails[FIELD_GENDER]        = $gender;
-        }
-
-    } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-        // Business account
-
-        // Check for set params
-        if (isset($_POST[FIELD_BUSINESS_NAME])) {
-
-            // Add business name to associative array
-            $signUpDetails[FIELD_BUSINESS_NAME] = $businessName;
-        }
-    }
-
-    // Add the other fields to associative array
-    $signUpDetails[FIELD_EMAIL_ADDRESS]     = $emailAddress;
-    $signUpDetails[FIELD_COUNTRY_CODE]      = $countryCode;
-    $signUpDetails[FIELD_COUNTRY_ALPHA2]    = $countryAlpha2;
-    $signUpDetails[FIELD_PASSWORD]          = $password;
-    $signUpDetails[FIELD_ACCOUNT_TYPE]      = $accountType;
-
-
-    // Signup user
-    $signupUser = $userAccountFunctions->signUpUser($signUpDetails);
-
-    // Check If User Was Signed Up
-    if ($signupUser) {
-        // User Signed Up
-
-        // Add User Details Json Response Array
-        $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
-
-        // Check account type
-        if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
-            // Personal account
-
-            $response[KEY_SIGN_UP][FIELD_FIRST_NAME]    = $signupUser[FIELD_FIRST_NAME];
-            $response[KEY_SIGN_UP][FIELD_LAST_NAME]     = $signupUser[FIELD_LAST_NAME];
+                // Add first name and last name to associative array
+                $signUpDetails[FIELD_FIRST_NAME]    = $firstName;
+                $signUpDetails[FIELD_LAST_NAME]     = $lastName;
+            }
 
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
             // Business account
 
-            $response[KEY_SIGN_UP][FIELD_BUSINESS_NAME] = $signupUser[FIELD_BUSINESS_NAME];
+            // Check for set params
+            if (isset($_POST[FIELD_BUSINESS_NAME])) {
+
+                // Add business name to associative array
+                $signUpDetails[FIELD_BUSINESS_NAME] = $businessName;
+            }
         }
 
-        $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupUser[FIELD_EMAIL_ADDRESS];
-        $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupUser[FIELD_ACCOUNT_TYPE];
+        // Add the other fields to associative array
+        $signUpDetails[FIELD_EMAIL_ADDRESS]     = $emailAddress;
+        $signUpDetails[FIELD_COUNTRY_CODE]      = $countryCode;
+        $signUpDetails[FIELD_COUNTRY_ALPHA2]    = $countryAlpha2;
+        $signUpDetails[FIELD_PASSWORD]          = $password;
+        $signUpDetails[FIELD_ACCOUNT_TYPE]      = $accountType;
 
-        // Encode and echo Json response
-        echo json_encode($response);
 
-    } else {
-        // Signup Failed
+        // Signup user
+        $signupUser = $userAccountFunctions->signUpUser($signUpDetails);
 
-        // Set response error to true and add error message
-        $response[KEY_ERROR]            = true;
-        $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
+        // Check If User Was Signed Up
+        if ($signupUser) {
+            // User Signed Up
 
-        // Encode and echo Json response
-        echo json_encode($response);
+            // Add User Details Json Response Array
+            $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
+
+            // Check account type
+            if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
+                // Personal account
+
+                $response[KEY_SIGN_UP][FIELD_FIRST_NAME]    = $signupUser[FIELD_FIRST_NAME];
+                $response[KEY_SIGN_UP][FIELD_LAST_NAME]     = $signupUser[FIELD_LAST_NAME];
+
+            } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
+                // Business account
+
+                $response[KEY_SIGN_UP][FIELD_BUSINESS_NAME] = $signupUser[FIELD_BUSINESS_NAME];
+            }
+
+            $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupUser[FIELD_EMAIL_ADDRESS];
+            $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupUser[FIELD_ACCOUNT_TYPE];
+
+            // Encode and echo Json response
+            echo json_encode($response);
+
+        } else {
+            // Signup Failed
+
+            // Set response error to true and add error message
+            $response[KEY_ERROR]            = true;
+            $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
+
+            // Encode and echo Json response
+            echo json_encode($response);
+        }
     }
-}
 } else {
     // Missing params
 

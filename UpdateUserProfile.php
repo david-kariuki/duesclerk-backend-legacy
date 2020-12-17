@@ -31,13 +31,11 @@ $businessName   = "";
 $emailAddress   = "";
 $countryCode    = "";
 $countryAlpha2  = "";
-$gender         = "";
 
 // Update details associative array
 $updateDetails  = array(
     FIELD_FIRST_NAME        => "",
     FIELD_LAST_NAME         => "",
-    FIELD_GENDER            => "",
     FIELD_BUSINESS_NAME     => "",
     FIELD_EMAIL_ADDRESS     => "",
     FIELD_COUNTRY_CODE      => "",
@@ -104,12 +102,6 @@ if (
             if (isset($_POST[FIELD_LAST_NAME])) {
                 $lastName = $_POST[FIELD_LAST_NAME] ? $_POST[FIELD_LAST_NAME] : '';
                 $updateDetails[FIELD_LAST_NAME] = $lastName; // Add lastName to details array
-            }
-
-            // Check for and get gender
-            if (isset($_POST[FIELD_GENDER])) {
-                $gender = $_POST[FIELD_GENDER] ? $_POST[FIELD_GENDER] : '';
-                $updateDetails[FIELD_GENDER] = $gender; // Add gender to details array
             }
 
             // Check for busimess account params

@@ -34,7 +34,6 @@ define("FIELD_COUNTRY_FLAG",                "CountryFlag");
 define("FIELD_PASSWORD",                    "Password");
 define("FIELD_NEW_PASSWORD",                "NewPassword");
 define("FIELD_HASH",                        "Hash");
-define("FIELD_GENDER",                      "Gender");
 define("FIELD_BUSINESS_NAME",               "BusinessName");
 define("FIELD_ACCOUNT_TYPE",                "AccountType");
 define("FIELD_NEW_ACCOUNT_TYPE",            "NewAccountType");
