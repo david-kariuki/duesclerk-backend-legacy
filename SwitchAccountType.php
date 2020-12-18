@@ -25,41 +25,95 @@ $userAccountFunctions = new UserAccountFunctions();
 $response = array(KEY_ERROR => false);
 
 // Update details associative array
-$updateDetails  = array(FIELD_ACCOUNT_TYPE => "");
+$switchAccountDetails  = array(FIELD_ACCOUNT_TYPE => "");
 
 // Check for set POST params
-if (isset($_POST[FIELD_USER_ID])
-&& isset($_POST[FIELD_PASSWORD])
+if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
 && isset($_POST[FIELD_NEW_ACCOUNT_TYPE])
-){
+&& ((isset($_POST[FIELD_FIRST_NAME]) && isset($_POST[FIELD_LAST_NAME]))
+|| (isset($_POST[FIELD_BUSINESS_NAME])))) {
 
-        // Get Values From POST
-        $userId       = $_POST[FIELD_USER_ID]   ? $_POST[FIELD_USER_ID]   : '';
-        $password       = $_POST[FIELD_PASSWORD]    ? $_POST[FIELD_PASSWORD]    : '';
-        $newAccountType = $_POST[FIELD_NEW_ACCOUNT_TYPE] ? $_POST[FIELD_NEW_ACCOUNT_TYPE] : '';
+    // Get Values From POST
+    $userId         = $_POST[FIELD_USER_ID]     ? $_POST[FIELD_USER_ID]     : '';
+    $password       = $_POST[FIELD_PASSWORD]    ? $_POST[FIELD_PASSWORD]    : '';
+    $newAccountType = $_POST[FIELD_NEW_ACCOUNT_TYPE] ? $_POST[FIELD_NEW_ACCOUNT_TYPE] : '';
 
-        // Get user details
-        $user = $userAccountFunctions->getUserByUserId($userId);
+    $firstName      = ""; // First name for convertion to personal account
+    $lastName       = ""; // Last name for convertion to personal account
+    $businessName   = ""; // Business name for convertion to business account
 
-        // Check for user details
-        if ($user !== false) {
-            // User details fetched
+    // Get user details
+    $user = $userAccountFunctions->getUserByUserId($userId);
 
-            // Get users password hash
-            $userHash = $user[FIELD_HASH];
+    // Check for user details
+    if ($user !== false) {
+        // User details fetched
 
-            // Verify users password
-            if ($userAccountFunctions->verifyPassword($password, $userHash)) {
-                // Password verified
+        $userHash = $user[FIELD_HASH]; // Get users password hash
+
+        // Verify users password
+        if (!$userAccountFunctions->verifyPassword($password, $userHash)) {
+            // Password verified
+
+            if (isset($_POST[FIELD_FIRST_NAME]) && isset($_POST[FIELD_LAST_NAME])) {
+                // Converting to personal account
+
+                // Get firstName and lastName from POST
+                $firstName  = $_POST[FIELD_FIRST_NAME]  ? $_POST[FIELD_FIRST_NAME]  : '';
+                $lastName   = $_POST[FIELD_LAST_NAME]   ? $_POST[FIELD_LAST_NAME]   : '';
+
+                // Add first and last names to associative array
+                $switchAccountDetails[FIELD_FIRST_NAME] = $firstName;
+                $switchAccountDetails[FIELD_LAST_NAME]  = $lastName;
+
+            } else if (isset($_POST[FIELD_BUSINESS_NAME])) {
+                // Converting to business account
+
+                // Get businessName from POST
+                $businessName = $_POST[FIELD_BUSINESS_NAME] ? $_POST[FIELD_BUSINESS_NAME] : '';
+
+                // Add business name to associative array
+                $switchAccountDetails[FIELD_BUSINESS_NAME] = $businessName;
+            }
+
+            // Add user id and new account type to associative array
+            $switchAccountDetails[FIELD_USER_ID]            = $userId;
+            $switchAccountDetails[FIELD_NEW_ACCOUNT_TYPE]   = $newAccountType;
+
+            // Switch account type
+            $switchAccountType = $userAccountFunctions->switchAccountType($switchAccountDetails);
+
+            // Check for successful switching
+            if (($switchAccountType !== null) && ($switchAccountType !== false)) {
+                // Account switching successful
+
+                // Set error to true
+                $response[KEY_SUCCESS_MESSAGE] = "Account switching successful!";
+
+                // Encode and echo Json response
+                echo json_encode($response);
 
             } else {
-                // Pasword verification failed
+                // Account switching failed
 
+                // Set error to true
+                $response[KEY_ERROR]			= true;
+                $response[KEY_ERROR_MESSAGE]    = "Account switching failed!!";
+
+                // Encode and echo Json response
+                echo json_encode($response);
             }
+        } else {
+            // Pasword verification failed
+
+            // Set error to true
+            $response[KEY_ERROR]			= true;
+            $response[KEY_ERROR_MESSAGE]    = "Incorrect password!";
+
+            // Encode and echo Json response
+            echo json_encode($response);
         }
-
-        // Verify password
-
+    }
 } else {
     // Missing userId
 

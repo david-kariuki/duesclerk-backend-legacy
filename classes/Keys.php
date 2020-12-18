@@ -104,6 +104,8 @@ define("LOG_TYPE_SIGN_IN",                  "LogTypeSignIn");
 define("LOG_TYPE_SIGN_OUT",                 "LogTypeSignOut");
 define("LOG_TYPE_UPDATE_PROFILE",           "LogTypeUpdateProfile");
 define("LOG_TYPE_UPDATE_PASSWORD",          "LogTypeUpdatePassword");
+define("LOG_TYPE_SWITCH_ACCOUNT_TYPE",      "LogTypeSwitchAccountType");
+
 
 // Date formats
 define("FORMAT_DATE_TIME_FULL",             "l d, F Y H:i:s");

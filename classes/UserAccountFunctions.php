@@ -9,6 +9,7 @@
 */
 
 
+// Enable error reporting
 error_reporting(1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -64,16 +65,15 @@ class UserAccountFunctions
     */
     function __destruct()
     {
-
     }
 
 
     /**
     * Check if email address is in users table.
     *
-    * @param emailAddress
+    * @param emailAddress   - Users email address
     *
-    * @return boolean - true/false - (if/not found)
+    * @return boolean       - true/false - (if/not found)
     */
     public function isEmailAddressInUsersTable($emailAddress)
     {
@@ -115,12 +115,12 @@ class UserAccountFunctions
     /**
     * Function to get user by email address and password
     *
-    * @param emailAddress - users email address
-    * @param password - users password
+    * @param emailAddress   - users email address
+    * @param password       - users password
     *
-    * @return array - Associative array (user details)
-    * @return boolean - false - (on password mismatch)
-    * @return null - on fetch failure
+    * @return array         - Associative array (user details)
+    * @return boolean       - false - (on password mismatch)
+    * @return null          - on fetch failure
     */
     public function getUserByEmailAddressAndPassword($emailAddress, $password)
     {
@@ -192,10 +192,10 @@ class UserAccountFunctions
     /**
     * Function to get user by userId
     *
-    * @param userId - users id
+    * @param userId     - users id
     *
-    * @return array - Associative array (user details)
-    * @return boolean - false - (fetch failure)
+    * @return array     - Associative array (user details)
+    * @return boolean   - false - (fetch failure)
     */
     public function getUserByUserId($userId)
     {
@@ -252,10 +252,10 @@ class UserAccountFunctions
     /**
     * Function to get user by email address
     *
-    * @param emailAddress - users email address
+    * @param emailAddress   - users email address
     *
-    * @return array - Associative array (user details)
-    * @return boolean - false - (fetch failure)
+    * @return array         - Associative array (user details)
+    * @return boolean       - false - (fetch failure)
     */
     public function getUserByEmailAddress($emailAddress)
     {
@@ -312,11 +312,11 @@ class UserAccountFunctions
     /**
     * Function to signup user
     *
-    * @param signUpDetails - array with signup details
+    * @param signUpDetails  - array with signup details
     *
-    * @return array - Associative array (user details)
-    * @return boolean - false (on signup failure)
-    * @return null - on logging failed
+    * @return array         - Associative array (user details)
+    * @return boolean       - false (on signup failure)
+    * @return null          - on logging failed
     */
     public function signUpUser($signUpDetails) {
 
@@ -339,7 +339,7 @@ class UserAccountFunctions
         $hash = $this->hashPassword($password);
 
         // Get account creation date
-        $signupDateTime = $this->dateTimeFunctions->getDefaultTimeZoneDateTime();
+        $signupDateTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime();
 
         $result;
         // Insert into Users
@@ -348,19 +348,18 @@ class UserAccountFunctions
 
             $stmt; // Statement variable
 
-            // Get first name, last name and gender
+            // Get first name and last name
             $firstName   = $signUpDetails[FIELD_FIRST_NAME];
             $lastName    = $signUpDetails[FIELD_LAST_NAME];
-            $gender      = $signUpDetails[FIELD_GENDER];
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->valueOfConst(TABLE_USERS)}(`UserId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `Gender`, `AccountType`, `SignUpDateTime`)
-                VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
+                "INSERT INTO {$this->keys->valueOfConst(TABLE_USERS)}(`UserId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `AccountType`, `SignUpDateTime`)
+                VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
 
             // Bind parameters
-            $stmt->bind_param("ssssssssss", $userId, $firstName, $lastName, $emailAddress, $countryCode, $countryAlpha2, $hash, $gender, $accountType, $signupDateTime);
+            $stmt->bind_param("sssssssss", $userId, $firstName, $lastName, $emailAddress, $countryCode, $countryAlpha2, $hash, $accountType, $signupDateTime);
 
             $result = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
@@ -436,15 +435,17 @@ class UserAccountFunctions
     /**
     * Function to update user profile
     *
-    * @param userId - users Id
-    * @param accountType - users account type
-    * @param updateDetails - array with associative array of fields key value pair to be updated
+    * @param userId         - users Id
+    * @param accountType    - users account type
+    * @param updateDetails  - array with associative array of fields key value pair to be updated
     *
-    * @return boolean - true/false (on revokation success / revokation failure)
-    * @return boolean - true/false (on email sent / email not sent)
-    * @return - null/0 (on logging failed/on update failure)
+    * @return boolean       - true/false (on revokation success / revokation failure)
+    * @return boolean       - true/false (on email sent / email not sent)
+    * @return null          - on logging failed
+    * @return int           - 0 - (on update failure)
     */
-    public function updateUserProfile($userId, $accountType, $updateDetails) {
+    public function updateUserProfile($userId, $accountType, $updateDetails)
+    {
         // Get details from array
 
         // Get emailAddress, countryCode, countryAlpha2, password,
@@ -454,43 +455,40 @@ class UserAccountFunctions
 
         $firstName = "";
         $lastName = "";
-        $gender = "";
         $businessName = "";
         $bindParamValues = array();
 
-        // Insert into Users
-        if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
-            // Personal account
+        // Check for account type
+        if (!empty($accountType)) {
+            // Insert into users
 
-            // Check for first name
-            if (array_key_exists(FIELD_FIRST_NAME, $updateDetails)) {
+            if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
+                // Personal account
 
-                // Add last name to update params
-                $updateParams .= ", {$this->keys->valueOfConst(FIELD_FIRST_NAME)} = ?";
-            }
+                // Check for first name
+                if (array_key_exists(FIELD_FIRST_NAME, $updateDetails)) {
 
-            // Check for last name
-            if (array_key_exists(FIELD_LAST_NAME, $updateDetails)) {
+                    // Add last name to update params
+                    $updateParams .= ", {$this->keys->valueOfConst(FIELD_FIRST_NAME)} = ?";
+                }
 
-                // Add last name to update params
-                $updateParams .= ", {$this->keys->valueOfConst(FIELD_LAST_NAME)} = ?";
-            }
+                // Check for last name
+                if (array_key_exists(FIELD_LAST_NAME, $updateDetails)) {
 
-            // Check for gender
-            if (array_key_exists(FIELD_GENDER, $updateDetails)) {
+                    // Add last name to update params
+                    $updateParams .= ", {$this->keys->valueOfConst(FIELD_LAST_NAME)} = ?";
+                }
 
-                // Add gender to update params
-                $updateParams .= ", {$this->keys->valueOfConst(FIELD_GENDER)} = ?";
-            }
 
-        } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-            // Business account
+            } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
+                // Business account
 
-            // Check for business name
-            if (array_key_exists(FIELD_BUSINESS_NAME, $updateDetails)) {
+                // Check for business name
+                if (array_key_exists(FIELD_BUSINESS_NAME, $updateDetails)) {
 
-                // Add business name to update params
-                $updateParams .= ", {$this->keys->valueOfConst(FIELD_BUSINESS_NAME)} = ?";
+                    // Add business name to update params
+                    $updateParams .= ", {$this->keys->valueOfConst(FIELD_BUSINESS_NAME)} = ?";
+                }
             }
         }
 
@@ -511,6 +509,7 @@ class UserAccountFunctions
             // Add country alpha2 to update params
             $updateParams .= ", {$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)} = ?";
         }
+
 
         // Check for password hash
         if (array_key_exists(FIELD_HASH, $updateDetails)) {
@@ -642,13 +641,13 @@ class UserAccountFunctions
     /**
     * Function to update and reset users password
     *
-    * @param userId - Users id
-    * @param currentPassword - Users current password for verification
-    * @param newPassword - Users new password
+    * @param userId             - Users id
+    * @param currentPassword    - Users current password for verification
+    * @param newPassword        - Users new password
     *
-    * @return boolean - true/false/0 - password updated/not updated
-    * @return null - on user details fetching failed
-    * @return int - 0 - (on password not verified)
+    * @return boolean           - true/false/0 - password updated/not updated
+    * @return null              - on user details fetching failed
+    * @return int               - 0 - (on password not verified)
     */
     public function updateUserPassword($userId, $currentPassword, $newPassword)
     {
@@ -704,13 +703,133 @@ class UserAccountFunctions
 
 
     /**
+    * Function to switch account type
+    *
+    * @param userId         - Users id
+    * @param newAccountType - New account type to switch to
+    *
+    * @return boolean       - false - (password updated/not updated)
+    * @return int           - 0 - (on update failed)
+    * @return null          - on logging failed
+    */
+    public function switchAccountType($switchAccountDetails)
+    {
+
+        $newAccountType     = ""; // Account type to switch to
+        $userId             = ""; // User id
+        $firstName          = ""; // Users first name
+        $lastName           = ""; // Users last name
+        $businessName       = ""; // Users business name
+
+        // Check for new account type
+        if (array_key_exists(FIELD_USER_ID, $switchAccountDetails)
+        && array_key_exists(FIELD_NEW_ACCOUNT_TYPE, $switchAccountDetails)) {
+
+            $userId = $switchAccountDetails[FIELD_USER_ID]; // Get userId from associative array
+
+            // Get new account type from associative array
+            $newAccountType = $switchAccountDetails[FIELD_NEW_ACCOUNT_TYPE];
+
+            // Check personal account fields
+            if (array_key_exists(FIELD_FIRST_NAME, $switchAccountDetails)
+            && array_key_exists(FIELD_LAST_NAME, $switchAccountDetails)) {
+                // Converting to personal account
+
+                // Get first and last name from associative array
+                $firstName  = $switchAccountDetails[FIELD_FIRST_NAME];
+                $lastName   = $switchAccountDetails[FIELD_LAST_NAME];
+
+            } else if (array_key_exists(FIELD_BUSINESS_NAME, $switchAccountDetails)) {
+                // Converting to business account
+
+                // Get business name from associative array
+                $businessName = $switchAccountDetails[FIELD_BUSINESS_NAME];
+            }
+
+            // Prepare UPDATE statement
+            $stmt = $this->connectToDB->prepare(
+                "UPDATE {$this->keys->valueOfConst(TABLE_USERS)}
+                SET {$this->keys->valueOfConst(FIELD_FIRST_NAME)} = ?,
+                {$this->keys->valueOfConst(FIELD_LAST_NAME)} = ?,
+                {$this->keys->valueOfConst(FIELD_BUSINESS_NAME)} = ?,
+                {$this->keys->valueOfConst(FIELD_ACCOUNT_TYPE)} = ?
+                WHERE {$this->keys->valueOfConst(FIELD_USER_ID)} = ?"
+            );
+
+            // Bind parameters
+            $stmt->bind_param(
+                "sssss",
+                $firstName, $lastName, $businessName, $newAccountType, $userId
+            );
+            $update = $stmt->execute(); // Execute statement
+            $stmt->close(); // Close statement
+
+            // Check for query execution
+            if ($update) {
+                // Update successful
+
+                // Prepare SELECT statement
+                $stmt = $this->connectToDB->prepare(
+                    "SELECT {$this->keys->valueOfConst(KEY_USER)}.*
+                    FROM {$this->keys->valueOfConst(TABLE_USERS)}
+                    AS {$this->keys->valueOfConst(KEY_USER)}
+                    WHERE {$this->keys->valueOfConst(KEY_USER)}
+                    .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
+                    AND {$this->keys->valueOfConst(KEY_USER)}
+                    .{$this->keys->valueOfConst(FIELD_ACCOUNT_TYPE)} = ?"
+                );
+                $stmt->bind_param("ss", $userId, $newAccountType); // Bind parameters
+
+                // Check for client details
+                if ($stmt->execute()) {
+                    // Client details fetched
+
+                    $user = $stmt->get_result()->fetch_assoc(); // Get result array
+                    $stmt->close(); // Close statement
+
+                    // Get date and time
+                    $switchTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime();
+
+                    // Log signup event
+                    if ($this->sharedFunctions->createStoreUserLogs(
+                        LOG_TYPE_SWITCH_ACCOUNT_TYPE,
+                        $switchTime,
+                        $userId
+                    )) {
+                        // Logging successful
+
+                        return $user; // Return user associative array
+
+                    } else {
+                        // Logging failed
+
+                        return null; // Return null on logging failed
+                    }
+                } else {
+                    // Client details not fetched
+
+                    $stmt->close(); // Close statement
+
+                    return false; // Feturn false on fetch failed
+                }
+            } else {
+                // Update failed
+
+                return 0; // Return 0 on update failed
+            }
+        }
+    }
+
+
+    /**
     * Function To Encrypt Password
     *
-    * @param password - users password
+    * @param password   - users password
     *
-    * @return string - Hashed Password
+    * @return string    - Hashed Password
     */
-    private function hashPassword($password) {
+    private function hashPassword($password)
+    {
 
         // Using BCRYPT, which will always be 60 characters.
         $options = [
@@ -727,11 +846,13 @@ class UserAccountFunctions
     /**
     * Function To Decrypt password
     *
-    * @param password, @param hash
+    * @param password   - Users password
+    * @param hash       - Users password hask
     *
-    * @return boolean - true/false (password verified / not verified)
+    * @return boolean   - true/false (password verified / not verified)
     */
-    public function verifyPassword($password, $hash) {
+    public function verifyPassword($password, $hash)
+    {
 
         return password_verify($password, $hash); // Verify password and return boolean
     }
