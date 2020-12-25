@@ -1,15 +1,21 @@
 <?php
 
 /**
-* Keys class
+* Constants class
 * This class contains all the constants required by all project files
 *
 * @author David Kariuki (dk)
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
-// Disable Error Reporting
+// Namespace declaration
+namespace duesclerk\configs;
+
+// Enable error reporting
 error_reporting(1);
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
 // Website and domain details
 define("PROTOCOL",                          "https://");
@@ -58,7 +64,7 @@ define("KEY_COUNTRY_DATA",                  "CountryData");
 define("KEY_ACCOUNT_TYPE_PERSONAL",         "AccountTypePersonal");
 define("KEY_ACCOUNT_TYPE_BUSINESS",         "AccountTypeBusiness");
 
-// SignUp and SignIn Keys
+// SignUp and SignIn Constants
 define("KEY_SIGN_UP",                       "SignUp");
 define("KEY_SIGN_IN",                       "SignIn");
 
@@ -115,7 +121,11 @@ define("FORMAT_DATE_TIME_NUMERICAL",        "m/d/Y h:i:s a");
 define("FILE_TYPE_PNG",                     ".png");
 
 
-class Keys
+/**
+* Class declaration for autoloaer visibility and
+* to get constants value when calling the constant in between quotes
+*/
+class Constants
 {
 
     /**
@@ -160,4 +170,4 @@ class Keys
     }
 }
 
-// EOF: Keys.php
+// EOF: Constants.php

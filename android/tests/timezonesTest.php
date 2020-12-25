@@ -1,5 +1,8 @@
 <?php
 
+// Call autoloader fie
+require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
+
 if (isset($_GET['countryAlpha2'])) {
 
     echo '<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="refresh" content=".1"/></head></html>';

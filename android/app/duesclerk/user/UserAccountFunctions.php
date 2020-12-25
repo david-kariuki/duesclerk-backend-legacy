@@ -8,6 +8,8 @@
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
+// Namespace declaration
+namespace duesclerk\user;
 
 // Enable error reporting
 error_reporting(1);
@@ -15,15 +17,27 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
+// Call project classes
+use duesclerk\database\DatabaseConnection;
+use duesclerk\configs\Constants;
+use duesclerk\mail\MailFunctions;
+use duesclerk\src\SharedFunctions;
+use duesclerk\src\LogsFunctions;
+use duesclerk\src\DateTimeFunctions;
+
+
+// Class declaration
 class UserAccountFunctions
 {
 
     // Connection status value variable
     private $connectToDB;       // Create DatabaseConnection class object
-    private $keys;              // Create Keys class object
+    private $constants;         // Create Constants class object
     private $mailFunctions;     // Create MailFunctions class object
-    private $dateTimeFunctions; // Create DateTimeFunctions class object
     private $sharedFunctions;   // Create SharedFunctions class object
+    private $logsFunctions;     // Create LogsFunctions class object
+    private $dateTimeFunctions; // Create DateTimeFunctions class object
+
 
     /**
     * Class constructor
@@ -31,32 +45,20 @@ class UserAccountFunctions
     function __construct()
     {
 
-        // Call required functions classes
-        require_once 'DatabaseConnection.php';  // Call database connection php file
-        require_once 'Keys.php';                // Call keys php file
-        require_once 'MailFunctions.php';       // Call mail functions php file
-        require_once 'DateTimeFunctions.php';   // Call date and time functions php file
-        require_once 'SharedFunctions.php';     // Call shared functions php file
-
-
         // Creating objects of the required classes
 
         // Initialize database connection class instance
-        $connectionInstance         = DatabaseConnection::getConnectionInstance();
+        $connectionInstance = DatabaseConnection::getConnectionInstance();
 
         // Initialize connection object
-        $this->connectToDB          = $connectionInstance->getDatabaseConnection();
-
-        $this->keys                 = new Keys(); // Initialize keys object
-
-        // Initialize MailFunctions class object
-        $this->mailFunctions        = new MailFunctions();
+        $this->connectToDB      = $connectionInstance->getDatabaseConnection();
+        $this->constants        = new Constants();      // Initialize constants object
+        $this->mailFunctions    = new MailFunctions();  // Initialize MailFunctions class object
+        $this->sharedFunctions  = new SharedFunctions(); // Initialize SharedFunctions class object
+        $this->logsFunctions    = new LogsFunctions();  // Initialize SharedFunctions class object
 
         // Initialize DateTimeFunctions class object
-        $this->dateTimeFunctions    = new DateTimeFunctions();
-
-        // Initialize SharedFunctions class object
-        $this->sharedFunctions      = new SharedFunctions();
+        $this->dateTimeFunctions = new DateTimeFunctions();
     }
 
 
@@ -81,12 +83,12 @@ class UserAccountFunctions
         // Check for email address in users table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
-            FROM {$this->keys->valueOfConst(TABLE_USERS)}
-            AS {$this->keys->valueOfConst(KEY_USER)}
-            WHERE {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
+            "SELECT {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)}
+            FROM {$this->constants->valueOfConst(TABLE_USERS)}
+            AS {$this->constants->valueOfConst(KEY_USER)}
+            WHERE {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
         );
         $stmt->bind_param("s", $emailAddress); // Bind parameters
         $stmt->execute(); // Execute statement
@@ -128,22 +130,22 @@ class UserAccountFunctions
         // Check for email in Table Users
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_USER)}.*,
-            {$this->keys->valueOfConst(KEY_COUNTRY)}.*
-            FROM {$this->keys->valueOfConst(TABLE_USERS)}
-            AS {$this->keys->valueOfConst(KEY_USER)}
-            LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
-            AS {$this->keys->valueOfConst(KEY_COUNTRY)}
-            ON {$this->keys->valueOfConst(KEY_COUNTRY)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            AND {$this->keys->valueOfConst(KEY_COUNTRY)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            = {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
+            "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
+            {$this->constants->valueOfConst(KEY_COUNTRY)}.*
+            FROM {$this->constants->valueOfConst(TABLE_USERS)}
+            AS {$this->constants->valueOfConst(KEY_USER)}
+            LEFT OUTER JOIN {$this->constants->valueOfConst(TABLE_COUNTRIES)}
+            AS {$this->constants->valueOfConst(KEY_COUNTRY)}
+            ON {$this->constants->valueOfConst(KEY_COUNTRY)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            = {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            AND {$this->constants->valueOfConst(KEY_COUNTRY)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+            = {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+            WHERE {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)}
             = ?"
         );
         $stmt->bind_param("s", $emailAddress); // Bind parameters
@@ -203,22 +205,22 @@ class UserAccountFunctions
         // Check for email in Table Users
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_USER)}.*,
-            {$this->keys->valueOfConst(KEY_COUNTRY)}.*
-            FROM {$this->keys->valueOfConst(TABLE_USERS)}
-            AS {$this->keys->valueOfConst(KEY_USER)}
-            LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
-            AS {$this->keys->valueOfConst(KEY_COUNTRY)}
-            ON {$this->keys->valueOfConst(KEY_COUNTRY)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            AND {$this->keys->valueOfConst(KEY_COUNTRY)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            = {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_USER_ID)}
+            "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
+            {$this->constants->valueOfConst(KEY_COUNTRY)}.*
+            FROM {$this->constants->valueOfConst(TABLE_USERS)}
+            AS {$this->constants->valueOfConst(KEY_USER)}
+            LEFT OUTER JOIN {$this->constants->valueOfConst(TABLE_COUNTRIES)}
+            AS {$this->constants->valueOfConst(KEY_COUNTRY)}
+            ON {$this->constants->valueOfConst(KEY_COUNTRY)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            = {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            AND {$this->constants->valueOfConst(KEY_COUNTRY)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+            = {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+            WHERE {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_USER_ID)}
             = ?"
         );
         $stmt->bind_param("s", $userId); // Bind parameters
@@ -263,22 +265,22 @@ class UserAccountFunctions
         // Check for email in Table Users
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->keys->valueOfConst(KEY_USER)}.*,
-            {$this->keys->valueOfConst(KEY_COUNTRY)}.*
-            FROM {$this->keys->valueOfConst(TABLE_USERS)}
-            AS {$this->keys->valueOfConst(KEY_USER)}
-            LEFT OUTER JOIN {$this->keys->valueOfConst(TABLE_COUNTRIES)}
-            AS {$this->keys->valueOfConst(KEY_COUNTRY)}
-            ON {$this->keys->valueOfConst(KEY_COUNTRY)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            = {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            AND {$this->keys->valueOfConst(KEY_COUNTRY)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            = {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_COUNTRY_CODE)}
-            WHERE {$this->keys->valueOfConst(KEY_USER)}
-            .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)}
+            "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
+            {$this->constants->valueOfConst(KEY_COUNTRY)}.*
+            FROM {$this->constants->valueOfConst(TABLE_USERS)}
+            AS {$this->constants->valueOfConst(KEY_USER)}
+            LEFT OUTER JOIN {$this->constants->valueOfConst(TABLE_COUNTRIES)}
+            AS {$this->constants->valueOfConst(KEY_COUNTRY)}
+            ON {$this->constants->valueOfConst(KEY_COUNTRY)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            = {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+            AND {$this->constants->valueOfConst(KEY_COUNTRY)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+            = {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+            WHERE {$this->constants->valueOfConst(KEY_USER)}
+            .{$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)}
             = ?"
         );
         $stmt->bind_param("s", $emailAddress); // Bind parameters
@@ -354,7 +356,7 @@ class UserAccountFunctions
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->valueOfConst(TABLE_USERS)}(`UserId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `AccountType`, `SignUpDateTime`)
+                "INSERT INTO {$this->constants->valueOfConst(TABLE_USERS)}(`UserId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `AccountType`, `SignUpDateTime`)
                 VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
 
@@ -372,7 +374,7 @@ class UserAccountFunctions
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->keys->valueOfConst(TABLE_USERS)}(`UserId`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `AccountType`, `SignUpDateTime`)
+                "INSERT INTO {$this->constants->valueOfConst(TABLE_USERS)}(`UserId`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `AccountType`, `SignUpDateTime`)
                 VALUES( ?, ?, ?, ?, ?, ?, ?, ? )"
             );
 
@@ -391,7 +393,7 @@ class UserAccountFunctions
             // Signup successful
 
             // Log signup event
-            if ($this->sharedFunctions->createStoreUserLogs(
+            if ($this->logsFunctions->createStoreUserLogs(
                 LOG_TYPE_SIGN_UP,
                 $signupDateTime,
                 $userId
@@ -402,12 +404,12 @@ class UserAccountFunctions
                 // Get stored values
                 // Prepare statement
                 $stmt = $this->connectToDB->prepare(
-                    "SELECT * FROM {$this->keys->valueOfConst(TABLE_USERS)}
-                    AS {$this->keys->valueOfConst(KEY_USER)}
-                    WHERE {$this->keys->valueOfConst(KEY_USER)}
-                    .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
-                    AND {$this->keys->valueOfConst(KEY_USER)}
-                    .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
+                    "SELECT * FROM {$this->constants->valueOfConst(TABLE_USERS)}
+                    AS {$this->constants->valueOfConst(KEY_USER)}
+                    WHERE {$this->constants->valueOfConst(KEY_USER)}
+                    .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+                    AND {$this->constants->valueOfConst(KEY_USER)}
+                    .{$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
                 );
 
                 $stmt->bind_param("ss", $userId, $emailAddress); // Bind parameters
@@ -469,14 +471,14 @@ class UserAccountFunctions
                 if (array_key_exists(FIELD_FIRST_NAME, $updateDetails)) {
 
                     // Add last name to update params
-                    $updateParams .= ", {$this->keys->valueOfConst(FIELD_FIRST_NAME)} = ?";
+                    $updateParams .= ", {$this->constants->valueOfConst(FIELD_FIRST_NAME)} = ?";
                 }
 
                 // Check for last name
                 if (array_key_exists(FIELD_LAST_NAME, $updateDetails)) {
 
                     // Add last name to update params
-                    $updateParams .= ", {$this->keys->valueOfConst(FIELD_LAST_NAME)} = ?";
+                    $updateParams .= ", {$this->constants->valueOfConst(FIELD_LAST_NAME)} = ?";
                 }
 
 
@@ -487,7 +489,7 @@ class UserAccountFunctions
                 if (array_key_exists(FIELD_BUSINESS_NAME, $updateDetails)) {
 
                     // Add business name to update params
-                    $updateParams .= ", {$this->keys->valueOfConst(FIELD_BUSINESS_NAME)} = ?";
+                    $updateParams .= ", {$this->constants->valueOfConst(FIELD_BUSINESS_NAME)} = ?";
                 }
             }
         }
@@ -496,7 +498,7 @@ class UserAccountFunctions
         if (array_key_exists(FIELD_EMAIL_ADDRESS, $updateDetails)) {
 
             // Add email address to update params
-            $updateParams .= ", {$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?";
+            $updateParams .= ", {$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?";
         }
 
         // Check for country code and country alpha2
@@ -504,10 +506,10 @@ class UserAccountFunctions
         && array_key_exists(FIELD_COUNTRY_ALPHA2, $updateDetails)) {
 
             // Add country code to update params
-            $updateParams .= ", {$this->keys->valueOfConst(FIELD_COUNTRY_CODE)} = ?";
+            $updateParams .= ", {$this->constants->valueOfConst(FIELD_COUNTRY_CODE)} = ?";
 
             // Add country alpha2 to update params
-            $updateParams .= ", {$this->keys->valueOfConst(FIELD_COUNTRY_ALPHA2)} = ?";
+            $updateParams .= ", {$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)} = ?";
         }
 
 
@@ -515,20 +517,20 @@ class UserAccountFunctions
         if (array_key_exists(FIELD_HASH, $updateDetails)) {
 
             // Add password hash to update params
-            $updateParams .= ", {$this->keys->valueOfConst(FIELD_HASH)} = ?";
+            $updateParams .= ", {$this->constants->valueOfConst(FIELD_HASH)} = ?";
         }
 
         // Check for email verified field
         if (array_key_exists(FIELD_EMAIL_VERIFIED, $updateDetails)) {
 
             // Add password hash to update params
-            $updateParams .= ", {$this->keys->valueOfConst(FIELD_EMAIL_VERIFIED)} = ?";
+            $updateParams .= ", {$this->constants->valueOfConst(FIELD_EMAIL_VERIFIED)} = ?";
         }
 
         // Construct SQL command with the update params above
-        $updateStatement = "UPDATE {$this->keys->valueOfConst(TABLE_USERS)}
-        SET {$updateParams} WHERE {$this->keys->valueOfConst(TABLE_USERS)}
-        .{$this->keys->valueOfConst(FIELD_USER_ID)} = '$userId'";
+        $updateStatement = "UPDATE {$this->constants->valueOfConst(TABLE_USERS)}
+        SET {$updateParams} WHERE {$this->constants->valueOfConst(TABLE_USERS)}
+        .{$this->constants->valueOfConst(FIELD_USER_ID)} = '$userId'";
 
         // Remove the comma after SET keyword
         $updateStatement = str_replace("SET ,", "SET", $updateStatement);
@@ -563,7 +565,7 @@ class UserAccountFunctions
             if (array_key_exists(FIELD_HASH, $updateDetails)) {
 
                 // Log password change
-                if ($this->sharedFunctions->createStoreUserLogs(
+                if ($this->logsFunctions->createStoreUserLogs(
                     LOG_TYPE_UPDATE_PASSWORD,
                     $updateDateTime,
                     $userId
@@ -601,7 +603,7 @@ class UserAccountFunctions
             } else {
 
                 // Log profile update
-                if ($this->sharedFunctions->createStoreUserLogs(
+                if ($this->logsFunctions->createStoreUserLogs(
                     LOG_TYPE_UPDATE_PROFILE,
                     $updateDateTime,
                     $userId
@@ -748,12 +750,12 @@ class UserAccountFunctions
 
             // Prepare UPDATE statement
             $stmt = $this->connectToDB->prepare(
-                "UPDATE {$this->keys->valueOfConst(TABLE_USERS)}
-                SET {$this->keys->valueOfConst(FIELD_FIRST_NAME)} = ?,
-                {$this->keys->valueOfConst(FIELD_LAST_NAME)} = ?,
-                {$this->keys->valueOfConst(FIELD_BUSINESS_NAME)} = ?,
-                {$this->keys->valueOfConst(FIELD_ACCOUNT_TYPE)} = ?
-                WHERE {$this->keys->valueOfConst(FIELD_USER_ID)} = ?"
+                "UPDATE {$this->constants->valueOfConst(TABLE_USERS)}
+                SET {$this->constants->valueOfConst(FIELD_FIRST_NAME)} = ?,
+                {$this->constants->valueOfConst(FIELD_LAST_NAME)} = ?,
+                {$this->constants->valueOfConst(FIELD_BUSINESS_NAME)} = ?,
+                {$this->constants->valueOfConst(FIELD_ACCOUNT_TYPE)} = ?
+                WHERE {$this->constants->valueOfConst(FIELD_USER_ID)} = ?"
             );
 
             // Bind parameters
@@ -770,13 +772,13 @@ class UserAccountFunctions
 
                 // Prepare SELECT statement
                 $stmt = $this->connectToDB->prepare(
-                    "SELECT {$this->keys->valueOfConst(KEY_USER)}.*
-                    FROM {$this->keys->valueOfConst(TABLE_USERS)}
-                    AS {$this->keys->valueOfConst(KEY_USER)}
-                    WHERE {$this->keys->valueOfConst(KEY_USER)}
-                    .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
-                    AND {$this->keys->valueOfConst(KEY_USER)}
-                    .{$this->keys->valueOfConst(FIELD_ACCOUNT_TYPE)} = ?"
+                    "SELECT {$this->constants->valueOfConst(KEY_USER)}.*
+                    FROM {$this->constants->valueOfConst(TABLE_USERS)}
+                    AS {$this->constants->valueOfConst(KEY_USER)}
+                    WHERE {$this->constants->valueOfConst(KEY_USER)}
+                    .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+                    AND {$this->constants->valueOfConst(KEY_USER)}
+                    .{$this->constants->valueOfConst(FIELD_ACCOUNT_TYPE)} = ?"
                 );
                 $stmt->bind_param("ss", $userId, $newAccountType); // Bind parameters
 
@@ -791,7 +793,7 @@ class UserAccountFunctions
                     $switchTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime();
 
                     // Log signup event
-                    if ($this->sharedFunctions->createStoreUserLogs(
+                    if ($this->logsFunctions->createStoreUserLogs(
                         LOG_TYPE_SWITCH_ACCOUNT_TYPE,
                         $switchTime,
                         $userId

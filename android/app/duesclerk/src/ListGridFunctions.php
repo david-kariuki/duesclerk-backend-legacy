@@ -1,5 +1,18 @@
 <?php
 
+/**
+* List and grid functions class
+* This class contains all the list and grid functions required throught the project
+*
+* @author David Kariuki (dk)
+* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+*/
+
+// Namespace declaration
+namespace duesclerk\src;
+
+
+// Class declaration
 class ListGridFunctions{
 
     // Connection status value variable
@@ -9,10 +22,6 @@ class ListGridFunctions{
 
     // Constructor
     function __construct() {
-
-        // Call required functions classes
-        require_once 'Keys.php';
-        require_once 'Connection.php';
 
         // Create and initialize required classes objects
         $connection = new Connection();

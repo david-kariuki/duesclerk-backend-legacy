@@ -8,14 +8,13 @@
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
-
-$DOCUMENT_ROOT = realpath($_SERVER["DOCUMENT_ROOT"]);       // Document root path
-require_once($DOCUMENT_ROOT . '/andr/classes/Keys.php');    // Call Keys.php file
+// Namespace declaration
+namespace duesclerk\configs;
 
 // SMTP Email address usernames
 define("EMAIL_ADDRESS_INFO_USERNAME",       "info@"     . ROOT_DOMAIN);
 define("EMAIL_ADDRESS_SUPPORT_USERNAME",    "support@"  . ROOT_DOMAIN);
-define("EMAIL_ADDRESS_NO_REPLY_USERNAME",   "no-reply@"  . ROOT_DOMAIN);
+define("EMAIL_ADDRESS_NO_REPLY_USERNAME",   "no-reply@" . ROOT_DOMAIN);
 
 // SMTP Email address passwords
 define("EMAIL_ADDRESS_INFO_PASSWORD",       "Z+&Yb#c-rl+v!1m*tl");
@@ -36,5 +35,28 @@ define("ALLOW_SELF_SIGNED", true);
 
 // Auth
 define("SMTP_AUTH",         true);
+
+
+// Class declaration for autoloaer visibility
+class MailConfiguration
+{
+
+    /**
+    * Class destructor
+    */
+    function __construct()
+    {
+
+    }
+
+
+    /**
+    * Class destructor
+    */
+    function __destruct()
+    {
+
+    }
+}
 
 // EOF: MailConfiguration.php

@@ -9,23 +9,33 @@
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
+// Namespace declaration
+namespace duesclerk\src;
+
 // Enable error reporting
 error_reporting(1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
+// Call project classes
+use duesclerk\configs\Constants;
+
+
+// Class declaration
 class DateTimeFunctions
 {
+
+    private $constants; // Create Constants object
+
 
     /**
     * Class destructor
     */
     function __construct()
     {
-
-        // Call required functions classes
-        require_once 'Keys.php'; // Call keys file
+        // Initialize constants object
+        $this->constants = new Constants();
     }
 
 
@@ -49,14 +59,14 @@ class DateTimeFunctions
     {
 
         // Create date from format
-        $dateTime = DateTime::createFromFormat(
+        $dateTime = \DateTime::createFromFormat(
             FORMAT_DATE_TIME_FULL,      // Set date format
             $dateTimeStamp,             // Date time stamp
-            new DateTimeZone('UTC')     // Set time zone to UTC
+            new \DateTimeZone('UTC')     // Set time zone to UTC
         );
 
         // Set dateTimes' objects' time zone to local time zone
-        $dateTime->setTimeZone(new DateTimeZone($this->getLocalTimezone($countryAlpha2)));
+        $dateTime->setTimeZone(new \DateTimeZone($this->getLocalTimezone($countryAlpha2)));
 
         // Format and return date time object
         return $dateTime->format(FORMAT_DATE_TIME_FULL);

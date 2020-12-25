@@ -9,12 +9,14 @@
 */
 
 // Enable Error Reporting
-error_reporting(0);
+error_reporting(1);
 
-// Call Required Functions Classes
-require_once 'classes/UserAccountFunctions.php';
-require_once 'classes/Keys.php';
+// Call autoloader fie
+require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 
+// Call required functions classes
+use duesclerk\user\UserAccountFunctions;
+use duesclerk\configs\Constants;
 
 // Create Classes Objects
 $userAccountFunctions = new UserAccountFunctions();

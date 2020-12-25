@@ -4,9 +4,8 @@
 // Enable Error Reporting
 error_reporting(1);
 
-// Call Required Functions Classes
-require_once '../classes/ListGridFunctions.php';
-require_once '../classes/Keys.php';
+// Call autoloader fie
+require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 
 
 // Create Classes Objects

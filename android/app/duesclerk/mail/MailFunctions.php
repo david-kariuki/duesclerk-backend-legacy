@@ -8,19 +8,8 @@
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
-// Disable error reporting
-error_reporting(1);
-
-// Import PHPMailer classes into the global namespace
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-use PHPMailer\PHPMailer\SMTP;
-
-
-// Import PHPMailer classes
-require 'PHPMailer-6.1.8/src/PHPMailer.php';    // PHPMailer class
-require 'PHPMailer-6.1.8/src/Exception.php';    // PHPMailer exception class
-require 'PHPMailer-6.1.8/src/SMTP.php';         // PHPMailer SMTP class
+// Namespace declaration
+namespace duesclerk\mail;
 
 // Enable error reporting
 error_reporting(1);
@@ -28,6 +17,20 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
+// Call PHPMailer classes into the global namespace
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
+
+// Call project classes
+use duesclerk\database\DatabaseConnection;
+use duesclerk\configs\Constants;
+use duesclerk\configs\MailConfiguration;
+use duesclerk\configs\Paths;
+use duesclerk\src\DateTimeFunctions;
+
+
+// Class declaration
 class MailFunctions
 {
 
@@ -36,7 +39,8 @@ class MailFunctions
 
     // Create required class objects
     private $phpMailer;
-    private $keys;
+    private $constants;
+    private $mailConfiguration;
     private $dateTimeFunctions;
 
     // Shared variables
@@ -51,23 +55,18 @@ class MailFunctions
     function __construct()
     {
 
-        // Call required functions classes
-        require_once 'DatabaseConnection.php';          // Database connection file
-        require_once 'configs/MailConfiguration.php';   // Mail configuration file
-        require_once 'Keys.php';                        // Keys file
-        require_once 'DateTimeFunctions.php';           // DateTimeFunctions file
-        require_once 'Paths.php';                       // Paths file
-
         // Creating objects of the required Classes
 
         // Initialize database connection class instance
         $connectionInstance = DatabaseConnection::getConnectionInstance();
 
         // Initialize connection object
-        $this->connectToDB  = $connectionInstance->getDatabaseConnection();
+        $this->connectToDB          = $connectionInstance->getDatabaseConnection();
 
-        $this->keys         = new Keys(); // Keys class object
-        $this->dateTimeFunctions = new DateTimeFunctions(); // DateTimeFunctions class object
+        $this->constants            = new Constants();          // Constants class object
+        $this->mailConfiguration    = new MailConfiguration();  // MailConfigurations class object
+        $this->dateTimeFunctions    = new DateTimeFunctions();  // DateTimeFunctions class object
+        $this->paths                = new Paths();              // PathsFunctions class object
 
         // Create JSON response array and initialize error to false
         $this->response = array(KEY_ERROR => false);
@@ -80,8 +79,8 @@ class MailFunctions
             // Set mail SMTP options
             $this->phpMailer->SMTPOptions = array(
                 'ssl' => array(
-                    'verify_peer' => VERIFY_PEER,
-                    'verify_peer_name' => VERIFY_PEER_NAME,
+                    'verify_peer'       => VERIFY_PEER,
+                    'verify_peer_name'  => VERIFY_PEER_NAME,
                     'allow_self_signed' => ALLOW_SELF_SIGNED
                 )
             );
@@ -385,7 +384,7 @@ class MailFunctions
 
         // Attach file user_email_verification.png, and later link to it using identfier emailVerificationImg
         $this->phpMailer->AddEmbeddedImage(
-            PATH_IMAGE_ACCOUNT_EMAIL_VERIFICATION,
+            IMAGE_ACCOUNT_EMAIL_VERIFICATION,
             'emailVerificationImg',
             'account_email_verification.png'
         );
@@ -481,7 +480,7 @@ class MailFunctions
         // Attach file password_reset_email_verification.png, and later link to it using identfier
         // passwordResetEmailVerificationImg
         $this->phpMailer->AddEmbeddedImage(
-            PATH_IMAGE_PASSWORD_RESET_EMAIL_VERIFICATION,
+            IMAGE_PASSWORD_RESET_EMAIL_VERIFICATION,
             'passwordResetEmailVerificationImg',
             'password_reset_email_verification.png'
         );
@@ -598,7 +597,7 @@ class MailFunctions
         <h2> Hello <b>' . $firstName .'</b>,</h2>
         <h2> Your account password has been changed successfully. If this was you, then you can safely ignore this email.
         </h2>
-        <h2> <b>Didn\'t request a new password?</b><br>If you didn\'t change your account password, please let us know immediately by replying to this email.
+        <h2> <b>Did not request a new password?</b><br>If you did not change your account password, please let us know immediately by replying to this email.
         </h2>
         <br>
         <h2><b>P.S.</b> We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you '. 'have any questions.
@@ -619,7 +618,7 @@ class MailFunctions
         </html>';
 
         // This is the body in plain text for non-HTML mail users
-        $this->phpMailer->AltBody = 'Hello ' . $firstName .', Your account password has been changed successfully. If this was you, then you can safely ignore this email. If you didn\'t change your account password, please let us know immediately by replying to this email. P.S.
+        $this->phpMailer->AltBody = 'Hello ' . $firstName .', Your account password has been changed successfully. If this was you, then you can safely ignore this email. If you did not change your account password, please let us know immediately by replying to this email. P.S.
         We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
         Kind Regards, ' . COMPANY_NAME . ' Team';
 
@@ -661,10 +660,10 @@ class MailFunctions
 
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "UPDATE {$this->keys->valueOfConst(TABLE_USERS)}
-            SET {$this->keys->valueOfConst(FIELD_EMAIL_VERIFIED)} = ?
-            WHERE {$this->keys->valueOfConst(TABLE_USERS)}
-            .{$this->keys->valueOfConst(FIELD_USER_ID)}
+            "UPDATE {$this->constants->valueOfConst(TABLE_USERS)}
+            SET {$this->constants->valueOfConst(FIELD_EMAIL_VERIFIED)} = ?
+            WHERE {$this->constants->valueOfConst(TABLE_USERS)}
+            .{$this->constants->valueOfConst(FIELD_USER_ID)}
             = ?"
         );
 
@@ -679,12 +678,12 @@ class MailFunctions
             // Check if EmailVerified value is false
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "SELECT * FROM {$this->keys->valueOfConst(TABLE_USERS)}
-                AS {$this->keys->valueOfConst(KEY_USER)}
-                WHERE {$this->keys->valueOfConst(KEY_USER)}
-                .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
-                AND {$this->keys->valueOfConst(KEY_USER)}
-                .{$this->keys->valueOfConst(FIELD_EMAIL_VERIFIED)}
+                "SELECT * FROM {$this->constants->valueOfConst(TABLE_USERS)}
+                AS {$this->constants->valueOfConst(KEY_USER)}
+                WHERE {$this->constants->valueOfConst(KEY_USER)}
+                .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+                AND {$this->constants->valueOfConst(KEY_USER)}
+                .{$this->constants->valueOfConst(FIELD_EMAIL_VERIFIED)}
                 = ?"
             );
             $stmt->bind_param("ss", $userId, $emailVerified); // Bind parameters
@@ -738,12 +737,12 @@ class MailFunctions
     {
 
         // Select params with UserId only
-        $selectParams = ", {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-        .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?";
+        $selectParams = ", {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+        .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?";
 
         // Delete params with UserId only
-        $deleteParams = ", {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-        .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?";
+        $deleteParams = ", {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+        .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?";
 
         $bindParamTypes = ""; // Bind param values
         $bindParamValues = array(); // Bind param value array
@@ -753,12 +752,12 @@ class MailFunctions
         if (!empty($verificationType)) {
 
             // Select params with UserId and VerificationType
-            $selectParams .= ", {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-            .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
+            $selectParams .= ", {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+            .{$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
 
             // Delete params with UserId and VerificationType
-            $deleteParams .= ", {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-            .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
+            $deleteParams .= ", {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+            .{$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
 
             $bindParamValues[1] = $verificationType; // Add VerificationType to bind param array
 
@@ -767,13 +766,13 @@ class MailFunctions
         }
 
         // Select command
-        $selectCommand = "SELECT {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}.*
-        FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-        AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
+        $selectCommand = "SELECT {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}.*
+        FROM {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+        AS {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
         WHERE {$selectParams}";
 
         // Delete command
-        $deleteCommand = "DELETE FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+        $deleteCommand = "DELETE FROM {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
         WHERE {$deleteParams}";
 
         // Remove the comma after WHERE keyword
@@ -833,13 +832,13 @@ class MailFunctions
     public function checkForVerificationRequestRecord($userId, $verificationType){
 
         // Check if a previous verification record exists
-        $selectStatement = "SELECT {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}.*
-        FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-        AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-        WHERE {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-        .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
-        AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-        .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
+        $selectStatement = "SELECT {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}.*
+        FROM {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+        AS {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+        WHERE {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+        .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+        AND {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+        .{$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
 
         $stmt = $this->connectToDB->prepare($selectStatement); // Prepare statement
         $stmt->bind_param("ss", $userId, $verificationType); // Bind parameters
@@ -921,7 +920,7 @@ class MailFunctions
 
         // Insert Verification Details
         $stmt = $this->connectToDB->prepare(
-            "INSERT INTO {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+            "INSERT INTO {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
             (VerificationId, UserId, EmailAddress, VerificationCode, CodeRequestTime, VerificationType) VALUES(?, ?, ?, ?, ?, ?)"
         );
 
@@ -944,14 +943,14 @@ class MailFunctions
 
             // Get Email Verification Details
             $stmt = $this->connectToDB->prepare(
-                "SELECT * FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-                AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-                WHERE {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-                .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
-                AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-                .{$this->keys->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?
-                AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-                .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?"
+                "SELECT * FROM {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+                AS {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+                WHERE {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+                .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+                AND {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+                .{$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?
+                AND {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+                .{$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?"
             );
             $stmt->bind_param("sss", $userId, $emailAddress, $verificationType);
             $stmt->execute(); // Execute statement
@@ -983,14 +982,14 @@ class MailFunctions
     {
         // Get Email Verification Details
         $stmt = $this->connectToDB->prepare(
-            "SELECT * FROM {$this->keys->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-            AS {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-            WHERE {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-            .{$this->keys->valueOfConst(FIELD_USER_ID)} = ?
-            AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-            .{$this->keys->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?
-            AND {$this->keys->valueOfConst(KEY_EMAIL_VERIFICATION)}
-            .{$this->keys->valueOfConst(FIELD_VERIFICATION_CODE)} = ?"
+            "SELECT * FROM {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
+            AS {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+            WHERE {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+            AND {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+            .{$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?
+            AND {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
+            .{$this->constants->valueOfConst(FIELD_VERIFICATION_CODE)} = ?"
         );
         $stmt->bind_param("sss", $userId, $verificationType, $verificationCode);
         $stmt->execute(); // Execute statement

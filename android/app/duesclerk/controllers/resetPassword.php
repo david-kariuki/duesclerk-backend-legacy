@@ -13,16 +13,19 @@
 // Enable Error Reporting
 error_reporting(1);
 
-// Call Required Functions Classes
-require_once 'classes/UserAccountFunctions.php';  // User account functions php file
-require_once 'classes/MailFunctions.php';           // MailFunctions php file
-require_once 'classes/Keys.php';
+// Call autoloader fie
+require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
+
+// Call required functions classes
+use duesclerk\user\UserAccountFunctions;
+use duesclerk\mail\MailFunctions;
+use duesclerk\configs\Constants;
 
 // Create Classes Objects
-$userAccountFunctions = new UserAccountFunctions();
+$userAccountFunctions   = new UserAccountFunctions();
 $mailFunctions          = new MailFunctions();
 
-// Create Json Response Array And Initialize Error o FALSE
+// Create Json Response Array And Initialize Error to FALSE
 $response = array(KEY_ERROR => false);
 
 // Check for set POST params
