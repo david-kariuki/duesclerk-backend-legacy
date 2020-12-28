@@ -67,6 +67,7 @@ class UserAccountFunctions
     */
     function __destruct()
     {
+        
     }
 
 

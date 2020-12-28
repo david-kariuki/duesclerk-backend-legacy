@@ -21,7 +21,7 @@ use duesclerk\configs\Constants;
 // Create Classes Objects
 $userAccountFunctions = new UserAccountFunctions();
 
-// Create Json Response Array And Initialize Error To FALSE
+// Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
 
 // Check for set POST params
@@ -41,8 +41,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	if ($getUser !== false) {
 		// User found
 
-		// Add User Details To Response Array
-		$response[KEY_SIGN_IN][FIELD_USER_ID]       = $getUser[FIELD_USER_ID];
+		// Add user details to response array
+		$response[KEY_SIGN_IN][FIELD_USER_ID]         = $getUser[FIELD_USER_ID];
 		$response[KEY_SIGN_IN][FIELD_ACCOUNT_TYPE]    = $getUser[FIELD_ACCOUNT_TYPE];
 		$response[KEY_SIGN_IN][FIELD_EMAIL_ADDRESS]   = $getUser[FIELD_EMAIL_ADDRESS];
 
@@ -52,7 +52,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	} else {
 		// User Not Found
 
-		// Check For Wrong Password (Credentials Mismatch)
+		// Check for email address in database
 		if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
 			// User with the emailAddress exists in the database
 
@@ -85,4 +85,4 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	echo json_encode($response);
 }
 
-// EOF: SignInUser.php
+// EOF: signInUser.php

@@ -23,7 +23,7 @@ use duesclerk\configs\Constants;
 // Create classes objects
 $userAccountFunctions = new UserAccountFunctions();
 
-// Create Json response array and initialize error to false
+// Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
 
 // Update details associative array
@@ -33,7 +33,8 @@ $switchAccountDetails  = array(FIELD_ACCOUNT_TYPE => "");
 if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
 && isset($_POST[FIELD_NEW_ACCOUNT_TYPE])
 && ((isset($_POST[FIELD_FIRST_NAME]) && isset($_POST[FIELD_LAST_NAME]))
-|| (isset($_POST[FIELD_BUSINESS_NAME])))) {
+|| (isset($_POST[FIELD_BUSINESS_NAME])))
+) {
 
     // Get Values From POST
     $userId         = $_POST[FIELD_USER_ID]     ? $_POST[FIELD_USER_ID]     : '';
@@ -127,4 +128,4 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
     echo json_encode($response);
 }
 
-// EOF: SwitchAccountType.php
+// EOF: switchAccountType.php

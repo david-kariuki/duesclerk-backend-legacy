@@ -26,7 +26,7 @@ $userAccountFunctions   = new UserAccountFunctions();
 $dateTimeFunctions      = new DateTimeFunctions();
 $mailFunctions          = new MailFunctions();
 
-// Create Json Response Array And Initialize Error To FALSE
+// Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
 
 // Check for set POST params
@@ -34,12 +34,12 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 && (isset($_POST[FIELD_USER_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS]))) {
 
     // Get Values From POST
-    $userId       = ""; // User id
-    $emailAddress   = ""; // Users email address
-    $user         = array(); // User details array
+    $userId         = "";       // User id
+    $emailAddress   = "";       // Users email address
+    $user           = array();  // User details array
 
     // Get verification code from POST params
-    $verificationType   = $_POST[FIELD_VERIFICATION_TYPE]   ? $_POST[FIELD_VERIFICATION_TYPE] : '';
+    $verificationType = $_POST[FIELD_VERIFICATION_TYPE]   ? $_POST[FIELD_VERIFICATION_TYPE] : '';
 
     // Check verification code type
     if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
@@ -52,7 +52,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
             $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
 
             // Get user details
-            $user = $userAccountFunctions->getUserByUserId($userId);
+            $user   = $userAccountFunctions->getUserByUserId($userId);
         }
 
     } else if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
@@ -69,7 +69,6 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
         }
     }
 
-
     // Check for user details
     if ($user !== false) {
         // User details fetched
@@ -77,7 +76,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
         // Check for email address
         if (empty($emailAddress)) {
 
-            $emailAddress   = $user[FIELD_EMAIL_ADDRESS]; // Get email address from array
+            $emailAddress = $user[FIELD_EMAIL_ADDRESS]; // Get email address from array
         }
 
         // Check for user id
@@ -105,7 +104,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
         if ((!empty($emailAddress)) && (!empty($name))) {
             // Email address and first name not empty
 
-            $verificationCode   = ""; // Verification code
+            $verificationCode = ""; // Verification code
 
             // Check if user had requested for email account verification code earlier
             $checkForOldCode = $mailFunctions->checkForVerificationRequestRecord(
@@ -242,4 +241,4 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
     echo json_encode($response);
 }
 
-// EOF: SendEmailVerificationCode.php
+// EOF: sendEmailVerificationCode.php

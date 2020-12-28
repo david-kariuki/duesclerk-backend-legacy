@@ -23,7 +23,7 @@ use duesclerk\configs\Constants;
 // Create classes objects
 $userAccountFunctions = new UserAccountFunctions();
 
-// Create Json response array and initialize error to false
+// Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
 
 // Required fields
@@ -191,4 +191,4 @@ if (
     echo json_encode($response);
 }
 
-// EOF: UpdateUserProfile.php
+// EOF: updateUserProfile.php

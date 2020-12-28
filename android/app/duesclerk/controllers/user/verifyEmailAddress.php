@@ -22,12 +22,12 @@ use duesclerk\src\DateTimeFunctions;
 use duesclerk\mail\MailFunctions;
 use duesclerk\configs\Constants;
 
-// Create Classes Objects
+// Create classes objects
 $userAccountFunctions = new UserAccountFunctions();
 $dateTimeFunctions      = new DateTimeFunctions();
 $mailFunctions          = new MailFunctions();
 
-// Create Json Response Array And Initialize Error o FALSE
+// Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
 
 // Associative array to update email verification status
@@ -38,10 +38,10 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 || isset($_POST[FIELD_USER_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS])) {
 
     // Get values from POST params
-    $userId           = "";
+    $userId             = "";
     $verificationType   = $_POST[FIELD_VERIFICATION_TYPE]   ? $_POST[FIELD_VERIFICATION_TYPE] : '';
     $verificationCode   = $_POST[FIELD_VERIFICATION_CODE]   ? $_POST[FIELD_VERIFICATION_CODE] : '';
-    $user             = array(); // User details array
+    $user               = array(); // User details array
     $check              = array(); // Array to store verification request record response
 
     // Check verification code type
@@ -149,7 +149,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
         $verificationType,
         $verificationCode
     )) {
-        // Verification code matched UserId
+        // Verification code matched user id
 
         // Check verification code type
         if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
@@ -242,4 +242,4 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
     echo json_encode($response);
 }
 
-// EOF: VerifyEmailAddress.php
+// EOF: verifyEmailAddress.php

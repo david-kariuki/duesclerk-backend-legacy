@@ -21,7 +21,7 @@ use duesclerk\configs\Constants;
 // Create Classes Objects
 $userAccountFunctions = new UserAccountFunctions();
 
-// Create Json response array and initialize error to FALSE
+// Create JSON response array and initialize error to false
 $response       = array(KEY_ERROR => false);
 $signUpDetails  = array(
 
@@ -81,15 +81,15 @@ if (
 
 
     /**
-    * Check Email Address Validity
-    * Check The Maximum Allowed Length Of The Email Address
+    * Check email address validity
+    * Check the maximum allowed length of the email address
     * Total length in RFC_3696 is 320 characters
     * The local part of the email address—your username—must not exceed 64 characters.
     * The domain name is limited to 255 characters.
     */
     if ((!filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
     || (strlen($emailAddress) > LENGTH_MAX_EMAIL_ADDRESS)) {
-        // Invalid Email
+        // Invalid email
 
         // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
@@ -101,7 +101,7 @@ if (
 
 
     } else if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
-        // Email Address Exists
+        // Email address exists
 
         // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
@@ -111,9 +111,9 @@ if (
         // Encode and echo Json response
         echo json_encode($response);
 
-        // Check Password Length
+        // Check password length
     } else if (strlen($password) < LENGTH_MIN_PASSWORD) {
-        // Password too hhort
+        // Password too short
 
         // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
@@ -169,7 +169,7 @@ if (
                 // Last name too Short
 
                 // Set response error to true and add error message
-                $response[KEY_ERROR]         = true;
+                $response[KEY_ERROR]          = true;
                 $response[KEY_SIGN_UP]        = FIELD_LAST_NAME;
                 $response[KEY_ERROR_MESSAGE]  = 'The last name you entered is too short!';
 
@@ -185,7 +185,6 @@ if (
                 $signUpDetails[FIELD_FIRST_NAME]    = $firstName;
                 $signUpDetails[FIELD_LAST_NAME]     = $lastName;
             }
-
         } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
             // Business account
 
@@ -208,11 +207,11 @@ if (
         // Signup user
         $signupUser = $userAccountFunctions->signUpUser($signUpDetails);
 
-        // Check If User Was Signed Up
+        // Check if user was signed up
         if ($signupUser) {
-            // User Signed Up
+            // User signed up
 
-            // Add User Details Json Response Array
+            // Add user details Json response array
             $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
 
             // Check account type
@@ -235,7 +234,7 @@ if (
             echo json_encode($response);
 
         } else {
-            // Signup Failed
+            // Signup failed
 
             // Set response error to true and add error message
             $response[KEY_ERROR]            = true;
@@ -256,4 +255,4 @@ if (
     echo json_encode($response);
 }
 
-// EOF: SignUpUser.php
+// EOF: signUpUser.php

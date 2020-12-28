@@ -10,7 +10,7 @@
 */
 
 
-// Enable Error Reporting
+// Enable error reporting
 error_reporting(1);
 
 // Call autoloader fie
@@ -21,11 +21,11 @@ use duesclerk\user\UserAccountFunctions;
 use duesclerk\mail\MailFunctions;
 use duesclerk\configs\Constants;
 
-// Create Classes Objects
+// Create classes objects
 $userAccountFunctions   = new UserAccountFunctions();
 $mailFunctions          = new MailFunctions();
 
-// Create Json Response Array And Initialize Error to FALSE
+// Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
 
 // Check for set POST params
@@ -46,9 +46,9 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
         // User details fetched
 
         // Get first name and email address for mail notification
-        $userId       = $user[FIELD_USER_ID]; // Get UserId from array
-        $firstName      = $user[FIELD_FIRST_NAME]; // Get FirstName from array
-        $emailAddress   = $user[FIELD_EMAIL_ADDRESS]; // Get EmailAddress from array
+        $userId       = $user[FIELD_USER_ID];           // Get user id from array
+        $firstName      = $user[FIELD_FIRST_NAME];      // Get first name from array
+        $emailAddress   = $user[FIELD_EMAIL_ADDRESS];   // Get email address from array
 
         // Update password
         $update = $userAccountFunctions->updateUserPassword(
@@ -107,4 +107,4 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
     echo json_encode($response);
 }
 
-// EOF: ResetPassword.php
+// EOF: resetPassword.php
