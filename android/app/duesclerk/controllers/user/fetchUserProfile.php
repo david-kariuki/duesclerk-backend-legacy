@@ -8,8 +8,8 @@
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
-// Enable error reporting
-error_reporting(1);
+
+error_reporting(1); // Enable error reporting
 
 // Call autoloader fie
 require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
@@ -73,7 +73,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         $response[KEY_USER][FIELD_EMAIL_VERIFIED]       = $user[FIELD_EMAIL_VERIFIED];
         $response[KEY_USER][FIELD_SIGN_UP_DATE_TIME]    = $user[FIELD_SIGN_UP_DATE_TIME];
 
-        // Encode and echo json response
+        // Echo encoded Json response
         echo json_encode($response);
 
     } else {
@@ -83,7 +83,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "Please sign in to continue!";
 
-        // Encode and echo json response
+        // Echo encoded Json response
         echo json_encode($response);
     }
 
@@ -94,7 +94,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
     $response[KEY_ERROR]			= true;
     $response[KEY_ERROR_MESSAGE] 	= "Something went terribly wrong!";
 
-    // Encode and echo Json response
+    // Echo encoded Json response
     echo json_encode($response);
 }
 

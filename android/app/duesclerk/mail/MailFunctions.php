@@ -111,7 +111,7 @@ class MailFunctions
             $this->phpMailer->Host      = MAIL_HOST;
             $this->phpMailer->SMTPAuth  = SMTP_AUTH; // Enable SMTP authentication
 
-            // Enable TLS encryption, `ssl` also accepted
+            // Enable TLS encryption, ssl also accepted
             $this->phpMailer->SMTPSecure = "tls";
 
             // TCP port to connect to. the port for TLS is 587, for SSL is 465 and non-secure
@@ -915,24 +915,32 @@ class MailFunctions
         );
 
         // Get current date and time
-        $currentNumericalTimeStamp 	=
+        $verificationCodeRequestTime 	=
         $this->dateTimeFunctions->getDefaultTimeZoneNumericalDateTime();
 
-        // Insert Verification Details
+        // Insert Verification details
         $stmt = $this->connectToDB->prepare(
             "INSERT INTO {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
-            (VerificationId, UserId, EmailAddress, VerificationCode, CodeRequestTime, VerificationType) VALUES(?, ?, ?, ?, ?, ?)"
+            (
+                {$this->constants->valueOfConst(FIELD_VERIFICATION_ID)},
+                {$this->constants->valueOfConst(FIELD_VERIFICATION_CODE)},
+                {$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)},
+                {$this->constants->valueOfConst(FIELD_VERIFICATION_CODE_REQUEST_TIME)},
+                {$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)},
+                {$this->constants->valueOfConst(FIELD_USER_ID)}
+            )
+            VALUES(?, ?, ?, ?, ?, ?)"
         );
 
         // Bind paramaters
         $stmt->bind_param(
             "ssssss",
             $verificationId,
-            $userId,
-            $emailAddress,
             $verificationCode,
-            $currentNumericalTimeStamp,
-            $verificationType
+            $verificationType,
+            $verificationCodeRequestTime,
+            $emailAddress,
+            $userId
         );
 
         $result = $stmt->execute(); // Execute statement
@@ -941,7 +949,7 @@ class MailFunctions
         // Check for query execution
         if ($result){
 
-            // Get Email Verification Details
+            // Get Email Verification details
             $stmt = $this->connectToDB->prepare(
                 "SELECT * FROM {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
                 AS {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
@@ -980,7 +988,7 @@ class MailFunctions
     */
     public function verifyEmaiVerificationCode($userId, $verificationType, $verificationCode)
     {
-        // Get Email Verification Details
+        // Get Email Verification details
         $stmt = $this->connectToDB->prepare(
             "SELECT * FROM {$this->constants->valueOfConst(TABLE_EMAIL_VERIFICATION)}
             AS {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}

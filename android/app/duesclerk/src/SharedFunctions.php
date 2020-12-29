@@ -66,23 +66,24 @@ class SharedFunctions
     /**
     * Function to generate UserId
     *
-    * @param uniqueIdKey    - key to be concatenated to uniqueId
-    * @param tableName      - table name to check for existing uniqueId
-    * @param idFieldName    - table field name to check of existing uniqueId
+    * @param uniqueIdKey    - Key to be concatenated to uniqueId
+    * @param tableName      - Table name to check for existing uniqueId
+    * @param idFieldName    - Table field name to check of existing uniqueId
+    * @param uniqueIdLength - Unique id length - (Short / Long id)
     *
     * @return string uniqueId
     */
-    public function generateUniqueId($uniqueIdKey, $tableName, $idFieldName)
+    public function generateUniqueId($uniqueIdKey, $tableName, $idFieldName, $uniqueIdLength)
     {
 
         // Loop infinitely
         while (1 == 1) {
 
-            // Create userId
+            // Create unique id
             $uniqueId = substr(
                 $uniqueIdKey . md5(mt_rand()),
                 0,
-                LENGTH_TABLE_IDS
+                $uniqueIdLength
             );
 
             // Check if unique id is in associate table

@@ -2,7 +2,7 @@
 
 /**
 * User account functions class
-* This class contains all the functions required to process a users account
+* This class contains all the functions required to manage user accounts
 *
 * @author David Kariuki (dk)
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
@@ -67,12 +67,12 @@ class UserAccountFunctions
     */
     function __destruct()
     {
-        
+
     }
 
 
     /**
-    * Check if email address is in users table.
+    * Function to check if email address is in users table.
     *
     * @param emailAddress   - Users email address
     *
@@ -263,7 +263,7 @@ class UserAccountFunctions
     public function getUserByEmailAddress($emailAddress)
     {
 
-        // Check for email in Table Users
+        // Check for email in users table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
@@ -335,7 +335,8 @@ class UserAccountFunctions
         $userId = $this->sharedFunctions->generateUniqueId(
             strtolower(KEY_USER),
             TABLE_USERS,
-            FIELD_USER_ID
+            FIELD_USER_ID,
+            LENGTH_TABLE_IDS_SHORT
         );
 
         // Hash password
@@ -357,7 +358,18 @@ class UserAccountFunctions
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->constants->valueOfConst(TABLE_USERS)}(`UserId`, `FirstName`, `LastName`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `AccountType`, `SignUpDateTime`)
+                "INSERT INTO {$this->constants->valueOfConst(TABLE_USERS)}
+                (
+                    {$this->constants->valueOfConst(FIELD_USER_ID)},
+                    {$this->constants->valueOfConst(FIELD_FIRST_NAME)},
+                    {$this->constants->valueOfConst(FIELD_LAST_NAME)},
+                    {$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)},
+                    {$this->constants->valueOfConst(FIELD_COUNTRY_CODE)},
+                    {$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)},
+                    {$this->constants->valueOfConst(FIELD_HASH)},
+                    {$this->constants->valueOfConst(FIELD_ACCOUNT_TYPE)},
+                    {$this->constants->valueOfConst(FIELD_SIGN_UP_DATE_TIME)}
+                )
                 VALUES( ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
 
@@ -375,7 +387,17 @@ class UserAccountFunctions
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->constants->valueOfConst(TABLE_USERS)}(`UserId`, `EmailAddress`, `CountryCode`, `CountryAlpha2`, `Hash`, `BusinessName`, `AccountType`, `SignUpDateTime`)
+                "INSERT INTO {$this->constants->valueOfConst(TABLE_USERS)}
+                (
+                    {$this->constants->valueOfConst(FIELD_USER_ID)},
+                    {$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)},
+                    {$this->constants->valueOfConst(FIELD_COUNTRY_CODE)},
+                    {$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)},
+                    {$this->constants->valueOfConst(FIELD_HASH)},
+                    {$this->constants->valueOfConst(FIELD_BUSINESS_NAME)},
+                    {$this->constants->valueOfConst(FIELD_ACCOUNT_TYPE)},
+                    {$this->constants->valueOfConst(FIELD_SIGN_UP_DATE_TIME)}
+                )
                 VALUES( ?, ?, ?, ?, ?, ?, ?, ? )"
             );
 
@@ -402,24 +424,8 @@ class UserAccountFunctions
             ) {
                 // Loging successful
 
-                // Get stored values
-                // Prepare statement
-                $stmt = $this->connectToDB->prepare(
-                    "SELECT * FROM {$this->constants->valueOfConst(TABLE_USERS)}
-                    AS {$this->constants->valueOfConst(KEY_USER)}
-                    WHERE {$this->constants->valueOfConst(KEY_USER)}
-                    .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
-                    AND {$this->constants->valueOfConst(KEY_USER)}
-                    .{$this->constants->valueOfConst(FIELD_EMAIL_ADDRESS)} = ?"
-                );
-
-                $stmt->bind_param("ss", $userId, $emailAddress); // Bind parameters
-                $stmt->execute(); // Execute statement
-                $user = $stmt->get_result()->fetch_assoc(); // Get result array
-                $stmt->close(); // Close statement
-
                 // Return user details
-                return $user;
+                return $this->getUserByUserId($userId);
 
             } else {
                 // Logging failed
@@ -440,7 +446,7 @@ class UserAccountFunctions
     *
     * @param userId         - users Id
     * @param accountType    - users account type
-    * @param updateDetails  - array with associative array of fields key value pair to be updated
+    * @param updateDetails  - associative array of user fields key value pair to be updated
     *
     * @return boolean       - true/false (on revokation success / revokation failure)
     * @return boolean       - true/false (on email sent / email not sent)

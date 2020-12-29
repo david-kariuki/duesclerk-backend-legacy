@@ -83,12 +83,20 @@ class LogsFunctions
         $userLogId = $this->sharedFunctions->generateUniqueId(
             "eventLog",
             TABLE_USER_LOGS,
-            "UserLogId"
+            "UserLogId",
+            LENGTH_TABLE_IDS_LONG
         );
 
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
-            "INSERT INTO {$this->constants->valueOfConst(TABLE_USER_LOGS)}(`UserLogId`, `UserLogType`, `UserLogTime`, `UserId`) VALUES( ?, ?, ?, ?)"
+            "INSERT INTO {$this->constants->valueOfConst(TABLE_USER_LOGS)}
+            (
+                {$this->constants->valueOfConst(FIELD_USER_LOG_ID)},
+                {$this->constants->valueOfConst(FIELD_USER_LOG_TYPE)},
+                {$this->constants->valueOfConst(FIELD_USER_LOG_TIME)},
+                {$this->constants->valueOfConst(FIELD_USER_ID)}
+            )
+            VALUES( ?, ?, ?, ?)"
         );
 
         // Bind parameters

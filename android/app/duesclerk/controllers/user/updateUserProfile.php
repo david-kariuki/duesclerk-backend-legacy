@@ -10,8 +10,7 @@
 */
 
 
-// Enable Error Reporting
-error_reporting(1);
+error_reporting(1); // Enable Error Reporting
 
 // Call autoloader fie
 require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
@@ -72,7 +71,7 @@ if (
             $response[KEY_ERROR]         = true;
             $response[KEY_ERROR_MESSAGE] = "Please choose a different password other than the current one!";
 
-            // Encode and echo Json response
+            // Echo encoded Json response
             echo json_encode($response);
 
         } else {
@@ -166,7 +165,7 @@ if (
         // Set success message
         $response[KEY_UPDATE_PROFILE][KEY_SUCCESS_MESSAGE] = "Update successful!";
 
-        // Encode and echo Json response
+        // Echo encoded Json response
         echo json_encode($response);
 
     } else {
@@ -176,7 +175,7 @@ if (
         $response[KEY_ERROR]			= true;
         $response[KEY_ERROR_MESSAGE]    = "Update failed!";
 
-        // Encode and echo Json response
+        // Echo encoded Json response
         echo json_encode($response);
     }
 
@@ -187,7 +186,7 @@ if (
     $response[KEY_ERROR]			= true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Encode and echo Json response
+    // Echo encoded Json response
     echo json_encode($response);
 }
 

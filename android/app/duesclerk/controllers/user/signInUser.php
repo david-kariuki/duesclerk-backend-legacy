@@ -8,8 +8,8 @@
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
-// Enable Error Reporting
-error_reporting(1);
+
+error_reporting(1); // Enable Error Reporting
 
 // Call autoloader fie
 require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
@@ -46,7 +46,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 		$response[KEY_SIGN_IN][FIELD_ACCOUNT_TYPE]    = $getUser[FIELD_ACCOUNT_TYPE];
 		$response[KEY_SIGN_IN][FIELD_EMAIL_ADDRESS]   = $getUser[FIELD_EMAIL_ADDRESS];
 
-		// Encode and echo Json response
+		// Echo encoded Json response
 		echo json_encode($response);
 
 	} else {
@@ -60,7 +60,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 			$response[KEY_ERROR]         = true;
 			$response[KEY_ERROR_MESSAGE] = "Incorrect email address or password!";
 
-			// Encode and echo Json response
+			// Echo encoded Json response
 			echo json_encode($response);
 
 		} else {
@@ -70,7 +70,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 			$response[KEY_ERROR]         = true;
 			$response[KEY_ERROR_MESSAGE] = "We didn't find an account with that emailAddress!";
 
-			// Encode and echo Json response
+			// Echo encoded Json response
 			echo json_encode($response);
 		}
 	}
@@ -81,7 +81,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	$response[KEY_ERROR]           = true;
 	$response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
 
-	// Encode and echo Json response
+	// Echo encoded Json response
 	echo json_encode($response);
 }
 

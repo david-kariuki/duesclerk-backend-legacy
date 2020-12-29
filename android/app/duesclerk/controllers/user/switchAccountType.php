@@ -10,8 +10,7 @@
 */
 
 
-// Enable Error Reporting
-error_reporting(1);
+error_reporting(1); // Enable Error Reporting
 
 // Call autoloader fie
 require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
@@ -93,7 +92,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
                 // Set error to true
                 $response[KEY_SUCCESS_MESSAGE] = "Account switching successful!";
 
-                // Encode and echo Json response
+                // Echo encoded Json response
                 echo json_encode($response);
 
             } else {
@@ -103,7 +102,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
                 $response[KEY_ERROR]			= true;
                 $response[KEY_ERROR_MESSAGE]    = "Account switching failed!!";
 
-                // Encode and echo Json response
+                // Echo encoded Json response
                 echo json_encode($response);
             }
         } else {
@@ -113,7 +112,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
             $response[KEY_ERROR]			= true;
             $response[KEY_ERROR_MESSAGE]    = "Incorrect password!";
 
-            // Encode and echo Json response
+            // Echo encoded Json response
             echo json_encode($response);
         }
     }
@@ -124,7 +123,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
     $response[KEY_ERROR]			= true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Encode and echo Json response
+    // Echo encoded Json response
     echo json_encode($response);
 }
 

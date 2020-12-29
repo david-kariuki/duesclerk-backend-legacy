@@ -10,8 +10,7 @@
 */
 
 
-// Enable Error Reporting
-error_reporting(1);
+error_reporting(1); // Enable Error Reporting
 
 // Call autoloader fie
 require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
@@ -89,7 +88,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
         $numericalTimeStamp = $dateTimeFunctions->getDefaultTimeZoneNumericalDateTime();
 
         // Get old code request time from email verification table
-        $requestTime = $check[FIELD_CODE_REQUEST_TIME];
+        $requestTime = $check[FIELD_VERIFICATION_CODE_REQUEST_TIME];
 
         // Check if request time is empty
         if (!empty($requestTime)) {
@@ -116,7 +115,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Old verification code deletion failed!";
 
-                    // Encode and echo Json response
+                    // Echo encoded Json response
                     echo json_encode($response);
 
                 } else {
@@ -126,7 +125,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Expired code. Click resend to get a new one!";
 
-                    // Encode and echo Json response
+                    // Echo encoded Json response
                     echo json_encode($response);
                 }
             }
@@ -138,7 +137,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "You have not requested an email verification!";
 
-        // Encode and echo json response
+        // Echo encoded Json response
         echo json_encode($response);
     }
 
@@ -158,7 +157,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
             // Set success message
             $response[KEY_EMAIL_VERIFICATION][KEY_SUCCESS_MESSAGE] = "Email address verified!";
 
-            // Encode and echo json response
+            // Echo encoded Json response
             echo json_encode($response);
 
         } else if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
@@ -197,7 +196,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                         // Set success message
                         $response[KEY_EMAIL_VERIFICATION][KEY_SUCCESS_MESSAGE]  = "Your email address has been verified!";
 
-                        // Encode and echo json response
+                        // Echo encoded Json response
                         echo json_encode($response);
                     }
                 } else {
@@ -207,7 +206,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Email address verification failed!";
 
-                    // Encode and echo json response
+                    // Echo encoded Json response
                     echo json_encode($response);
                 }
             } else {
@@ -217,7 +216,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                 $response[KEY_ERROR]            = true;
                 $response[KEY_ERROR_MESSAGE]    = "Email verification details not deleted!";
 
-                // Encode and echo json response
+                // Echo encoded Json response
                 echo json_encode($response);
             }
         }
@@ -228,7 +227,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "Your verification code does not exist or has already been used!";
 
-        // Encode and echo json response
+        // Echo encoded Json response
         echo json_encode($response);
     }
 } else {
@@ -238,7 +237,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Encode and echo json response
+    // Echo encoded Json response
     echo json_encode($response);
 }
 
