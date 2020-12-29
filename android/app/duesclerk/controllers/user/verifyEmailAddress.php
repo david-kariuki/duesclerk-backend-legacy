@@ -19,10 +19,9 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 use duesclerk\user\UserAccountFunctions;
 use duesclerk\src\DateTimeFunctions;
 use duesclerk\mail\MailFunctions;
-use duesclerk\configs\Constants;
 
 // Create classes objects
-$userAccountFunctions = new UserAccountFunctions();
+$userAccountFunctions   = new UserAccountFunctions();
 $dateTimeFunctions      = new DateTimeFunctions();
 $mailFunctions          = new MailFunctions();
 

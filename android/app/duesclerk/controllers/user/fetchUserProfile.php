@@ -16,8 +16,6 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\user\UserAccountFunctions;
-use duesclerk\configs\Constants;
-
 
 // Create classes objects
 $userAccountFunctions = new UserAccountFunctions();
