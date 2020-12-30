@@ -3,7 +3,7 @@
 /**
 * User account functions class
 * This class contains all the functions required to manage user accounts
-*
+* 
 * @author David Kariuki (dk)
 * @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
