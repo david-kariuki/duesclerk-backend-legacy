@@ -2,9 +2,9 @@
 
     "autoload": {
         "psr-4": {
-            "duesclerk\\": "app/duesclerk"
+            "duesclerk\\": "application/duesclerk"
         },
-        "exclude-from-classmap": ["/Tests/", "/test/", "/tests/"]
+        "exclude-from-classmap": ["/Tests/", "/test/", "/tests/", ".test"]
     },
     "require": {
         "phpmailer/phpmailer": "^6.2",
