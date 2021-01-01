@@ -6,7 +6,7 @@
 * This file updates users profile, password and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -70,7 +70,7 @@ if (
             $response[KEY_ERROR]         = true;
             $response[KEY_ERROR_MESSAGE] = "Please choose a different password other than the current one!";
 
-            // Echo encoded Json response
+            // Echo encoded JSON response
             echo json_encode($response);
 
         } else {
@@ -164,7 +164,7 @@ if (
         // Set success message
         $response[KEY_UPDATE_PROFILE][KEY_SUCCESS_MESSAGE] = "Update successful!";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
 
     } else {
@@ -174,7 +174,7 @@ if (
         $response[KEY_ERROR]			= true;
         $response[KEY_ERROR_MESSAGE]    = "Update failed!";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
     }
 
@@ -185,7 +185,7 @@ if (
     $response[KEY_ERROR]			= true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Echo encoded Json response
+    // Echo encoded JSON response
     echo json_encode($response);
 }
 

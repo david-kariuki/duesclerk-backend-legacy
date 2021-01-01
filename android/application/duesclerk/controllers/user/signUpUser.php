@@ -5,7 +5,7 @@
 * This file Signs Up users / creates users accounts and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -95,7 +95,7 @@ if (
         $response[KEY_SIGN_UP]          = FIELD_EMAIL_ADDRESS;
         $response[KEY_ERROR_MESSAGE]    = "The email address you entered is invalid!";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
 
 
@@ -107,7 +107,7 @@ if (
         $response[KEY_SIGN_UP]          = FIELD_EMAIL_ADDRESS;
         $response[KEY_ERROR_MESSAGE]    = "An account with that email address already exists!";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
 
         // Check password length
@@ -119,7 +119,7 @@ if (
         $response[KEY_SIGN_UP]          = FIELD_PASSWORD;
         $response[KEY_ERROR_MESSAGE]    = 'Passwords should be 8 characters or longer!';
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
 
     } else {
@@ -136,7 +136,7 @@ if (
                 $response[KEY_ERROR_MESSAGE]    = 'The first name you entered does not appear to
                 be valid!';
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
 
                 // Check if last name is alphabetical
@@ -148,7 +148,7 @@ if (
                 $response[KEY_ERROR_MESSAGE]    = 'The last name you entered does not appear to
                 be valid!';
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
 
                 // Check first name Length
@@ -160,7 +160,7 @@ if (
                 $response[KEY_SIGN_UP]          = FIELD_FIRST_NAME;
                 $response[KEY_ERROR_MESSAGE]    = 'The first name you entered is too short!';
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
 
                 // Check last name length
@@ -172,7 +172,7 @@ if (
                 $response[KEY_SIGN_UP]        = FIELD_LAST_NAME;
                 $response[KEY_ERROR_MESSAGE]  = 'The last name you entered is too short!';
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
 
             }
@@ -210,7 +210,7 @@ if (
         if ($signupUser) {
             // User signed up
 
-            // Add user details Json response array
+            // Add user details JSON response array
             $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
 
             // Check account type
@@ -229,7 +229,7 @@ if (
             $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupUser[FIELD_EMAIL_ADDRESS];
             $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupUser[FIELD_ACCOUNT_TYPE];
 
-            // Echo encoded Json response
+            // Echo encoded JSON response
             echo json_encode($response);
 
         } else {
@@ -239,7 +239,7 @@ if (
             $response[KEY_ERROR]            = true;
             $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-            // Echo encoded Json response
+            // Echo encoded JSON response
             echo json_encode($response);
         }
     }
@@ -250,7 +250,7 @@ if (
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Echo encoded Json response
+    // Echo encoded JSON response
     echo json_encode($response);
 }
 

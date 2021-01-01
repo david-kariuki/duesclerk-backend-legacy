@@ -5,7 +5,7 @@
 * This file Signs In / logs in users and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -45,7 +45,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 		$response[KEY_SIGN_IN][FIELD_ACCOUNT_TYPE]    = $getUser[FIELD_ACCOUNT_TYPE];
 		$response[KEY_SIGN_IN][FIELD_EMAIL_ADDRESS]   = $getUser[FIELD_EMAIL_ADDRESS];
 
-		// Echo encoded Json response
+		// Echo encoded JSON response
 		echo json_encode($response);
 
 	} else {
@@ -59,7 +59,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 			$response[KEY_ERROR]         = true;
 			$response[KEY_ERROR_MESSAGE] = "Incorrect email address or password!";
 
-			// Echo encoded Json response
+			// Echo encoded JSON response
 			echo json_encode($response);
 
 		} else {
@@ -69,7 +69,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 			$response[KEY_ERROR]         = true;
 			$response[KEY_ERROR_MESSAGE] = "We didn't find an account with that emailAddress!";
 
-			// Echo encoded Json response
+			// Echo encoded JSON response
 			echo json_encode($response);
 		}
 	}
@@ -80,7 +80,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	$response[KEY_ERROR]           = true;
 	$response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
 
-	// Echo encoded Json response
+	// Echo encoded JSON response
 	echo json_encode($response);
 }
 

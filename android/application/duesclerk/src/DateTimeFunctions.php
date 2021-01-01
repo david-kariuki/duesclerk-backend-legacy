@@ -6,7 +6,7 @@
 * and date processing
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
 // Namespace declaration
@@ -34,8 +34,7 @@ class DateTimeFunctions
     */
     function __construct()
     {
-        // Initialize constants object
-        $this->constants = new Constants();
+        $this->constants = new Constants(); // Initialize constants object
     }
 
 
@@ -62,7 +61,7 @@ class DateTimeFunctions
         $dateTime = \DateTime::createFromFormat(
             FORMAT_DATE_TIME_FULL,      // Set date format
             $dateTimeStamp,             // Date time stamp
-            new \DateTimeZone('UTC')     // Set time zone to UTC
+            new \DateTimeZone('UTC')    // Set time zone to UTC
         );
 
         // Set dateTimes' objects' time zone to local time zone

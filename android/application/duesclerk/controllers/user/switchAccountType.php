@@ -6,7 +6,7 @@
 * This file updates users profile, password and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -91,7 +91,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
                 // Set error to true
                 $response[KEY_SUCCESS_MESSAGE] = "Account switching successful!";
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
 
             } else {
@@ -101,7 +101,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
                 $response[KEY_ERROR]			= true;
                 $response[KEY_ERROR_MESSAGE]    = "Account switching failed!!";
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
             }
         } else {
@@ -111,7 +111,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
             $response[KEY_ERROR]			= true;
             $response[KEY_ERROR_MESSAGE]    = "Incorrect password!";
 
-            // Echo encoded Json response
+            // Echo encoded JSON response
             echo json_encode($response);
         }
     }
@@ -122,7 +122,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
     $response[KEY_ERROR]			= true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Echo encoded Json response
+    // Echo encoded JSON response
     echo json_encode($response);
 }
 

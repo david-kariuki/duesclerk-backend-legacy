@@ -6,7 +6,7 @@
 * Only one connection is allowed through class instance
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
 // Namespace declaration

@@ -5,7 +5,7 @@
 * This file fetches users profile and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -71,7 +71,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         $response[KEY_USER][FIELD_EMAIL_VERIFIED]       = $user[FIELD_EMAIL_VERIFIED];
         $response[KEY_USER][FIELD_SIGN_UP_DATE_TIME]    = $user[FIELD_SIGN_UP_DATE_TIME];
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
 
     } else {
@@ -81,7 +81,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         $response[KEY_ERROR]            = true;
         $response[KEY_ERROR_MESSAGE]    = "Please sign in to continue!";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
     }
 
@@ -92,7 +92,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
     $response[KEY_ERROR]			= true;
     $response[KEY_ERROR_MESSAGE] 	= "Something went terribly wrong!";
 
-    // Echo encoded Json response
+    // Echo encoded JSON response
     echo json_encode($response);
 }
 

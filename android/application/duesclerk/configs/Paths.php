@@ -5,7 +5,7 @@
 * This file contains defined paths to required project resources
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
 // Paths Class

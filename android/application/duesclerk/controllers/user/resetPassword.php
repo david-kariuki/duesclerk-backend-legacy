@@ -6,7 +6,7 @@
 * mail and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -70,7 +70,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
                 $response[KEY_PASSWORD_RESET][FIELD_USER_ID]        = $userId;
                 $response[KEY_PASSWORD_RESET][KEY_SUCCESS_MESSAGE]  = "Password reset successful!";
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
 
             } else {
@@ -80,7 +80,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
                 $response[KEY_ERROR]            = true;
                 $response[KEY_ERROR_MESSAGE]    = "Verification code deletion failed!";
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
             }
         } else {
@@ -90,7 +90,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
             $response[KEY_ERROR]            = true;
             $response[KEY_ERROR_MESSAGE]    = "Password reset failed!";
 
-            // Echo encoded Json response
+            // Echo encoded JSON response
             echo json_encode($response);
         }
     }
@@ -101,7 +101,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Echo encoded Json response
+    // Echo encoded JSON response
     echo json_encode($response);
 }
 

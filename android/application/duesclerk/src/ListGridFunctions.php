@@ -5,7 +5,7 @@
 * This class contains all the list and grid functions required throught the project
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
 // Namespace declaration

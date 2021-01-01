@@ -1,11 +1,11 @@
 <?php
 
 /**
-* User Sign In file
+* Add contacts file
 * This file Signs In / logs in users and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 // Enable Error Reporting
@@ -40,17 +40,17 @@ if (
     );
 
     // Get Values From POST
-    $userId             = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
-    $contactFullName    = $_POST[FIELD_CONTACTS_FULL_NAME]
+    $userId                 = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
+    $contactsFullName       = $_POST[FIELD_CONTACTS_FULL_NAME]
     ? $_POST[FIELD_CONTACTS_FULL_NAME] : '';
-    $contactPhoneNumber = $_POST[FIELD_CONTACTS_PHONE_NUMBER]
+    $contactsPhoneNumber    = $_POST[FIELD_CONTACTS_PHONE_NUMBER]
     ? $_POST[FIELD_CONTACTS_PHONE_NUMBER] : '';
-    $contactType        = $_POST[FIELD_CONTACTS_TYPE] ? $_POST[FIELD_CONTACTS_TYPE] : '';
+    $contactsType           = $_POST[FIELD_CONTACTS_TYPE] ? $_POST[FIELD_CONTACTS_TYPE] : '';
 
     // Add full name, phone number and contact type to contact details array
-    $contactDetails[FIELD_CONTACTS_FULL_NAME]    = $contactFullName;
-    $contactDetails[FIELD_CONTACTS_PHONE_NUMBER] = $contactPhoneNumber;
-    $contactDetails[FIELD_CONTACTS_TYPE]         = $contactType;
+    $contactDetails[FIELD_CONTACTS_FULL_NAME]    = $contactsFullName;
+    $contactDetails[FIELD_CONTACTS_PHONE_NUMBER] = $contactsPhoneNumber;
+    $contactDetails[FIELD_CONTACTS_TYPE]         = $contactsType;
 
     // Check for phone number`
     if (isset($_POST[FIELD_CONTACTS_ADDRESS])) {
@@ -84,7 +84,7 @@ if (
             $response[KEY_SIGN_UP]          = FIELD_EMAIL_ADDRESS;
             $response[KEY_ERROR_MESSAGE]    = "The email address you entered is invalid!";
 
-            // Echo encoded Json response
+            // Echo encoded JSON response
             echo json_encode($response);
 
         } else {
@@ -106,18 +106,18 @@ if (
                 $response[KEY_ERROR]           = true;
                 $response[KEY_ERROR_MESSAGE]   = "The email address you entered exists as " . $fullName . "!";
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
             }
         }
     }
 
     // Check for phone number in contacts table
-    if ($contactFunctions->isPhoneNumberInContactsTable($contactPhoneNumber)) {
+    if ($contactFunctions->isPhoneNumberInContactsTable($contactsPhoneNumber)) {
         // Contact phone number is in contacts table
 
         // Get contact details
-        $contact = $contactFunctions->getContactByPhoneNumber($contactPhoneNumber);
+        $contact = $contactFunctions->getContactByPhoneNumber($contactsPhoneNumber);
 
         // Get contacts full name
         $fullName = $contactDetails[FIELD_CONTACT_FULL_NAME];
@@ -126,7 +126,7 @@ if (
         $response[KEY_ERROR]           = true;
         $response[KEY_ERROR_MESSAGE]   = "The phone number you entered exists as " . $fullName . "!";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
     }
 
@@ -140,7 +140,7 @@ if (
         // Set success message
         $response[KEY_SUCCESS_MESSAGE] = "Contact added successfully!";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
 
     } else {
@@ -148,9 +148,9 @@ if (
 
         // Set response error to true and add error message
         $response[KEY_ERROR]           = true;
-        $response[KEY_ERROR_MESSAGE]   = "Contact not added!";
+        $response[KEY_ERROR_MESSAGE]   = "Contact not added!" . $addContact . "-";
 
-        // Echo encoded Json response
+        // Echo encoded JSON response
         echo json_encode($response);
     }
 } else {
@@ -160,8 +160,8 @@ if (
     $response[KEY_ERROR]           = true;
     $response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
 
-    // Echo encoded Json response
+    // Echo encoded JSON response
     echo json_encode($response);
 }
 
-// EOF: addContact.php
+// EOF: addUserContact.php

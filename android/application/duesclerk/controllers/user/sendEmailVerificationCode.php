@@ -5,7 +5,7 @@
 * This file generates, sends email verification codes and returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -145,7 +145,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                             $response[KEY_ERROR]            = true;
                             $response[KEY_ERROR_MESSAGE]    = "Old verification code deletion failed!";
 
-                            // Echo encoded Json response
+                            // Echo encoded JSON response
                             echo json_encode($response);
                         }
                     } else {
@@ -181,7 +181,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                     $response[KEY_ERROR]            = true;
                     $response[KEY_ERROR_MESSAGE]    = "Verification code generation failed!";
 
-                    // Echo encoded Json response
+                    // Echo encoded JSON response
                     echo json_encode($response);
                 }
             }
@@ -214,7 +214,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                 // Set verification code
                 $response[KEY_SEND_VERIFICATION_CODE][FIELD_VERIFICATION_CODE] = $verificationCode;
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
 
             } else {
@@ -223,7 +223,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                 $response[KEY_ERROR]          = true;
                 $response[KEY_ERROR_MESSAGE]  = "Verification code not sent";
 
-                // Echo encoded Json response
+                // Echo encoded JSON response
                 echo json_encode($response);
             }
         }
@@ -235,7 +235,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
     $response[KEY_ERROR]            = true;
     $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
 
-    // Echo encoded Json response
+    // Echo encoded JSON response
     echo json_encode($response);
 }
 
