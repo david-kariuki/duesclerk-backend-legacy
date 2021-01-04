@@ -93,7 +93,11 @@ if (
             $contactDetails[FIELD_CONTACTS_EMAIL_ADDRESS] = $contactEmailAddress;
 
             // Check for email address in contacts table
-            if ($contactFunctions->isemailAddressInContactsTable($contactEmailAddress)) {
+            if ($contactFunctions->isemailAddressInContactsTable(
+                $contactEmailAddress,
+                $contactsType
+                )
+            ) {
                 // Contact email address is in contacts table
 
                 // Get contact details
@@ -113,14 +117,14 @@ if (
     }
 
     // Check for phone number in contacts table
-    if ($contactFunctions->isPhoneNumberInContactsTable($contactsPhoneNumber)) {
+    if ($contactFunctions->isPhoneNumberInContactsTable($contactsPhoneNumber, $contactsType)) {
         // Contact phone number is in contacts table
 
         // Get contact details
         $contact = $contactFunctions->getContactByPhoneNumber($contactsPhoneNumber);
 
         // Get contacts full name
-        $fullName = $contactDetails[FIELD_CONTACT_FULL_NAME];
+        $fullName = $contactDetails[FIELD_CONTACTS_FULL_NAME];
 
         // Set response error to true and add error message
         $response[KEY_ERROR]           = true;

@@ -5,7 +5,7 @@
 * This class contains all the functions required to manage and process contacts
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
 // Namespace declaration
@@ -67,7 +67,7 @@ class ContactFunctions
     *
     * @return boolean               - true/false - (if/not found)
     */
-    public function isEmailAddressInContactsTable($contactEmailAddress)
+    public function isEmailAddressInContactsTable($contactsEmailAddress, $contactsType)
     {
 
         // Check for email address in contacts table
@@ -78,9 +78,11 @@ class ContactFunctions
             FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
             AS {$this->constants->valueOfConst(KEY_CONTACT)}
             WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_EMAIL_ADDRESS)} = ?"
+            .{$this->constants->valueOfConst(FIELD_CONTACTS_EMAIL_ADDRESS)} = ?
+            AND {$this->constants->valueOfConst(KEY_CONTACT)}
+            .{$this->constants->valueOfConst(FIELD_CONTACTS_TYPE)} = ?"
         );
-        $stmt->bind_param("s", $contactEmailAddress); // Bind parameters
+        $stmt->bind_param("ss", $contactsEmailAddress, $contactsType); // Bind parameters
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store result
 
@@ -110,7 +112,7 @@ class ContactFunctions
     *
     * @return boolean           - true/false - (if/not found)
     */
-    public function isPhoneNumberInContactsTable($contactPhoneNumber)
+    public function isPhoneNumberInContactsTable($contactsPhoneNumber, $contactsType)
     {
 
         // Check for phone number in contacts table
@@ -121,9 +123,11 @@ class ContactFunctions
             FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
             AS {$this->constants->valueOfConst(KEY_CONTACT)}
             WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_PHONE_NUMBER)} = ?"
+            .{$this->constants->valueOfConst(FIELD_CONTACTS_PHONE_NUMBER)} = ?
+            AND {$this->constants->valueOfConst(KEY_CONTACT)}
+            .{$this->constants->valueOfConst(FIELD_CONTACTS_TYPE)} = ?"
         );
-        $stmt->bind_param("s", $contactPhoneNumber); // Bind parameters
+        $stmt->bind_param("ss", $contactsPhoneNumber, $contactsType); // Bind parameters
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store result
 
@@ -154,7 +158,7 @@ class ContactFunctions
     * @return array             - Associative array (contact details)
     * @return boolean           - false - (fetch failure)
     */
-    public function getContactByPhoneNumber($contactPhoneNumber)
+    public function getContactByPhoneNumber($contactsPhoneNumber)
     {
 
         // Check for phone number in contacts table
@@ -167,7 +171,7 @@ class ContactFunctions
             .{$this->constants->valueOfConst(FIELD_CONTACTS_PHONE_NUMBER)}
             = ?"
         );
-        $stmt->bind_param("s", $contactPhoneNumber); // Bind parameters
+        $stmt->bind_param("s", $contactsPhoneNumber); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
@@ -196,7 +200,7 @@ class ContactFunctions
     * @return array                 - Associative array (contact details)
     * @return boolean               - false - (fetch failure)
     */
-    public function getContactByEmailAddress($contactEmailAddress)
+    public function getContactByEmailAddress($contactsEmailAddress)
     {
 
         // Check for email address in contacts table
@@ -209,7 +213,7 @@ class ContactFunctions
             .{$this->constants->valueOfConst(FIELD_CONTACTS_EMAIL_ADDRESS)}
             = ?"
         );
-        $stmt->bind_param("s", $contactEmailAddress); // Bind parameters
+        $stmt->bind_param("s", $contactsEmailAddress); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
@@ -242,13 +246,6 @@ class ContactFunctions
     public function addContact($userId, $contactDetails)
     {
 
-        // Get contact details from associative array
-        $contactFullName        = $contactDetails[FIELD_CONTACTS_FULL_NAME];
-        $contactPhoneNumber     = $contactDetails[FIELD_CONTACTS_PHONE_NUMBER];
-        $contactType            = $contactDetails[FIELD_CONTACTS_TYPE];
-        $contactEmailAddress    = "";
-        $contactAddress         = "";
-
         if (
             array_key_exists(FIELD_CONTACTS_FULL_NAME, $contactDetails)
             && array_key_exists(FIELD_CONTACTS_PHONE_NUMBER, $contactDetails)
@@ -256,11 +253,19 @@ class ContactFunctions
         ) {
             // Required fields set
 
+            // Get contact details from associative array
+
+            $contactsFullName        = $contactDetails[FIELD_CONTACTS_FULL_NAME];
+            $contactsPhoneNumber     = $contactDetails[FIELD_CONTACTS_PHONE_NUMBER];
+            $contactsType            = $contactDetails[FIELD_CONTACTS_TYPE];
+            $contactsEmailAddress    = "NULL";
+            $contactAddress         = "NULL";
+
             // Check for contact email address
             if (array_key_exists(FIELD_CONTACTS_EMAIL_ADDRESS, $contactDetails)) {
                 // Contact email address exists
 
-                $contactEmailAddress = $contactDetails[FIELD_CONTACTS_EMAIL_ADDRESS];
+                $contactsEmailAddress = $contactDetails[FIELD_CONTACTS_EMAIL_ADDRESS];
             }
 
             // Check for contact address
@@ -296,7 +301,7 @@ class ContactFunctions
             // Bind parameters
             $stmt->bind_param(
                 "sssssss",
-                $contactId, $contactFullName, $contactPhoneNumber, $contactEmailAddress, $contactAddress, $contactType, $userId
+                $contactId, $contactsFullName, $contactsPhoneNumber, $contactsEmailAddress, $contactAddress, $contactsType, $userId
             );
             $add = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
@@ -306,7 +311,7 @@ class ContactFunctions
                 // Querry xecution successful
 
                 // Retrun contact details
-                return $this->getContactByPhoneNumber($contactPhoneNumber);
+                return $this->getContactByPhoneNumber($contactsPhoneNumber);
 
             } else {
                 // Query execution failed
@@ -317,6 +322,53 @@ class ContactFunctions
             // Missing required fields
 
             return null; // Return null
+        }
+    }
+
+    /**
+    * Function to fetch contacts by UserId
+    *
+    * @param UserId - UserId to get users contact list
+    *
+    * @return array - Associaive array - (contacts)
+    * @return boolean - false - (On contacts fetch failed)
+    */
+    public function getContactsByUserId($userId){
+
+        // Prepare select statement
+        $stmt = $this->connectToDB->prepare(
+            "SELECT {$this->constants->valueOfConst(KEY_CONTACTS)}.*
+            FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
+            AS {$this->constants->valueOfConst(KEY_CONTACTS)}
+            WHERE {$this->constants->valueOfConst(KEY_CONTACTS)}
+            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+            ORDER BY {$this->constants->valueOfConst(KEY_CONTACTS)}
+            .{$this->constants->valueOfConst(FIELD_CONTACTS_FULL_NAME)} ASC"
+        );
+        $stmt->bind_param("s", $userId); // Bind parameter
+        $stmt->execute(); // Execute statement
+        $result = $stmt->get_result(); // Get result
+        $stmt->close(); // Close statement
+
+        // Check for query execution
+        if ($result) {
+            // Query execution successful
+
+            // Create array to store all contact rows
+            $contacts = array();
+
+            // Loop through result to get all contact rows
+            while ($row = $result->fetch_assoc()) {
+
+                $contacts[] = $row; // Add row to array
+            }
+
+            return $contacts; // Return contacts
+
+        } else {
+            // Query execution failed
+
+            return false; // Return false
         }
     }
 }

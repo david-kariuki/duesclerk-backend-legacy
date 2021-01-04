@@ -27,21 +27,7 @@ $verificationTypeReset = "VerificationPasswordReset";
 //$check = $mailFunctions->checkForVerificationRequestRecord($userId, $verificationTypeEmail);
 //echo "Check Response : " . json_encode($check);
 
-// Contact details array
-    $contactDetails = array(
-        FIELD_CONTACT_FULL_NAME     => "",
-        FIELD_CONTACT_PHONE_NUMBER  => "",
-        FIELD_CONTACT_EMAIL_ADDRESS => "",
-        FIELD_CONTACT_ADDRESS       => "",
-        FIELD_CONTACT_TYPE          => "",
-    );
+$add = $contactFunctions->fetchContactsByUserId($userId);
 
-    $contactDetails[FIELD_CONTACT_FULL_NAME]        = "David kariuki";
-    $contactDetails[FIELD_CONTACT_PHONE_NUMBER]     = "+254700619045";
-    $contactDetails[FIELD_CONTACT_EMAIL_ADDRESS]    = "dkaris.k@gmail.com";
-    $contactDetails[FIELD_CONTACT_ADDRESS]          = "Eldoret, Kenya";
-    $contactDetails[FIELD_CONTACT_TYPE]             = "ContactPeopleOwingMe";
-$add = $contactFunctions->addContact($userId, $contactDetails);
-
-json_encode($add);
+echo json_encode($add);
 // EOF: test.php
