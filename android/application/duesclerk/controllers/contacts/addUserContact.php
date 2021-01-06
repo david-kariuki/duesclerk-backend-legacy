@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Add contacts file
+* Add contact file
 * This file Signs In / logs in users and returns response in json
 *
 * @author David Kariuki (dk)
@@ -25,48 +25,48 @@ $response = array(KEY_ERROR => false);
 
 // Check for set POST params
 if (
-    isset($_POST[FIELD_CONTACTS_FULL_NAME]) && isset($_POST[FIELD_CONTACTS_PHONE_NUMBER])
-    && isset($_POST[FIELD_CONTACTS_TYPE]) && isset($_POST[FIELD_USER_ID])
+    isset($_POST[FIELD_CONTACT_FULL_NAME]) && isset($_POST[FIELD_CONTACT_PHONE_NUMBER])
+    && isset($_POST[FIELD_CONTACT_TYPE]) && isset($_POST[FIELD_USER_ID])
 ) {
 
 
     // Contact details array
     $contactDetails = array(
-        FIELD_CONTACTS_FULL_NAME     => "",
-        FIELD_CONTACTS_PHONE_NUMBER  => "",
-        FIELD_CONTACTS_EMAIL_ADDRESS => "",
-        FIELD_CONTACTS_ADDRESS       => "",
-        FIELD_CONTACTS_TYPE          => "",
+        FIELD_CONTACT_FULL_NAME     => "",
+        FIELD_CONTACT_PHONE_NUMBER  => "",
+        FIELD_CONTACT_EMAIL_ADDRESS => "",
+        FIELD_CONTACT_ADDRESS       => "",
+        FIELD_CONTACT_TYPE          => "",
     );
 
     // Get Values From POST
     $userId                 = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
-    $contactsFullName       = $_POST[FIELD_CONTACTS_FULL_NAME]
-    ? $_POST[FIELD_CONTACTS_FULL_NAME] : '';
-    $contactsPhoneNumber    = $_POST[FIELD_CONTACTS_PHONE_NUMBER]
-    ? $_POST[FIELD_CONTACTS_PHONE_NUMBER] : '';
-    $contactsType           = $_POST[FIELD_CONTACTS_TYPE] ? $_POST[FIELD_CONTACTS_TYPE] : '';
+    $contactFullName       = $_POST[FIELD_CONTACT_FULL_NAME]
+    ? $_POST[FIELD_CONTACT_FULL_NAME] : '';
+    $contactPhoneNumber    = $_POST[FIELD_CONTACT_PHONE_NUMBER]
+    ? $_POST[FIELD_CONTACT_PHONE_NUMBER] : '';
+    $contactType           = $_POST[FIELD_CONTACT_TYPE] ? $_POST[FIELD_CONTACT_TYPE] : '';
 
     // Add full name, phone number and contact type to contact details array
-    $contactDetails[FIELD_CONTACTS_FULL_NAME]    = $contactsFullName;
-    $contactDetails[FIELD_CONTACTS_PHONE_NUMBER] = $contactsPhoneNumber;
-    $contactDetails[FIELD_CONTACTS_TYPE]         = $contactsType;
+    $contactDetails[FIELD_CONTACT_FULL_NAME]    = $contactFullName;
+    $contactDetails[FIELD_CONTACT_PHONE_NUMBER] = $contactPhoneNumber;
+    $contactDetails[FIELD_CONTACT_TYPE]         = $contactType;
 
     // Check for phone number`
-    if (isset($_POST[FIELD_CONTACTS_ADDRESS])) {
+    if (isset($_POST[FIELD_CONTACT_ADDRESS])) {
 
-        $contactAddress = $_POST[FIELD_CONTACTS_ADDRESS] ?
-        $_POST[FIELD_CONTACTS_ADDRESS] : '';
+        $contactAddress = $_POST[FIELD_CONTACT_ADDRESS] ?
+        $_POST[FIELD_CONTACT_ADDRESS] : '';
 
         // Add contact address to contact details array
-        $contactDetails[FIELD_CONTACTS_ADDRESS] = $contactAddress;
+        $contactDetails[FIELD_CONTACT_ADDRESS] = $contactAddress;
     }
 
     // Check for email address
-    if (isset($_POST[FIELD_CONTACTS_EMAIL_ADDRESS])) {
+    if (isset($_POST[FIELD_CONTACT_EMAIL_ADDRESS])) {
 
-        $contactEmailAddress = $_POST[FIELD_CONTACTS_EMAIL_ADDRESS] ?
-        $_POST[FIELD_CONTACTS_EMAIL_ADDRESS] : '';
+        $contactEmailAddress = $_POST[FIELD_CONTACT_EMAIL_ADDRESS] ?
+        $_POST[FIELD_CONTACT_EMAIL_ADDRESS] : '';
 
         /**
         * Check email address validity
@@ -90,21 +90,23 @@ if (
         } else {
 
             // Add email address to contact details array
-            $contactDetails[FIELD_CONTACTS_EMAIL_ADDRESS] = $contactEmailAddress;
+            $contactDetails[FIELD_CONTACT_EMAIL_ADDRESS] = $contactEmailAddress;
 
-            // Check for email address in contacts table
+            // Check for email address in contact table
             if ($contactFunctions->isemailAddressInContactsTable(
                 $contactEmailAddress,
-                $contactsType
+                $contactType
                 )
             ) {
-                // Contact email address is in contacts table
+                // Contact email address is in contact table
 
                 // Get contact details
-                $contact = $contactFunctions->getContactByEmailAddress($contactEmailAddress);
+                $contact = $contactFunctions->getContactInfoByContactEmailAddress(
+                    $contactEmailAddress
+                );
 
-                // Get contacts full name
-                $fullName = $contactDetails[FIELD_CONTACTS_FULL_NAME];
+                // Get contact full name
+                $fullName = $contactDetails[FIELD_CONTACT_FULL_NAME];
 
                 // Set response error to true and add error message
                 $response[KEY_ERROR]           = true;
@@ -116,15 +118,15 @@ if (
         }
     }
 
-    // Check for phone number in contacts table
-    if ($contactFunctions->isPhoneNumberInContactsTable($contactsPhoneNumber, $contactsType)) {
-        // Contact phone number is in contacts table
+    // Check for phone number in contact table
+    if ($contactFunctions->isPhoneNumberInContactsTable($contactPhoneNumber, $contactType)) {
+        // Contact phone number is in contact table
 
         // Get contact details
-        $contact = $contactFunctions->getContactByPhoneNumber($contactsPhoneNumber);
+        $contact = $contactFunctions->getContactInfoByContactPhoneNumber($contactPhoneNumber);
 
-        // Get contacts full name
-        $fullName = $contactDetails[FIELD_CONTACTS_FULL_NAME];
+        // Get contact full name
+        $fullName = $contactDetails[FIELD_CONTACT_FULL_NAME];
 
         // Set response error to true and add error message
         $response[KEY_ERROR]           = true;
@@ -135,7 +137,7 @@ if (
     }
 
     // Add contact to database
-    $addContact = $contactFunctions->addContact($userId, $contactDetails);
+    $addContact = $contactFunctions->addUsersContact($userId, $contactDetails);
 
     // Check if contact was added
     if ($addContact !== false) {
@@ -152,7 +154,7 @@ if (
 
         // Set response error to true and add error message
         $response[KEY_ERROR]           = true;
-        $response[KEY_ERROR_MESSAGE]   = "Contact not added!" . $addContact . "-";
+        $response[KEY_ERROR_MESSAGE]   = "Contact not added!" . $addContact;
 
         // Echo encoded JSON response
         echo json_encode($response);

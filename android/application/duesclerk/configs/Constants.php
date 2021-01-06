@@ -32,7 +32,7 @@ define("TABLE_USERS",                           "Users");
 define("TABLE_EMAIL_VERIFICATION",              "EmailVerification");
 define("TABLE_USER_LOGS",                       "UserLogs");
 define("TABLE_COUNTRIES",                       "Countries");
-define("TABLE_CONTACTS",                        "Contacts");
+define("TABLE_CONTACT",                        "Contacts");
 
 
 /**
@@ -74,14 +74,14 @@ define("FIELD_USER_LOG_TIME",                   "UserLogTime");
 
 
 /**
-* Table contacts fields
+* Table contact fields
 */
-define("FIELD_CONTACTS_ID",                      "ContactsId");
-define("FIELD_CONTACTS_FULL_NAME",               "ContactsFullName");
-define("FIELD_CONTACTS_PHONE_NUMBER",            "ContactsPhoneNumber");
-define("FIELD_CONTACTS_EMAIL_ADDRESS",           "ContactsEmailAddress");
-define("FIELD_CONTACTS_ADDRESS",                 "ContactsAddress");
-define("FIELD_CONTACTS_TYPE",                    "ContactsType");
+define("FIELD_CONTACT_ID",                      "ContactId");
+define("FIELD_CONTACT_FULL_NAME",               "ContactFullName");
+define("FIELD_CONTACT_PHONE_NUMBER",            "ContactPhoneNumber");
+define("FIELD_CONTACT_EMAIL_ADDRESS",           "ContactEmailAddress");
+define("FIELD_CONTACT_ADDRESS",                 "ContactAddress");
+define("FIELD_CONTACT_TYPE",                    "ContactType");
 
 
 /**

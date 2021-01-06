@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Fetch user contacts file
+* Fetch user contact file
 * This file Signs In / logs in users and returns response in json
 *
 * @author David Kariuki (dk)
@@ -29,20 +29,20 @@ if (isset($_POST[FIELD_USER_ID])) {
     // Get Values From POST
     $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : ''; // Get UserId
 
-    // Get user contacts
-    $getContacts = $contactFunctions->getContactsByUserId($userId);
+    // Get user contact
+    $getContacts = $contactFunctions->getUsersContactsByUserId($userId);
 
-    // Check for contacts
+    // Check for contact
     if ($getContacts !== null) {
         // Contacts fetched successfully
 
-        $response[KEY_CONTACTS] = $getContacts; // Add contacts array to JSON response
+        $response[KEY_CONTACT] = $getContacts; // Add contact array to JSON response
 
         // Echo encoded JSON response
         echo json_encode($response);
 
     } else {
-        // User contacts fetching failed
+        // User contact fetching failed
 
         // Set response error to true and add error message
         $response[KEY_ERROR]           = true;

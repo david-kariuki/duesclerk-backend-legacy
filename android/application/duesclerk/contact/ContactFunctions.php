@@ -2,7 +2,7 @@
 
 /**
 * User account functions class
-* This class contains all the functions required to manage and process contacts
+* This class contains all the functions required to manage and process contact
 *
 * @author David Kariuki (dk)
 * @copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
@@ -61,28 +61,28 @@ class ContactFunctions
 
 
     /**
-    * Function to check if contact email address is in contacts table.
+    * Function to check if contact email address is in contact table.
     *
-    * @param contactEmailAddress    - Contact email address
+    * @param contactEmailAddress   - Contact email address
     *
     * @return boolean               - true/false - (if/not found)
     */
-    public function isEmailAddressInContactsTable($contactsEmailAddress, $contactsType)
+    public function isEmailAddressInContactsTable($contactEmailAddress, $contactType)
     {
 
-        // Check for email address in contacts table
+        // Check for email address in contact table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_EMAIL_ADDRESS)}
-            FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_EMAIL_ADDRESS)}
+            FROM {$this->constants->valueOfConst(TABLE_CONTACT)}
             AS {$this->constants->valueOfConst(KEY_CONTACT)}
             WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_EMAIL_ADDRESS)} = ?
+            .{$this->constants->valueOfConst(FIELD_CONTACT_EMAIL_ADDRESS)} = ?
             AND {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_TYPE)} = ?"
+            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?"
         );
-        $stmt->bind_param("ss", $contactsEmailAddress, $contactsType); // Bind parameters
+        $stmt->bind_param("ss", $contactEmailAddress, $contactType); // Bind parameters
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store result
 
@@ -106,28 +106,28 @@ class ContactFunctions
     }
 
     /**
-    * Function to check if contact phone number is in contacts table.
+    * Function to check if contact phone number is in contact table.
     *
     * @param contactPhoneNumber - Contact phone number
     *
     * @return boolean           - true/false - (if/not found)
     */
-    public function isPhoneNumberInContactsTable($contactsPhoneNumber, $contactsType)
+    public function isPhoneNumberInContactsTable($contactPhoneNumber, $contactType)
     {
 
-        // Check for phone number in contacts table
+        // Check for phone number in contact table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_PHONE_NUMBER)}
-            FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_PHONE_NUMBER)}
+            FROM {$this->constants->valueOfConst(TABLE_CONTACT)}
             AS {$this->constants->valueOfConst(KEY_CONTACT)}
             WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_PHONE_NUMBER)} = ?
+            .{$this->constants->valueOfConst(FIELD_CONTACT_PHONE_NUMBER)} = ?
             AND {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_TYPE)} = ?"
+            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?"
         );
-        $stmt->bind_param("ss", $contactsPhoneNumber, $contactsType); // Bind parameters
+        $stmt->bind_param("ss", $contactPhoneNumber, $contactType); // Bind parameters
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store result
 
@@ -151,6 +151,48 @@ class ContactFunctions
     }
 
     /**
+    * Function to get contact by contact id
+    *
+    * @param contactId - contact id
+    *
+    * @return array     - Associative array (contact details)
+    * @return boolean   - false - (fetch failure)
+    */
+    public function getContactInfoByContactId($contactId)
+    {
+
+        // Check for contact id in contact table
+        // Prepare statement
+        $stmt = $this->connectToDB->prepare(
+            "SELECT {$this->constants->valueOfConst(KEY_CONTACT)}.*
+            FROM {$this->constants->valueOfConst(TABLE_CONTACT)}
+            AS {$this->constants->valueOfConst(KEY_CONTACT)}
+            WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_ID)}
+            = ?"
+        );
+        $stmt->bind_param("s", $contactId); // Bind parameters
+
+        // Check for query execution
+        if ($stmt->execute()) {
+            // Query executed
+
+            $contact = $stmt->get_result()->fetch_assoc(); // Get result array
+            $stmt->close(); // Close statement
+
+
+            return $contact; // Return contact details array
+
+        } else {
+            // Contact not found
+
+            $stmt->close(); // Close statement
+
+            return false; // Return false
+        }
+    }
+
+    /**
     * Function to get contact by contact phone number
     *
     * @param contactPhoneNumber - contact phone number
@@ -158,20 +200,20 @@ class ContactFunctions
     * @return array             - Associative array (contact details)
     * @return boolean           - false - (fetch failure)
     */
-    public function getContactByPhoneNumber($contactsPhoneNumber)
+    public function getContactInfoByContactPhoneNumber($contactPhoneNumber)
     {
 
-        // Check for phone number in contacts table
+        // Check for phone number in contact table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_CONTACT)}.*
-            FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
+            FROM {$this->constants->valueOfConst(TABLE_CONTACT)}
             AS {$this->constants->valueOfConst(KEY_CONTACT)}
             WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_PHONE_NUMBER)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_PHONE_NUMBER)}
             = ?"
         );
-        $stmt->bind_param("s", $contactsPhoneNumber); // Bind parameters
+        $stmt->bind_param("s", $contactPhoneNumber); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
@@ -200,20 +242,20 @@ class ContactFunctions
     * @return array                 - Associative array (contact details)
     * @return boolean               - false - (fetch failure)
     */
-    public function getContactByEmailAddress($contactsEmailAddress)
+    public function getContactInfoByContactEmailAddress($contactEmailAddress)
     {
 
-        // Check for email address in contacts table
+        // Check for email address in contact table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_CONTACT)}.*
-            FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
+            FROM {$this->constants->valueOfConst(TABLE_CONTACT)}
             AS {$this->constants->valueOfConst(KEY_CONTACT)}
             WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_EMAIL_ADDRESS)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_EMAIL_ADDRESS)}
             = ?"
         );
-        $stmt->bind_param("s", $contactsEmailAddress); // Bind parameters
+        $stmt->bind_param("s", $contactEmailAddress); // Bind parameters
 
         // Check for query execution
         if ($stmt->execute()) {
@@ -235,7 +277,7 @@ class ContactFunctions
     }
 
     /**
-    * Function to insert contact to contacts table
+    * Function to insert contact to contact table
     *
     * @param userId         - User id for user adding the contact
     * @param contactDetails - Associative array of contact fields key value pair to be inserted
@@ -243,56 +285,56 @@ class ContactFunctions
     * @return array         - Associatve array - (contact details)
     * @return boolean       - false - (on contact adding failure)
     */
-    public function addContact($userId, $contactDetails)
+    public function addUsersContact($userId, $contactDetails)
     {
 
         if (
-            array_key_exists(FIELD_CONTACTS_FULL_NAME, $contactDetails)
-            && array_key_exists(FIELD_CONTACTS_PHONE_NUMBER, $contactDetails)
-            && array_key_exists(FIELD_CONTACTS_TYPE, $contactDetails)
+            array_key_exists(FIELD_CONTACT_FULL_NAME, $contactDetails)
+            && array_key_exists(FIELD_CONTACT_PHONE_NUMBER, $contactDetails)
+            && array_key_exists(FIELD_CONTACT_TYPE, $contactDetails)
         ) {
             // Required fields set
 
             // Get contact details from associative array
 
-            $contactsFullName        = $contactDetails[FIELD_CONTACTS_FULL_NAME];
-            $contactsPhoneNumber     = $contactDetails[FIELD_CONTACTS_PHONE_NUMBER];
-            $contactsType            = $contactDetails[FIELD_CONTACTS_TYPE];
-            $contactsEmailAddress    = "NULL";
+            $contactFullName       = $contactDetails[FIELD_CONTACT_FULL_NAME];
+            $contactPhoneNumber    = $contactDetails[FIELD_CONTACT_PHONE_NUMBER];
+            $contactType           = $contactDetails[FIELD_CONTACT_TYPE];
+            $contactEmailAddress   = "NULL";
             $contactAddress         = "NULL";
 
             // Check for contact email address
-            if (array_key_exists(FIELD_CONTACTS_EMAIL_ADDRESS, $contactDetails)) {
+            if (array_key_exists(FIELD_CONTACT_EMAIL_ADDRESS, $contactDetails)) {
                 // Contact email address exists
 
-                $contactsEmailAddress = $contactDetails[FIELD_CONTACTS_EMAIL_ADDRESS];
+                $contactEmailAddress = $contactDetails[FIELD_CONTACT_EMAIL_ADDRESS];
             }
 
             // Check for contact address
-            if (array_key_exists(FIELD_CONTACTS_ADDRESS, $contactDetails)) {
+            if (array_key_exists(FIELD_CONTACT_ADDRESS, $contactDetails)) {
                 // Contact address exists
 
-                $contactAddress = $contactDetails[FIELD_CONTACTS_ADDRESS];
+                $contactAddress = $contactDetails[FIELD_CONTACT_ADDRESS];
             }
 
             // Generate contact id
             $contactId = $this->sharedFunctions->generateUniqueId(
                 "contact",
-                TABLE_CONTACTS,
-                FIELD_CONTACTS_ID,
+                TABLE_CONTACT,
+                FIELD_CONTACT_ID,
                 LENGTH_TABLE_IDS_LONG
             );
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
-                "INSERT INTO {$this->constants->valueOfConst(TABLE_CONTACTS)}
+                "INSERT INTO {$this->constants->valueOfConst(TABLE_CONTACT)}
                 (
-                    {$this->constants->valueOfConst(FIELD_CONTACTS_ID)},
-                    {$this->constants->valueOfConst(FIELD_CONTACTS_FULL_NAME)},
-                    {$this->constants->valueOfConst(FIELD_CONTACTS_PHONE_NUMBER)},
-                    {$this->constants->valueOfConst(FIELD_CONTACTS_EMAIL_ADDRESS)},
-                    {$this->constants->valueOfConst(FIELD_CONTACTS_ADDRESS)},
-                    {$this->constants->valueOfConst(FIELD_CONTACTS_TYPE)},
+                    {$this->constants->valueOfConst(FIELD_CONTACT_ID)},
+                    {$this->constants->valueOfConst(FIELD_CONTACT_FULL_NAME)},
+                    {$this->constants->valueOfConst(FIELD_CONTACT_PHONE_NUMBER)},
+                    {$this->constants->valueOfConst(FIELD_CONTACT_EMAIL_ADDRESS)},
+                    {$this->constants->valueOfConst(FIELD_CONTACT_ADDRESS)},
+                    {$this->constants->valueOfConst(FIELD_CONTACT_TYPE)},
                     {$this->constants->valueOfConst(FIELD_USER_ID)}
                 )
                 VALUES ( ?, ?, ?, ?, ?, ?, ?)"
@@ -301,7 +343,7 @@ class ContactFunctions
             // Bind parameters
             $stmt->bind_param(
                 "sssssss",
-                $contactId, $contactsFullName, $contactsPhoneNumber, $contactsEmailAddress, $contactAddress, $contactsType, $userId
+                $contactId, $contactFullName, $contactPhoneNumber, $contactEmailAddress, $contactAddress, $contactType, $userId
             );
             $add = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
@@ -311,7 +353,7 @@ class ContactFunctions
                 // Querry xecution successful
 
                 // Retrun contact details
-                return $this->getContactByPhoneNumber($contactsPhoneNumber);
+                return $this->getContactByPhoneNumber($contactPhoneNumber);
 
             } else {
                 // Query execution failed
@@ -326,24 +368,24 @@ class ContactFunctions
     }
 
     /**
-    * Function to fetch contacts by UserId
+    * Function to fetch contact by UserId
     *
     * @param UserId - UserId to get users contact list
     *
-    * @return array - Associaive array - (contacts)
-    * @return boolean - false - (On contacts fetch failed)
+    * @return array - Associaive array - (contact)
+    * @return boolean - false - (On contact fetch failed)
     */
-    public function getContactsByUserId($userId){
+    public function getUserContactsByUserId($userId){
 
         // Prepare select statement
         $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->constants->valueOfConst(KEY_CONTACTS)}.*
-            FROM {$this->constants->valueOfConst(TABLE_CONTACTS)}
-            AS {$this->constants->valueOfConst(KEY_CONTACTS)}
-            WHERE {$this->constants->valueOfConst(KEY_CONTACTS)}
+            "SELECT {$this->constants->valueOfConst(KEY_CONTACT)}.*
+            FROM {$this->constants->valueOfConst(TABLE_CONTACT)}
+            AS {$this->constants->valueOfConst(KEY_CONTACT)}
+            WHERE {$this->constants->valueOfConst(KEY_CONTACT)}
             .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
-            ORDER BY {$this->constants->valueOfConst(KEY_CONTACTS)}
-            .{$this->constants->valueOfConst(FIELD_CONTACTS_FULL_NAME)} ASC"
+            ORDER BY {$this->constants->valueOfConst(KEY_CONTACT)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_FULL_NAME)} ASC"
         );
         $stmt->bind_param("s", $userId); // Bind parameter
         $stmt->execute(); // Execute statement
@@ -355,15 +397,15 @@ class ContactFunctions
             // Query execution successful
 
             // Create array to store all contact rows
-            $contacts = array();
+            $contact = array();
 
             // Loop through result to get all contact rows
             while ($row = $result->fetch_assoc()) {
 
-                $contacts[] = $row; // Add row to array
+                $contact[] = $row; // Add row to array
             }
 
-            return $contacts; // Return contacts
+            return $contact; // Return contact
 
         } else {
             // Query execution failed
