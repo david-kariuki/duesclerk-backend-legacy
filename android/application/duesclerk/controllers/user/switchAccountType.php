@@ -3,7 +3,7 @@
 /**
 * Update user profile details file
 *
-* This file updates users profile, password and returns response in json
+* This file switches user account type and returns response in json
 *
 * @author David Kariuki (dk)
 * @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.

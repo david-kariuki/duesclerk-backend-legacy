@@ -65,7 +65,7 @@ class SharedFunctions
     /**
     * Function to generate UserId
     *
-    * @param uniqueIdKey    - Key to be concatenated to uniqueId
+    * @param uniqueIdKey    - Key to be concatenated to the beginning of the uniqueId
     * @param tableName      - Table name to check for existing uniqueId
     * @param idFieldName    - Table field name to check of existing uniqueId
     * @param uniqueIdLength - Unique id length - (Short / Long id)

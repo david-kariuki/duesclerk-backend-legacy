@@ -2,7 +2,7 @@
 
 /**
 * Add contact file
-* This file Signs In / logs in users and returns response in json
+* This file adds user contacts to database and returns response in json
 *
 * @author David Kariuki (dk)
 * @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
