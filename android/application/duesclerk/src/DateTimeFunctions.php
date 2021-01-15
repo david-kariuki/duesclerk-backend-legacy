@@ -28,7 +28,6 @@ class DateTimeFunctions
 
     private $constants; // Create Constants object
 
-
     /**
     * Class destructor
     */
@@ -37,7 +36,6 @@ class DateTimeFunctions
         $this->constants = new Constants(); // Initialize constants object
     }
 
-
     /**
     * Class destructor
     */
@@ -45,7 +43,6 @@ class DateTimeFunctions
     {
 
     }
-
 
     /**
     * Function to get local time from default time zone time
@@ -67,10 +64,8 @@ class DateTimeFunctions
         // Set dateTimes' objects' time zone to local time zone
         $dateTime->setTimeZone(new \DateTimeZone($this->getLocalTimezone($countryAlpha2)));
 
-        // Format and return date time object
-        return $dateTime->format(FORMAT_DATE_TIME_FULL);
+        return $dateTime->format(FORMAT_DATE_TIME_FULL); // Format and return date time object
     }
-
 
     /**
     * Function to get user timezone by alpha2
@@ -98,7 +93,6 @@ class DateTimeFunctions
         return $current;
     }
 
-
     /**
     * Function to get the default time zone numerical date and time
     *
@@ -113,20 +107,19 @@ class DateTimeFunctions
         ); // Return numerical time stamp
     }
 
-
     /**
     * Function to get the default time zone textual date and time
     *
-    * @return dateTime - (Default timezone textual date and time)
+    * @param format     - DateTime format
+    * @return dateTime  - (Default timezone textual date and time)
     */
-    public function getDefaultTimeZoneTextualDateTime()
+    public function getDefaultTimeZoneTextualDateTime($format)
     {
 
         $this->setTimeZoneUTC(); // Set time zone to UTC
 
-        return date(FORMAT_DATE_TIME_FULL); // Return full date and time
+        return date($format); // Return formatted date and time
     }
-
 
     /**
     * Function to get time difference
@@ -157,9 +150,8 @@ class DateTimeFunctions
         return (abs($recentTime - $oldTime) / 3600);
     }
 
-
     /**
-    * Function to convert date and time formats
+    * Function to convert string with both date and time formats
     *
     * @param dateAndTime    - Date and time to be converted
     * @param newFormat      - New date and time format
@@ -170,10 +162,10 @@ class DateTimeFunctions
     {
 
         // Create date from format
-        $dateTime = DateTime::createFromFormat(
-            FORMAT_DATE_TIME_FULL,  // Set date format
-            $dateAndTime,           // Date time stamp
-            new DateTimeZone('UTC') // Set time zone to UTC
+        $dateTime = \DateTime::createFromFormat(
+            FORMAT_DATE_TIME_FULL,      // Initial date format
+            $dateAndTime,               // Date time stamp
+            new \DateTimeZone('UTC')    // Set time zone to UTC
         );
 
         // Switch new format
@@ -187,6 +179,55 @@ class DateTimeFunctions
         }
     }
 
+    /**
+    * Function to convert string with both date and time formats
+    *
+    * @param fromFormat     - Initial date format
+    * @param dateAndTime    - Date and time to be converted
+    * @param newFormat      - New date and time format
+    *
+    * @return DateTime      - Converted date and time
+    */
+    public function convertDateTimeFromFormat($dateAndTime, $fromFormat, $newFormat)
+    {
+
+        // Create date from format
+        $dateTime = \DateTime::createFromFormat(
+            $fromFormat,                // Initial date format
+            $dateAndTime,               // Date time stamp
+            new \DateTimeZone('UTC')    // Set time zone to UTC
+        );
+
+        // Switch new format
+        switch ($newFormat) {
+
+            case FORMAT_DATE_TIME_NUMERICAL:
+            return strtotime($dateTime->format(FORMAT_DATE_TIME_NUMERICAL)); // Numerical date
+
+            case FORMAT_DATE_FULL:
+            return strtotime($dateTime->format(FORMAT_DATE_FULL)); // Full date
+
+            default:
+            return $dateTime->format($newFormat); // Other formats
+        }
+    }
+
+    /**
+    * Function to convert date string format
+    *
+    * @param date           - Date whose format is to be converted
+    * @param newFormat      - New date format
+    *
+    * @return convertedDate - Date converted to the new format
+    */
+    public function convertDateFormat($date, $newFormat)
+    {
+
+        $createDate = date_create($date); // Create date from date string
+        $formatDate = date_format($createDate, $newFormat); // Format date
+
+        return $formatDate; // Return formatted date
+    }
 
     /**
     * Function to set TimeZone to UTC

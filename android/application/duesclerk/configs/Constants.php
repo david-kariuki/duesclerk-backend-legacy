@@ -32,7 +32,8 @@ define("TABLE_USERS",                           "Users");
 define("TABLE_EMAIL_VERIFICATION",              "EmailVerification");
 define("TABLE_USER_LOGS",                       "UserLogs");
 define("TABLE_COUNTRIES",                       "Countries");
-define("TABLE_CONTACT",                        "Contacts");
+define("TABLE_CONTACTS",                        "Contacts");
+define("TABLE_DEBTS",                           "Debts");
 
 
 /**
@@ -55,14 +56,31 @@ define("FIELD_SIGN_UP_DATE_TIME",               "SignUpDateTime");
 define("FIELD_EMAIL_VERIFIED",                  "EmailVerified");
 define("FIELD_UPDATE_DATE_TIME",                "UpdateDateTime");
 
+define("FIELD_PASSWORD",                        "Password");
+define("FIELD_NEW_PASSWORD",                    "NewPassword");
+define("FIELD_NEW_ACCOUNT_TYPE",                "NewAccountType");
+define("KEY_ACCOUNT_TYPE_PERSONAL",             "AccountTypePersonal");
+define("KEY_ACCOUNT_TYPE_BUSINESS",             "AccountTypeBusiness");
+define("KEY_USER",                              "User");
+define("KEY_UPDATE_PROFILE",                    "UpdateProfile");
+define("KEY_SIGN_UP",                           "SignUp");
+define("KEY_SIGN_IN",                           "SignIn");
+define("KEY_PASSWORD_RESET",                    "PasswordReset");
+
 
 /**
 * Table email verification fields
 */
-define("FIELD_VERIFICATION_ID",                 "VerificationType");
-define("FIELD_VERIFICATION_CODE",               "VerificationType");
+define("FIELD_VERIFICATION_ID",                 "VerificationId");
+define("FIELD_VERIFICATION_CODE",               "VerificationCode");
 define("FIELD_VERIFICATION_TYPE",               "VerificationType");
 define("FIELD_VERIFICATION_CODE_REQUEST_TIME",  "VerificationCodeRequestTime");
+
+define("KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT",   "VerificationEmailAccount");
+define("KEY_VERIFICATION_TYPE_PASSWORD_RESET",  "VerificationPasswordReset");
+define("KEY_VERIFICATION_CODE_EXPIRY_TIME",     1); // 1 hour
+define("KEY_EMAIL_VERIFICATION",                "EmailVerification");
+define("KEY_SEND_VERIFICATION_CODE",            "SendVerificationCode");
 
 
 /**
@@ -74,7 +92,7 @@ define("FIELD_USER_LOG_TIME",                   "UserLogTime");
 
 
 /**
-* Table contact fields
+* Table contact fields and others
 */
 define("FIELD_CONTACT_ID",                      "ContactId");
 define("FIELD_CONTACT_FULL_NAME",               "ContactFullName");
@@ -82,6 +100,24 @@ define("FIELD_CONTACT_PHONE_NUMBER",            "ContactPhoneNumber");
 define("FIELD_CONTACT_EMAIL_ADDRESS",           "ContactEmailAddress");
 define("FIELD_CONTACT_ADDRESS",                 "ContactAddress");
 define("FIELD_CONTACT_TYPE",                    "ContactType");
+
+define("KEY_CONTACT",                           "Contact");
+define("KEY_CONTACTS",                          "Contacts");
+define("KEY_CONTACT_DETAILS",                   "ContactDetails");
+define("KEY_CONTACT_TYPE_PEOPLE_I_OWE",         "ContactTypePeopleIOwe");
+define("KEY_CONTACT_TYPE_PEOPLE_OWING_ME",      "ContactTypePeopleOwingMe");
+
+
+/**
+* Table debts fields and others
+*/
+define("FIELD_DEBT_ID",                         "DebtId");
+define("FIELD_DEBT_AMOUNT",                     "DebtAmount");
+define("FIELD_DEBT_DATE_ISSUED",                "DebtDateIssued");
+define("FIELD_DEBT_DATE_DUE",                   "DebtDateDue");
+define("FIELD_DEBT_DESCRIPTION",                "DebtDescription");
+define("KEY_DEBT",                              "Debt");
+define("KEY_DEBTS",                             "Debts");
 
 
 /**
@@ -95,33 +131,6 @@ define("LENGTH_TABLE_IDS_LONG",                 40);
 define("LENGTH_VERIFICATION_CODE",              6);
 
 
-// User account keys
-define("FIELD_PASSWORD",                        "Password");
-define("FIELD_NEW_PASSWORD",                    "NewPassword");
-define("FIELD_NEW_ACCOUNT_TYPE",                "NewAccountType");
-define("KEY_ACCOUNT_TYPE_PERSONAL",             "AccountTypePersonal");
-define("KEY_ACCOUNT_TYPE_BUSINESS",             "AccountTypeBusiness");
-define("KEY_USER",                              "User");
-define("KEY_UPDATE_PROFILE",                    "UpdateProfile");
-define("KEY_SIGN_UP",                           "SignUp");
-define("KEY_SIGN_IN",                           "SignIn");
-
-
-// Email verification keys
-define("KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT",   "VerificationEmailAccount");
-define("KEY_VERIFICATION_TYPE_PASSWORD_RESET",  "VerificationPasswordReset");
-define("KEY_VERIFICATION_CODE_EXPIRY_TIME",     1); // 1 hour
-define("KEY_EMAIL_VERIFICATION",                "EmailVerification");
-define("KEY_SEND_VERIFICATION_CODE",            "SendVerificationCode");
-
-
-// Contact keys
-define("KEY_CONTACT",                           "Contact");
-define("KEY_CONTACTS",                          "Contacts");
-define("KEY_CONTACT_TYPE_PEOPLE_I_OWE",         "ContactTypePeopleIOwe");
-define("KEY_CONTACT_TYPE_PEOPLE_OWING_ME",      "ContactTypePeopleOwingMe");
-
-
 // Country keys
 define("KEY_COUNTRY",                           "Country");
 define("KEY_COUNTRY_DATA",                      "CountryData");
@@ -133,13 +142,8 @@ define("KEY_ERROR_MESSAGE",                     "ErrorMessage");
 define("KEY_SUCCESS_MESSAGE",                   "SuccessMessage");
 
 
-// Password reset
-define("KEY_PASSWORD_RESET",                    "PasswordReset");
-
-
 // Expressions (preg match)
 define("EXPRESSION_NAMES",                      "/^[A-Za-z .'-]+$/");
-
 
 
 // Logs keys
@@ -152,6 +156,8 @@ define("LOG_TYPE_SWITCH_ACCOUNT_TYPE",          "LogTypeSwitchAccountType");
 
 
 // Date formats
+define("FORMAT_DATE_FULL",                      "l, F d, Y");
+define("FORMAT_DATE_SHORT",                     "n/j/Y");
 define("FORMAT_DATE_TIME_FULL",                 "l d, F Y H:i:s");
 define("FORMAT_DATE_TIME_NUMERICAL",            "m/d/Y h:i:s a");
 
