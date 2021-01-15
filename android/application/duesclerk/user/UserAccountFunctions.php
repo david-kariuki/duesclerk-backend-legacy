@@ -173,7 +173,10 @@ class UserAccountFunctions
                 $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
 
                 // Update signup date to users local time
-                $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
+                $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime(
+                    $signUpDateTime,
+                    $countryAlpha2
+                );
 
                 return $user; // Return user details array
 
@@ -238,7 +241,10 @@ class UserAccountFunctions
             $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
 
             // Update signup date to users local time
-            $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
+            $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime(
+                $signUpDateTime,
+                $countryAlpha2
+            );
 
             return $user; // Return user details array
 
@@ -298,7 +304,10 @@ class UserAccountFunctions
             $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
 
             // Update signup date to users local time
-            $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime($signUpDateTime, $countryAlpha2);
+            $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime(
+                $signUpDateTime,
+                $countryAlpha2
+            );
 
             return $user; // Return user details array
 
@@ -343,7 +352,9 @@ class UserAccountFunctions
         $hash = $this->hashPassword($password);
 
         // Get account creation date
-        $signupDateTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime();
+        $signupDateTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime(
+            FORMAT_DATE_TIME_FULL
+        );
 
         $result;
         // Insert into Users
@@ -383,7 +394,7 @@ class UserAccountFunctions
             // Business account
 
             // Get business name
-            $businessName    = $signUpDetails[FIELD_BUSINESS_NAME];
+            $businessName = $signUpDetails[FIELD_BUSINESS_NAME];
 
             // Prepare statement
             $stmt = $this->connectToDB->prepare(
@@ -562,7 +573,9 @@ class UserAccountFunctions
         $stmt->close(); // Close statement
 
         // Get update time
-        $updateDateTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime();
+        $updateDateTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime(
+            FORMAT_DATE_TIME_FULL
+        );
 
         // Check for query execution
         if ($update) {
@@ -797,7 +810,9 @@ class UserAccountFunctions
                     $stmt->close(); // Close statement
 
                     // Get date and time
-                    $switchTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime();
+                    $switchTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime(
+                        FORMAT_DATE_TIME_FULL
+                    );
 
                     // Log signup event
                     if ($this->logsFunctions->createStoreUserLogs(

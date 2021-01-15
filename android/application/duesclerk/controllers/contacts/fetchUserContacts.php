@@ -30,13 +30,13 @@ if (isset($_POST[FIELD_USER_ID])) {
     $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : ''; // Get UserId
 
     // Get user contact
-    $getContacts = $contactFunctions->getUsersContactsByUserId($userId);
+    $getContacts = $contactFunctions->getUserContactsByUserId($userId);
 
     // Check for contact
     if ($getContacts !== null) {
         // Contacts fetched successfully
 
-        $response[KEY_CONTACT] = $getContacts; // Add contact array to JSON response
+        $response[KEY_CONTACTS] = $getContacts; // Add contact array to JSON response
 
         // Echo encoded JSON response
         echo json_encode($response);

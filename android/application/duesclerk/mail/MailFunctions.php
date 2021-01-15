@@ -891,7 +891,7 @@ class MailFunctions
         $requestTimeStamp = $this->dateTimeFunctions->getDefaultTimeZoneNumericalDateTime();
 
         // Generate A 15 Character VerificationId
-        $verificationId = substr( "ver" . md5(mt_rand()), 0, LENGTH_TABLE_IDS);
+        $verificationId = substr( "ver" . md5(mt_rand()), 0, LENGTH_TABLE_IDS_SHORT);
 
         $codeIdentifier = ""; // Code type identifier
 

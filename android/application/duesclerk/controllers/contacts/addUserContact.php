@@ -101,7 +101,7 @@ if (
                 // Contact email address is in contact table
 
                 // Get contact details
-                $contact = $contactFunctions->getContactInfoByContactEmailAddress(
+                $contact = $contactFunctions->getContactDetailsByContactEmailAddress(
                     $contactEmailAddress
                 );
 
@@ -123,7 +123,7 @@ if (
         // Contact phone number is in contact table
 
         // Get contact details
-        $contact = $contactFunctions->getContactInfoByContactPhoneNumber($contactPhoneNumber);
+        $contact = $contactFunctions->getContactDetailsByContactPhoneNumber($contactPhoneNumber);
 
         // Get contact full name
         $fullName = $contactDetails[FIELD_CONTACT_FULL_NAME];
