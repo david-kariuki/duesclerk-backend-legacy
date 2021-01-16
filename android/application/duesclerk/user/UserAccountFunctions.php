@@ -19,7 +19,7 @@ error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
 // Call project classes
 use duesclerk\database\DatabaseConnection;
-use duesclerk\configs\Constants;
+use duesclerk\constants\Constants;
 use duesclerk\mail\MailFunctions;
 use duesclerk\src\SharedFunctions;
 use duesclerk\src\LogsFunctions;

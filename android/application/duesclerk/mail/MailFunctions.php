@@ -24,9 +24,9 @@ use PHPMailer\PHPMailer\SMTP;
 
 // Call project classes
 use duesclerk\database\DatabaseConnection;
-use duesclerk\configs\Constants;
+use duesclerk\constants\Constants;
 use duesclerk\configs\MailConfiguration;
-use duesclerk\configs\Paths;
+use duesclerk\constants\Paths;
 use duesclerk\src\DateTimeFunctions;
 
 

@@ -11,7 +11,7 @@
 // Paths Class
 
 // Namespace declaration
-namespace duesclerk\configs;
+namespace duesclerk\constants;
 
 // Project directory path
 define("PATH_DIRECTORY_PROJECT",    $_SERVER["DOCUMENT_ROOT"]   . "/android"    . "/");

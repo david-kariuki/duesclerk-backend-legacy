@@ -19,7 +19,7 @@ error_reporting(E_ALL|E_NOTICE|E_STRICT);
 
 // Call project classes
 use duesclerk\database\DatabaseConnection;
-use duesclerk\configs\Constants;
+use duesclerk\constants\Constants;
 use duesclerk\src\SharedFunctions;
 use duesclerk\src\DateTimeFunctions;
 
@@ -49,7 +49,7 @@ class ContactFunctions
         // Initialize connection object
         $this->connectToDB      = $connectionInstance->getDatabaseConnection();
 
-        $this->constants        = new Constants();      // Initialize constants object
+        $this->constants        = new Constants();       // Initialize constants object
         $this->sharedFunctions  = new SharedFunctions(); // Initialize SharedFunctions class object
 
         // Initialize DateTimeFunctions class object

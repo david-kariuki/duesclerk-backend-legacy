@@ -9,7 +9,7 @@
 */
 
 // Namespace declaration
-namespace duesclerk\configs;
+namespace duesclerk\constants;
 
 // Enable error reporting
 error_reporting(1);
