@@ -5,7 +5,7 @@
 * This file adds contacts debts then returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
 // Enable Error Reporting
@@ -96,7 +96,10 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
         // Debt added
 
         // Set success message
-        $response[KEY_SUCCESS_MESSAGE] = "Debt added successfully!";
+        $response[KEY_SUCCESS_MESSAGE]  = "Debt added successfully!";
+
+        // Return inserted debt associative array
+        $response[KEY_DEBT]             = $addDebt;
 
         // Echo encoded JSON response
         echo json_encode($response);

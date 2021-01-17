@@ -37,9 +37,6 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
     if ($getContactDetails !== false) {
         // Contacts info fetched
 
-        // Add contact info to response array
-        $response[KEY_CONTACT_DETAILS] = $getContactDetails;
-
         $contactType = $getContactDetails[FIELD_CONTACT_TYPE]; // Get contact type
 
         // Get contact debts
@@ -51,9 +48,19 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
             if ($getContactsDebts !== null) {
                 // Contacts debts found
 
-                $response[KEY_DEBTS] = $getContactsDebts; // Add debts to response array
+                // Add debts total amount to contact details
+                $getContactDetails[FIELD_DEBTS_TOTAL_AMOUNT] = $getContactsDebts[FIELD_DEBTS_TOTAL_AMOUNT];
+
+                // Add contact info to response array
+                $response[KEY_CONTACT_DETAILS] = $getContactDetails;
+
+                // Add debts to response array
+                $response[KEY_DEBTS] = $getContactsDebts[KEY_DEBTS];
 
             } else {
+
+                // Add contact info to response array
+                $response[KEY_CONTACT_DETAILS] = $getContactDetails;
 
                 $response[KEY_DEBTS] = array(); // Set debts array to null
             }

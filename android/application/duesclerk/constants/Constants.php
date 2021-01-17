@@ -116,6 +116,8 @@ define("FIELD_DEBT_AMOUNT",                     "DebtAmount");
 define("FIELD_DEBT_DATE_ISSUED",                "DebtDateIssued");
 define("FIELD_DEBT_DATE_DUE",                   "DebtDateDue");
 define("FIELD_DEBT_DESCRIPTION",                "DebtDescription");
+define("FIELD_DEBT_ORDER",                      "DebtOrder");
+define("FIELD_DEBTS_TOTAL_AMOUNT",              "DebtsTotalAmount");
 define("KEY_DEBT",                              "Debt");
 define("KEY_DEBTS",                             "Debts");
 
@@ -126,8 +128,8 @@ define("KEY_DEBTS",                             "Debts");
 define("LENGTH_MIN_SINGLE_NAME",                1);
 define("LENGTH_MIN_PASSWORD",                   8);
 define("LENGTH_MAX_EMAIL_ADDRESS",              320);
-define("LENGTH_TABLE_IDS_SHORT",                20);
-define("LENGTH_TABLE_IDS_LONG",                 40);
+define("LENGTH_TABLE_IDS_SHORT",                25);
+define("LENGTH_TABLE_IDS_LONG",                 50);
 define("LENGTH_VERIFICATION_CODE",              6);
 
 

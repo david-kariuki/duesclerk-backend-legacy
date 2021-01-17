@@ -186,6 +186,8 @@ class ContactFunctions
             $contact = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
 
+            // Initialize contacts debts total amount to empty
+            $contact[FIELD_DEBTS_TOTAL_AMOUNT] = "";
 
             return $contact; // Return contact details array
 
@@ -411,135 +413,17 @@ class ContactFunctions
             // Loop through result to get all contact rows
             while ($row = $result->fetch_assoc()) {
 
+                // Initialize contacts debts total amount to empty
+                $row[FIELD_DEBTS_TOTAL_AMOUNT] = "";
+
                 $contacts[] = $row; // Add row to array
             }
 
             // Check array size
             if (sizeof($contacts) > 0) {
 
-                return $contacts; // Return contacts
-
-            } else {
-
-                return null; // Return null
-            }
-        } else {
-            // Query execution failed
-
-            return false; // Return false
-        }
-    }
-
-    /**
-    * Function to get a debts details
-    *
-    * @param DebtId - Debts id
-    *
-    * @return array - Associative array - (debt details)
-    */
-    private function getDebtDetailsByDebtId($debtId)
-    {
-
-        // Check for debt id in debts table
-        // Prepare statement
-        $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->constants->valueOfConst(KEY_DEBT)}.*
-            FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
-            AS {$this->constants->valueOfConst(KEY_DEBT)}
-            WHERE {$this->constants->valueOfConst(KEY_DEBT)}
-            .{$this->constants->valueOfConst(FIELD_DEBT_ID)}
-            = ?"
-        );
-        $stmt->bind_param("s", $debtId); // Bind parameters
-
-        // Check for query execution
-        if ($stmt->execute()) {
-            // Query executed
-
-            $debt = $stmt->get_result()->fetch_assoc(); // Get result array
-            $stmt->close(); // Close statement
-
-            return $debt; // Return debt details array
-
-        } else {
-            // Debt not found
-
-            $stmt->close(); // Close statement
-
-            return false; // Return false
-        }
-    }
-
-    /**
-    * Function to get an array of a contacts debts
-    *
-    * @param ContactId      - Contact id
-    * @param ContactType    - Contact type
-    * @param UserId         - UserId to get user contact debt list
-    *
-    * @return array         - Associaive array - (debts)
-    * @return boolean       - false - (On debts fetch failed)
-    * @return null          - on fetched array empty
-    */
-    public function getContactsDebts($contactId, $contactType, $userId)
-    {
-
-        // Prepare SELECT statement
-        $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->constants->valueOfConst(KEY_DEBTS)}.*
-            FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
-            AS {$this->constants->valueOfConst(KEY_DEBTS)}
-            WHERE {$this->constants->valueOfConst(KEY_DEBTS)}
-            .{$this->constants->valueOfConst(FIELD_CONTACT_ID)} = ?
-            AND {$this->constants->valueOfConst(KEY_DEBTS)}
-            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?
-            AND {$this->constants->valueOfConst(KEY_DEBTS)}
-            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
-            ORDER BY {$this->constants->valueOfConst(KEY_DEBTS)}
-            .{$this->constants->valueOfConst(FIELD_DEBT_DATE_ISSUED)} DESC"
-        );
-        $stmt->bind_param("sss", $contactId, $contactType, $userId); // Bind parameter
-        $stmt->execute(); // Execute statement
-        $result = $stmt->get_result(); // Get result
-        $stmt->close(); // Close statement
-
-        // Check for query execution
-        if ($result) {
-            // Query execution successful
-
-            // Create array to store all contact rows
-            $debts = array();
-
-            // Loop through result to get all contact rows
-            while ($row = $result->fetch_assoc()) {
-
-                // Get debt date issued and date due
-                $debtDateIssued = $row[FIELD_DEBT_DATE_ISSUED];
-                $debtDateDue    = $row[FIELD_DEBT_DATE_DUE];
-
-                // Convert debt date issued time format to users local time format
-                $readableDebtDateIssued = $this->dateTimeFunctions->convertDateFormat(
-                    $debtDateIssued,
-                    FORMAT_DATE_FULL
-                );
-
-                // Convert debt date due time format to users local time format
-                $readableDebtDateDue = $this->dateTimeFunctions->convertDateFormat(
-                    $debtDateDue,
-                    FORMAT_DATE_FULL
-                );
-
-                // Update rows debt dates to readable time format
-                $row[FIELD_DEBT_DATE_ISSUED]    = $readableDebtDateIssued; // Update date issued
-                $row[FIELD_DEBT_DATE_DUE]       = $readableDebtDateDue; // Update date due
-
-                $debts[] = $row; // Add row to array
-            }
-
-            // Check array size
-            if (sizeof($debts) > 0) {
-
-                return $debts; // Return contacts
+                // Return contacts with total debts amount
+                return $this->getAllContactsDebtsTotalFromArray($contacts);
 
             } else {
 
@@ -633,6 +517,7 @@ class ContactFunctions
                 $debtId, $debtAmount, $debtDateIssued, $debtDateDue, $debtDescription,
                 $contactId, $contactType, $userId
             );
+
             $add = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
 
@@ -652,6 +537,248 @@ class ContactFunctions
             return 0; // Return zero
         }
     }
+
+    /**
+    * Function to get a debts details
+    *
+    * @param DebtId - Debts id
+    *
+    * @return array - Associative array - (debt details)
+    */
+    private function getDebtDetailsByDebtId($debtId)
+    {
+
+        // Check for debt id in debts table
+        // Prepare statement
+        $stmt = $this->connectToDB->prepare(
+            "SELECT {$this->constants->valueOfConst(KEY_DEBT)}.*
+            FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
+            AS {$this->constants->valueOfConst(KEY_DEBT)}
+            WHERE {$this->constants->valueOfConst(KEY_DEBT)}
+            .{$this->constants->valueOfConst(FIELD_DEBT_ID)}
+            = ?"
+        );
+        $stmt->bind_param("s", $debtId); // Bind parameters
+
+        // Check for query execution
+        if ($stmt->execute()) {
+            // Query executed
+
+            $debt = $stmt->get_result()->fetch_assoc(); // Get result array
+            $stmt->close(); // Close statement
+
+            return $debt; // Return debt details array
+
+        } else {
+            // Debt not found
+
+            $stmt->close(); // Close statement
+
+            return false; // Return false
+        }
+    }
+
+    /**
+    * Function to get an array of a contacts debts
+    *
+    * @param ContactId      - Contact id
+    * @param ContactType    - Contact type
+    * @param UserId         - UserId to get user contact debt list
+    *
+    * @return array         - Associaive array - (debts)
+    * @return boolean       - false - (On debts fetch failed)
+    * @return null          - on fetched array empty
+    */
+    public function getContactsDebts($contactId, $contactType, $userId)
+    {
+
+        // Prepare SELECT statement
+        $stmt = $this->connectToDB->prepare(
+            "SELECT {$this->constants->valueOfConst(KEY_DEBTS)}.*
+            FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
+            AS {$this->constants->valueOfConst(KEY_DEBTS)}
+            WHERE {$this->constants->valueOfConst(KEY_DEBTS)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_ID)} = ?
+            AND {$this->constants->valueOfConst(KEY_DEBTS)}
+            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?
+            AND {$this->constants->valueOfConst(KEY_DEBTS)}
+            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
+            ORDER BY {$this->constants->valueOfConst(KEY_DEBTS)}
+            .{$this->constants->valueOfConst(FIELD_DEBT_ORDER)} DESC"
+        );
+
+        $stmt->bind_param("sss", $contactId, $contactType, $userId); // Bind parameter
+        $stmt->execute(); // Execute statement
+        $result = $stmt->get_result(); // Get result
+        $stmt->close(); // Close statement
+
+        // Check for query execution
+        if ($result) {
+            // Query execution successful
+
+            // Create array to store all contact rows
+            $debts = array();
+
+            // Loop through result to get all contact rows
+            while ($row = $result->fetch_assoc()) {
+
+                // Get debt date issued and date due
+                $debtDateIssued = $row[FIELD_DEBT_DATE_ISSUED];
+                $debtDateDue    = $row[FIELD_DEBT_DATE_DUE];
+
+                // Convert debt date issued time format to users local time format
+                $readableDebtDateIssued = $this->dateTimeFunctions->convertDateFormat(
+                    $debtDateIssued,
+                    FORMAT_DATE_FULL
+                );
+
+                // Convert debt date due time format to users local time format
+                $readableDebtDateDue = $this->dateTimeFunctions->convertDateFormat(
+                    $debtDateDue,
+                    FORMAT_DATE_FULL
+                );
+
+                // Update rows debt dates to readable time format
+                $row[FIELD_DEBT_DATE_ISSUED]    = $readableDebtDateIssued; // Update date issued
+                $row[FIELD_DEBT_DATE_DUE]       = $readableDebtDateDue; // Update date due
+
+                $debts[] = $row; // Add row to array
+            }
+
+            // Check array size
+            if (sizeof($debts) > 0) {
+
+                // Get total debts amount
+                $totalDebtsAmount = $this->getDebtsTotalAmountFromArray($debts);
+
+                // Debts data associative array to hold debts array and debts total amount
+                $debtsData = array(
+                    KEY_DEBTS => array(),           // Set to array
+                    FIELD_DEBTS_TOTAL_AMOUNT => 0   // Initialize to 0
+                );
+
+                $debtsData[KEY_DEBTS] = $debts; // Add debts to debts data array
+
+                // Add total debts amount to debts data array
+                $debtsData[FIELD_DEBTS_TOTAL_AMOUNT] = $totalDebtsAmount;
+
+                return $debtsData; // Return contacts
+
+            } else {
+
+                return null; // Return null
+            }
+        } else {
+            // Query execution failed
+
+            return false; // Return false
+        }
+    }
+
+    /**
+    * Function to get debts total amount for a all contacts
+    *
+    * @param contacts   - All users contacts
+    *
+    * @return array     - Associative array - (Users contacts with total debts amount)
+    * @return int       - 0 - (If array count is 0)
+    * @return null      - on fetched array empty
+    */
+    private function getAllContactsDebtsTotalFromArray($contacts)
+    {
+        // Check if passed parameter is array
+        if (is_array($contacts)) {
+            // Passed parameter is array
+
+            if (sizeof($contacts) > 0) {
+
+                // Loop through all contacts debts
+                foreach($contacts as $key => $contact) {
+
+                    $contactId      = "";
+                    $contactType    = "";
+                    $userId         = "";
+
+                    // Loop through single debt to get debt details
+                    foreach ($contact as $key => $contactDetails) {
+
+                        $contactId      = $contact[FIELD_CONTACT_ID];
+                        $contactType    = $contact[FIELD_CONTACT_TYPE];
+                        $userId         = $contact[FIELD_USER_ID];
+                    }
+
+                    $contactsDebts = $this->getContactsDebts($contactId, $contactType, $userId);
+
+                    $debtsTotalAmount = $contactsDebts[FIELD_DEBTS_TOTAL_AMOUNT];
+
+                    if ($debtsTotalAmount != null) {
+
+                        $contact[FIELD_DEBTS_TOTAL_AMOUNT] = $debtsTotalAmount;
+                    } else {
+
+                        $contact[FIELD_DEBTS_TOTAL_AMOUNT] = "";
+                    }
+
+                    $contactsWithTotalDebts[] = $contact;
+                }
+
+                return $contactsWithTotalDebts;
+            } else {
+
+                return 0; // If array count is 0 (no record found)
+            }
+        } else {
+
+            return null; // If passed parameter is not an array
+        }
+    }
+
+    /**
+    * Function to get debts total amount for a single contact
+    *
+    * @param debts          - All contacts debts
+    *
+    * @return int           - Total debts amount
+    * @return int           - 0 - (If array count is 0)
+    * @return null          - on fetched array empty
+    */
+    private function getDebtsTotalAmountFromArray($debts)
+    {
+        // Check if passed parameter is array
+        if (is_array($debts)){
+
+            // Check array length
+            if (sizeof($debts) > 0) {
+
+                $totalDebtsAmount = 0; // Variable to hold total debts amount
+
+                // Loop through all contacts debts
+                foreach($debts as $key => $debt) {
+
+                    // Loop through single debt to get debt details
+                    foreach ($debt as $key => $debtDetails) {
+
+                        // Check if current key in loop is amounts field
+                        if ($key == FIELD_DEBT_AMOUNT) {
+
+                            // Increment total value with current debt amount value
+                            $totalDebtsAmount += $debt[$key];
+                        }
+                    }
+                }
+
+                // Round off total debts amount to 2 decimal places
+                return number_format((float)$totalDebtsAmount, 2, '.', '');
+
+            } else {
+
+                return 0; // If array count is 0 (no record found)
+            }
+        } else {
+
+            return null; // If passed parameter is not an array
+        }
+    }
 }
 
-// EOF: ContactFunctions
+// EOF: ContactFunctions.php
