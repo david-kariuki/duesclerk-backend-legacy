@@ -73,6 +73,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
                 // Echo encoded JSON response
                 echo json_encode($response);
 
+                exit; // Exit script
+
             } else {
                 // Code deletion failed
 
@@ -82,6 +84,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
 
                 // Echo encoded JSON response
                 echo json_encode($response);
+
+                exit; // Exit script
             }
         } else {
             // Password update failed
@@ -92,6 +96,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
 
             // Echo encoded JSON response
             echo json_encode($response);
+
+            exit; // Exit script
         }
     }
 } else {
@@ -103,6 +109,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: resetPassword.php

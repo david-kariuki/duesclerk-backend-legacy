@@ -147,6 +147,8 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                             // Echo encoded JSON response
                             echo json_encode($response);
+
+                            exit; // Exit script
                         }
                     } else {
                         // Old verification code is still valid
@@ -183,6 +185,8 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                     // Echo encoded JSON response
                     echo json_encode($response);
+
+                    exit; // Exit script
                 }
             }
 
@@ -217,6 +221,8 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                 // Echo encoded JSON response
                 echo json_encode($response);
 
+                exit; // Exit script
+
             } else {
 
                 // Set response error to true and add error message
@@ -225,6 +231,8 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                 // Echo encoded JSON response
                 echo json_encode($response);
+
+                exit; // Exit script
             }
         }
     }
@@ -237,6 +245,8 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: sendEmailVerificationCode.php

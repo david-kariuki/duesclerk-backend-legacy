@@ -87,6 +87,8 @@ if (
             // Echo encoded JSON response
             echo json_encode($response);
 
+            exit; // Exit script
+
         } else {
 
             // Add email address to contact details array
@@ -114,6 +116,8 @@ if (
 
                 // Echo encoded JSON response
                 echo json_encode($response);
+
+                exit; // Exit script
             }
         }
     }
@@ -134,6 +138,8 @@ if (
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 
     // Add contact to database
@@ -149,6 +155,8 @@ if (
         // Echo encoded JSON response
         echo json_encode($response);
 
+        exit; // Exit script
+
     } else {
         // Contact addition failed
 
@@ -158,6 +166,8 @@ if (
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 } else {
     // Mising fields
@@ -168,6 +178,8 @@ if (
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: addUserContact.php

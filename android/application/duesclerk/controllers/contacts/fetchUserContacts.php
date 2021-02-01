@@ -41,6 +41,8 @@ if (isset($_POST[FIELD_USER_ID])) {
         // Echo encoded JSON response
         echo json_encode($response);
 
+        exit; // Exit script
+
     } else {
         // User contact fetching failed
 
@@ -50,6 +52,8 @@ if (isset($_POST[FIELD_USER_ID])) {
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 } else {
     // Mising fields
@@ -60,6 +64,8 @@ if (isset($_POST[FIELD_USER_ID])) {
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: fetchUserContact.php

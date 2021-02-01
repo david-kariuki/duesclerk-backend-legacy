@@ -73,6 +73,8 @@ if (
             // Echo encoded JSON response
             echo json_encode($response);
 
+            exit; // Exit script
+
         } else {
             // New passwprd
 
@@ -162,10 +164,12 @@ if (
         // Update successful
 
         // Set success message
-        $response[KEY_UPDATE_PROFILE][KEY_SUCCESS_MESSAGE] = "Update successful!";
+        $response[KEY_UPDATE_PROFILE][KEY_SUCCESS_MESSAGE] = "Profile updated successfully!";
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
 
     } else {
         // Update unsuccessful
@@ -176,6 +180,8 @@ if (
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 
 } else {
@@ -187,6 +193,8 @@ if (
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: updateUserProfile.php

@@ -117,6 +117,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                     // Echo encoded JSON response
                     echo json_encode($response);
 
+                    exit; // Exit script
+
                 } else {
                     // Verification code expired
 
@@ -126,6 +128,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
                     // Echo encoded JSON response
                     echo json_encode($response);
+
+                    exit; // Exit script
                 }
             }
         }
@@ -138,6 +142,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 
 
@@ -158,6 +164,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
             // Echo encoded JSON response
             echo json_encode($response);
+
+            exit; // Exit script
 
         } else if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
             // Email account verification code
@@ -197,6 +205,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
                         // Echo encoded JSON response
                         echo json_encode($response);
+
+                        exit; // Exit script
                     }
                 } else {
                     // Email verified field update failed
@@ -207,6 +217,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
                     // Echo encoded JSON response
                     echo json_encode($response);
+
+                    exit; // Exit script
                 }
             } else {
                 // Email verification details deletion failed
@@ -217,6 +229,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
                 // Echo encoded JSON response
                 echo json_encode($response);
+
+                exit; // Exit script
             }
         }
     } else {
@@ -228,6 +242,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 } else {
     // Missing params
@@ -238,6 +254,8 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: verifyEmailAddress.php

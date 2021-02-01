@@ -94,6 +94,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
                 // Echo encoded JSON response
                 echo json_encode($response);
 
+                exit; // Exit script
+
             } else {
                 // Account switching failed
 
@@ -103,6 +105,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
 
                 // Echo encoded JSON response
                 echo json_encode($response);
+
+                exit; // Exit script
             }
         } else {
             // Pasword verification failed
@@ -113,6 +117,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
 
             // Echo encoded JSON response
             echo json_encode($response);
+
+            exit; // Exit script
         }
     }
 } else {
@@ -124,6 +130,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_PASSWORD])
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: switchAccountType.php

@@ -68,6 +68,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
             // Echo encoded JSON response
             echo json_encode($response);
 
+            exit; // Exit script
+
         } else {
             // Get contacts debts failed
 
@@ -77,6 +79,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
 
             // Echo encoded JSON response
             echo json_encode($response);
+
+            exit; // Exit script
         }
     } else {
         // Contact info not fetched
@@ -87,6 +91,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 
 } else {
@@ -98,6 +104,8 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: fetchContactsDebts.php

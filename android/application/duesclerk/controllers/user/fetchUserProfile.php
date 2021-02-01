@@ -8,7 +8,6 @@
 * @copyright Copyright (c) 2020 David Kariuki (dk) All Rights Reserved.
 */
 
-
 error_reporting(1); // Enable error reporting
 
 // Call autoloader fie
@@ -74,6 +73,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
         // Echo encoded JSON response
         echo json_encode($response);
 
+        exit; // Exit script
+
     } else {
         // User not found
 
@@ -83,6 +84,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 
 } else {
@@ -94,6 +97,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: fetchUserDetails.php

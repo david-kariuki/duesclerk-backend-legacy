@@ -48,6 +48,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 		// Echo encoded JSON response
 		echo json_encode($response);
 
+        exit; // Exit script
+
 	} else {
 		// User Not Found
 
@@ -62,6 +64,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 			// Echo encoded JSON response
 			echo json_encode($response);
 
+            exit; // Exit script
+
 		} else {
 			// User not found
 
@@ -71,6 +75,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
 			// Echo encoded JSON response
 			echo json_encode($response);
+
+            exit; // Exit script
 		}
 	}
 } else {
@@ -82,6 +88,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
 	// Echo encoded JSON response
 	echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: signInUser.php

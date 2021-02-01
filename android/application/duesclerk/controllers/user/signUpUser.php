@@ -98,6 +98,8 @@ if (
         // Echo encoded JSON response
         echo json_encode($response);
 
+        exit; // Exit script
+
 
     } else if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
         // Email address exists
@@ -110,6 +112,8 @@ if (
         // Echo encoded JSON response
         echo json_encode($response);
 
+        exit; // Exit script
+
         // Check password length
     } else if (strlen($password) < LENGTH_MIN_PASSWORD) {
         // Password too short
@@ -121,6 +125,8 @@ if (
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
 
     } else {
 
@@ -139,6 +145,8 @@ if (
                 // Echo encoded JSON response
                 echo json_encode($response);
 
+                exit; // Exit script
+
                 // Check if last name is alphabetical
             } else if (!preg_match(EXPRESSION_NAMES, $lastName)) {
                 // Invalid last name
@@ -150,6 +158,8 @@ if (
 
                 // Echo encoded JSON response
                 echo json_encode($response);
+
+                exit; // Exit script
 
                 // Check first name Length
             } else if (strlen($firstName) < LENGTH_MIN_SINGLE_NAME) {
@@ -163,6 +173,8 @@ if (
                 // Echo encoded JSON response
                 echo json_encode($response);
 
+                exit; // Exit script
+
                 // Check last name length
             } else if (strlen($lastName) < LENGTH_MIN_SINGLE_NAME) {
                 // Last name too Short
@@ -175,6 +187,7 @@ if (
                 // Echo encoded JSON response
                 echo json_encode($response);
 
+                exit; // Exit script
             }
 
             // Check for set params
@@ -232,6 +245,8 @@ if (
             // Echo encoded JSON response
             echo json_encode($response);
 
+            exit; // Exit script
+
         } else {
             // Signup failed
 
@@ -241,6 +256,8 @@ if (
 
             // Echo encoded JSON response
             echo json_encode($response);
+
+            exit; // Exit script
         }
     }
 } else {
@@ -252,6 +269,8 @@ if (
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: signUpUser.php

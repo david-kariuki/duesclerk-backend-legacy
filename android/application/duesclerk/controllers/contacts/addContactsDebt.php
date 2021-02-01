@@ -69,6 +69,8 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 
     // Check for debt description
@@ -104,6 +106,8 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
         // Echo encoded JSON response
         echo json_encode($response);
 
+        exit; // Exit script
+
     } else {
 
         // Set response error to true and add error message
@@ -112,6 +116,8 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
 
         // Echo encoded JSON response
         echo json_encode($response);
+
+        exit; // Exit script
     }
 
 } else {
@@ -123,6 +129,8 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
 
     // Echo encoded JSON response
     echo json_encode($response);
+
+    exit; // Exit script
 }
 
 // EOF: fetchContactsDebts.php
