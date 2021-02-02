@@ -100,6 +100,8 @@ define("FIELD_CONTACT_PHONE_NUMBER",            "ContactPhoneNumber");
 define("FIELD_CONTACT_EMAIL_ADDRESS",           "ContactEmailAddress");
 define("FIELD_CONTACT_ADDRESS",                 "ContactAddress");
 define("FIELD_CONTACT_TYPE",                    "ContactType");
+define("FIELD_CONTACT_ORDER",                   "ContactOrder");
+define("KEY_UPDATE_CONTACT",                    "UpdateContact");
 
 define("KEY_CONTACT",                           "Contact");
 define("KEY_CONTACTS",                          "Contacts");
