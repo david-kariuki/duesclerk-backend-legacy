@@ -285,6 +285,51 @@ class ContactFunctions
     }
 
     /**
+    * Function to update contact details
+    *
+    * @param contactDetails - Contact details associative array
+    *
+    * @return boolean - (update successfull / failed)
+    */
+    public function updateContactDetails($contactDetails)
+    {
+        // Check required fields
+        if (array_key_exists(FIELD_USER_ID, $contactDetails)
+        && array_key_exists(FIELD_CONTACT_ID, $contactDetails)) {
+            // User id and contact id exists
+
+            // Prepare UPDATE statement
+            $stmt = $this->connectToDB->prepare(
+                "UPDATE {$this->constants->valueOfConst(TABLE_CONTACTS)}
+                SET {$this->constants->valueOfConst(FIELD_CONTACT_FULL_NAME)} = ?,
+                {$this->constants->valueOfConst(FIELD_CONTACT_PHONE_NUMBER)} = ?,
+                {$this->constants->valueOfConst(FIELD_CONTACT_EMAIL_ADDRESS)} = ?,
+                {$this->constants->valueOfConst(FIELD_CONTACT_ADDRESS)} = ?
+                WHERE {$this->constants->valueOfConst(TABLE_CONTACTS)}
+                .{$this->constants->valueOfConst(FIELD_CONTACT_ID)} = ?
+                AND {$this->constants->valueOfConst(TABLE_CONTACTS)}
+                .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?"
+            );
+
+            // Bind parameters
+            $stmt->bind_param(
+                "ssssss",
+                $contactDetails[FIELD_CONTACT_FULL_NAME],
+                $contactDetails[FIELD_CONTACT_PHONE_NUMBER],
+                $contactDetails[FIELD_CONTACT_EMAIL_ADDRESS],
+                $contactDetails[FIELD_CONTACT_ADDRESS],
+                $contactDetails[FIELD_CONTACT_ID],
+                $contactDetails[FIELD_USER_ID]
+            );
+
+            $updated = $stmt->execute(); // Execute statement
+            $stmt->close(); // Close statement
+
+            return $updated; // Return boolean on update success status
+        }
+    }
+
+    /**
     * Function to add user contact to contact table
     *
     * @param userId         - User id for user adding the contact
@@ -302,7 +347,7 @@ class ContactFunctions
             && array_key_exists(FIELD_CONTACT_PHONE_NUMBER, $contactDetails)
             && array_key_exists(FIELD_CONTACT_TYPE, $contactDetails)
         ) {
-            // Required fields set
+            // Required fields exist
 
             // Get contact details from associative array
 
@@ -310,7 +355,7 @@ class ContactFunctions
             $contactPhoneNumber    = $contactDetails[FIELD_CONTACT_PHONE_NUMBER];
             $contactType           = $contactDetails[FIELD_CONTACT_TYPE];
             $contactEmailAddress   = "NULL";
-            $contactAddress         = "NULL";
+            $contactAddress        = "NULL";
 
             // Check for contact email address
             if (array_key_exists(FIELD_CONTACT_EMAIL_ADDRESS, $contactDetails)) {
@@ -354,6 +399,7 @@ class ContactFunctions
                 "sssssss",
                 $contactId, $contactFullName, $contactPhoneNumber, $contactEmailAddress, $contactAddress, $contactType, $userId
             );
+
             $add = $stmt->execute(); // Execute statement
             $stmt->close(); // Close statement
 
@@ -454,7 +500,7 @@ class ContactFunctions
         && array_key_exists(FIELD_DEBT_DATE_ISSUED, $debtDetails)
         && array_key_exists(FIELD_DEBT_DATE_DUE, $debtDetails)
         && array_key_exists(FIELD_CONTACT_TYPE, $debtDetails)) {
-            // Required fields set
+            // Required fields exist
 
             // Generate debt id
             $debtId = $this->sharedFunctions->generateUniqueId(
