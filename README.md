@@ -2,4 +2,4 @@
 
 `Application to manage dues for personal and business use.`
 
-This is the applications PHP backend.
+This is the applications PHP back-end.

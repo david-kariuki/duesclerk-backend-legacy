@@ -8,17 +8,19 @@
 * @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
-// Enable Error Reporting
+// Enable error reporting
 error_reporting(1);
 
-// Call autoloader fie
+// Call autoloader file
 require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\contact\ContactFunctions;
+use duesclerk\debt\DebtFunctions;
 
-// Create Classes Objects
-$contactFunctions = new ContactFunctions();
+// Create classes objects
+$contactFunctions   = new ContactFunctions();
+$debtFunctions      = new DebtFunctions();
 
 // Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
@@ -55,6 +57,7 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
     // Get contact by contact id
     $getContact = $contactFunctions->getContactDetailsByContactId($contactId);
 
+    // Check if contact fetched
     if ($getContact !== false) {
         // Contact fetched
 
@@ -91,7 +94,7 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
     $debtDetails[FIELD_CONTACT_TYPE]        = $contactType;     // Add contact type
     $debtDetails[FIELD_USER_ID]             = $userId;          // Add user id
 
-    $addDebt = $contactFunctions->addContactsDebt($debtDetails); // Add debt to contact
+    $addDebt = $debtFunctions->addContactsDebt($debtDetails); // Add debt to contact
 
     // Check if debt was added
     if ($addDebt !== false) {
