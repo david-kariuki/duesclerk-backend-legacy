@@ -16,9 +16,11 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\contact\ContactFunctions;
+use duesclerk\debt\DebtFunctions;
 
 // Create Classes Objects
-$contactFunctions = new ContactFunctions();
+$contactFunctions   = new ContactFunctions();
+$debtFunctions      = new DebtFunctions();
 
 // Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
@@ -40,7 +42,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
         $contactType = $getContactDetails[FIELD_CONTACT_TYPE]; // Get contact type
 
         // Get contact debts
-        $getContactsDebts = $contactFunctions->getContactsDebts($contactId, $contactType, $userId);
+        $getContactsDebts = $debtFunctions->getContactsDebts($contactId, $contactType, $userId);
 
         // Check for debts
         if ($getContactsDebts !== false) {

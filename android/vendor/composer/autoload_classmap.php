@@ -1125,6 +1125,7 @@ return array(
     'duesclerk\\constants\\Paths' => $baseDir . '/application/duesclerk/constants/Paths.php',
     'duesclerk\\contact\\ContactFunctions' => $baseDir . '/application/duesclerk/contact/ContactFunctions.php',
     'duesclerk\\database\\DatabaseConnection' => $baseDir . '/application/duesclerk/database/DatabaseConnection.php',
+    'duesclerk\\debt\\DebtFunctions' => $baseDir . '/application/duesclerk/debt/DebtFunctions.php',
     'duesclerk\\mail\\MailFunctions' => $baseDir . '/application/duesclerk/mail/MailFunctions.php',
     'duesclerk\\src\\DateTimeFunctions' => $baseDir . '/application/duesclerk/src/DateTimeFunctions.php',
     'duesclerk\\src\\ListGridFunctions' => $baseDir . '/application/duesclerk/src/ListGridFunctions.php',

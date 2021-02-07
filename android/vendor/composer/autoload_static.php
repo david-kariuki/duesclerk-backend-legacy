@@ -1244,6 +1244,7 @@ class ComposerStaticInit9e857291db0757375cb88789b76cb712
         'duesclerk\\constants\\Paths' => __DIR__ . '/../..' . '/application/duesclerk/constants/Paths.php',
         'duesclerk\\contact\\ContactFunctions' => __DIR__ . '/../..' . '/application/duesclerk/contact/ContactFunctions.php',
         'duesclerk\\database\\DatabaseConnection' => __DIR__ . '/../..' . '/application/duesclerk/database/DatabaseConnection.php',
+        'duesclerk\\debt\\DebtFunctions' => __DIR__ . '/../..' . '/application/duesclerk/debt/DebtFunctions.php',
         'duesclerk\\mail\\MailFunctions' => __DIR__ . '/../..' . '/application/duesclerk/mail/MailFunctions.php',
         'duesclerk\\src\\DateTimeFunctions' => __DIR__ . '/../..' . '/application/duesclerk/src/DateTimeFunctions.php',
         'duesclerk\\src\\ListGridFunctions' => __DIR__ . '/../..' . '/application/duesclerk/src/ListGridFunctions.php',
