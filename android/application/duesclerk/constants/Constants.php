@@ -125,6 +125,7 @@ define("FIELD_DEBTS_TOTAL_AMOUNT",              "DebtsTotalAmount");
 define("KEY_DEBT",                              "Debt");
 define("KEY_DEBTS",                             "Debts");
 define("KEY_DEBTS_IDS",                         "DebtsIds");
+define("KEY_DELETE_DEBTS",                      "DeleteDebts");
 
 
 /**
