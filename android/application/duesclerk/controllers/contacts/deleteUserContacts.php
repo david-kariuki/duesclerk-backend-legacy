@@ -26,8 +26,6 @@ $response = array(KEY_ERROR => false);
 // Check for set POST params
 if (isset($_POST[KEY_CONTACTS_IDS]) && isset($_POST[FIELD_USER_ID])) {
 
-    $contactIds = array(); // Contact ids array
-
     // Get Values From POST
     $contactIds = $_POST[KEY_CONTACTS_IDS]  ? $_POST[KEY_CONTACTS_IDS] : ''; // Get ContactIds
     $userId     = $_POST[FIELD_USER_ID]     ? $_POST[FIELD_USER_ID]     : ''; // Get UserId
