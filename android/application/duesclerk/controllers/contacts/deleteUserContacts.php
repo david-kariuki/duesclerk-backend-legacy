@@ -60,6 +60,7 @@ if (isset($_POST[KEY_CONTACTS_IDS]) && isset($_POST[FIELD_USER_ID])) {
         exit; // Exit script
 
     } else if ($deleteContacts == false) {
+        // Contact not deleted
 
         // Set response error to true and add error message
         $response[KEY_ERROR]           = true;
@@ -71,6 +72,7 @@ if (isset($_POST[KEY_CONTACTS_IDS]) && isset($_POST[FIELD_USER_ID])) {
         exit; // Exit script
 
     } else {
+        // Contact deleted
 
         // Set success message
         $response[KEY_DELETE_CONTACTS][KEY_SUCCESS_MESSAGE] = "Contact deleted!";
