@@ -449,60 +449,67 @@ class DebtFunctions
     *
     * @return boolean   - (Debt deletion successful / failed)
     */
-    public function deleteDebts($debtIds, $contactId)
+    public function deleteContactsDebts($debtsIds, $contactId)
     {
 
-        $debtIds = array($debtIds); // Convert passed parameter values into an array
+        $debtsIds = array($debtsIds); // Convert passed parameter values into an array
 
         // Check if variable is array
-        if (is_array($debtIds)) {
+        if (is_array($debtsIds)) {
             // Variable is array
 
-            $debtIdsCount = sizeof($debtIds); // Check debtIds array length
+            // Sanitize array elements
+            $debtsIds = $this->sharedFunctions->sanitizeArrayElements($debtsIds);
 
-            if ($debtIdsCount == 1) {
-                // Deleting one debt
+            // Loop through array to get contact ids
+            foreach($debtsIds as $debtId) {
 
-                // Prepare DELETE statement
-                $stmt = $this->connectToDB->prepare(
-                    "DELETE FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
-                    WHERE {$this->constants->valueOfConst(TABLE_DEBTS)}
-                    .{$this->constants->valueOfConst(FIELD_DEBT_ID)} = ?
-                    AND {$this->constants->valueOfConst(TABLE_DEBTS)}
-                    .{$this->constants->valueOfConst(FIELD_CONTACT_ID)} = ?"
-                );
+                // Get debt by debt id
+                $debt = $this->getDebtDetailsByDebtId($debtId);
 
-                $stmt->bind_param("ss", $debtIds[0], $contactId); // Bind parameters
+                // Check if debt found
+                if ($debt !== false) {
+                    // Debt exists
 
-            } else {
-                // Deleting multiple debts
+                    // Get debts history - Coming soon
+                    // $contactsDebts = array($this->debtFunctions->getContactsDebts(
+                    //     $debtId,
+                    //     $contact[FIELD_CONTACT_TYPE],
+                    //     $userId
+                    // ));
 
-                $placeholders = str_repeat("?, ", $debtIdsCount); // Repeat placeholders
-                $placeholders = rtrim($placeholders, ", "); // Trim trailing comma and space
+                    // Check debts history size
+                    // if (sizeof($contactsDebts) > 0) {
+                    //     // Debts exist for contact
+                    //
+                    //     // Delete debts for contacts
+                    //     if (!$this->debtFunctions->deleteAllDebtsForContact($debtId, $userId)) {
+                    //         // Contacts debts not deleted
+                    //
+                    //         return 0; // Return 0
+                    //     }
+                    // }
 
-                $values = array(); // Values array
-                $values = $debtIds; // Add debt ids to values array
+                    // Prepare DELETE statement to delete debt from debts table
+                    $stmt = $this->connectToDB->prepare(
+                        "DELETE FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
+                        WHERE {$this->constants->valueOfConst(TABLE_DEBTS)}
+                        .{$this->constants->valueOfConst(FIELD_DEBT_ID)} = ?
+                        AND {$this->constants->valueOfConst(TABLE_DEBTS)}
+                        .{$this->constants->valueOfConst(FIELD_CONTACT_ID)} = ?"
+                    );
 
-                // Add contact id to the end of values array
-                $values = array_push($values, $contactId);
+                    $stmt->bind_param("ss", $debtId, $contactId); // Bind parameters
+                    $deleted = $stmt->execute(); // Execute statement
+                    $stmt->close(); // Close statement
 
-                // Prepare DELETE statement
-                $stmt = $this->connectToDB->prepare(
-                    "DELETE FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
-                    WHERE {$this->constants->valueOfConst(TABLE_DEBTS)}
-                    .{$this->constants->valueOfConst(FIELD_DEBT_ID)}
-                    IN ($values)
-                    AND {$this->constants->valueOfConst(TABLE_DEBTS)}
-                    .{$this->constants->valueOfConst(FIELD_CONTACT_ID)} = ?"
-                );
+                    return $deleted; // Return deletion status
 
-                $stmt->bind_param("ss", ...$debtIds); // Bind parameters
+                } else {
+
+                    return null; // Return null
+                }
             }
-
-            $deleted = $stmt->execute(); // Execute statememt
-            $stmt->close(); // Close statement
-
-            return $deleted; // Return deletion status
         }
     }
 }
