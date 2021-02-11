@@ -8,17 +8,19 @@
 * @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
 */
 
-// Enable Error Reporting
+// Enable error reporting
 error_reporting(1);
 
-// Call autoloader fie
+// Call autoloader file
 require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\contact\ContactFunctions;
+use duesclerk\debt\DebtFunctions;
 
-// Create Classes Objects
-$contactFunctions = new ContactFunctions();
+// Create classes objects
+$contactFunctions   = new ContactFunctions();
+$debtFunctions      = new DebtFunctions();
 
 // Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
@@ -44,10 +46,13 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
 
     // Get debt amount
     $debtAmount     = $_POST[FIELD_DEBT_AMOUNT]  ? $_POST[FIELD_DEBT_AMOUNT]  : '';
+
     // Get debt date issued
     $debtDateIssued = $_POST[FIELD_DEBT_DATE_ISSUED]  ? $_POST[FIELD_DEBT_DATE_ISSUED]  : '';
+
     // Get debt date due
     $debtDateDue    = $_POST[FIELD_DEBT_DATE_DUE]  ? $_POST[FIELD_DEBT_DATE_DUE]  : '';
+
     $userId         = $_POST[FIELD_USER_ID]     ? $_POST[FIELD_USER_ID]     : ''; // Get UserId
     $contactId      = $_POST[FIELD_CONTACT_ID]  ? $_POST[FIELD_CONTACT_ID]  : ''; // Get ContactId
     $contactType    = ""; // Contact type
@@ -55,6 +60,7 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
     // Get contact by contact id
     $getContact = $contactFunctions->getContactDetailsByContactId($contactId);
 
+    // Check if contact fetched
     if ($getContact !== false) {
         // Contact fetched
 
@@ -83,6 +89,17 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
         $debtDetails[FIELD_DEBT_DESCRIPTION] = $debtDescription;
     }
 
+    // Get first element of debt amount
+    $firstElementOfAmount = $debtAmount[0];
+
+    // Check if the first element is a dot
+    if ($firstElementOfAmount == ".") {
+        // Amount is a float with a leading dot without 0
+
+        // Add a zero to the beggining of debt amount
+        $debtAmount = "0" . $debtAmount;
+    }
+
     // Add other details to debt details array
     $debtDetails[FIELD_DEBT_AMOUNT]         = $debtAmount;      // Add debt amount
     $debtDetails[FIELD_DEBT_DATE_ISSUED]    = $debtDateIssued;  // Add debt date issued
@@ -91,7 +108,7 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
     $debtDetails[FIELD_CONTACT_TYPE]        = $contactType;     // Add contact type
     $debtDetails[FIELD_USER_ID]             = $userId;          // Add user id
 
-    $addDebt = $contactFunctions->addContactsDebt($debtDetails); // Add debt to contact
+    $addDebt = $debtFunctions->addContactsDebt($debtDetails); // Add debt to contact
 
     // Check if debt was added
     if ($addDebt !== false) {

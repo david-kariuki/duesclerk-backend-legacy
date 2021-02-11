@@ -104,8 +104,10 @@ define("FIELD_CONTACT_ORDER",                   "ContactOrder");
 define("KEY_UPDATE_CONTACT",                    "UpdateContact");
 
 define("KEY_CONTACT",                           "Contact");
+define("KEY_CONTACTS_IDS",                      "ContactsIds");
 define("KEY_CONTACTS",                          "Contacts");
 define("KEY_CONTACT_DETAILS",                   "ContactDetails");
+define("KEY_DELETE_CONTACTS",                   "DeleteContacts");
 define("KEY_CONTACT_TYPE_PEOPLE_I_OWE",         "ContactTypePeopleIOwe");
 define("KEY_CONTACT_TYPE_PEOPLE_OWING_ME",      "ContactTypePeopleOwingMe");
 
@@ -122,6 +124,8 @@ define("FIELD_DEBT_ORDER",                      "DebtOrder");
 define("FIELD_DEBTS_TOTAL_AMOUNT",              "DebtsTotalAmount");
 define("KEY_DEBT",                              "Debt");
 define("KEY_DEBTS",                             "Debts");
+define("KEY_DEBTS_IDS",                         "DebtsIds");
+define("KEY_DELETE_DEBTS",                      "DeleteDebts");
 
 
 /**
