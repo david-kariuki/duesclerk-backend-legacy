@@ -106,4 +106,55 @@ class SharedFunctions
             $stmt->close(); // Close statement
         }
     }
+
+    /**
+    * Function to sanitize array elements
+    * This function removes square brackets from array elements
+    *
+    * @param array      - Array to sanitize
+    *
+    * @return int       - 0 - If array size is 0
+    * @return boolean   - false - If passed parameter is not an array
+    * @return array     - Sanitized array
+    */
+    public function sanitizeArrayElements($array)
+    {
+
+        // Check if passed variable is array
+        if (is_array($array)) {
+            // Passed parameter is array
+
+            // Check array size
+            if (sizeof($array) > 0) {
+                // Array size greater than 0
+
+                $sanitizedArray = array(); // Array to hold new sanitized elements
+
+                // Loop through array
+                foreach ($array as $element) {
+
+                    // Remove unwanted characters from array passed with array elements
+                    $element = str_replace(
+                        // Array of unwanted characters
+                        array('[', ']'),
+                        "",
+                        $element
+                    );
+
+                    $sanitizedArray[] = $element; // Add element to sanitized array
+                }
+
+                return $sanitizedArray; // Return sanitized array
+
+            } else {
+                // Array size is 0
+
+                return 0; // Return 0
+            }
+        } else {
+            // Passed parameter is not an array
+
+            return false; // Return false
+        }
+    }
 }
