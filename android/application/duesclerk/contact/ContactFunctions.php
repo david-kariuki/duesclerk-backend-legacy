@@ -492,17 +492,20 @@ class ContactFunctions
     * @return boolean   - (Contact deletion status)
     * @return int       - 0 - When debts deletion failed
     */
-    public function deleteUserContacts($contactIds, $userId)
+    public function deleteUserContacts($contactsIds, $userId)
     {
 
-        $contactIds = array($contactIds); // Convert passed parameter values into an array
+        $contactsIds = array($contactsIds); // Convert passed parameter values into an array
 
         // Check if variable is array
-        if (is_array($contactIds)) {
+        if (is_array($contactsIds)) {
             // Variable is array
 
+            // Sanitize array elements
+            $contactsIds = $this->sharedFunctions->sanitizeArrayElements($contactsIds);
+
             // Loop through array to get contact ids
-            foreach($contactIds as $contactId) {
+            foreach($contactsIds as $contactId) {
 
                 // Get contact by contact id
                 $contact = $this->getContactDetailsByContactId($contactId);
