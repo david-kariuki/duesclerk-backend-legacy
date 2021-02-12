@@ -46,14 +46,26 @@ if (isset($_POST[FIELD_USER_ID])) {
     } else {
         // User contact fetching failed
 
-        // Set response error to true and add error message
-        $response[KEY_ERROR]           = true;
-        $response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
+        if ($getContacts == null) {
+            // Contacts not found
 
-        // Echo encoded JSON response
-        echo json_encode($response);
+            $response[KEY_CONTACTS] = array(); // Set empty array as contacts
 
-        exit; // Exit script
+            // Echo encoded JSON response
+            echo json_encode($response);
+
+            exit; // Exit script
+
+        } else {
+            // Set response error to true and add error message
+            $response[KEY_ERROR]           = true;
+            $response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
+
+            // Echo encoded JSON response
+            echo json_encode($response);
+
+            exit; // Exit script
+        }
     }
 } else {
     // Mising fields
