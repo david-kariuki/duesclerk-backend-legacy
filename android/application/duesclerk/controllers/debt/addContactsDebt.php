@@ -98,6 +98,20 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
 
         // Add a zero to the beggining of debt amount
         $debtAmount = "0" . $debtAmount;
+
+    // Check if first element is a zero
+    } else if ($firstElementOfAmount == "0") {
+
+        // Get second element of debt amount
+        $secondElementOfAmount = $debtAmount[1];
+
+        // Check if second element is numeric to determine if debt amount
+        // is a number with a leading zero
+        if (is_numeric($secondElementOfAmount)) {
+            // Debt amount has leading zero
+
+            $debtAmount = ltrim($debtAmount, "0"); // Trim leading zero in debt amount
+        }
     }
 
     // Add other details to debt details array
