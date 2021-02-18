@@ -136,7 +136,7 @@ class SharedFunctions
                     // Remove unwanted characters from array passed with array elements
                     $element = str_replace(
                         // Array of unwanted characters
-                        array('[', ']'),
+                        array('[', ']', '\\', '"'),
                         "",
                         $element
                     );
