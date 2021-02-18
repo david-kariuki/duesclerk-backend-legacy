@@ -291,10 +291,10 @@ class DebtFunctions
         if ($stmt->execute()) {
             // Query executed
 
-            $debt = $stmt->get_result()->fetch_assoc(); // Get result array
+            $debtDetails = $stmt->get_result()->fetch_assoc(); // Get result array
             $stmt->close(); // Close statement
 
-            return $debt; // Return debt details array
+            return $debtDetails; // Return debt details array
 
         } else {
             // Debt not found
@@ -452,8 +452,6 @@ class DebtFunctions
     public function deleteContactsDebts($debtsIds, $contactId)
     {
 
-        $debtsIds = array($debtsIds); // Convert passed parameter values into an array
-
         // Check if variable is array
         if (is_array($debtsIds)) {
             // Variable is array
@@ -477,8 +475,8 @@ class DebtFunctions
                     //     $contact[FIELD_CONTACT_TYPE],
                     //     $userId
                     // ));
-
-                    // Check debts history size
+                    //
+                    // // Check debts history size
                     // if (sizeof($contactsDebts) > 0) {
                     //     // Debts exist for contact
                     //
@@ -503,13 +501,13 @@ class DebtFunctions
                     $deleted = $stmt->execute(); // Execute statement
                     $stmt->close(); // Close statement
 
-                    return $deleted; // Return deletion status
-
                 } else {
 
                     return null; // Return null
                 }
             }
+
+            return $deleted; // Return deletion status
         }
     }
 }

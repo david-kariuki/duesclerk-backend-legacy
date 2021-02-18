@@ -30,6 +30,9 @@ if (isset($_POST[KEY_DEBTS_IDS]) && isset($_POST[FIELD_CONTACT_ID])) {
     $debtsIds   = $_POST[KEY_DEBTS_IDS]     ? $_POST[KEY_DEBTS_IDS]     : ''; // Get debts ids
     $contactId  = $_POST[FIELD_CONTACT_ID]  ? $_POST[FIELD_CONTACT_ID]  : ''; // Get contact id
 
+    // Decode JSON array with debts ids into PHP array
+    $debtsIds = json_decode($debtsIds, true);
+
     // Delete debt(s)
     $deleteDebts = $debtFunctions->deleteContactsDebts($debtsIds, $contactId);
 
@@ -48,9 +51,8 @@ if (isset($_POST[KEY_DEBTS_IDS]) && isset($_POST[FIELD_CONTACT_ID])) {
     } else if ($deleteDebts == true) {
         // Debts(s) deleted
 
-        $debtsIds = array($debtsIds);
         // Set success message
-        $response[KEY_DELETE_DEBTS][KEY_SUCCESS_MESSAGE] = "Debt deleted!" . $deleteDebts;
+        $response[KEY_DELETE_DEBTS][KEY_SUCCESS_MESSAGE] = "Debt deleted!";
 
         // Echo encoded JSON response
         echo json_encode($response);
