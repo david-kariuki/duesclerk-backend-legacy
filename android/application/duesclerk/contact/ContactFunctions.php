@@ -495,8 +495,6 @@ class ContactFunctions
     public function deleteUserContacts($contactsIds, $userId)
     {
 
-        $contactsIds = array($contactsIds); // Convert passed parameter values into an array
-
         // Check if variable is array
         if (is_array($contactsIds)) {
             // Variable is array
@@ -546,13 +544,13 @@ class ContactFunctions
                     $deleted = $stmt->execute(); // Execute statement
                     $stmt->close(); // Close statement
 
-                    return $deleted; // Return deletion status
-
                 } else {
 
                     return null; // Return null
                 }
             }
+
+            return $deleted; // Return deletion status
         }
     }
 }
