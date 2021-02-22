@@ -36,6 +36,7 @@ if (isset($_POST[KEY_CONTACTS_IDS]) && isset($_POST[FIELD_USER_ID])) {
     // Delete contact(s)
     $deleteContacts = $contactFunctions->deleteUserContacts($contactsIds, $userId);
 
+    // Check for delete contacts response
     if ($deleteContacts == null) {
         // Contact not found
 
