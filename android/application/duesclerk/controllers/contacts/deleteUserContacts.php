@@ -27,11 +27,14 @@ $response = array(KEY_ERROR => false);
 if (isset($_POST[KEY_CONTACTS_IDS]) && isset($_POST[FIELD_USER_ID])) {
 
     // Get Values From POST
-    $contactIds = $_POST[KEY_CONTACTS_IDS]  ? $_POST[KEY_CONTACTS_IDS] : ''; // Get ContactIds
+    $contactsIds = $_POST[KEY_CONTACTS_IDS]  ? $_POST[KEY_CONTACTS_IDS] : ''; // Get ContactIds
     $userId     = $_POST[FIELD_USER_ID]     ? $_POST[FIELD_USER_ID]     : ''; // Get UserId
 
+    // Decode JSON array with contacts ids into PHP array
+    $contactsIds = json_decode($contactsIds, true);
+
     // Delete contact(s)
-    $deleteContacts = $contactFunctions->deleteUserContacts($contactIds, $userId);
+    $deleteContacts = $contactFunctions->deleteUserContacts($contactsIds, $userId);
 
     if ($deleteContacts == null) {
         // Contact not found
@@ -93,4 +96,4 @@ if (isset($_POST[KEY_CONTACTS_IDS]) && isset($_POST[FIELD_USER_ID])) {
     exit; // Exit script
 }
 
-// EOF: deleteContact.php
+// EOF: deleteUserContacts.php
