@@ -332,7 +332,7 @@ class ContactFunctions
             if (sizeof($contacts) > 0) {
 
                 // Return contacts with total debts amount
-                return $this->debtFunctions->getAllContactsDebtsTotalFromArray($contacts);
+                return $this->debtFunctions->getContactsWithTheirDebtsTotalFromArray($contacts);
 
             } else {
 
@@ -358,11 +358,9 @@ class ContactFunctions
     public function addUsersContact($userId, $contactDetails)
     {
 
-        if (
-            array_key_exists(FIELD_CONTACT_FULL_NAME, $contactDetails)
-            && array_key_exists(FIELD_CONTACT_PHONE_NUMBER, $contactDetails)
-            && array_key_exists(FIELD_CONTACT_TYPE, $contactDetails)
-        ) {
+        if (array_key_exists(FIELD_CONTACT_FULL_NAME, $contactDetails)
+        && array_key_exists(FIELD_CONTACT_PHONE_NUMBER, $contactDetails)
+        && array_key_exists(FIELD_CONTACT_TYPE, $contactDetails)) {
             // Required fields set
 
             // Get contact details from associative array
@@ -447,6 +445,7 @@ class ContactFunctions
     */
     public function updateContactDetails($contactDetails)
     {
+
         // Check required fields
         if (array_key_exists(FIELD_USER_ID, $contactDetails)
         && array_key_exists(FIELD_CONTACT_ID, $contactDetails)) {
