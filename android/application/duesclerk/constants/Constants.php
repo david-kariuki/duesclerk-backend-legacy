@@ -122,6 +122,7 @@ define("FIELD_DEBT_DATE_DUE",                   "DebtDateDue");
 define("FIELD_DEBT_DESCRIPTION",                "DebtDescription");
 define("FIELD_DEBT_ORDER",                      "DebtOrder");
 define("FIELD_DEBTS_TOTAL_AMOUNT",              "DebtsTotalAmount");
+define("FIELD_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT", "AllContactsDebtsTotalAmount");
 define("KEY_DEBT",                              "Debt");
 define("KEY_DEBTS",                             "Debts");
 define("KEY_DEBTS_IDS",                         "DebtsIds");
