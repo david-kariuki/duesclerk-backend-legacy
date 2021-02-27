@@ -76,6 +76,7 @@ class DebtFunctions
     */
     public function addContactsDebt($debtDetails)
     {
+
         // Check for UserId and ContactId
         if (array_key_exists(FIELD_USER_ID, $debtDetails)
         && array_key_exists(FIELD_CONTACT_ID, $debtDetails)
@@ -244,13 +245,13 @@ class DebtFunctions
                 // Debts data associative array to hold debts array and debts total amount
                 $debtsData = array(
                     KEY_DEBTS => array(),           // Set to array
-                    FIELD_DEBTS_TOTAL_AMOUNT => 0   // Initialize to 0
+                    KEY_DEBTS_TOTAL_AMOUNT => 0   // Initialize to 0
                 );
 
                 $debtsData[KEY_DEBTS] = $debts; // Add debts to debts data array
 
                 // Add total debts amount to debts data array
-                $debtsData[FIELD_DEBTS_TOTAL_AMOUNT] = $totalDebtsAmount;
+                $debtsData[KEY_DEBTS_TOTAL_AMOUNT] = $totalDebtsAmount;
 
                 return $debtsData; // Return contacts
 
@@ -316,6 +317,7 @@ class DebtFunctions
     */
     public function getSingleContactDebtsTotalFromArray($debts)
     {
+
         // Check if passed parameter is array
         if (is_array($debts)){
 
@@ -340,7 +342,7 @@ class DebtFunctions
                 }
 
                 // Round off total debts amount to 2 decimal places
-                return number_format((float)$totalDebtsAmount, 2, '.', '');
+                return $this->sharedFunctions->roundOffFloat($totalDebtsAmount, 2);
 
             } else {
 
@@ -361,12 +363,14 @@ class DebtFunctions
     * @return int       - 0 - (If array count is 0)
     * @return null      - on fetched array empty
     */
-    public function getAllContactsDebtsTotalFromArray($contacts)
+    public function getContactsWithTheirDebtsTotalFromArray($contacts)
     {
+
         // Check if passed parameter is array
         if (is_array($contacts)) {
             // Passed parameter is array
 
+            // Check array size
             if (sizeof($contacts) > 0) {
 
                 // Loop through all contacts debts
@@ -388,22 +392,113 @@ class DebtFunctions
                     $contactsDebts = $this->getContactsDebts($contactId, $contactType, $userId);
 
                     // Get debts total for single contact from contacts debts
-                    $debtsTotalAmount = $contactsDebts[FIELD_DEBTS_TOTAL_AMOUNT];
+                    $debtsTotalAmount = $contactsDebts[KEY_DEBTS_TOTAL_AMOUNT];
 
                     // Check if total amount is null
                     if ($debtsTotalAmount != null) {
 
-                        $contact[FIELD_DEBTS_TOTAL_AMOUNT] = $debtsTotalAmount;
+                        // Add debts total amount to contact
+                        $contact[KEY_DEBTS_TOTAL_AMOUNT] = $debtsTotalAmount;
 
                     } else {
 
-                        $contact[FIELD_DEBTS_TOTAL_AMOUNT] = "";
+                        // Set amount to null
+                        $contact[KEY_DEBTS_TOTAL_AMOUNT] = "0";
                     }
 
-                    $contactsWithTotalDebts[] = $contact;
+                    // Add contact to array
+                    $contactsWithTheirTotalDebtsAmount[] = $contact;
                 }
 
-                return $contactsWithTotalDebts;
+                // Return each contacts with its total debt
+                return $contactsWithTheirTotalDebtsAmount;
+
+            } else {
+
+                return 0; // If array count is 0 (no record found)
+            }
+        } else {
+
+            return null; // If passed parameter is not an array
+        }
+    }
+
+    /**
+    * Function to sum up debts totals for each contacts
+    *
+    * @param contacts   - Contacts to loop through
+    *
+    * @return array     - allContactsDebtsTotal
+    */
+    public function getContactsDebtsTotalSumForAllUserContacts($contacts)
+    {
+
+        // Check if passed parameter is array
+        if (is_array($contacts)) {
+            // Passed parameter is array
+
+            // Check array size
+            if (sizeof($contacts) > 0) {
+
+                // Variable to hold debts total for PeopleOwingMe contacts
+                $allPeopleOwingMeContactsDebtsTotal = 0; // Variable
+
+                // Variable to hold debts total for PeopleIOwe contacts
+                $allPeopleIOweContactsDebtsTotal = 0;
+
+                // All contacts debts totals array for both PeopleOwingMe
+                // and PeopleIOwe contacts
+                $allContactsDebtsTotal = array(
+                    KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_OWING_ME    => 0,
+                    KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_I_OWE       => 0
+                );
+
+                // Get all contacts with their debts totals
+                $contactsWithTheirDebtsTotal = $this->getContactsWithTheirDebtsTotalFromArray(
+                    $contacts
+                );
+
+                // Loop through contact
+                foreach ($contactsWithTheirDebtsTotal as $contact) {
+
+                    // Get contacts total
+                    $contactTotalDebtsAmount    = $contact[KEY_DEBTS_TOTAL_AMOUNT];
+                    $contactType                = $contact[FIELD_CONTACT_TYPE];
+
+                    // Check contact type
+                    if ($contactType == KEY_CONTACT_TYPE_PEOPLE_OWING_ME) {
+
+                        // Add contacts debts total to all contacts debts total
+                        $allPeopleOwingMeContactsDebtsTotal += $contactTotalDebtsAmount;
+
+                    } else if ($contactType == KEY_CONTACT_TYPE_PEOPLE_I_OWE) {
+
+                        // Add contacts debts total to all contacts debts total
+                        $allPeopleIOweContactsDebtsTotal += $contactTotalDebtsAmount;
+                    }
+
+                }
+
+                // Round off PeopleOwingMe totals to 2 decimal places
+                $allPeopleOwingMeContactsDebtsTotal = $this->sharedFunctions->roundOffFloat(
+                    $allPeopleOwingMeContactsDebtsTotal,
+                    2
+                );
+
+                // Round off PeopleIOwe totals to 2 decimal places
+                $allPeopleIOweContactsDebtsTotal = $this->sharedFunctions->roundOffFloat(
+                    $allPeopleIOweContactsDebtsTotal,
+                    2
+                );
+
+                // Add all PeopleOwingMe contacts debts totals to array
+                $allContactsDebtsTotal[KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_OWING_ME] = $allPeopleOwingMeContactsDebtsTotal;
+
+                // Add all PeopleIOwe contacts debts totals to array
+                $allContactsDebtsTotal[KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_I_OWE] = $allPeopleIOweContactsDebtsTotal;
+
+                // Return all contacts debts totals array
+                return $allContactsDebtsTotal;
 
             } else {
 
@@ -425,6 +520,7 @@ class DebtFunctions
     */
     public function deleteAllDebtsForContact($contactId, $userId)
     {
+
         // Prepare DELETE statement
         $stmt = $this->connectToDB->prepare(
             "DELETE FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
