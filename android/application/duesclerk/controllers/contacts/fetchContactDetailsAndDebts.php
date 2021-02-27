@@ -51,7 +51,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
                 // Contacts debts found
 
                 // Add debts total amount to contact details
-                $getContactDetails[FIELD_DEBTS_TOTAL_AMOUNT] = $getContactsDebts[FIELD_DEBTS_TOTAL_AMOUNT];
+                $getContactDetails[KEY_DEBTS_TOTAL_AMOUNT] = $getContactsDebts[KEY_DEBTS_TOTAL_AMOUNT];
 
                 // Add contact info to response array
                 $response[KEY_CONTACT_DETAILS] = $getContactDetails;

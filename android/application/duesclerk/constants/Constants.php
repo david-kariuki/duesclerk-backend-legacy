@@ -115,17 +115,20 @@ define("KEY_CONTACT_TYPE_PEOPLE_OWING_ME",      "ContactTypePeopleOwingMe");
 /**
 * Table debts fields and others
 */
-define("FIELD_DEBT_ID",                         "DebtId");
-define("FIELD_DEBT_AMOUNT",                     "DebtAmount");
-define("FIELD_DEBT_DATE_ISSUED",                "DebtDateIssued");
-define("FIELD_DEBT_DATE_DUE",                   "DebtDateDue");
-define("FIELD_DEBT_DESCRIPTION",                "DebtDescription");
-define("FIELD_DEBT_ORDER",                      "DebtOrder");
-define("FIELD_DEBTS_TOTAL_AMOUNT",              "DebtsTotalAmount");
-define("KEY_DEBT",                              "Debt");
-define("KEY_DEBTS",                             "Debts");
-define("KEY_DEBTS_IDS",                         "DebtsIds");
-define("KEY_DELETE_DEBTS",                      "DeleteDebts");
+define("FIELD_DEBT_ID",                             "DebtId");
+define("FIELD_DEBT_AMOUNT",                         "DebtAmount");
+define("FIELD_DEBT_DATE_ISSUED",                    "DebtDateIssued");
+define("FIELD_DEBT_DATE_DUE",                       "DebtDateDue");
+define("FIELD_DEBT_DESCRIPTION",                    "DebtDescription");
+define("FIELD_DEBT_ORDER",                          "DebtOrder");
+define("KEY_DEBTS_TOTAL_AMOUNT",                    "DebtsTotalAmount");
+define("KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT",       "AllContactsDebtsTotalAmount");
+define("KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_OWING_ME",  "ContactsDebtsTotalPeopleOwingMe");
+define("KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_I_OWE",     "ContactsDebtsTotalPeopleIOwe");
+define("KEY_DEBT",                                  "Debt");
+define("KEY_DEBTS",                                 "Debts");
+define("KEY_DEBTS_IDS",                             "DebtsIds");
+define("KEY_DELETE_DEBTS",                          "DeleteDebts");
 
 
 /**

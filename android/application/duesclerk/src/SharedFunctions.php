@@ -157,4 +157,16 @@ class SharedFunctions
             return false; // Return false
         }
     }
+
+    /**
+    * Function to round off floats
+    *
+    * @param float numbers - Float to round off
+    */
+    public function roundOffFloat($float, $decimalPlaces)
+    {
+
+        // Round off float to specified decimal places
+        return number_format((float)$float, $decimalPlaces, '.', '');
+    }
 }

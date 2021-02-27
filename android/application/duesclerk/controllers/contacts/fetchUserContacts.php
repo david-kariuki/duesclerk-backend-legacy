@@ -16,9 +16,11 @@ require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\contact\ContactFunctions;
+use duesclerk\debt\DebtFunctions;
 
 // Create Classes Objects
 $contactFunctions = new ContactFunctions();
+$debtFunctions    = new DebtFunctions();
 
 // Create JSON response array and initialize error to false
 $response = array(KEY_ERROR => false);
@@ -36,7 +38,26 @@ if (isset($_POST[FIELD_USER_ID])) {
     if ($getContacts !== null) {
         // Contacts fetched successfully
 
-        $response[KEY_CONTACTS] = $getContacts; // Add contact array to JSON response
+        // Get total debts for all contacts
+        $getAllContactsTotals = $debtFunctions->getContactsDebtsTotalSumForAllUserContacts(
+            $getContacts
+        );
+
+        // Check for contacts debts total
+        if ($getAllContactsTotals !== false) {
+            // Contacts totals found
+
+            // Add all contacts debts total amount to response
+            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT] = $getAllContactsTotals;
+
+            $response[KEY_CONTACTS] = $getContacts; // Add contact array to JSON response
+
+        } else {
+            // Contacts debts total fetching failed or null
+
+            // Set empty array as all contacts debts total array
+            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT] = array();
+        }
 
         // Echo encoded JSON response
         echo json_encode($response);
@@ -44,7 +65,7 @@ if (isset($_POST[FIELD_USER_ID])) {
         exit; // Exit script
 
     } else {
-        // User contact fetching failed
+        // User contact fetching failed or null
 
         if ($getContacts == null) {
             // Contacts not found
@@ -57,6 +78,7 @@ if (isset($_POST[FIELD_USER_ID])) {
             exit; // Exit script
 
         } else {
+
             // Set response error to true and add error message
             $response[KEY_ERROR]           = true;
             $response[KEY_ERROR_MESSAGE]   = "Something went terribly wrong!";
@@ -80,4 +102,4 @@ if (isset($_POST[FIELD_USER_ID])) {
     exit; // Exit script
 }
 
-// EOF: fetchUserContact.php
+// EOF: fetchUserContacts.php

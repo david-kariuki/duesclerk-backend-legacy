@@ -83,4 +83,4 @@ if (isset($_POST[KEY_DEBTS_IDS]) && isset($_POST[FIELD_CONTACT_ID])) {
     exit; // Exit script
 }
 
-// EOF: deleteDebts.php
+// EOF: deleteContactsDebts.php
