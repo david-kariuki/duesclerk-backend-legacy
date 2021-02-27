@@ -188,7 +188,7 @@ class ContactFunctions
             $stmt->close(); // Close statement
 
             // Initialize contacts debts total amount to empty
-            $contact[FIELD_DEBTS_TOTAL_AMOUNT] = "";
+            $contact[KEY_DEBTS_TOTAL_AMOUNT] = "";
 
             return $contact; // Return contact details array
 
@@ -323,7 +323,7 @@ class ContactFunctions
             while ($row = $result->fetch_assoc()) {
 
                 // Initialize contacts debts total amount to empty
-                $row[FIELD_DEBTS_TOTAL_AMOUNT] = "";
+                $row[KEY_DEBTS_TOTAL_AMOUNT] = "";
 
                 $contacts[] = $row; // Add row to array
             }
