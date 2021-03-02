@@ -179,7 +179,7 @@ class DebtFunctions
     * @return boolean       - false - (On debts fetch failed)
     * @return null          - on fetched array empty
     */
-    public function getContactsDebts($contactId, $contactType, $userId)
+    public function getContactsDebtsData($contactId, $contactType, $userId)
     {
 
         // Prepare SELECT statement
@@ -389,10 +389,14 @@ class DebtFunctions
                     }
 
                     // Get all debts for contact
-                    $contactsDebts = $this->getContactsDebts($contactId, $contactType, $userId);
+                    $contactsDebtsData = $this->getContactsDebtsData(
+                        $contactId,
+                        $contactType,
+                        $userId
+                    );
 
                     // Get debts total for single contact from contacts debts
-                    $debtsTotalAmount = $contactsDebts[KEY_DEBTS_TOTAL_AMOUNT];
+                    $debtsTotalAmount = $contactsDebtsData[KEY_DEBTS_TOTAL_AMOUNT];
 
                     // Check if total amount is null
                     if ($debtsTotalAmount != null) {
@@ -403,7 +407,24 @@ class DebtFunctions
                     } else {
 
                         // Set amount to null
-                        $contact[KEY_DEBTS_TOTAL_AMOUNT] = "0";
+                        $contact[KEY_DEBTS_TOTAL_AMOUNT] = "0.00";
+
+
+                    }
+
+                    // Check if debts total amount is greater than 0
+                    if ($debtsTotalAmount > 0) {
+
+                        // Get contacts debts
+                        $debts = $contactsDebtsData[KEY_DEBTS];
+
+                        // Add number of debts to contact
+                        $contact[KEY_CONTACTS_NUMBER_OF_DEBTS] = sizeof($debts);
+
+                    } else {
+
+                        // Add number of debts to contact
+                        $contact[KEY_CONTACTS_NUMBER_OF_DEBTS] = "0";
                     }
 
                     // Add contact to array
@@ -566,7 +587,7 @@ class DebtFunctions
                     // Debt exists
 
                     // Get debts history - Coming soon
-                    // $contactsDebts = array($this->debtFunctions->getContactsDebts(
+                    // $contactsDebts = array($this->debtFunctions->getContactsDebtsData(
                     //     $debtId,
                     //     $contact[FIELD_CONTACT_TYPE],
                     //     $userId

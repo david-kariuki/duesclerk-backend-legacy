@@ -42,22 +42,26 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
         $contactType = $getContactDetails[FIELD_CONTACT_TYPE]; // Get contact type
 
         // Get contact debts
-        $getContactsDebts = $debtFunctions->getContactsDebts($contactId, $contactType, $userId);
+        $getContactsDebtsData = $debtFunctions->getContactsDebtsData(
+            $contactId,
+            $contactType,
+            $userId
+        );
 
         // Check for debts
-        if ($getContactsDebts !== false) {
+        if ($getContactsDebtsData !== false) {
 
-            if ($getContactsDebts !== null) {
+            if ($getContactsDebtsData !== null) {
                 // Contacts debts found
 
                 // Add debts total amount to contact details
-                $getContactDetails[KEY_DEBTS_TOTAL_AMOUNT] = $getContactsDebts[KEY_DEBTS_TOTAL_AMOUNT];
+                $getContactDetails[KEY_DEBTS_TOTAL_AMOUNT] = $getContactsDebtsData[KEY_DEBTS_TOTAL_AMOUNT];
 
                 // Add contact info to response array
                 $response[KEY_CONTACT_DETAILS] = $getContactDetails;
 
                 // Add debts to response array
-                $response[KEY_DEBTS] = $getContactsDebts[KEY_DEBTS];
+                $response[KEY_DEBTS] = $getContactsDebtsData[KEY_DEBTS];
 
             } else {
 
