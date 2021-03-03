@@ -55,6 +55,9 @@ if (isset($_POST[FIELD_USER_ID])) {
         } else {
             // Contacts debts total fetching failed or null
 
+            // Add all contacts debts total amount to response
+            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT] = $getAllContactsTotals;
+            
             // Set empty array as all contacts debts total array
             $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT] = array();
         }
