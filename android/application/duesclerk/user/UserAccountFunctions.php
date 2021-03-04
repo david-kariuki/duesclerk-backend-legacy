@@ -521,7 +521,7 @@ class UserAccountFunctions
                     // Get user details
                     $user = $this->getUserByUserId($userId);
 
-                    // Get firsnName and EmailAddress
+                    // Get FullNameOrBusinessName and EmailAddress
                     $fullNameOrBusinessName = $user[FIELD_FULL_NAME_OR_BUSINESS_NAME];
                     $emailAddress = $user[FIELD_EMAIL_ADDRESS];
 
@@ -636,7 +636,7 @@ class UserAccountFunctions
         $updateDetails = array(FIELD_HASH => $hash);
 
         // Update hash in database
-        if ($this->updateUserProfile($userId, "", $updateDetails) !== false) {
+        if ($this->updateUserProfile($userId, $updateDetails) !== false) {
             // Password updated successfully
 
             return true; // Return true
