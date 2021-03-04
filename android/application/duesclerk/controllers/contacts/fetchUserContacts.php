@@ -55,11 +55,11 @@ if (isset($_POST[FIELD_USER_ID])) {
         } else {
             // Contacts debts total fetching failed or null
 
-            // Add all contacts debts total amount to response
-            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT] = $getAllContactsTotals;
-            
-            // Set empty array as all contacts debts total array
-            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT] = array();
+            // Add all PeopleOwingMe contacts debts total amount to response
+            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT][KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_OWING_ME] = "0.00";
+
+            // Add all PeopleOwingMe contacts debts total amount to response
+            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT][KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_I_OWE] = "0.00";
         }
 
         // Echo encoded JSON response
@@ -72,6 +72,12 @@ if (isset($_POST[FIELD_USER_ID])) {
 
         if ($getContacts == null) {
             // Contacts not found
+
+            // Add all PeopleOwingMe contacts debts total amount to response
+            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT][KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_OWING_ME] = "0.00";
+
+            // Add all PeopleOwingMe contacts debts total amount to response
+            $response[KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT][KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_I_OWE] = "0.00";
 
             $response[KEY_CONTACTS] = array(); // Set empty array as contacts
 
