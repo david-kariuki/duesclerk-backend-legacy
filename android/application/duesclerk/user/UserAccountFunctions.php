@@ -16,6 +16,8 @@ error_reporting(1);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL|E_NOTICE|E_STRICT);
+ini_set('log_errors',1);
+mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 
 // Call project classes
 use duesclerk\database\DatabaseConnection;
@@ -128,7 +130,7 @@ class UserAccountFunctions
     public function getUserByEmailAddressAndPassword($emailAddress, $password)
     {
 
-        // Check for email in Table Users
+        // Check for EmailAddress in Table Users
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
@@ -206,57 +208,60 @@ class UserAccountFunctions
     public function getUserByUserId($userId)
     {
 
-        // Check for email in Table Users
-        // Prepare statement
-        $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
-            {$this->constants->valueOfConst(KEY_COUNTRY)}.*
-            FROM {$this->constants->valueOfConst(TABLE_USERS)}
-            AS {$this->constants->valueOfConst(KEY_USER)}
-            LEFT OUTER JOIN {$this->constants->valueOfConst(TABLE_COUNTRIES)}
-            AS {$this->constants->valueOfConst(KEY_COUNTRY)}
-            ON {$this->constants->valueOfConst(KEY_COUNTRY)}
-            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            = {$this->constants->valueOfConst(KEY_USER)}
-            .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
-            AND {$this->constants->valueOfConst(KEY_COUNTRY)}
-            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
-            = {$this->constants->valueOfConst(KEY_USER)}
-            .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
-            WHERE {$this->constants->valueOfConst(KEY_USER)}
-            .{$this->constants->valueOfConst(FIELD_USER_ID)}
-            = ?"
-        );
-        $stmt->bind_param("s", $userId); // Bind parameters
+        // Check if UserId is null
+        if (!empty($userId)) {
 
-        // Check for query execution
-        if ($stmt->execute()) {
-            // Query executed
-
-            $user = $stmt->get_result()->fetch_assoc(); // Get result array
-            $stmt->close(); // Close statement
-
-            // Get current sign up date and time
-            $signUpDateTime = $user[FIELD_SIGN_UP_DATE_TIME];
-            $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
-
-            // Update signup date to users local time
-            $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime(
-                $signUpDateTime,
-                $countryAlpha2
+            // Check for UserId in Table Users
+            // Prepare statement
+            $stmt = $this->connectToDB->prepare(
+                "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
+                {$this->constants->valueOfConst(KEY_COUNTRY)}.*
+                FROM {$this->constants->valueOfConst(TABLE_USERS)}
+                AS {$this->constants->valueOfConst(KEY_USER)}
+                LEFT OUTER JOIN {$this->constants->valueOfConst(TABLE_COUNTRIES)}
+                AS {$this->constants->valueOfConst(KEY_COUNTRY)}
+                ON {$this->constants->valueOfConst(KEY_COUNTRY)}
+                .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+                = {$this->constants->valueOfConst(KEY_USER)}
+                .{$this->constants->valueOfConst(FIELD_COUNTRY_ALPHA2)}
+                AND {$this->constants->valueOfConst(KEY_COUNTRY)}
+                .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+                = {$this->constants->valueOfConst(KEY_USER)}
+                .{$this->constants->valueOfConst(FIELD_COUNTRY_CODE)}
+                WHERE {$this->constants->valueOfConst(KEY_USER)}
+                .{$this->constants->valueOfConst(FIELD_USER_ID)}
+                = ?"
             );
+            $stmt->bind_param("s", $userId); // Bind parameters
 
-            return $user; // Return user details array
+            // Check for query execution
+            if ($stmt->execute()) {
+                // Query executed
 
-        } else {
-            // User not found
+                $user = $stmt->get_result()->fetch_assoc(); // Get result array
+                $stmt->close(); // Close statement
 
-            $stmt->close(); // Close statement
+                // Get current sign up date and time
+                $signUpDateTime = $user[FIELD_SIGN_UP_DATE_TIME];
+                $countryAlpha2  = $user[FIELD_COUNTRY_ALPHA2];
 
-            return false; // Return false
+                // Update signup date to users local time
+                $user[FIELD_SIGN_UP_DATE_TIME] = $this->dateTimeFunctions->getLocalTime(
+                    $signUpDateTime,
+                    $countryAlpha2
+                );
+
+                return $user; // Return user details array
+
+            } else {
+                // User not found
+
+                $stmt->close(); // Close statement
+
+                return false; // Return false
+            }
         }
     }
-
 
     /**
     * Function to get user by EmailAddress
@@ -269,7 +274,7 @@ class UserAccountFunctions
     public function getUserByEmailAddress($emailAddress)
     {
 
-        // Check for email in users table
+        // Check for EmailAddress in users table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_USER)}.*,
@@ -332,12 +337,13 @@ class UserAccountFunctions
     */
     public function signUpUser($signUpDetails) {
 
-        // Get emailAddress, countryCode, countryAlpha2, password from SignUpDetails array
-        $emailAddress     = $signUpDetails[FIELD_EMAIL_ADDRESS];
-        $countryCode      = $signUpDetails[FIELD_COUNTRY_CODE];
-        $countryAlpha2    = $signUpDetails[FIELD_COUNTRY_ALPHA2];
-        $password         = $signUpDetails[FIELD_PASSWORD];
-        $accountType      = KEY_ACCOUNT_TYPE_FREE;
+        // Get FullNameOrBusinessName, emailAddress, countryCode, countryAlpha2, password from SignUpDetails array
+        $fullNameOrBusinessName = $signUpDetails[FIELD_FULL_NAME_OR_BUSINESS_NAME];
+        $emailAddress           = $signUpDetails[FIELD_EMAIL_ADDRESS];
+        $countryCode            = $signUpDetails[FIELD_COUNTRY_CODE];
+        $countryAlpha2          = $signUpDetails[FIELD_COUNTRY_ALPHA2];
+        $password               = $signUpDetails[FIELD_PASSWORD];
+        $accountType            = KEY_ACCOUNT_TYPE_FREE;
 
         // Create userId
         $userId = $this->sharedFunctions->generateUniqueId(
@@ -354,9 +360,6 @@ class UserAccountFunctions
         $signupDateTime = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime(
             FORMAT_DATE_TIME_FULL
         );
-
-        // Get FullNameOrBusinessName
-        $fullNameOrBusinessName = $signUpDetails[FIELD_FULL_NAME_OR_BUSINESS_NAME];
 
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
@@ -394,7 +397,7 @@ class UserAccountFunctions
                 // Loging successful
 
                 // Return user details
-                return $this->getUserByUserId($userId);
+                return $this->getUserByEmailAddressAndPassword($emailAddress, $password);
 
             } else {
                 // Logging failed

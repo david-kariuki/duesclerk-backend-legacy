@@ -39,18 +39,15 @@ $countryAlpha2          = "";
 
 // Check for set POST params
 if (
-    isset($_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME])
-    ||
-    (isset($_POST[FIELD_EMAIL_ADDRESS]) &&
-    isset($_POST[FIELD_COUNTRY_CODE])   &&
-    isset($_POST[FIELD_COUNTRY_ALPHA2]) &&
-    isset($_POST[FIELD_PASSWORD]))
+    isset($_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME]) &&
+    isset($_POST[FIELD_EMAIL_ADDRESS])              &&
+    isset($_POST[FIELD_COUNTRY_CODE])               &&
+    isset($_POST[FIELD_COUNTRY_ALPHA2])             &&
+    isset($_POST[FIELD_PASSWORD])
 ) {
 
     // Get Values From POST
     $fullNameOrBusinessName = $_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME]  ? $_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME]  : '';
-
-    // Other fields
     $emailAddress   = $_POST[FIELD_EMAIL_ADDRESS]   ? $_POST[FIELD_EMAIL_ADDRESS]   : '';
     $countryCode    = $_POST[FIELD_COUNTRY_CODE]    ? $_POST[FIELD_COUNTRY_CODE]    : '';
     $countryAlpha2  = $_POST[FIELD_COUNTRY_ALPHA2]  ? $_POST[FIELD_COUNTRY_ALPHA2]  : '';
@@ -136,30 +133,23 @@ if (
             exit; // Exit script
         }
 
-        // Check for set params
-        if (isset($_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME])) {
-
-            // Add FullNameOrBusinessName to associative array
-            $signUpDetails[FIELD_FULL_NAME_OR_BUSINESS_NAME] = $fullNameOrBusinessName;
-        }
-
-        // Add the other fields to associative array
+        // Add the fields to associative array
+        $signUpDetails[FIELD_FULL_NAME_OR_BUSINESS_NAME] = $fullNameOrBusinessName;
         $signUpDetails[FIELD_EMAIL_ADDRESS]     = $emailAddress;
         $signUpDetails[FIELD_COUNTRY_CODE]      = $countryCode;
         $signUpDetails[FIELD_COUNTRY_ALPHA2]    = $countryAlpha2;
         $signUpDetails[FIELD_PASSWORD]          = $password;
 
-
         // Signup user
         $signupUser = $userAccountFunctions->signUpUser($signUpDetails);
 
         // Check if user was signed up
-        if ($signupUser) {
+        if ($signupUser !== false) {
             // User signed up
 
             // Add user details JSON response array
-            $response[KEY_SIGN_UP][FIELD_USER_ID]       = $signupUser[FIELD_USER_ID];
-            $response[KEY_SIGN_UP][FIELD_FULL_NAME_OR_BUSINESS_NAME]    = $signupUser[FIELD_FULL_NAME_OR_BUSINESS_NAME];
+            $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
+            $response[KEY_SIGN_UP][FIELD_FULL_NAME_OR_BUSINESS_NAME] = $signupUser[FIELD_FULL_NAME_OR_BUSINESS_NAME];
             $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupUser[FIELD_EMAIL_ADDRESS];
             $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupUser[FIELD_ACCOUNT_TYPE];
 
@@ -173,7 +163,7 @@ if (
 
             // Set response error to true and add error message
             $response[KEY_ERROR]            = true;
-            $response[KEY_ERROR_MESSAGE]    = "Something went terribly wrong!";
+            $response[KEY_ERROR_MESSAGE]    = "Signup failed!";
 
             // Echo encoded JSON response
             echo json_encode($response);
