@@ -70,9 +70,9 @@ class DateTimeFunctions
     /**
     * Function to get user timezone by alpha2
     *
-    * @param countryAlpha2  - Country's alpha2
+    * @param countryAlpha2  - Country alpha2
     *
-    * @return timeZone      - Country's time zone
+    * @return timeZone      - Country time zone
     */
     private function getLocalTimezone($countryAlpha2)
     {
@@ -80,7 +80,7 @@ class DateTimeFunctions
         // Create timezone array
         $timeZone = array();
 
-        // Get timezone by country alpha2
+        // Get timezone by CountryAlpha2
         $timeZone = \DateTimeZone::listIdentifiers(
             \DateTimeZone::PER_COUNTRY,
             strtoupper($countryAlpha2)
@@ -89,8 +89,7 @@ class DateTimeFunctions
         // Get timezone in array at current position incase of multiple timezones in array
         $current = current($timeZone);
 
-        // Return TimeZone
-        return $current;
+        return $current; // Return TimeZone
     }
 
     /**

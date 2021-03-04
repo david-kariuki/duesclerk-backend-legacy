@@ -70,11 +70,11 @@ class LogsFunctions
     /**
     * Function to log user actions
     *
-    * @param userLogType - action to be logged
-    * @param logTime - Time of logging
-    * @param userId - users Id
+    * @param userLogType    - action to be logged
+    * @param logTime        - Time of logging
+    * @param userId         - UserId
     *
-    * @return boolean - true/fasle - (log stored / not stored)
+    * @return boolean       - true/fasle - (log stored / not stored)
     */
     public function createStoreUserLogs($userLogType, $logDateTime, $userId) {
 

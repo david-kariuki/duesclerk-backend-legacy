@@ -378,14 +378,14 @@ class DebtFunctions
 
                     $contactId      = ""; // Contact id
                     $contactType    = ""; // Contact type
-                    $userId         = ""; // User id
+                    $userId         = ""; // UserId
 
                     // Loop through single debt to get debt details
                     foreach ($contact as $key => $contactDetails) {
 
                         $contactId      = $contact[FIELD_CONTACT_ID]; // Set contact id
                         $contactType    = $contact[FIELD_CONTACT_TYPE]; // Set contact type
-                        $userId         = $contact[FIELD_USER_ID]; // Set user id
+                        $userId         = $contact[FIELD_USER_ID]; // Set UserId
                     }
 
                     // Get all debts for contact
