@@ -39,9 +39,7 @@ $updateDetails  = array(
 );
 
 // Check for set POST params
-if (
-    isset($_POST[FIELD_USER_ID])
-){
+if (isset($_POST[FIELD_USER_ID])){
 
     // Get Values From POST
     $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID]    : '';
@@ -104,10 +102,14 @@ if (
         if (isset($_POST[FIELD_COUNTRY_CODE]) && isset($_POST[FIELD_COUNTRY_ALPHA2])) {
 
             $countryCode = $_POST[FIELD_COUNTRY_CODE] ? $_POST[FIELD_COUNTRY_CODE] : '';
-            $updateDetails[FIELD_COUNTRY_CODE] = $countryCode; // Add to details array
+
+            // Add to details array
+            $updateDetails[FIELD_COUNTRY_CODE] = $countryCode;
 
             $countryAlpha2 = $_POST[FIELD_COUNTRY_ALPHA2] ? $_POST[FIELD_COUNTRY_ALPHA2] : '';
-            $updateDetails[FIELD_COUNTRY_ALPHA2] = $countryAlpha2; // Add to details array
+
+            // Add to details array
+            $updateDetails[FIELD_COUNTRY_ALPHA2] = $countryAlpha2;
         }
 
 
