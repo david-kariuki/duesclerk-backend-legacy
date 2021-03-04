@@ -58,7 +58,7 @@ define("FIELD_PASSWORD",                        "Password");
 define("FIELD_NEW_PASSWORD",                    "NewPassword");
 define("FIELD_NEW_ACCOUNT_TYPE",                "NewAccountType");
 
-define("KEY_ACCOUNT_TYPE_FREE",                 "AccountTypeFree");
+define("KEY_ACCOUNT_TYPE_FREE",                 "Free account");
 define("KEY_USER",                              "User");
 define("KEY_UPDATE_PROFILE",                    "UpdateProfile");
 define("KEY_SIGN_UP",                           "SignUp");
