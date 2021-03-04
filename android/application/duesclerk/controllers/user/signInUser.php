@@ -30,7 +30,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	$emailAddress 	= $_POST[FIELD_EMAIL_ADDRESS]	? $_POST[FIELD_EMAIL_ADDRESS]	: '';
 	$password 		= $_POST[FIELD_PASSWORD] 		? $_POST[FIELD_PASSWORD]		: '';
 
-	// Get user by email address and password
+	// Get user by EmailAddress and password
 	$getUser = $userAccountFunctions->getUserByEmailAddressAndPassword(
         $emailAddress,
         $password
@@ -53,9 +53,9 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 	} else {
 		// User Not Found
 
-		// Check for email address in database
+		// Check for EmailAddress in database
 		if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
-			// User with the emailAddress exists in the database
+			// User with the EmailAddress exists in the database
 
 			// Set response error to true and add error message
 			$response[KEY_ERROR]         = true;
