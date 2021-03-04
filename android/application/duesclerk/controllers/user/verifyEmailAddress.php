@@ -182,7 +182,6 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                 // Update EmailVerified field in users table
                 $update = $userAccountFunctions->updateUserProfile(
                     $userId,
-                    "",
                     $updateDetails
                 );
 
