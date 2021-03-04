@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Send verify email address file
-* This file verifies email address by comparing stored verification code to that sent on
+* Send verify EmailAddress file
+* This file verifies EmailAddress by comparing stored verification code to that sent on
 * mail and returns response in json
 *
 * @author David Kariuki (dk)
@@ -43,10 +43,12 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
     if ($user !== false) {
         // User details fetched
 
-        // Get first name and email address for mail notification
-        $userId       = $user[FIELD_USER_ID];           // Get user id from array
-        $firstName      = $user[FIELD_FIRST_NAME];      // Get first name from array
-        $emailAddress   = $user[FIELD_EMAIL_ADDRESS];   // Get email address from array
+        // Get FullNameOrBusinessName and EmailAddress for mail notification
+        $userId = $user[FIELD_USER_ID]; // Get UserId from array
+
+        // Get FullNameOrBusinessName from array
+        $fullNameOrBusinessName = $user[FIELD_FULL_NAME_OR_BUSINESS_NAME];
+        $emailAddress   = $user[FIELD_EMAIL_ADDRESS];   // Get EmailAddress from array
 
         // Update password
         $update = $userAccountFunctions->updateUserPassword(
@@ -66,7 +68,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_NEW_PASSWORD])
             )) {
                 // Verification code deleted
 
-                // Set user id and success message
+                // Set UserId and success message
                 $response[KEY_PASSWORD_RESET][FIELD_USER_ID]        = $userId;
                 $response[KEY_PASSWORD_RESET][KEY_SUCCESS_MESSAGE]  = "Password reset successful!";
 

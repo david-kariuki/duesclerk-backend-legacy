@@ -364,14 +364,14 @@ class MailFunctions
     /**
     * Function to send email verification for password reset
     *
-    * @param firstName          - Users first name
-    * @param emailAddress       - Users email address
-    * @param verificationCode   - Generated verification code
+    * @param fullNameOrBusinessName - Users FullNameOrBusinessName
+    * @param emailAddress           - Users EmailAddress
+    * @param verificationCode       - Generated verification code
     *
-    * @return boolean           - true/false - (if/not mail sent)
+    * @return boolean               - true/false - (if/not mail sent)
     */
     public function sendUserEmailAccountVerificationCodeMail(
-        $firstName,
+        $fullNameOrBusinessName,
         $emailAddress,
         $verificationCode
     ) {
@@ -405,7 +405,7 @@ class MailFunctions
         <tr>
         <td>
         <div id = "message">
-        <h2> Hello <b>' . $firstName .'</b>,</h2>
+        <h2> Hello <b>' . $fullNameOrBusinessName .'</b>,</h2>
         <h2> To get started on ' . COMPANY_NAME . ', kindly verify your email address.<br>Your email verification code is: </h2><h1><u>' . $verificationCode . '</u></h1><h2> Enter the code on our website or android app when queried to verify your email address and continue enjoying our amazing features.<b>This code will expire after ' .
         KEY_VERIFICATION_CODE_EXPIRY_TIME . ' hour.</b>
         </h2>
@@ -428,11 +428,11 @@ class MailFunctions
         </html>';
 
         // This is the body in plain text for non-HTML mail users
-        $this->phpMailer->AltBody = 'Hello ' . $firstName .', to get started on
+        $this->phpMailer->AltBody = 'Hello ' . $fullNameOrBusinessName .', to get started on
         ' . COMPANY_NAME . ', kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and contine enjoying our amazing features. P.S. We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
         Kind Regards, '  . COMPANY_NAME . ' Team';
 
-        $this->phpMailer->addAddress($emailAddress, $firstName);     // Add a recipient
+        $this->phpMailer->addAddress($emailAddress, $fullNameOrBusinessName);     // Add a recipient
         // $this->phpMailer->addAddress('ellen@example.com');         // Name is optional
 
         // Attachments
@@ -459,14 +459,14 @@ class MailFunctions
     /**
     * Function to send email verification/ for password reset
     *
-    * @param firstName          - Users first name
-    * @param emailAddress,      - Users email address
-    * @param verificationCode   - Generated verification code
+    * @param fullNameOrBusinessName - Users FullNameOrBusinessName
+    * @param emailAddress,          - Users EmailAddress
+    * @param verificationCode       - Generated verification code
     *
-    * @return boolean           - true/false - (if/not mail sent)
+    * @return boolean               - true/false - (if/not mail sent)
     */
     public function sendUserPasswordResetEmailVerificationCodeMail(
-        $firstName,
+        $fullNameOrBusinessName,
         $emailAddress,
         $verificationCode
     ) {
@@ -502,7 +502,7 @@ class MailFunctions
         <tr>
         <td>
         <div id = "message">
-        <h2> Hello <b>' . $firstName .'</b>,</h2>
+        <h2> Hello <b>' . $fullNameOrBusinessName .'</b>,</h2>
         <h2> To reset your account password, kindly verify your email address. Your email verification code is: </h2>
         <h1><u>' . $verificationCode . '</u></h1>
         <h2> Enter the code on our website or android app when queried to verify your email address and reset your password. <b>This code will expire after '
@@ -528,11 +528,11 @@ class MailFunctions
         </html>';
 
         // This is the body in plain text for non-HTML mail users
-        $this->phpMailer->AltBody = 'Hello ' . $firstName .', to reset your account password, kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and reset you password.
+        $this->phpMailer->AltBody = 'Hello ' . $fullNameOrBusinessName .', to reset your account password, kindly verify your email address. Your email verification code is ' . $verificationCode . '. Enter the code on our website or android app when queried to verify your email address and reset you password.
         If you did not request a password reset please ignore this email or reply to let us know. P.S. We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
         We cannot wait to have you back! Kind Regards, ' . COMPANY_NAME . ' Team.';
 
-        $this->phpMailer->addAddress($emailAddress, $firstName);     // Add a recipient
+        $this->phpMailer->addAddress($emailAddress, $fullNameOrBusinessName);     // Add a recipient
         // $this->phpMailer->addAddress('ellen@example.com');         // Name is optional
 
         // Attachments
@@ -559,12 +559,12 @@ class MailFunctions
     /**
     * Function to notify User of password reset event by mail
     *
-    * @param firstName      - Users firt name
-    * @param emailAddress   - Users email address
+    * @param fullNameOrBusinessName - Users firt name
+    * @param emailAddress           - Users EmailAddress
     *
-    * @return boolean       - (true/false - if/not mail sent)
+    * @return boolean               - (true/false - if/not mail sent)
     */
-    public function sendPasswordChangeNotificationMail($firstName, $emailAddress)
+    public function sendPasswordChangeNotificationMail($fullNameOrBusinessName, $emailAddress)
     {
 
         // Configure SMTP email and password
@@ -594,7 +594,7 @@ class MailFunctions
         <tr>
         <td>
         <div id = "message">
-        <h2> Hello <b>' . $firstName .'</b>,</h2>
+        <h2> Hello <b>' . $fullNameOrBusinessName .'</b>,</h2>
         <h2> Your account password has been changed successfully. If this was you, then you can safely ignore this email.
         </h2>
         <h2> <b>Did not request a new password?</b><br>If you did not change your account password, please let us know immediately by replying to this email.
@@ -618,11 +618,11 @@ class MailFunctions
         </html>';
 
         // This is the body in plain text for non-HTML mail users
-        $this->phpMailer->AltBody = 'Hello ' . $firstName .', Your account password has been changed successfully. If this was you, then you can safely ignore this email. If you did not change your account password, please let us know immediately by replying to this email. P.S.
+        $this->phpMailer->AltBody = 'Hello ' . $fullNameOrBusinessName .', Your account password has been changed successfully. If this was you, then you can safely ignore this email. If you did not change your account password, please let us know immediately by replying to this email. P.S.
         We would also love hearing from you and helping you with any issues or complaints you migh have. Please reply to this email if you have any questions.
         Kind Regards, ' . COMPANY_NAME . ' Team';
 
-        $this->phpMailer->addAddress($emailAddress, $firstName); // Add a recipient
+        $this->phpMailer->addAddress($emailAddress, $fullNameOrBusinessName); // Add a recipient
         // $this->phpMailer->addAddress('ellen@example.com'); // Name is optional
 
         // Attachments
@@ -656,7 +656,7 @@ class MailFunctions
     public function revokeEmailVerification($userId)
     {
 
-        $emailVerified = "FALSE"; // Email verified new value
+        $emailVerified = "FALSE"; // EmailVerified new value
 
         // Prepare statement
         $stmt = $this->connectToDB->prepare(

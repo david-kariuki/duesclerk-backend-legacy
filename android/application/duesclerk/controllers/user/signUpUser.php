@@ -24,52 +24,31 @@ $userAccountFunctions = new UserAccountFunctions();
 $response       = array(KEY_ERROR => false);
 $signUpDetails  = array(
 
-    FIELD_FIRST_NAME        => "",
-    FIELD_LAST_NAME         => "",
-    FIELD_BUSINESS_NAME     => "",
-    FIELD_EMAIL_ADDRESS     => "",
-    FIELD_COUNTRY_CODE      => "",
-    FIELD_COUNTRY_ALPHA2    => "",
-    FIELD_PASSWORD          => "",
-    FIELD_ACCOUNT_TYPE      => ""
+    FIELD_FULL_NAME_OR_BUSINESS_NAME    => "",
+    FIELD_EMAIL_ADDRESS                 => "",
+    FIELD_COUNTRY_CODE                  => "",
+    FIELD_COUNTRY_ALPHA2                => "",
+    FIELD_PASSWORD                      => ""
 );
 
 // Required fields
-$firstName      = "";
-$lastName       = "";
-$businessName   = "";
-$emailAddress   = "";
-$countryCode    = "";
-$countryAlpha2  = "";
+$fullNameOrBusinessName = "";
+$emailAddress           = "";
+$countryCode            = "";
+$countryAlpha2          = "";
 
 // Check for set POST params
 if (
-    (isset($_POST[FIELD_FIRST_NAME])        &&
-    isset($_POST[FIELD_LAST_NAME]))
+    isset($_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME])
     ||
-    isset($_POST[FIELD_BUSINESS_NAME])
-    ||
-    (isset($_POST[FIELD_EMAIL_ADDRESS])      &&
-    isset($_POST[FIELD_COUNTRY_CODE])       &&
-    isset($_POST[FIELD_COUNTRY_ALPHA2])     &&
-    isset($_POST[FIELD_PASSWORD])           &&
-    isset($_POST[FIELD_ACCOUNT_TYPE]))
+    (isset($_POST[FIELD_EMAIL_ADDRESS]) &&
+    isset($_POST[FIELD_COUNTRY_CODE])   &&
+    isset($_POST[FIELD_COUNTRY_ALPHA2]) &&
+    isset($_POST[FIELD_PASSWORD]))
 ) {
 
     // Get Values From POST
-    $accountType = $_POST[FIELD_ACCOUNT_TYPE] ? $_POST[FIELD_ACCOUNT_TYPE] : '';
-
-    if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
-        // Personal account
-
-        $firstName  = $_POST[FIELD_FIRST_NAME]  ? $_POST[FIELD_FIRST_NAME]  : '';
-        $lastName   = $_POST[FIELD_LAST_NAME]   ? $_POST[FIELD_LAST_NAME]   : '';
-
-    } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-        // Business account
-
-        $businessName   = $_POST[FIELD_BUSINESS_NAME]  ? $_POST[FIELD_BUSINESS_NAME]    : '';
-    }
+    $fullNameOrBusinessName = $_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME]  ? $_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME]  : '';
 
     // Other fields
     $emailAddress   = $_POST[FIELD_EMAIL_ADDRESS]   ? $_POST[FIELD_EMAIL_ADDRESS]   : '';
@@ -78,12 +57,11 @@ if (
     $password       = $_POST[FIELD_PASSWORD]        ? $_POST[FIELD_PASSWORD]        : '';
 
 
-
     /**
-    * Check email address validity
-    * Check the maximum allowed length of the email address
+    * Check EmailAddress validity
+    * Check the maximum allowed length of the EmailAddress
     * Total length in RFC_3696 is 320 characters
-    * The local part of the email address—your username—must not exceed 64 characters.
+    * The local part of the EmailAddress—your username—must not exceed 64 characters.
     * The domain name is limited to 255 characters.
     */
     if ((!filter_var($emailAddress, FILTER_VALIDATE_EMAIL))
@@ -102,7 +80,7 @@ if (
 
 
     } else if ($userAccountFunctions->isEmailAddressInUsersTable($emailAddress)) {
-        // Email address exists
+        // EmailAddress exists
 
         // Set response error to true and add error message
         $response[KEY_ERROR]            = true;
@@ -130,82 +108,39 @@ if (
 
     } else {
 
-        if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
-            // Personal
+        // Check if FullNameOrBusinessName is alphabetical
+        if (!preg_match(EXPRESSION_NAMES, $fullNameOrBusinessName)) {
+            // Invalid FullNameOrBusinessName
 
-            // Check if first name is alphabetical
-            if (!preg_match(EXPRESSION_NAMES, $firstName)) {
-                // Invalid first name
+            // Set response error to true and add error message
+            $response[KEY_ERROR]            = true;
+            $response[KEY_ERROR_MESSAGE]    = 'The full name or business name you entered does not appear to be valid!';
 
-                // Set response error to true and add error message
-                $response[KEY_ERROR]            = true;
-                $response[KEY_ERROR_MESSAGE]    = 'The first name you entered does not appear to
-                be valid!';
+            // Echo encoded JSON response
+            echo json_encode($response);
 
-                // Echo encoded JSON response
-                echo json_encode($response);
+            exit; // Exit script
 
-                exit; // Exit script
+            // Check FullNameOrBusinessName Length
+        } else if (strlen($fullNameOrBusinessName) < LENGTH_MIN_SINGLE_NAME) {
+            // First name too Short
 
-                // Check if last name is alphabetical
-            } else if (!preg_match(EXPRESSION_NAMES, $lastName)) {
-                // Invalid last name
+            // Set response error to true and add error message
+            $response[KEY_ERROR]            = true;
+            $response[KEY_SIGN_UP]          = FIELD_FULL_NAME_OR_BUSINESS_NAME;
+            $response[KEY_ERROR_MESSAGE]    = 'The full name or business name you entered is too short!';
 
-                // Set response error to true and add error message
-                $response[KEY_ERROR]            = true;
-                $response[KEY_ERROR_MESSAGE]    = 'The last name you entered does not appear to
-                be valid!';
+            // Echo encoded JSON response
+            echo json_encode($response);
 
-                // Echo encoded JSON response
-                echo json_encode($response);
+            exit; // Exit script
+        }
 
-                exit; // Exit script
+        // Check for set params
+        if (isset($_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME])) {
 
-                // Check first name Length
-            } else if (strlen($firstName) < LENGTH_MIN_SINGLE_NAME) {
-                // First name too Short
-
-                // Set response error to true and add error message
-                $response[KEY_ERROR]            = true;
-                $response[KEY_SIGN_UP]          = FIELD_FIRST_NAME;
-                $response[KEY_ERROR_MESSAGE]    = 'The first name you entered is too short!';
-
-                // Echo encoded JSON response
-                echo json_encode($response);
-
-                exit; // Exit script
-
-                // Check last name length
-            } else if (strlen($lastName) < LENGTH_MIN_SINGLE_NAME) {
-                // Last name too Short
-
-                // Set response error to true and add error message
-                $response[KEY_ERROR]          = true;
-                $response[KEY_SIGN_UP]        = FIELD_LAST_NAME;
-                $response[KEY_ERROR_MESSAGE]  = 'The last name you entered is too short!';
-
-                // Echo encoded JSON response
-                echo json_encode($response);
-
-                exit; // Exit script
-            }
-
-            // Check for set params
-            if (isset($_POST[FIELD_FIRST_NAME]) && isset($_POST[FIELD_LAST_NAME])) {
-
-                // Add first name and last name to associative array
-                $signUpDetails[FIELD_FIRST_NAME]    = $firstName;
-                $signUpDetails[FIELD_LAST_NAME]     = $lastName;
-            }
-        } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-            // Business account
-
-            // Check for set params
-            if (isset($_POST[FIELD_BUSINESS_NAME])) {
-
-                // Add business name to associative array
-                $signUpDetails[FIELD_BUSINESS_NAME] = $businessName;
-            }
+            // Add FullNameOrBusinessName to associative array
+            $signUpDetails[FIELD_FULL_NAME_OR_BUSINESS_NAME] = $fullNameOrBusinessName;
         }
 
         // Add the other fields to associative array
@@ -213,7 +148,6 @@ if (
         $signUpDetails[FIELD_COUNTRY_CODE]      = $countryCode;
         $signUpDetails[FIELD_COUNTRY_ALPHA2]    = $countryAlpha2;
         $signUpDetails[FIELD_PASSWORD]          = $password;
-        $signUpDetails[FIELD_ACCOUNT_TYPE]      = $accountType;
 
 
         // Signup user
@@ -224,21 +158,8 @@ if (
             // User signed up
 
             // Add user details JSON response array
-            $response[KEY_SIGN_UP][FIELD_USER_ID] = $signupUser[FIELD_USER_ID];
-
-            // Check account type
-            if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
-                // Personal account
-
-                $response[KEY_SIGN_UP][FIELD_FIRST_NAME]    = $signupUser[FIELD_FIRST_NAME];
-                $response[KEY_SIGN_UP][FIELD_LAST_NAME]     = $signupUser[FIELD_LAST_NAME];
-
-            } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-                // Business account
-
-                $response[KEY_SIGN_UP][FIELD_BUSINESS_NAME] = $signupUser[FIELD_BUSINESS_NAME];
-            }
-
+            $response[KEY_SIGN_UP][FIELD_USER_ID]       = $signupUser[FIELD_USER_ID];
+            $response[KEY_SIGN_UP][FIELD_FULL_NAME_OR_BUSINESS_NAME]    = $signupUser[FIELD_FULL_NAME_OR_BUSINESS_NAME];
             $response[KEY_SIGN_UP][FIELD_EMAIL_ADDRESS] = $signupUser[FIELD_EMAIL_ADDRESS];
             $response[KEY_SIGN_UP][FIELD_ACCOUNT_TYPE]  = $signupUser[FIELD_ACCOUNT_TYPE];
 
