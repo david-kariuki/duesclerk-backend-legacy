@@ -40,8 +40,7 @@ define("TABLE_DEBTS",                           "Debts");
 * Table users fields
 */
 define("FIELD_USER_ID",                         "UserId");
-define("FIELD_FIRST_NAME",                      "FirstName");
-define("FIELD_LAST_NAME",                       "LastName");
+define("FIELD_FULL_NAME_OR_BUSINESS_NAME",      "FullNameOrBusinessName");
 define("FIELD_EMAIL_ADDRESS",                   "EmailAddress");
 define("FIELD_COUNTRY_ID",                      "CountryId");
 define("FIELD_COUNTRY_NAME",                    "CountryName");
@@ -50,7 +49,6 @@ define("FIELD_COUNTRY_ALPHA2",                  "CountryAlpha2");
 define("FIELD_COUNTRY_ALPHA3",                  "CountryAlpha3");
 define("FIELD_COUNTRY_FLAG",                    "CountryFlag");
 define("FIELD_HASH",                            "Hash");
-define("FIELD_BUSINESS_NAME",                   "BusinessName");
 define("FIELD_ACCOUNT_TYPE",                    "AccountType");
 define("FIELD_SIGN_UP_DATE_TIME",               "SignUpDateTime");
 define("FIELD_EMAIL_VERIFIED",                  "EmailVerified");
@@ -59,8 +57,8 @@ define("FIELD_UPDATE_DATE_TIME",                "UpdateDateTime");
 define("FIELD_PASSWORD",                        "Password");
 define("FIELD_NEW_PASSWORD",                    "NewPassword");
 define("FIELD_NEW_ACCOUNT_TYPE",                "NewAccountType");
-define("KEY_ACCOUNT_TYPE_PERSONAL",             "AccountTypePersonal");
-define("KEY_ACCOUNT_TYPE_BUSINESS",             "AccountTypeBusiness");
+
+define("KEY_ACCOUNT_TYPE_FREE",                 "AccountTypeFree");
 define("KEY_USER",                              "User");
 define("KEY_UPDATE_PROFILE",                    "UpdateProfile");
 define("KEY_SIGN_UP",                           "SignUp");
