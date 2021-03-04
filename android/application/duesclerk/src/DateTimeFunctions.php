@@ -49,30 +49,36 @@ class DateTimeFunctions
     * This function is used to convert UTC to local time and display it correctly
     *
     * @param dateTimeStamp  - Date and time stamp
-    * @param countryAlpha2  - Country alpha2 for getting time zone
+    * @param countryAlpha2  - CountryAlpha2 for getting time zone
     */
     public function getLocalTime($dateTimeStamp, $countryAlpha2)
     {
 
-        // Create date from format
-        $dateTime = \DateTime::createFromFormat(
-            FORMAT_DATE_TIME_FULL,      // Set date format
-            $dateTimeStamp,             // Date time stamp
-            new \DateTimeZone('UTC')    // Set time zone to UTC
-        );
+        // Catch errors
+        try {
 
-        // Set dateTimes' objects' time zone to local time zone
-        $dateTime->setTimeZone(new \DateTimeZone($this->getLocalTimezone($countryAlpha2)));
+            // Create date from format
+            $dateTime = \DateTime::createFromFormat(
+                FORMAT_DATE_TIME_FULL,      // Set date format
+                $dateTimeStamp,             // Date time stamp
+                new \DateTimeZone('UTC')    // Set time zone to UTC
+            );
 
-        return $dateTime->format(FORMAT_DATE_TIME_FULL); // Format and return date time object
+            // Set dateTimes' objects' time zone to local time zone
+            $dateTime->setTimeZone(new \DateTimeZone($this->getLocalTimezone($countryAlpha2)));
+
+            return $dateTime->format(FORMAT_DATE_TIME_FULL); // Format and return date time object
+
+        } catch (Exception $e){
+        }
     }
 
     /**
     * Function to get user timezone by alpha2
     *
-    * @param countryAlpha2  - Country's alpha2
+    * @param countryAlpha2  - CountryAlpha2
     *
-    * @return timeZone      - Country's time zone
+    * @return timeZone      - Country time zone
     */
     private function getLocalTimezone($countryAlpha2)
     {
@@ -80,7 +86,7 @@ class DateTimeFunctions
         // Create timezone array
         $timeZone = array();
 
-        // Get timezone by country alpha2
+        // Get timezone by CountryAlpha2
         $timeZone = \DateTimeZone::listIdentifiers(
             \DateTimeZone::PER_COUNTRY,
             strtoupper($countryAlpha2)
@@ -89,8 +95,7 @@ class DateTimeFunctions
         // Get timezone in array at current position incase of multiple timezones in array
         $current = current($timeZone);
 
-        // Return TimeZone
-        return $current;
+        return $current; // Return TimeZone
     }
 
     /**

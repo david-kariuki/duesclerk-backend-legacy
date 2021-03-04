@@ -30,7 +30,7 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
     $password 		= $_POST[FIELD_PASSWORD]        ? $_POST[FIELD_PASSWORD]        : '';
 
 
-    // Get user by emailAddress and password
+    // Get user by EmailAddress and password
     $user = $userAccountFunctions->getUserByEmailAddressAndPassword(
         $emailAddress,
         $password
@@ -40,21 +40,8 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
     if ($user != false) {
         // User details found
 
-        // Get account type
-        $accountType = $user[FIELD_ACCOUNT_TYPE];
-
-        // Add user business and personal account details to response array
-        if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
-            // Personal account
-
-            $response[KEY_USER][FIELD_FIRST_NAME]       = $user[FIELD_FIRST_NAME];
-            $response[KEY_USER][FIELD_LAST_NAME]        = $user[FIELD_LAST_NAME];
-
-        } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-            // Business account
-
-            $response[KEY_USER][FIELD_BUSINESS_NAME]    = $user[FIELD_BUSINESS_NAME];
-        }
+        // Add user account details to response array
+        $response[KEY_USER][FIELD_FULL_NAME_OR_BUSINESS_NAME] = $user[FIELD_FULL_NAME_OR_BUSINESS_NAME];
 
         // Add user details to response array
         $response[KEY_USER][FIELD_USER_ID]              = $user[FIELD_USER_ID];

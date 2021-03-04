@@ -68,16 +68,16 @@ class ContactFunctions
 
 
     /**
-    * Function to check if contact email address is in contact table.
+    * Function to check if contact EmailAddress is in contact table.
     *
-    * @param contactEmailAddress    - Contact email address
+    * @param contactEmailAddress    - Contact EmailAddress
     *
     * @return boolean               - true/false - (if/not found)
     */
     public function isEmailAddressInContactsTable($contactEmailAddress, $contactType)
     {
 
-        // Check for email address in contact table
+        // Check for EmailAddress in contact table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_CONTACTS)}
@@ -95,7 +95,7 @@ class ContactFunctions
 
         // Check if records found
         if ($stmt->num_rows > 0) {
-            // Contact email address found
+            // Contact EmailAddress found
 
             $stmt->close(); // Close statement
 
@@ -103,7 +103,7 @@ class ContactFunctions
             return true; // Return false
 
         } else {
-            // Contact email address not found
+            // Contact EmailAddress not found
 
             $stmt->close(); // Close statement
 
@@ -244,9 +244,9 @@ class ContactFunctions
     }
 
     /**
-    * Function to get contact by contact email address
+    * Function to get contact by contact EmailAddress
     *
-    * @param contactEmailAddress    - contact email address
+    * @param contactEmailAddress    - contact EmailAddress
     *
     * @return array                 - Associative array (contact details)
     * @return boolean               - false - (fetch failure)
@@ -254,7 +254,7 @@ class ContactFunctions
     public function getContactDetailsByContactEmailAddress($contactEmailAddress)
     {
 
-        // Check for email address in contact table
+        // Check for EmailAddress in contact table
         // Prepare statement
         $stmt = $this->connectToDB->prepare(
             "SELECT {$this->constants->valueOfConst(KEY_CONTACT)}.*
@@ -348,7 +348,7 @@ class ContactFunctions
     /**
     * Function to add user contact to contact table
     *
-    * @param userId         - User id for user adding the contact
+    * @param userId         - UserId for user adding the contact
     * @param contactDetails - Associative array of contacts fields key value pair to be inserted
     *
     * @return array         - Associatve array - (contact details)
@@ -368,9 +368,9 @@ class ContactFunctions
             $contactEmailAddress   = "NULL";
             $contactAddress        = "NULL";
 
-            // Check for contact email address
+            // Check for contact EmailAddress
             if (array_key_exists(FIELD_CONTACT_EMAIL_ADDRESS, $contactDetails)) {
-                // Contact email address exists
+                // Contact EmailAddress exists
 
                 $contactEmailAddress = $contactDetails[FIELD_CONTACT_EMAIL_ADDRESS];
             }
@@ -449,7 +449,7 @@ class ContactFunctions
         // Check required fields
         if (array_key_exists(FIELD_USER_ID, $contactDetails)
         && array_key_exists(FIELD_CONTACT_ID, $contactDetails)) {
-            // User id and contact id exists
+            // UserId and contact id exists
 
             // Prepare UPDATE statement
             $stmt = $this->connectToDB->prepare(

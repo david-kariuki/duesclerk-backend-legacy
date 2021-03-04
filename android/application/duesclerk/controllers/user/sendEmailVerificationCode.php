@@ -32,8 +32,8 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 && (isset($_POST[FIELD_USER_ID]) || isset($_POST[FIELD_EMAIL_ADDRESS]))) {
 
     // Get Values From POST
-    $userId         = "";       // User id
-    $emailAddress   = "";       // Users email address
+    $userId         = "";       // UserId
+    $emailAddress   = "";       // Users EmailAddress
     $user           = array();  // User details array
 
     // Get verification code from POST params
@@ -43,10 +43,10 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
     if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
         // Verifying email account
 
-        // Check for user id in POST params
+        // Check for UserId in POST params
         if (isset($_POST[FIELD_USER_ID])) {
 
-            // Get user id from POST params
+            // Get UserId from POST params
             $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
 
             // Get user details
@@ -56,10 +56,10 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
     } else if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
         // Email verification for password reset
 
-        // Check for email address in POST params
+        // Check for EmailAddress in POST params
         if (isset($_POST[FIELD_EMAIL_ADDRESS])) {
 
-            // Get email address from POST params
+            // Get EmailAddress from POST params
             $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
 
             // Get user details
@@ -71,36 +71,24 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
     if ($user !== false) {
         // User details fetched
 
-        // Check for email address
+        // Check for EmailAddress
         if (empty($emailAddress)) {
 
-            $emailAddress = $user[FIELD_EMAIL_ADDRESS]; // Get email address from array
+            $emailAddress = $user[FIELD_EMAIL_ADDRESS]; // Get EmailAddress from array
         }
 
-        // Check for user id
+        // Check for UserId
         if (empty($userId)) {
 
-            $userId = $user[FIELD_USER_ID]; // Get user id from array
+            $userId = $user[FIELD_USER_ID]; // Get UserId from array
         }
 
-        $accountType    = $user[FIELD_ACCOUNT_TYPE];  // Get account type from array
-        $name           = ""; // Variable to hold business or persons first name
+        // Get FullNameOrBusinessName from array
+        $fullNameOrBusinessName = $user[FIELD_FULL_NAME_OR_BUSINESS_NAME];
 
-        // Check account type to get first name or business name
-        if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
-            // Personal account
-
-            $name = $user[FIELD_FIRST_NAME]; // Get first name from array
-
-        } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-            // Business account
-
-            $name = $user[FIELD_BUSINESS_NAME]; // Get business name from array
-        }
-
-        // Check if email address and first name are empty
-        if ((!empty($emailAddress)) && (!empty($name))) {
-            // Email address and first name not empty
+        // Check if EmailAddress and FullNameOrBusinessName are empty
+        if ((!empty($emailAddress)) && (!empty($fullNameOrBusinessName))) {
+            // EmailAddress and FullNameOrBusinessName not empty
 
             $verificationCode = ""; // Verification code
 
@@ -196,7 +184,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                 // Send email account verification mail
                 $sendMail = $mailFunctions->sendUserEmailAccountVerificationCodeMail(
-                    $name,
+                    $fullNameOrBusinessName,
                     $emailAddress,
                     $verificationCode
                 );
@@ -206,7 +194,7 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
 
                 // Send password reset email verification
                 $sendMail = $mailFunctions->sendUserPasswordResetEmailVerificationCodeMail(
-                    $name,
+                    $fullNameOrBusinessName,
                     $emailAddress,
                     $verificationCode
                 );

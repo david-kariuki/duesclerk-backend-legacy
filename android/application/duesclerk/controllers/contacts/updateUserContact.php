@@ -49,16 +49,16 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
         $_POST[FIELD_CONTACT_ADDRESS] ? $_POST[FIELD_CONTACT_ADDRESS] : '';
     }
 
-    // Check for contact email address
+    // Check for contact EmailAddress
     if (isset($_POST[FIELD_CONTACT_EMAIL_ADDRESS])) {
 
         $contactEmailAddress = $_POST[FIELD_CONTACT_EMAIL_ADDRESS] ? $_POST[FIELD_CONTACT_EMAIL_ADDRESS] : '';
 
         /**
-        * Check email address validity
-        * Check the maximum allowed length of the email address
+        * Check EmailAddress validity
+        * Check the maximum allowed length of the EmailAddress
         * Total length in RFC_3696 is 320 characters
-        * The local part of the email address—your username—must not exceed 64 characters.
+        * The local part of the EmailAddress—your username—must not exceed 64 characters.
         * The domain name is limited to 255 characters.
         */
         if ((!filter_var($contactEmailAddress, FILTER_VALIDATE_EMAIL))
@@ -77,7 +77,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
         } else {
             // Contact email is valid
 
-            // Add contact email address to contact details associative array
+            // Add contact EmailAddress to contact details associative array
             $updateDetails[FIELD_CONTACT_EMAIL_ADDRESS] = $contactEmailAddress;
         }
     }

@@ -1,8 +1,8 @@
 <?php
 
 /**
-* Send verify email address file
-* This file verifies email address by comparing stored verification code to that sent on
+* Send verify EmailAddress file
+* This file verifies EmailAddress by comparing stored verification code to that sent on
 * mail and returns response in json
 *
 * @author David Kariuki (dk)
@@ -46,16 +46,16 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
     if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
         // Password reset verification code
 
-        // Check for email address in POST params
+        // Check for EmailAddress in POST params
         if (isset($_POST[FIELD_EMAIL_ADDRESS])) {
 
-            // Get email address from POST params
+            // Get EmailAddress from POST params
             $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
 
             // Get user details
             $user = $userAccountFunctions->getUserByEmailAddress($emailAddress);
 
-            $userId = $user[FIELD_USER_ID]; // Get userId from array
+            $userId = $user[FIELD_USER_ID]; // Get UserId from array
         }
 
     } else if ($verificationType == KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT) {
@@ -153,7 +153,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
         $verificationType,
         $verificationCode
     )) {
-        // Verification code matched user id
+        // Verification code matched UserId
 
         // Check verification code type
         if ($verificationType == KEY_VERIFICATION_TYPE_PASSWORD_RESET) {
@@ -177,28 +177,27 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
             )) {
                 // Email verification details deleted successfully
 
-                $updateDetails[FIELD_EMAIL_VERIFIED] = "true"; // Set email verified value
+                $updateDetails[FIELD_EMAIL_VERIFIED] = "true"; // Set EmailVerified value
 
-                // Update email verified field in users table
+                // Update EmailVerified field in users table
                 $update = $userAccountFunctions->updateUserProfile(
                     $userId,
-                    "",
                     $updateDetails
                 );
 
                 // Check if update was successful
                 if ($update !== false) {
-                    // Email verified field update successful
+                    // EmailVerified field update successful
 
                     // Get user details
                     $user = $userAccountFunctions->getUserByUserId($userId);
 
-                    // Get email verified field value
+                    // Get EmailVerified field value
                     $emailVerified = $user[FIELD_EMAIL_VERIFIED];
 
-                    // Check if email verified value is true
+                    // Check if EmailVerified value is true
                     if ($emailVerified == "true") {
-                        // Email verified field updated successfully
+                        // EmailVerified field updated successfully
 
                         // Set success message
                         $response[KEY_EMAIL_VERIFICATION][KEY_SUCCESS_MESSAGE]  = "Your email address has been verified!";
@@ -209,7 +208,7 @@ if ((isset($_POST[FIELD_VERIFICATION_CODE]) && isset($_POST[FIELD_VERIFICATION_T
                         exit; // Exit script
                     }
                 } else {
-                    // Email verified field update failed
+                    // EmailVerified field update failed
 
                     // Set response error to true and add error message
                     $response[KEY_ERROR]            = true;

@@ -62,17 +62,17 @@ if (
         $contactDetails[FIELD_CONTACT_ADDRESS] = $contactAddress;
     }
 
-    // Check for email address
+    // Check for EmailAddress
     if (isset($_POST[FIELD_CONTACT_EMAIL_ADDRESS])) {
 
         $contactEmailAddress = $_POST[FIELD_CONTACT_EMAIL_ADDRESS] ?
         $_POST[FIELD_CONTACT_EMAIL_ADDRESS] : '';
 
         /**
-        * Check email address validity
-        * Check the maximum allowed length of the email address
+        * Check EmailAddress validity
+        * Check the maximum allowed length of the EmailAddress
         * Total length in RFC_3696 is 320 characters
-        * The local part of the email address—your username—must not exceed 64 characters.
+        * The local part of the EmailAddress—your username—must not exceed 64 characters.
         * The domain name is limited to 255 characters.
         */
         if ((!filter_var($contactEmailAddress, FILTER_VALIDATE_EMAIL))
@@ -91,16 +91,16 @@ if (
 
         } else {
 
-            // Add email address to contact details array
+            // Add EmailAddress to contact details array
             $contactDetails[FIELD_CONTACT_EMAIL_ADDRESS] = $contactEmailAddress;
 
-            // Check for email address in contact table
+            // Check for EmailAddress in contact table
             if ($contactFunctions->isemailAddressInContactsTable(
                 $contactEmailAddress,
                 $contactType
                 )
             ) {
-                // Contact email address is in contact table
+                // Contact EmailAddress is in contact table
 
                 // Get contact details
                 $contact = $contactFunctions->getContactDetailsByContactEmailAddress(

@@ -25,42 +25,33 @@ $userAccountFunctions = new UserAccountFunctions();
 $response = array(KEY_ERROR => false);
 
 // Required fields
-$firstName      = "";
-$lastName       = "";
-$businessName   = "";
-$emailAddress   = "";
-$countryCode    = "";
-$countryAlpha2  = "";
+$fullNameOrBusinessName = "";
+$emailAddress           = "";
+$countryCode            = "";
+$countryAlpha2          = "";
 
 // Update details associative array
 $updateDetails  = array(
-    FIELD_FIRST_NAME        => "",
-    FIELD_LAST_NAME         => "",
-    FIELD_BUSINESS_NAME     => "",
-    FIELD_EMAIL_ADDRESS     => "",
-    FIELD_COUNTRY_CODE      => "",
-    FIELD_COUNTRY_ALPHA2    => "",
-    FIELD_ACCOUNT_TYPE      => ""
+    FIELD_FULL_NAME_OR_BUSINESS_NAME    => "",
+    FIELD_EMAIL_ADDRESS                 => "",
+    FIELD_COUNTRY_CODE                  => "",
+    FIELD_COUNTRY_ALPHA2                => ""
 );
 
-
 // Check for set POST params
-if (
-    isset($_POST[FIELD_USER_ID]) &&
-    (isset($_POST[FIELD_ACCOUNT_TYPE]) || (isset($_POST[FIELD_PASSWORD]) && isset($_POST[FIELD_NEW_PASSWORD])))
-){
+if (isset($_POST[FIELD_USER_ID])){
 
     // Get Values From POST
-    $userId   = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID]    : '';
-    $update     = "";
+    $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID]    : '';
+    $update = "";
 
     // Check for password
     if (isset($_POST[FIELD_PASSWORD]) && isset($_POST[FIELD_NEW_PASSWORD])) {
         // Updating password
 
         // Get values from POST
-        $currentPassword   = $_POST[FIELD_PASSWORD]     ? $_POST[FIELD_PASSWORD]	    : '';
-        $newPassword       = $_POST[FIELD_NEW_PASSWORD] ? $_POST[FIELD_NEW_PASSWORD]    : '';
+        $currentPassword    = $_POST[FIELD_PASSWORD]     ? $_POST[FIELD_PASSWORD]	    : '';
+        $newPassword        = $_POST[FIELD_NEW_PASSWORD] ? $_POST[FIELD_NEW_PASSWORD]   : '';
 
         // Check for password change
         if ($newPassword == $currentPassword) {
@@ -85,58 +76,40 @@ if (
                 $newPassword
             );
         }
-    } else if (isset($_POST[FIELD_ACCOUNT_TYPE])) {
+    } else {
         // Updating profile details
 
-        // Get values from POST
-        $accountType    = $_POST[FIELD_ACCOUNT_TYPE]    ? $_POST[FIELD_ACCOUNT_TYPE] : '';
+        // Check for and get FullNameOrBusinessName
+        if (isset($_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME])) {
 
-        // Check for personal account params
-        if ($accountType == KEY_ACCOUNT_TYPE_PERSONAL) {
+            $fullNameOrBusinessName = $_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME] ? $_POST[FIELD_FULL_NAME_OR_BUSINESS_NAME] : '';
 
-            // Check for and get first name
-            if (isset($_POST[FIELD_FIRST_NAME])) {
-                $firstName = $_POST[FIELD_FIRST_NAME] ? $_POST[FIELD_FIRST_NAME] : '';
-                $updateDetails[FIELD_FIRST_NAME] = $firstName; // Add firstName to details array
-            }
-
-            // Check for and get last name
-            if (isset($_POST[FIELD_LAST_NAME])) {
-                $lastName = $_POST[FIELD_LAST_NAME] ? $_POST[FIELD_LAST_NAME] : '';
-                $updateDetails[FIELD_LAST_NAME] = $lastName; // Add lastName to details array
-            }
-
-            // Check for busimess account params
-        } else if ($accountType == KEY_ACCOUNT_TYPE_BUSINESS) {
-
-            // Check for and get business name
-            if (isset($_POST[FIELD_BUSINESS_NAME])) {
-
-                $businessName = $_POST[FIELD_BUSINESS_NAME] ? $_POST[FIELD_BUSINESS_NAME] : '';
-
-                // Add businessName to details array
-                $updateDetails[FIELD_BUSINESS_NAME] = $businessName;
-            }
+            // Add FullNameOrBusinessName to details array
+            $updateDetails[FIELD_FULL_NAME_OR_BUSINESS_NAME] = $fullNameOrBusinessName;
         }
 
         // Check for the other account params
 
-        // Check for and get email address
+        // Check for and get EmailAddress
         if (isset($_POST[FIELD_EMAIL_ADDRESS])) {
             $emailAddress = $_POST[FIELD_EMAIL_ADDRESS] ? $_POST[FIELD_EMAIL_ADDRESS] : '';
 
-            // Add emailAddress to details array
+            // Add EmailAddress to details array
             $updateDetails[FIELD_EMAIL_ADDRESS] = $emailAddress;
         }
 
-        // Check for and get country code and country alpha2
+        // Check for and get CountryCode and CountryAlpha2
         if (isset($_POST[FIELD_COUNTRY_CODE]) && isset($_POST[FIELD_COUNTRY_ALPHA2])) {
 
             $countryCode = $_POST[FIELD_COUNTRY_CODE] ? $_POST[FIELD_COUNTRY_CODE] : '';
-            $updateDetails[FIELD_COUNTRY_CODE] = $countryCode; // Add to details array
+
+            // Add to details array
+            $updateDetails[FIELD_COUNTRY_CODE] = $countryCode;
 
             $countryAlpha2 = $_POST[FIELD_COUNTRY_ALPHA2] ? $_POST[FIELD_COUNTRY_ALPHA2] : '';
-            $updateDetails[FIELD_COUNTRY_ALPHA2] = $countryAlpha2; // Add to details array
+
+            // Add to details array
+            $updateDetails[FIELD_COUNTRY_ALPHA2] = $countryAlpha2;
         }
 
 
@@ -154,7 +127,6 @@ if (
         // Update profile details
         $update = $userAccountFunctions->updateUserProfile(
             $userId,
-            $accountType,
             $updateDetails
         );
     }
@@ -185,7 +157,7 @@ if (
     }
 
 } else {
-    // Missing userId
+    // Missing UserId
 
     // Set error to true
     $response[KEY_ERROR]			= true;

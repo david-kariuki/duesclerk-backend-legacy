@@ -120,7 +120,7 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
     $debtDetails[FIELD_DEBT_DATE_DUE]       = $debtDateDue;     // Add debt date due
     $debtDetails[FIELD_CONTACT_ID]          = $contactId;       // Add contact id
     $debtDetails[FIELD_CONTACT_TYPE]        = $contactType;     // Add contact type
-    $debtDetails[FIELD_USER_ID]             = $userId;          // Add user id
+    $debtDetails[FIELD_USER_ID]             = $userId;          // Add UserId
 
     $addDebt = $debtFunctions->addContactsDebt($debtDetails); // Add debt to contact
 
