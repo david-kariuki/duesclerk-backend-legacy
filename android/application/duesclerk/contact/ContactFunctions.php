@@ -520,7 +520,7 @@ class ContactFunctions
                     // Contact exists
 
                     // Get contacts debts
-                    $contactsDebts = array($this->debtFunctions->getContactsDebts(
+                    $contactsDebts = array($this->debtFunctions->getContactsDebtsData(
                         $contactId,
                         $contact[FIELD_CONTACT_TYPE],
                         $userId
