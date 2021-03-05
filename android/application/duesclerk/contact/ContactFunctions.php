@@ -71,10 +71,12 @@ class ContactFunctions
     * Function to check if contact EmailAddress is in contact table.
     *
     * @param contactEmailAddress    - Contact EmailAddress
+    * @param contactType            - ContactType
+    * @param userId                 - UserId
     *
     * @return boolean               - true/false - (if/not found)
     */
-    public function isEmailAddressInContactsTable($contactEmailAddress, $contactType)
+    public function isEmailAddressInContactsTable($contactEmailAddress, $contactType, $userId)
     {
 
         // Check for EmailAddress in contact table
@@ -87,9 +89,11 @@ class ContactFunctions
             WHERE {$this->constants->valueOfConst(KEY_CONTACTS)}
             .{$this->constants->valueOfConst(FIELD_CONTACT_EMAIL_ADDRESS)} = ?
             AND {$this->constants->valueOfConst(KEY_CONTACTS)}
-            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?"
+            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?
+            AND {$this->constants->valueOfConst(KEY_CONTACTS)}
+            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?"
         );
-        $stmt->bind_param("ss", $contactEmailAddress, $contactType); // Bind parameters
+        $stmt->bind_param("sss", $contactEmailAddress, $contactType, $userId); // Bind parameters
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store result
 
@@ -115,11 +119,13 @@ class ContactFunctions
     /**
     * Function to check if contact phone number is in contact table.
     *
-    * @param contactPhoneNumber - Contact phone number
+    * @param contactPhoneNumber - Contact PhoneNumber
+    * @param contactType        - ContactType
+    * @param userId             - UserId
     *
     * @return boolean           - true/false - (if/not found)
     */
-    public function isPhoneNumberInContactsTable($contactPhoneNumber, $contactType)
+    public function isPhoneNumberInContactsTable($contactPhoneNumber, $contactType, $userId)
     {
 
         // Check for phone number in contact table
@@ -132,9 +138,11 @@ class ContactFunctions
             WHERE {$this->constants->valueOfConst(KEY_CONTACTS)}
             .{$this->constants->valueOfConst(FIELD_CONTACT_PHONE_NUMBER)} = ?
             AND {$this->constants->valueOfConst(KEY_CONTACTS)}
-            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?"
+            .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?
+            AND {$this->constants->valueOfConst(KEY_CONTACTS)}
+            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?"
         );
-        $stmt->bind_param("ss", $contactPhoneNumber, $contactType); // Bind parameters
+        $stmt->bind_param("sss", $contactPhoneNumber, $contactType, $userId); // Bind parameters
         $stmt->execute(); // Execute statement
         $stmt->store_result(); // Store result
 

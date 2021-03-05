@@ -40,7 +40,7 @@ if (
     );
 
     // Get Values From POST
-    $userId                 = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
+    $userId                = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : '';
     $contactFullName       = $_POST[FIELD_CONTACT_FULL_NAME]
     ? $_POST[FIELD_CONTACT_FULL_NAME] : '';
     $contactPhoneNumber    = $_POST[FIELD_CONTACT_PHONE_NUMBER]
@@ -97,7 +97,8 @@ if (
             // Check for EmailAddress in contact table
             if ($contactFunctions->isemailAddressInContactsTable(
                 $contactEmailAddress,
-                $contactType
+                $contactType,
+                $userId
                 )
             ) {
                 // Contact EmailAddress is in contact table
@@ -123,7 +124,12 @@ if (
     }
 
     // Check for phone number in contact table
-    if ($contactFunctions->isPhoneNumberInContactsTable($contactPhoneNumber, $contactType)) {
+    if ($contactFunctions->isPhoneNumberInContactsTable(
+        $contactPhoneNumber,
+        $contactType,
+        $userId
+        )
+    ) {
         // Contact phone number is in contact table
 
         // Get contact details
