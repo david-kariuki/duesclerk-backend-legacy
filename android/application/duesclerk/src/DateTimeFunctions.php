@@ -53,23 +53,31 @@ class DateTimeFunctions
     */
     public function getLocalTime($dateTimeStamp, $countryAlpha2)
     {
+        // Check if Date and Time stamp and CountryAlpha2 are null
+        if ((!is_null($dateTimeStamp)) && (!is_null($countryAlpha2))) {
 
-        // Catch errors
-        try {
+            // Catch errors
+            try {
 
-            // Create date from format
-            $dateTime = \DateTime::createFromFormat(
-                FORMAT_DATE_TIME_FULL,      // Set date format
-                $dateTimeStamp,             // Date time stamp
-                new \DateTimeZone('UTC')    // Set time zone to UTC
-            );
+                // Create date from format
+                $dateTime = \DateTime::createFromFormat(
+                    FORMAT_DATE_TIME_FULL,      // Set date format
+                    $dateTimeStamp,             // Date time stamp
+                    new \DateTimeZone('UTC')    // Set time zone to UTC
+                );
 
-            // Set dateTimes' objects' time zone to local time zone
-            $dateTime->setTimeZone(new \DateTimeZone($this->getLocalTimezone($countryAlpha2)));
+                // Set dateTimes' objects' time zone to local time zone
+                $dateTime->setTimeZone(new \DateTimeZone(
+                    $this->getLocalTimezone($countryAlpha2)
+                ));
 
-            return $dateTime->format(FORMAT_DATE_TIME_FULL); // Format and return date time object
-
-        } catch (Exception $e){
+                // Format and return date time object
+                return $dateTime->format(FORMAT_DATE_TIME_FULL);
+                
+            } catch (Exception $e){
+            }
+        } else {
+            return null; // Return null
         }
     }
 
@@ -83,19 +91,27 @@ class DateTimeFunctions
     private function getLocalTimezone($countryAlpha2)
     {
 
-        // Create timezone array
-        $timeZone = array();
+        // Check if parameter is null
+        if (!is_null($countryAlpha2)) {
 
-        // Get timezone by CountryAlpha2
-        $timeZone = \DateTimeZone::listIdentifiers(
-            \DateTimeZone::PER_COUNTRY,
-            strtoupper($countryAlpha2)
-        );
+            // Create timezone array
+            $timeZone = array();
 
-        // Get timezone in array at current position incase of multiple timezones in array
-        $current = current($timeZone);
+            // Get timezone by CountryAlpha2
+            $timeZone = \DateTimeZone::listIdentifiers(
+                \DateTimeZone::PER_COUNTRY,
+                strtoupper($countryAlpha2)
+            );
 
-        return $current; // Return TimeZone
+            // Get timezone in array at current position incase of multiple timezones in array
+            $current = current($timeZone);
+
+            return $current; // Return TimeZone
+
+        } else {
+
+            return null; // Return null
+        }
     }
 
     /**
@@ -107,23 +123,34 @@ class DateTimeFunctions
     {
 
         $this->setTimeZoneUTC(); // Set time zone to UTC
+
+        // Return numerical time stamp
         return strtotime(
             date(FORMAT_DATE_TIME_NUMERICAL, time())
-        ); // Return numerical time stamp
+        );
     }
 
     /**
     * Function to get the default time zone textual date and time
     *
     * @param format     - DateTime format
+    *
     * @return dateTime  - (Default timezone textual date and time)
     */
     public function getDefaultTimeZoneTextualDateTime($format)
     {
 
-        $this->setTimeZoneUTC(); // Set time zone to UTC
+        // Check if parameter is null
+        if (!is_null($format)) {
 
-        return date($format); // Return formatted date and time
+            $this->setTimeZoneUTC(); // Set time zone to UTC
+
+            return date($format); // Return formatted date and time
+
+        } else {
+
+            return null; // Return null
+        }
     }
 
     /**
@@ -137,22 +164,36 @@ class DateTimeFunctions
     public function getNumericalTimeDifferenceInHours($recentTime, $oldTime)
     {
 
-        // Check if recent time is numeric
-        if (!is_numeric($recentTime)) {
+        // Check if parameters are null
+        if ((!is_null($recentTime)) && (!is_null($oldTime))) {
 
-            // Convert date time format
-            $recentTime = $this->convertDateTimeFormat($recentTime, FORMAT_DATE_TIME_NUMERICAL);
+            // Check if recent time is numeric
+            if (!is_numeric($recentTime)) {
+
+                // Convert date time format
+                $recentTime = $this->convertDateTimeFormat(
+                    $recentTime,
+                    FORMAT_DATE_TIME_NUMERICAL
+                );
+            }
+
+            // Check if old time is numeric
+            if (!is_numeric($oldTime)) {
+
+                // Convert date time format
+                $oldTime = $this->convertDateTimeFormat(
+                    $oldTime,
+                    FORMAT_DATE_TIME_NUMERICAL
+                );
+            }
+
+            // Return time difference
+            return (abs($recentTime - $oldTime) / 3600);
+
+        } else {
+
+            return null; // Return null
         }
-
-        // Check if old time is numeric
-        if (!is_numeric($oldTime)) {
-
-            // Convert date time format
-            $oldTime = $this->convertDateTimeFormat($oldTime, FORMAT_DATE_TIME_NUMERICAL);
-        }
-
-        // Return time difference
-        return (abs($recentTime - $oldTime) / 3600);
     }
 
     /**
@@ -166,21 +207,29 @@ class DateTimeFunctions
     private function convertDateTimeFormat($dateAndTime, $newFormat)
     {
 
-        // Create date from format
-        $dateTime = \DateTime::createFromFormat(
-            FORMAT_DATE_TIME_FULL,      // Initial date format
-            $dateAndTime,               // Date time stamp
-            new \DateTimeZone('UTC')    // Set time zone to UTC
-        );
+        // Check if parameters are null
+        if ((!is_null($dateAndTime)) && (!is_null($newFormat))) {
 
-        // Switch new format
-        switch ($newFormat) {
+            // Create date from format
+            $dateTime = \DateTime::createFromFormat(
+                FORMAT_DATE_TIME_FULL,      // Initial date format
+                $dateAndTime,               // Date time stamp
+                new \DateTimeZone('UTC')    // Set time zone to UTC
+            );
 
-            case FORMAT_DATE_TIME_NUMERICAL:
-            return strtotime($dateTime->format(FORMAT_DATE_TIME_NUMERICAL)); // Numerical
+            // Switch new format
+            switch ($newFormat) {
 
-            default:
-            return $dateTime->format($newFormat); // Other formats
+                case FORMAT_DATE_TIME_NUMERICAL:
+                return strtotime($dateTime->format(FORMAT_DATE_TIME_NUMERICAL)); // Numerical
+                break;
+
+                default:
+                return $dateTime->format($newFormat); // Other formats
+            }
+        } else {
+
+            return null; // Return null
         }
     }
 
@@ -196,24 +245,31 @@ class DateTimeFunctions
     public function convertDateTimeFromFormat($dateAndTime, $fromFormat, $newFormat)
     {
 
-        // Create date from format
-        $dateTime = \DateTime::createFromFormat(
-            $fromFormat,                // Initial date format
-            $dateAndTime,               // Date time stamp
-            new \DateTimeZone('UTC')    // Set time zone to UTC
-        );
+        // Check if parameters are null
+        if ((!is_null($dateAndTime)) && (!is_null($fromFormat)) && (!is_null($newFormat))) {
 
-        // Switch new format
-        switch ($newFormat) {
+            // Create date from format
+            $dateTime = \DateTime::createFromFormat(
+                $fromFormat,                // Initial date format
+                $dateAndTime,               // Date time stamp
+                new \DateTimeZone('UTC')    // Set time zone to UTC
+            );
 
-            case FORMAT_DATE_TIME_NUMERICAL:
-            return strtotime($dateTime->format(FORMAT_DATE_TIME_NUMERICAL)); // Numerical date
+            // Switch new format
+            switch ($newFormat) {
 
-            case FORMAT_DATE_FULL:
-            return strtotime($dateTime->format(FORMAT_DATE_FULL)); // Full date
+                case FORMAT_DATE_TIME_NUMERICAL:
+                return strtotime($dateTime->format(FORMAT_DATE_TIME_NUMERICAL)); // Numerical date
 
-            default:
-            return $dateTime->format($newFormat); // Other formats
+                case FORMAT_DATE_FULL:
+                return strtotime($dateTime->format(FORMAT_DATE_FULL)); // Full date
+
+                default:
+                return $dateTime->format($newFormat); // Other formats
+            }
+        } else {
+
+            return null; // Return null
         }
     }
 
@@ -228,10 +284,17 @@ class DateTimeFunctions
     public function convertDateFormat($date, $newFormat)
     {
 
-        $createDate = date_create($date); // Create date from date string
-        $formatDate = date_format($createDate, $newFormat); // Format date
+        // Check if parameters are null
+        if ((!is_null($date)) && (!is_null($newFormat))) {
 
-        return $formatDate; // Return formatted date
+            $createDate = date_create($date); // Create date from date string
+            $formatDate = date_format($createDate, $newFormat); // Format date
+
+            return $formatDate; // Return formatted date
+        } else {
+
+            return null; // Return null
+        }
     }
 
     /**
