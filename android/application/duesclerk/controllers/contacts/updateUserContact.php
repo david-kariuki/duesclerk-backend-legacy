@@ -91,7 +91,7 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])) {
     // Update contact
     $updateContact = $contactFunctions->updateContactDetails($updateDetails);
 
-    // Chec for successful contact update
+    // Check for successful contact update
     if ($updateContact !== false) {
         // Contact updated
 
