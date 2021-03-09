@@ -84,12 +84,10 @@ class DebtFunctions
         if (array_key_exists(FIELD_USER_ID, $debtDetails)
         && array_key_exists(FIELD_CONTACT_ID, $debtDetails)
         && array_key_exists(FIELD_DEBT_AMOUNT, $debtDetails)
-        && array_key_exists(FIELD_DEBT_DATE_ISSUED, $debtDetails)
-        && array_key_exists(FIELD_DEBT_DATE_DUE, $debtDetails)
         && array_key_exists(FIELD_CONTACT_TYPE, $debtDetails)) {
             // Required fields set
 
-            // Generate debt id
+            // Generate DebtId
             $debtId = $this->sharedFunctions->generateUniqueId(
                 "debt",
                 TABLE_DEBTS,
@@ -97,36 +95,44 @@ class DebtFunctions
                 LENGTH_TABLE_IDS_LONG
             );
 
-            // Get debt details from associative array
-            $debtAmount = $debtDetails[FIELD_DEBT_AMOUNT]; // Get debt amount
+            // Get debt and other details from associative array
+            $debtAmount         = $debtDetails[FIELD_DEBT_AMOUNT]; // Get DebtAmount
+            $contactId          = $debtDetails[FIELD_CONTACT_ID];   // Get ContactId
+            $contactType        = $debtDetails[FIELD_CONTACT_TYPE]; // Get contact type
+            $userId             = $debtDetails[FIELD_USER_ID];      // Get UserId
+            $debtDateIssued     = ""; // DateDebtIssued
+            $debtDateDue        = ""; // DateDebtDue
+            $debtDescription    = ""; // DebtDescription
 
-            // Get debt date issued
-            $debtDateIssued = $this->dateTimeFunctions->convertDateTimeFromFormat(
-                $debtDetails[FIELD_DEBT_DATE_ISSUED],
-                FORMAT_DATE_FULL,
-                FORMAT_DATE_SHORT
-            );
+            // Check if DebtDateIssued exists in update details array
+            if (array_key_exists(FIELD_DEBT_DATE_ISSUED, $debtDetails)) {
 
-            // Get debt date due
-            $debtDateDue = $this->dateTimeFunctions->convertDateTimeFromFormat(
-                $debtDetails[FIELD_DEBT_DATE_DUE],
-                FORMAT_DATE_FULL,
-                FORMAT_DATE_SHORT
-            );
+                // Get DebtDateIssued
+                $debtDateIssued = $this->dateTimeFunctions->convertDateTimeFromFormat(
+                    $debtDetails[FIELD_DEBT_DATE_ISSUED],
+                    FORMAT_DATE_FULL,
+                    FORMAT_DATE_SHORT
+                );
+            }
 
-            $debtDescription = ""; // Debt description
+            // Check if DebtDateDue exists in update details array
+            if (array_key_exists(FIELD_DEBT_DATE_DUE, $debtDetails)) {
 
-            // Check for debt description
+                // Get DebtDateDue
+                $debtDateDue = $this->dateTimeFunctions->convertDateTimeFromFormat(
+                    $debtDetails[FIELD_DEBT_DATE_DUE],
+                    FORMAT_DATE_FULL,
+                    FORMAT_DATE_SHORT
+                );
+            }
+
+            // Check for DebtDescription
             if (array_key_exists(FIELD_DEBT_DESCRIPTION, $debtDetails)) {
 
-                // Get debt description
+                // Get DebtDescription
                 $debtDescription = $debtDetails[FIELD_DEBT_DESCRIPTION];
             }
 
-            // Get contact details and UserId from associative array
-            $contactId      = $debtDetails[FIELD_CONTACT_ID];   // Get contact id
-            $contactType    = $debtDetails[FIELD_CONTACT_TYPE]; // Get contact type
-            $userId         = $debtDetails[FIELD_USER_ID];      // Get UserId
 
             // Prepare INSERT statement
             $stmt = $this->connectToDB->prepare(
@@ -162,12 +168,52 @@ class DebtFunctions
             } else {
                 // Debt insertion failed
 
-                return null;
+                return null; // Return null
             }
         } else {
             // Missing required fields
 
             return 0; // Return zero
+        }
+    }
+
+    /**
+    * Function to get a debts details
+    *
+    * @param DebtId - DebtId
+    *
+    * @return array - Associative array - (debt details)
+    */
+    public function getDebtDetailsByDebtId($debtId)
+    {
+
+        // Check for DebtId in debts table
+        // Prepare statement
+        $stmt = $this->connectToDB->prepare(
+            "SELECT {$this->constants->valueOfConst(KEY_DEBT)}.*
+            FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
+            AS {$this->constants->valueOfConst(KEY_DEBT)}
+            WHERE {$this->constants->valueOfConst(KEY_DEBT)}
+            .{$this->constants->valueOfConst(FIELD_DEBT_ID)}
+            = ?"
+        );
+        $stmt->bind_param("s", $debtId); // Bind parameters
+
+        // Check for query execution
+        if ($stmt->execute()) {
+            // Query executed
+
+            $debtDetails = $stmt->get_result()->fetch_assoc(); // Get result array
+            $stmt->close(); // Close statement
+
+            return $debtDetails; // Return debt details array
+
+        } else {
+            // Debt not found
+
+            $stmt->close(); // Close statement
+
+            return false; // Return false
         }
     }
 
@@ -215,25 +261,33 @@ class DebtFunctions
             // Loop through result to get all contact rows
             while ($row = $result->fetch_assoc()) {
 
-                // Get debt date issued and date due
+                // Get DebtDateIssued and date due
                 $debtDateIssued = $row[FIELD_DEBT_DATE_ISSUED];
                 $debtDateDue    = $row[FIELD_DEBT_DATE_DUE];
 
-                // Convert debt date issued time format to users local time format
-                $readableDebtDateIssued = $this->dateTimeFunctions->convertDateFormat(
-                    $debtDateIssued,
-                    FORMAT_DATE_FULL
-                );
+                // Check if DebtDateIssued is null or empty
+                if ((!is_null($debtDateIssued)) && (!empty($debtDateIssued))) {
 
-                // Convert debt date due time format to users local time format
-                $readableDebtDateDue = $this->dateTimeFunctions->convertDateFormat(
-                    $debtDateDue,
-                    FORMAT_DATE_FULL
-                );
+                    // Convert DebtDateIssued time format to users local time format
+                    $debtDateIssued = $this->dateTimeFunctions->convertDateFormat(
+                        $debtDateIssued,
+                        FORMAT_DATE_FULL
+                    );
+                }
+
+                // Check if DebtDateIssued is null or empty
+                if ((!is_null($debtDateDue)) && (!empty($debtDateDue))) {
+                    // Convert DebtDateDue time format to users local time format
+
+                    $debtDateDue = $this->dateTimeFunctions->convertDateFormat(
+                        $debtDateDue,
+                        FORMAT_DATE_FULL
+                    );
+                }
 
                 // Update rows debt dates to readable time format
-                $row[FIELD_DEBT_DATE_ISSUED]    = $readableDebtDateIssued; // Update date issued
-                $row[FIELD_DEBT_DATE_DUE]       = $readableDebtDateDue; // Update date due
+                $row[FIELD_DEBT_DATE_ISSUED]    = $debtDateIssued; // Update date issued
+                $row[FIELD_DEBT_DATE_DUE]       = $debtDateDue; // Update date due
 
                 $debts[] = $row; // Add row to array
             }
@@ -270,46 +324,6 @@ class DebtFunctions
     }
 
     /**
-    * Function to get a debts details
-    *
-    * @param DebtId - Debts id
-    *
-    * @return array - Associative array - (debt details)
-    */
-    private function getDebtDetailsByDebtId($debtId)
-    {
-
-        // Check for debt id in debts table
-        // Prepare statement
-        $stmt = $this->connectToDB->prepare(
-            "SELECT {$this->constants->valueOfConst(KEY_DEBT)}.*
-            FROM {$this->constants->valueOfConst(TABLE_DEBTS)}
-            AS {$this->constants->valueOfConst(KEY_DEBT)}
-            WHERE {$this->constants->valueOfConst(KEY_DEBT)}
-            .{$this->constants->valueOfConst(FIELD_DEBT_ID)}
-            = ?"
-        );
-        $stmt->bind_param("s", $debtId); // Bind parameters
-
-        // Check for query execution
-        if ($stmt->execute()) {
-            // Query executed
-
-            $debtDetails = $stmt->get_result()->fetch_assoc(); // Get result array
-            $stmt->close(); // Close statement
-
-            return $debtDetails; // Return debt details array
-
-        } else {
-            // Debt not found
-
-            $stmt->close(); // Close statement
-
-            return false; // Return false
-        }
-    }
-
-    /**
     * Function to get single contact debts total amount
     *
     * @param debts  - All contacts debts
@@ -338,7 +352,7 @@ class DebtFunctions
                         // Check if current key in loop is amounts field
                         if ($key == FIELD_DEBT_AMOUNT) {
 
-                            // Increment total value with current debt amount value
+                            // Increment total value with current DebtAmount value
                             $totalDebtsAmount += $debt[$key];
                         }
                     }
@@ -386,7 +400,7 @@ class DebtFunctions
                     // Loop through single debt to get debt details
                     foreach ($contact as $key => $contactDetails) {
 
-                        $contactId      = $contact[FIELD_CONTACT_ID]; // Set contact id
+                        $contactId      = $contact[FIELD_CONTACT_ID]; // Set ContactId
                         $contactType    = $contact[FIELD_CONTACT_TYPE]; // Set contact type
                         $userId         = $contact[FIELD_USER_ID]; // Set UserId
                     }
@@ -535,6 +549,81 @@ class DebtFunctions
     }
 
     /**
+    * Function to update debt details
+    *
+    * @param debtDetails    - Debt details associative array
+    *
+    * @return boolean       - (Update successfull / failed)
+    */
+    public function updateDebtDetails($debtDetails)
+    {
+
+        // Check if passed parameter is an array
+        if (is_array($debtDetails)) {
+
+            // Check for required fields
+            if (array_key_exists(FIELD_CONTACT_ID, $debtDetails)
+            && array_key_exists(FIELD_DEBT_ID, $debtDetails)) {
+                // ContactId and DebtId exists
+
+                $debtDateIssued = ""; // DateDebtIssued
+                $debtDateDue    = ""; // DateDebtDue
+
+                // Check if DebtDateIssued exists in update details array
+                if (array_key_exists(FIELD_DEBT_DATE_ISSUED, $debtDetails)) {
+
+                    // Get DebtDateIssued
+                    $debtDateIssued = $this->dateTimeFunctions->convertDateTimeFromFormat(
+                        $debtDetails[FIELD_DEBT_DATE_ISSUED],
+                        FORMAT_DATE_FULL,
+                        FORMAT_DATE_SHORT
+                    );
+                }
+
+                // Check if DebtDateDue exists in update details array
+                if (array_key_exists(FIELD_DEBT_DATE_DUE, $debtDetails)) {
+
+                    // Get DebtDateDue
+                    $debtDateDue = $this->dateTimeFunctions->convertDateTimeFromFormat(
+                        $debtDetails[FIELD_DEBT_DATE_DUE],
+                        FORMAT_DATE_FULL,
+                        FORMAT_DATE_SHORT
+                    );
+                }
+
+                // Prepare UPDATE statement
+                $stmt = $this->connectToDB->prepare(
+                    "UPDATE {$this->constants->valueOfConst(TABLE_DEBTS)}
+                    SET {$this->constants->valueOfConst(FIELD_DEBT_AMOUNT)} = ?,
+                    {$this->constants->valueOfConst(FIELD_DEBT_DATE_ISSUED)} = ?,
+                    {$this->constants->valueOfConst(FIELD_DEBT_DATE_DUE)} = ?,
+                    {$this->constants->valueOfConst(FIELD_DEBT_DESCRIPTION)} = ?
+                    WHERE {$this->constants->valueOfConst(TABLE_DEBTS)}
+                    .{$this->constants->valueOfConst(FIELD_CONTACT_ID)} = ?
+                    AND {$this->constants->valueOfConst(TABLE_DEBTS)}
+                    .{$this->constants->valueOfConst(FIELD_DEBT_ID)} = ?"
+                );
+
+                // Bind parameters
+                $stmt->bind_param(
+                    "ssssss",
+                    $debtDetails[FIELD_DEBT_AMOUNT],
+                    $debtDateIssued,
+                    $debtDateDue,
+                    $debtDetails[FIELD_DEBT_DESCRIPTION],
+                    $debtDetails[FIELD_CONTACT_ID],
+                    $debtDetails[FIELD_DEBT_ID]
+                );
+
+                $updated = $stmt->execute(); // Execute statement
+                $stmt->close(); // Close statement
+
+                return $updated; // Return boolean on update success status
+            }
+        }
+    }
+
+    /**
     * Function to delete contacts debt
     *
     * @param contactId  - Contacts id
@@ -564,7 +653,7 @@ class DebtFunctions
     /**
     * Function to delete one or more contacts debts
     *
-    * @param debtIds    - Single or multiple debt ids for debts to be deleted
+    * @param debtIds    - Single or multiple DebtIds for debts to be deleted
     * @param contactId  - Contacts id
     *
     * @return boolean   - (Debt deletion successful / failed)
@@ -579,10 +668,10 @@ class DebtFunctions
             // Sanitize array elements
             $debtsIds = $this->sharedFunctions->sanitizeArrayElements($debtsIds);
 
-            // Loop through array to get contact ids
+            // Loop through array to get ContactIds
             foreach($debtsIds as $debtId) {
 
-                // Get debt by debt id
+                // Get debt by DebtId
                 $debt = $this->getDebtDetailsByDebtId($debtId);
 
                 // Check if debt found
@@ -628,6 +717,64 @@ class DebtFunctions
             }
 
             return $deleted; // Return deletion status
+        }
+    }
+
+    /**
+    * Function to check for unwanted characters and sanitize DebtAmount
+    *
+    * @param debtAmount - DebtAmount
+    *
+    * @return debtAmount - DebtAmount
+    */
+    public function checkAndSanitizeDebtAmount($debtAmount)
+    {
+
+        // Check if DebtAmount is null
+        if (!is_null($debtAmount)) {
+            // DebtAmount not empty
+
+            // Check string length
+            if (strlen($debtAmount) > 1) {
+                // String length is greater than 1
+
+                // Check if the first character is a dot
+                if (strcmp(substr($debtAmount, 0, 1), ".") == 0) {
+                    // Amount is a float with a leading dot without 0
+
+                    // Add a zero to the beggining of DebtAmount
+                    $debtAmount = "0" . $debtAmount;
+
+                    // Check if first character is a zero
+                } else if (strcmp(substr($debtAmount, 0, 1), "0") == 0) {
+
+                    // Check if second character is numeric to determine if DebtAmount
+                    // is a number with a leading zero
+                    if (is_numeric(substr($debtAmount, 1, 1))) {
+                        // DebtAmount has leading zero
+
+                        $debtAmount = ltrim($debtAmount, "0"); // Trim leading zero in DebtAmount
+                    }
+                } else {
+
+                    // Check if the last character of DebtAmount is a period
+                    if (strcmp(substr($debtAmount, -1), ".") == 0) {
+                        // Last character is a period
+
+                        $debtAmount = rtrim($debtAmount, "."); // Trim ending period from DebtAmount
+                    }
+
+                    // Check if the last 2 characters of DebtAmount are .0
+                    if (strcmp(substr($debtAmount, -2), ".0") == 0) {
+                        // String ends with .0
+
+                        // Ommit the last two characters of DebtAmount
+                        $debtAmount = substr($debtAmount, 0, -2);
+                    }
+                }
+            }
+
+            return $debtAmount; // Return sanitized DebtAmount
         }
     }
 }
