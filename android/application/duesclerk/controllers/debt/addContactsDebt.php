@@ -43,34 +43,102 @@ $debtDetails = array(
 );
 
 // Check for set POST params
-if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
-&& isset($_POST[FIELD_DEBT_DATE_DUE]) && isset($_POST[FIELD_USER_ID])
-&& isset($_POST[FIELD_CONTACT_ID])) {
+if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])
+&& isset($_POST[FIELD_DEBT_AMOUNT])) {
 
     // Get Values From POST
 
-    // Get debt amount
-    $debtAmount     = $_POST[FIELD_DEBT_AMOUNT]  ? $_POST[FIELD_DEBT_AMOUNT]  : '';
+    $userId = $_POST[FIELD_USER_ID] ? $_POST[FIELD_USER_ID] : ''; // Get UserId
+    $contactId = $_POST[FIELD_CONTACT_ID] ? $_POST[FIELD_CONTACT_ID] : ''; // Get ContactId
+    $debtAmount = $_POST[FIELD_DEBT_AMOUNT] ? $_POST[FIELD_DEBT_AMOUNT] : ''; // Get DebtAmount
+    $contactType = ""; // Contact type
 
-    // Get debt date issued
-    $debtDateIssued = $_POST[FIELD_DEBT_DATE_ISSUED]  ? $_POST[FIELD_DEBT_DATE_ISSUED]  : '';
-
-    // Get debt date due
-    $debtDateDue    = $_POST[FIELD_DEBT_DATE_DUE]  ? $_POST[FIELD_DEBT_DATE_DUE]  : '';
-
-    $userId         = $_POST[FIELD_USER_ID]     ? $_POST[FIELD_USER_ID]     : ''; // Get UserId
-    $contactId      = $_POST[FIELD_CONTACT_ID]  ? $_POST[FIELD_CONTACT_ID]  : ''; // Get ContactId
-    $contactType    = ""; // Contact type
-
-    // Get contact by contact id
+    // Get contact by ContactId
     $getContact = $contactFunctions->getContactDetailsByContactId($contactId);
 
     // Check if contact fetched
     if ($getContact !== false) {
         // Contact fetched
 
-        $contactType = $getContact[FIELD_CONTACT_TYPE]; // Get contact type
+        $contactType = $getContact[FIELD_CONTACT_TYPE]; // Get ContactType
 
+        // Check for DebtDateIssued
+        if (isset($_POST[FIELD_DEBT_DATE_ISSUED])) {
+
+            // Get DebtDescription from POST
+            $debtDateIssued = $_POST[FIELD_DEBT_DATE_ISSUED] ? $_POST[FIELD_DEBT_DATE_ISSUED] : '';
+
+            // Add DebtDateIssued to update details
+            $debtDetails[FIELD_DEBT_DATE_ISSUED] = $debtDateIssued;
+        }
+
+        // Check for DebtDateDue
+        if (isset($_POST[FIELD_DEBT_DATE_DUE])) {
+
+            // Get DebtDateDue from POST
+            $debtDateDue = $_POST[FIELD_DEBT_DATE_DUE] ? $_POST[FIELD_DEBT_DATE_DUE]    : '';
+
+            // Add DebtDateDue to update details
+            $debtDetails[FIELD_DEBT_DATE_DUE] = $debtDateDue;
+        }
+
+        // Check for DebtDescription
+        if (isset($_POST[FIELD_DEBT_DESCRIPTION])) {
+
+            // Get DebtDescription from POST
+            $debtDescription = $_POST[FIELD_DEBT_DESCRIPTION] ? $_POST[FIELD_DEBT_DESCRIPTION] : '';
+
+            // Add DebtDescription to update details
+            $debtDetails[FIELD_DEBT_DESCRIPTION] = $debtDescription;
+        }
+
+        // Check and sanitize debt amount
+        $debtAmount = $debtFunctions->checkAndSanitizeDebtAmount($debtAmount);
+
+        // Add other details to debt details array
+        $debtDetails[FIELD_USER_ID]             = $userId;          // Add UserId
+        $debtDetails[FIELD_CONTACT_ID]          = $contactId;       // Add ContactId
+        $debtDetails[FIELD_DEBT_AMOUNT]         = $debtAmount;      // Add DebtAmount
+        $debtDetails[FIELD_CONTACT_TYPE]        = $contactType;     // Add ContactType
+
+        // Loop through array removing null key value pairs if any
+        foreach ($debtDetails as $key => $value) {
+
+            // Check for null
+            if (is_null($value) || $value == '') {
+
+                unset($debtDetails[$key]); // Unset key and value
+            }
+        }
+
+        $addDebt = $debtFunctions->addContactsDebt($debtDetails); // Add debt to contact
+
+        // Check if debt was added
+        if ($addDebt !== false) {
+            // Debt added
+
+            // Set success message
+            $response[KEY_SUCCESS_MESSAGE]  = "Debt added successfully!";
+
+            // Return inserted debt associative array
+            $response[KEY_DEBT]             = $addDebt;
+
+            // Echo encoded JSON response
+            echo json_encode($response);
+
+            exit; // Exit script
+
+        } else {
+
+            // Set response error to true and add error message
+            $response[KEY_ERROR]           = true;
+            $response[KEY_ERROR_MESSAGE]   = "Adding debt failed!";
+
+            // Echo encoded JSON response
+            echo json_encode($response);
+
+            exit; // Exit script
+        }
     } else {
         // Contact does not exist
 
@@ -83,79 +151,6 @@ if (isset($_POST[FIELD_DEBT_AMOUNT]) && isset($_POST[FIELD_DEBT_DATE_ISSUED])
 
         exit; // Exit script
     }
-
-    // Check for debt description
-    if (isset($_POST[FIELD_DEBT_DESCRIPTION])) {
-
-        // Get debt description
-        $debtDescription  = $_POST[FIELD_DEBT_DESCRIPTION] ? $_POST[FIELD_DEBT_DESCRIPTION] : '';
-
-        // Add debt description to debt details array
-        $debtDetails[FIELD_DEBT_DESCRIPTION] = $debtDescription;
-    }
-
-    // Get first element of debt amount
-    $firstElementOfAmount = $debtAmount[0];
-
-    // Check if the first element is a dot
-    if ($firstElementOfAmount == ".") {
-        // Amount is a float with a leading dot without 0
-
-        // Add a zero to the beggining of debt amount
-        $debtAmount = "0" . $debtAmount;
-
-    // Check if first element is a zero
-    } else if ($firstElementOfAmount == "0") {
-
-        // Get second element of debt amount
-        $secondElementOfAmount = $debtAmount[1];
-
-        // Check if second element is numeric to determine if debt amount
-        // is a number with a leading zero
-        if (is_numeric($secondElementOfAmount)) {
-            // Debt amount has leading zero
-
-            $debtAmount = ltrim($debtAmount, "0"); // Trim leading zero in debt amount
-        }
-    }
-
-    // Add other details to debt details array
-    $debtDetails[FIELD_DEBT_AMOUNT]         = $debtAmount;      // Add debt amount
-    $debtDetails[FIELD_DEBT_DATE_ISSUED]    = $debtDateIssued;  // Add debt date issued
-    $debtDetails[FIELD_DEBT_DATE_DUE]       = $debtDateDue;     // Add debt date due
-    $debtDetails[FIELD_CONTACT_ID]          = $contactId;       // Add contact id
-    $debtDetails[FIELD_CONTACT_TYPE]        = $contactType;     // Add contact type
-    $debtDetails[FIELD_USER_ID]             = $userId;          // Add UserId
-
-    $addDebt = $debtFunctions->addContactsDebt($debtDetails); // Add debt to contact
-
-    // Check if debt was added
-    if ($addDebt !== false) {
-        // Debt added
-
-        // Set success message
-        $response[KEY_SUCCESS_MESSAGE]  = "Debt added successfully!";
-
-        // Return inserted debt associative array
-        $response[KEY_DEBT]             = $addDebt;
-
-        // Echo encoded JSON response
-        echo json_encode($response);
-
-        exit; // Exit script
-
-    } else {
-
-        // Set response error to true and add error message
-        $response[KEY_ERROR]           = true;
-        $response[KEY_ERROR_MESSAGE]   = "Adding debt failed!";
-
-        // Echo encoded JSON response
-        echo json_encode($response);
-
-        exit; // Exit script
-    }
-
 } else {
     // Mising fields
 

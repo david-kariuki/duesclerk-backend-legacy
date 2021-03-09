@@ -92,7 +92,7 @@ define("FIELD_USER_LOG_TIME",                   "UserLogTime");
 
 
 /**
-* Table contact fields and others
+* Table contact fields and keys
 */
 define("FIELD_CONTACT_ID",                      "ContactId");
 define("FIELD_CONTACT_FULL_NAME",               "ContactFullName");
@@ -102,6 +102,7 @@ define("FIELD_CONTACT_ADDRESS",                 "ContactAddress");
 define("FIELD_CONTACT_TYPE",                    "ContactType");
 define("FIELD_CONTACT_ORDER",                   "ContactOrder");
 define("KEY_UPDATE_CONTACT",                    "UpdateContact");
+define("KEY_UPDATE_DEBT",                       "UpdateDebt");
 
 define("KEY_CONTACT",                           "Contact");
 define("KEY_CONTACTS_IDS",                      "ContactsIds");
@@ -113,7 +114,7 @@ define("KEY_CONTACT_TYPE_PEOPLE_OWING_ME",      "ContactTypePeopleOwingMe");
 
 
 /**
-* Table debts fields and others
+* Table debts fields and keys
 */
 define("FIELD_DEBT_ID",                             "DebtId");
 define("FIELD_DEBT_AMOUNT",                         "DebtAmount");
@@ -167,14 +168,27 @@ define("LOG_TYPE_UPDATE_PASSWORD",              "LogTypeUpdatePassword");
 define("LOG_TYPE_SWITCH_ACCOUNT_TYPE",          "LogTypeSwitchAccountType");
 
 
-// Date formats
-define("FORMAT_DATE_FULL",                      "l, F d, Y");
-define("FORMAT_DATE_SHORT",                     "n/j/Y");
-define("FORMAT_DATE_TIME_FULL",                 "l d, F Y H:i:s");
-define("FORMAT_DATE_TIME_NUMERICAL",            "m/d/Y h:i:s a");
-
 // File types
 define("FILE_TYPE_PNG",                         ".png");
+
+
+/** Date formats
+* j - The day of the month without leading zeros (1 to 31)
+* l (lowercase 'L') - A full textual representation of a day
+* F - A full textual representation of a month (January through December)
+* m - A numeric representation of a month (from 01 to 12)
+* n - A numeric representation of a month, without leading zeros (1 to 12)
+* Y - A four digit representation of a year
+* a - Lowercase am or pm
+* H - 24-hour format of an hour (00 to 23)
+* i - Minutes with leading zeros (00 to 59)
+* s - Seconds, with leading zeros (00 to 59)
+* h - 12-hour format of an hour (01 to 12)
+*/
+define("FORMAT_DATE_FULL",                      "l, F j, Y");
+define("FORMAT_DATE_SHORT",                     "n/j/Y");
+define("FORMAT_DATE_TIME_FULL",                 "l j, F Y H:i:s");
+define("FORMAT_DATE_TIME_NUMERICAL",            "m/j/Y h:i:s a");
 
 
 /**
