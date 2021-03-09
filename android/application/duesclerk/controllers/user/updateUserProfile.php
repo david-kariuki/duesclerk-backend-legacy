@@ -119,8 +119,7 @@ if (isset($_POST[FIELD_USER_ID])){
             // Check for null
             if (is_null($value) || $value == '') {
 
-                // Unset key and value
-                unset($updateDetails[$key]);
+                unset($updateDetails[$key]); // Unset key and value
             }
         }
 
