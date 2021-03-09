@@ -55,13 +55,14 @@ if (isset($_POST[FIELD_EMAIL_ADDRESS]) && isset($_POST[FIELD_PASSWORD])) {
 
         // Get country flag and strip out extension type to get flag name
         $countryFlagName = str_replace(FILE_TYPE_PNG, "", $user[FIELD_COUNTRY_FLAG]);
-        $response[KEY_USER][FIELD_COUNTRY_FLAG]         = $countryFlagName;
 
+        $response[KEY_USER][FIELD_COUNTRY_FLAG]         = $countryFlagName;
         $response[KEY_USER][FIELD_COUNTRY_NAME]         = $user[FIELD_COUNTRY_NAME];
         $response[KEY_USER][FIELD_COUNTRY_CODE]         = $user[FIELD_COUNTRY_CODE];
         $response[KEY_USER][FIELD_COUNTRY_ALPHA2]       = $user[FIELD_COUNTRY_ALPHA2];
         $response[KEY_USER][FIELD_EMAIL_VERIFIED]       = $user[FIELD_EMAIL_VERIFIED];
         $response[KEY_USER][FIELD_SIGN_UP_DATE_TIME]    = $user[FIELD_SIGN_UP_DATE_TIME];
+        $response[KEY_USER][FIELD_ACCOUNT_TYPE]         = $user[FIELD_ACCOUNT_TYPE];
 
         // Echo encoded JSON response
         echo json_encode($response);
