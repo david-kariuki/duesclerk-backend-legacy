@@ -164,4 +164,4 @@ if (isset($_POST[FIELD_USER_ID]) && isset($_POST[FIELD_CONTACT_ID])
     exit; // Exit script
 }
 
-// EOF: fetchContactsDebts.php
+// EOF: addContactsDebts.php
