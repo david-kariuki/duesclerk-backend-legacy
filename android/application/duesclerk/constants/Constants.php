@@ -121,7 +121,7 @@ define("FIELD_DEBT_AMOUNT",                         "DebtAmount");
 define("FIELD_DEBT_DATE_ISSUED",                    "DebtDateIssued");
 define("FIELD_DEBT_DATE_DUE",                       "DebtDateDue");
 define("FIELD_DEBT_DESCRIPTION",                    "DebtDescription");
-define("FIELD_DEBT_ORDER",                          "DebtOrder");
+define("FIELD_DEBT_DATE_TIME_ADDED",                "DebtDateTimeAdded");
 define("KEY_DEBTS_TOTAL_AMOUNT",                    "DebtsTotalAmount");
 define("KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT",       "AllContactsDebtsTotalAmount");
 define("KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_OWING_ME",  "ContactsDebtsTotalPeopleOwingMe");
