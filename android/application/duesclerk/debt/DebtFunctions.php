@@ -133,6 +133,10 @@ class DebtFunctions
                 $debtDescription = $debtDetails[FIELD_DEBT_DESCRIPTION];
             }
 
+            // Get account creation date
+            $dateAdded = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime(
+                FORMAT_DATE_TIME_FULL
+            );
 
             // Prepare INSERT statement
             $stmt = $this->connectToDB->prepare(
@@ -145,16 +149,17 @@ class DebtFunctions
                     {$this->constants->valueOfConst(FIELD_DEBT_DESCRIPTION)},
                     {$this->constants->valueOfConst(FIELD_CONTACT_ID)},
                     {$this->constants->valueOfConst(FIELD_CONTACT_TYPE)},
-                    {$this->constants->valueOfConst(FIELD_USER_ID)}
+                    {$this->constants->valueOfConst(FIELD_USER_ID)},
+                    {$this->constants->valueOfConst(FIELD_DEBT_DATE_TIME_ADDED)}
                 )
-                VALUES ( ?, ?, ?, ?, ?, ?, ?, ?)"
+                VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
 
             // Bind parameters
             $stmt->bind_param(
-                "ssssssss",
+                "sssssssss",
                 $debtId, $debtAmount, $debtDateIssued, $debtDateDue, $debtDescription,
-                $contactId, $contactType, $userId
+                $contactId, $contactType, $userId, $dateAdded
             );
 
             $add = $stmt->execute(); // Execute statement
@@ -241,9 +246,7 @@ class DebtFunctions
             AND {$this->constants->valueOfConst(KEY_DEBTS)}
             .{$this->constants->valueOfConst(FIELD_CONTACT_TYPE)} = ?
             AND {$this->constants->valueOfConst(KEY_DEBTS)}
-            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?
-            ORDER BY {$this->constants->valueOfConst(KEY_DEBTS)}
-            .{$this->constants->valueOfConst(FIELD_DEBT_ORDER)} DESC"
+            .{$this->constants->valueOfConst(FIELD_USER_ID)} = ?"
         );
 
         $stmt->bind_param("sss", $contactId, $contactType, $userId); // Bind parameter
