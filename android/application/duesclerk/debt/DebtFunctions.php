@@ -135,7 +135,7 @@ class DebtFunctions
 
             // Get account creation date
             $dateAdded = $this->dateTimeFunctions->getDefaultTimeZoneTextualDateTime(
-                FORMAT_DATE_TIME_FULL
+                FORMAT_DATE_SHORT
             );
 
             // Prepare INSERT statement
@@ -150,7 +150,7 @@ class DebtFunctions
                     {$this->constants->valueOfConst(FIELD_CONTACT_ID)},
                     {$this->constants->valueOfConst(FIELD_CONTACT_TYPE)},
                     {$this->constants->valueOfConst(FIELD_USER_ID)},
-                    {$this->constants->valueOfConst(FIELD_DEBT_DATE_TIME_ADDED)}
+                    {$this->constants->valueOfConst(FIELD_DEBT_DATE_ADDED)}
                 )
                 VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?)"
             );
@@ -267,6 +267,7 @@ class DebtFunctions
                 // Get DebtDateIssued and date due
                 $debtDateIssued = $row[FIELD_DEBT_DATE_ISSUED];
                 $debtDateDue    = $row[FIELD_DEBT_DATE_DUE];
+                $debtDateAdded  = $row[FIELD_DEBT_DATE_ADDED];
 
                 // Check if DebtDateIssued is null or empty
                 if ((!is_null($debtDateIssued)) && (!empty($debtDateIssued))) {
@@ -288,9 +289,15 @@ class DebtFunctions
                     );
                 }
 
+                $debtDateAdded = $this->dateTimeFunctions->convertDateFormat(
+                    $debtDateAdded,
+                    FORMAT_DATE_FULL
+                );
+
                 // Update rows debt dates to readable time format
                 $row[FIELD_DEBT_DATE_ISSUED]    = $debtDateIssued; // Update date issued
                 $row[FIELD_DEBT_DATE_DUE]       = $debtDateDue; // Update date due
+                $row[FIELD_DEBT_DATE_ADDED] = $debtDateAdded; // Update date added
 
                 $debts[] = $row; // Add row to array
             }
