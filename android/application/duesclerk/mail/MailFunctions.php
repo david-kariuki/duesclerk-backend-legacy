@@ -762,10 +762,10 @@ class MailFunctions
             .{$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?";
 
             $bindParamValues[1] = $verificationType; // Add VerificationType to bind param array
-
-            // Get bind param types
-            $bindParamTypes = str_repeat("s", count($bindParamValues));
         }
+
+        // Get bind param types
+        $bindParamTypes = str_repeat("s", count($bindParamValues));
 
         // Select command
         $selectCommand = "SELECT {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}.*
