@@ -21,96 +21,95 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable MYSQLI erro
 
 
 // Website and domain details
-define("PROTOCOL",                              "https://");
-define("SUB_DOMAIN",                            "www.");
-define("ROOT_DOMAIN",                           "duesclerk.com");
-define("ROOT_DOMAIN_WITH_SUB_DOMAIN",           SUB_DOMAIN . ROOT_DOMAIN);
-define("WEBSITE_URL",                           PROTOCOL . ROOT_DOMAIN_WITH_SUB_DOMAIN);
-define("COMPANY_NAME",                          "DuesClerk");
+define("PROTOCOL",                                  "https://");
+define("SUB_DOMAIN",                                "www.");
+define("ROOT_DOMAIN",                               "duesclerk.com");
+define("ROOT_DOMAIN_WITH_SUB_DOMAIN",               SUB_DOMAIN . ROOT_DOMAIN);
+define("WEBSITE_URL",                               PROTOCOL . ROOT_DOMAIN_WITH_SUB_DOMAIN);
+define("COMPANY_NAME",                              "DuesClerk");
 
 
 // Table Names
-define("TABLE_USERS",                           "Users");
-define("TABLE_EMAIL_VERIFICATION",              "EmailVerification");
-define("TABLE_USER_LOGS",                       "UserLogs");
-define("TABLE_COUNTRIES",                       "Countries");
-define("TABLE_CONTACTS",                        "Contacts");
-define("TABLE_DEBTS",                           "Debts");
+define("TABLE_USERS",                               "Users");
+define("TABLE_EMAIL_VERIFICATION",                  "EmailVerification");
+define("TABLE_USER_LOGS",                           "UserLogs");
+define("TABLE_COUNTRIES",                           "Countries");
+define("TABLE_CONTACTS",                            "Contacts");
+define("TABLE_DEBTS",                               "Debts");
 
 
 /**
 * Table users fields
 */
-define("FIELD_USER_ID",                         "UserId");
-define("FIELD_FULL_NAME_OR_BUSINESS_NAME",      "FullNameOrBusinessName");
-define("FIELD_EMAIL_ADDRESS",                   "EmailAddress");
-define("FIELD_COUNTRY_ID",                      "CountryId");
-define("FIELD_COUNTRY_NAME",                    "CountryName");
-define("FIELD_COUNTRY_CODE",                    "CountryCode");
-define("FIELD_COUNTRY_ALPHA2",                  "CountryAlpha2");
-define("FIELD_COUNTRY_ALPHA3",                  "CountryAlpha3");
-define("FIELD_COUNTRY_FLAG",                    "CountryFlag");
-define("FIELD_HASH",                            "Hash");
-define("FIELD_ACCOUNT_TYPE",                    "AccountType");
-define("FIELD_SIGN_UP_DATE_TIME",               "SignUpDateTime");
-define("FIELD_EMAIL_VERIFIED",                  "EmailVerified");
-define("FIELD_UPDATE_DATE_TIME",                "UpdateDateTime");
+define("FIELD_USER_ID",                             "UserId");
+define("FIELD_FULL_NAME_OR_BUSINESS_NAME",          "FullNameOrBusinessName");
+define("FIELD_EMAIL_ADDRESS",                       "EmailAddress");
+define("FIELD_COUNTRY_ID",                          "CountryId");
+define("FIELD_COUNTRY_NAME",                        "CountryName");
+define("FIELD_COUNTRY_CODE",                        "CountryCode");
+define("FIELD_COUNTRY_ALPHA2",                      "CountryAlpha2");
+define("FIELD_COUNTRY_ALPHA3",                      "CountryAlpha3");
+define("FIELD_COUNTRY_FLAG",                        "CountryFlag");
+define("FIELD_HASH",                                "Hash");
+define("FIELD_ACCOUNT_TYPE",                        "AccountType");
+define("FIELD_SIGN_UP_DATE_TIME",                   "SignUpDateTime");
+define("FIELD_EMAIL_VERIFIED",                      "EmailVerified");
+define("FIELD_UPDATE_DATE_TIME",                    "UpdateDateTime");
+define("FIELD_PASSWORD",                            "Password");
+define("FIELD_NEW_PASSWORD",                        "NewPassword");
+define("FIELD_NEW_ACCOUNT_TYPE",                    "NewAccountType");
 
-define("FIELD_PASSWORD",                        "Password");
-define("FIELD_NEW_PASSWORD",                    "NewPassword");
-define("FIELD_NEW_ACCOUNT_TYPE",                "NewAccountType");
-
-define("KEY_ACCOUNT_TYPE_FREE",                 "Free account");
-define("KEY_USER",                              "User");
-define("KEY_UPDATE_PROFILE",                    "UpdateProfile");
-define("KEY_SIGN_UP",                           "SignUp");
-define("KEY_SIGN_IN",                           "SignIn");
-define("KEY_PASSWORD_RESET",                    "PasswordReset");
+define("KEY_ACCOUNT_TYPE_FREE",                     "Free account");
+define("KEY_USER",                                  "User");
+define("KEY_UPDATE_PROFILE",                        "UpdateProfile");
+define("KEY_SIGN_UP",                               "SignUp");
+define("KEY_SIGN_IN",                               "SignIn");
+define("KEY_PASSWORD_RESET",                        "PasswordReset");
 
 
 /**
 * Table email verification fields
 */
-define("FIELD_VERIFICATION_ID",                 "VerificationId");
-define("FIELD_VERIFICATION_CODE",               "VerificationCode");
-define("FIELD_VERIFICATION_TYPE",               "VerificationType");
-define("FIELD_VERIFICATION_CODE_REQUEST_TIME",  "VerificationCodeRequestTime");
+define("FIELD_VERIFICATION_ID",                     "VerificationId");
+define("FIELD_VERIFICATION_CODE",                   "VerificationCode");
+define("FIELD_VERIFICATION_TYPE",                   "VerificationType");
+define("FIELD_VERIFICATION_CODE_REQUEST_TIME",      "VerificationCodeRequestTime");
 
-define("KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT",   "VerificationEmailAccount");
-define("KEY_VERIFICATION_TYPE_PASSWORD_RESET",  "VerificationPasswordReset");
-define("KEY_VERIFICATION_CODE_EXPIRY_TIME",     1); // 1 hour
-define("KEY_EMAIL_VERIFICATION",                "EmailVerification");
-define("KEY_SEND_VERIFICATION_CODE",            "SendVerificationCode");
+define("KEY_VERIFICATION_TYPE_EMAIL_ACCOUNT",       "VerificationEmailAccount");
+define("KEY_VERIFICATION_TYPE_PASSWORD_RESET",      "VerificationPasswordReset");
+define("KEY_VERIFICATION_CODE_EXPIRY_TIME",         1); // 1 hour
+define("KEY_EMAIL_VERIFICATION",                    "EmailVerification");
+define("KEY_SEND_VERIFICATION_CODE",                "SendVerificationCode");
 
 
 /**
 * Table logs fields
 */
-define("FIELD_USER_LOG_ID",                     "UserLogId");
-define("FIELD_USER_LOG_TYPE",                   "UserLogType");
-define("FIELD_USER_LOG_TIME",                   "UserLogTime");
+define("FIELD_USER_LOG_ID",                         "UserLogId");
+define("FIELD_USER_LOG_TYPE",                       "UserLogType");
+define("FIELD_USER_LOG_TIME",                       "UserLogTime");
 
 
 /**
 * Table contact fields and keys
 */
-define("FIELD_CONTACT_ID",                      "ContactId");
-define("FIELD_CONTACT_FULL_NAME",               "ContactFullName");
-define("FIELD_CONTACT_PHONE_NUMBER",            "ContactPhoneNumber");
-define("FIELD_CONTACT_EMAIL_ADDRESS",           "ContactEmailAddress");
-define("FIELD_CONTACT_ADDRESS",                 "ContactAddress");
-define("FIELD_CONTACT_TYPE",                    "ContactType");
-define("FIELD_CONTACT_ORDER",                   "ContactOrder");
-define("KEY_UPDATE_CONTACT",                    "UpdateContact");
-define("KEY_UPDATE_DEBT",                       "UpdateDebt");
+define("FIELD_CONTACT_ID",                          "ContactId");
+define("FIELD_CONTACT_FULL_NAME",                   "ContactFullName");
+define("FIELD_CONTACT_PHONE_NUMBER",                "ContactPhoneNumber");
+define("FIELD_CONTACT_EMAIL_ADDRESS",               "ContactEmailAddress");
+define("FIELD_CONTACT_ADDRESS",                     "ContactAddress");
+define("FIELD_CONTACT_TYPE",                        "ContactType");
+define("FIELD_CONTACT_ORDER",                       "ContactOrder");
 
-define("KEY_CONTACT",                           "Contact");
-define("KEY_CONTACTS_IDS",                      "ContactsIds");
-define("KEY_CONTACTS",                          "Contacts");
-define("KEY_CONTACT_DETAILS",                   "ContactDetails");
-define("KEY_DELETE_CONTACTS",                   "DeleteContacts");
-define("KEY_CONTACT_TYPE_PEOPLE_I_OWE",         "ContactTypePeopleIOwe");
-define("KEY_CONTACT_TYPE_PEOPLE_OWING_ME",      "ContactTypePeopleOwingMe");
+define("KEY_UPDATE_CONTACT",                        "UpdateContact");
+define("KEY_UPDATE_DEBT",                           "UpdateDebt");
+define("KEY_CONTACT",                               "Contact");
+define("KEY_CONTACTS_IDS",                          "ContactsIds");
+define("KEY_CONTACTS",                              "Contacts");
+define("KEY_CONTACT_DETAILS",                       "ContactDetails");
+define("KEY_DELETE_CONTACTS",                       "DeleteContacts");
+define("KEY_CONTACT_TYPE_PEOPLE_I_OWE",             "ContactTypePeopleIOwe");
+define("KEY_CONTACT_TYPE_PEOPLE_OWING_ME",          "ContactTypePeopleOwingMe");
 
 
 /**
@@ -121,7 +120,8 @@ define("FIELD_DEBT_AMOUNT",                         "DebtAmount");
 define("FIELD_DEBT_DATE_ISSUED",                    "DebtDateIssued");
 define("FIELD_DEBT_DATE_DUE",                       "DebtDateDue");
 define("FIELD_DEBT_DESCRIPTION",                    "DebtDescription");
-define("FIELD_DEBT_DATE_TIME_ADDED",                "DebtDateTimeAdded");
+define("FIELD_DEBT_DATE_ADDED",                     "DebtDateAdded");
+
 define("KEY_DEBTS_TOTAL_AMOUNT",                    "DebtsTotalAmount");
 define("KEY_ALL_CONTACTS_DEBTS_TOTAL_AMOUNT",       "AllContactsDebtsTotalAmount");
 define("KEY_CONTACTS_DEBTS_TOTAL_PEOPLE_OWING_ME",  "ContactsDebtsTotalPeopleOwingMe");
@@ -136,40 +136,40 @@ define("KEY_CONTACTS_NUMBER_OF_DEBTS",              "ContactsNumberOfDebts");
 /**
 * Table field lengths
 */
-define("LENGTH_MIN_SINGLE_NAME",                1);
-define("LENGTH_MIN_PASSWORD",                   8);
-define("LENGTH_MAX_EMAIL_ADDRESS",              320);
-define("LENGTH_TABLE_IDS_SHORT",                25);
-define("LENGTH_TABLE_IDS_LONG",                 50);
-define("LENGTH_VERIFICATION_CODE",              6);
+define("LENGTH_MIN_SINGLE_NAME",                    1);
+define("LENGTH_MIN_PASSWORD",                       8);
+define("LENGTH_MAX_EMAIL_ADDRESS",                  320);
+define("LENGTH_TABLE_IDS_SHORT",                    25);
+define("LENGTH_TABLE_IDS_LONG",                     50);
+define("LENGTH_VERIFICATION_CODE",                  6);
 
 
 // Country keys
-define("KEY_COUNTRY",                           "Country");
-define("KEY_COUNTRY_DATA",                      "CountryData");
+define("KEY_COUNTRY",                               "Country");
+define("KEY_COUNTRY_DATA",                          "CountryData");
 
 
 // Error, error message and success message keys
-define("KEY_ERROR",                             "Error");
-define("KEY_ERROR_MESSAGE",                     "ErrorMessage");
-define("KEY_SUCCESS_MESSAGE",                   "SuccessMessage");
+define("KEY_ERROR",                                 "Error");
+define("KEY_ERROR_MESSAGE",                         "ErrorMessage");
+define("KEY_SUCCESS_MESSAGE",                       "SuccessMessage");
 
 
 // Expressions (preg match)
-define("EXPRESSION_NAMES",                      "/^[A-Za-z .'-]+$/");
+define("EXPRESSION_NAMES",                          "/^[A-Za-z .'-]+$/");
 
 
 // Logs keys
-define("LOG_TYPE_SIGN_UP",                      "LogTypeSignUp");
-define("LOG_TYPE_SIGN_IN",                      "LogTypeSignIn");
-define("LOG_TYPE_SIGN_OUT",                     "LogTypeSignOut");
-define("LOG_TYPE_UPDATE_PROFILE",               "LogTypeUpdateProfile");
-define("LOG_TYPE_UPDATE_PASSWORD",              "LogTypeUpdatePassword");
-define("LOG_TYPE_SWITCH_ACCOUNT_TYPE",          "LogTypeSwitchAccountType");
+define("LOG_TYPE_SIGN_UP",                          "LogTypeSignUp");
+define("LOG_TYPE_SIGN_IN",                          "LogTypeSignIn");
+define("LOG_TYPE_SIGN_OUT",                         "LogTypeSignOut");
+define("LOG_TYPE_UPDATE_PROFILE",                   "LogTypeUpdateProfile");
+define("LOG_TYPE_UPDATE_PASSWORD",                  "LogTypeUpdatePassword");
+define("LOG_TYPE_SWITCH_ACCOUNT_TYPE",              "LogTypeSwitchAccountType");
 
 
 // File types
-define("FILE_TYPE_PNG",                         ".png");
+define("FILE_TYPE_PNG",                             ".png");
 
 
 /** Date formats
