@@ -24,11 +24,13 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable MYSQLI erro
 define("EMAIL_ADDRESS_INFO_USERNAME",       "info@"     . ROOT_DOMAIN);
 define("EMAIL_ADDRESS_SUPPORT_USERNAME",    "support@"  . ROOT_DOMAIN);
 define("EMAIL_ADDRESS_NO_REPLY_USERNAME",   "no-reply@" . ROOT_DOMAIN);
+define("EMAIL_ADDRESS_POLICY_USERNAME",     "policy@"   . ROOT_DOMAIN);
 
 // SMTP Email address passwords
 define("EMAIL_ADDRESS_INFO_PASSWORD",       "Z+&Yb#c-rl+v!1m*tl");
 define("EMAIL_ADDRESS_SUPPORT_PASSWORD",    "LH+.g1AdpOL3+YyCL9");
 define("EMAIL_ADDRESS_NO_REPLY_PASSWORD",   ";ejMn];A5!;JNPGy0}");
+define("EMAIL_ADDRESS_POLICY_PASSWORD",     "b(16+@}vqpEc=KI}0,");
 
 // Set main(mail) and backup SMTP(webdisk) servers.
 define("MAIL_HOST",         "mail." . ROOT_DOMAIN . ";" . "webdisk." . ROOT_DOMAIN);
