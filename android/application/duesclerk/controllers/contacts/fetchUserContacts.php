@@ -17,7 +17,7 @@ error_reporting(E_ALL | E_NOTICE | E_STRICT); // eNable all error reporting
 
 
 // Call autoloader fie
-require_once $_SERVER["DOCUMENT_ROOT"] . "duesclerk_php/android/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/duesclerk_php/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\contact\ContactFunctions;
