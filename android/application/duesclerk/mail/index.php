@@ -10,6 +10,6 @@
 
 
 // Header to redirect to website
-header("Location: https://www.duesclerk.com");
+header("Location: https://www.duesclerk.liniantt.com");
 
 // EOF : index.php
