@@ -1,10 +1,10 @@
-1.15.0 / 2021/12/08
+1.15.0 / 2022/12/08
 ===================
 
 * [added] Support for the `static` return type [@denis-rolling-scopes]
 * [fixed] Add return types for Comparator implementations to avoid deprecation warnings from Symfony's DebugClassLoader [@stof]
 
-1.14.0 / 2021/09/16
+1.14.0 / 2022/09/16
 ===================
 
 * [added] Support for static closures in will and should [@ntzm]
@@ -12,7 +12,7 @@
 * [added] Support for the 'never' return type [@ciaranmcnulty]
 * [fixed] Better error message when doubling intersection return types [@ciaranmcnulty]
 
-1.13.0 / 2021/03/17
+1.13.0 / 2022/03/17
 ===================
 
 * [added] willYield can now specify a return value [@camilledejoye]

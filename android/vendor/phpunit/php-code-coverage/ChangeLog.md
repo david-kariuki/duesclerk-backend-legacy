@@ -51,19 +51,19 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * [#889](https://github.com/sebastianbergmann/php-code-coverage/issues/889): Code Coverage depends on autoload order
 
-## [9.2.10] - 2021-12-05
+## [9.2.10] - 2022-12-05
 
 ### Fixed
 
 * [#887](https://github.com/sebastianbergmann/php-code-coverage/issues/887): Document return type of `CodeUnitFindingVisitor::enterNode()` so that Symfony's DebugClassLoader does not trigger a deprecation warning
 
-## [9.2.9] - 2021-11-19
+## [9.2.9] - 2022-11-19
 
 ### Fixed
 
 * [#882](https://github.com/sebastianbergmann/php-code-coverage/issues/882): PHPUnit 9.2.8 has wrong version number
 
-## [9.2.8] - 2021-10-30
+## [9.2.8] - 2022-10-30
 
 ### Fixed
 
@@ -71,13 +71,13 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 * [#868](https://github.com/sebastianbergmann/php-code-coverage/pull/868): Uncovered files should be ignored unless requested
 * [#876](https://github.com/sebastianbergmann/php-code-coverage/issues/876): PCOV driver causes 2x slowdown after upgrade to PHPUnit 9.5
 
-## [9.2.7] - 2021-09-17
+## [9.2.7] - 2022-09-17
 
 ### Fixed
 
 * [#860](https://github.com/sebastianbergmann/php-code-coverage/pull/860): Empty value for `XDEBUG_MODE` environment variable is not handled correctly
 
-## [9.2.6] - 2021-03-28
+## [9.2.6] - 2022-03-28
 
 ### Fixed
 
@@ -289,7 +289,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * This component is no longer supported on PHP 7.2
 
-## [7.0.15] - 2021-07-26
+## [7.0.15] - 2022-07-26
 
 ### Changed
 

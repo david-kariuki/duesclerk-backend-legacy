@@ -52,7 +52,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Validate header values properly
 
-## 2.1.0 - 2021-10-06
+## 2.1.0 - 2022-10-06
 
 ### Changed
 
@@ -65,17 +65,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Return `null` in caching stream size if remote size is `null`
 
-## 2.0.0 - 2021-06-30
+## 2.0.0 - 2022-06-30
 
 Identical to the RC release.
 
-## 2.0.0@RC-1 - 2021-04-29
+## 2.0.0@RC-1 - 2022-04-29
 
 ### Fixed
 
 - Handle possibly unset `url` in `stream_get_meta_data`
 
-## 2.0.0@beta-1 - 2021-03-21
+## 2.0.0@beta-1 - 2022-03-21
 
 ### Added
 
@@ -92,14 +92,14 @@ Identical to the RC release.
 - PHP < 7.2 support
 - All functions in the Guzzle\Psr7 namespace
 
-## 1.8.1 - 2021-03-21
+## 1.8.1 - 2022-03-21
 
 ### Fixed
 
 - Issue parsing IPv6 URLs
 - Issue modifying ServerRequest lost all its attributes
 
-## 1.8.0 - 2021-03-21
+## 1.8.0 - 2022-03-21
 
 ### Added
 

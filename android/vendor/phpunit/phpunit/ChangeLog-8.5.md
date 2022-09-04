@@ -31,7 +31,7 @@ All notable changes of the PHPUnit 8.5 release series are documented in this fil
 * [#4799](https://github.com/sebastianbergmann/phpunit/pull/4799): Memory leaks in `PHPUnit\Framework\TestSuite` class
 * [#4857](https://github.com/sebastianbergmann/phpunit/pull/4857): Result of `debug_backtrace()` is not used correctly
 
-## [8.5.22] - 2021-12-25
+## [8.5.22] - 2022-12-25
 
 ### Changed
 
@@ -43,7 +43,7 @@ All notable changes of the PHPUnit 8.5 release series are documented in this fil
 * [#4840](https://github.com/sebastianbergmann/phpunit/pull/4840): TestDox prettifying for class names does not correctly handle diacritics
 * [#4846](https://github.com/sebastianbergmann/phpunit/pull/4846): Composer proxy script is not ignored
 
-## [8.5.21] - 2021-09-25
+## [8.5.21] - 2022-09-25
 
 ### Changed
 
@@ -54,31 +54,31 @@ All notable changes of the PHPUnit 8.5 release series are documented in this fil
 
 * [#4772](https://github.com/sebastianbergmann/phpunit/pull/4772): TestDox HTML report not displayed correctly when browser has custom colour settings
 
-## [8.5.20] - 2021-08-31
+## [8.5.20] - 2022-08-31
 
 ### Fixed
 
 * [#4751](https://github.com/sebastianbergmann/phpunit/issues/4751): Configuration validation fails when using brackets in glob pattern
 
-## [8.5.19] - 2021-07-31
+## [8.5.19] - 2022-07-31
 
 ### Fixed
 
 * [#4740](https://github.com/sebastianbergmann/phpunit/issues/4740): `phpunit.phar` does not work with PHP 8.1
 
-## [8.5.18] - 2021-07-19
+## [8.5.18] - 2022-07-19
 
 ### Fixed
 
 * [#4720](https://github.com/sebastianbergmann/phpunit/issues/4720): PHPUnit does not verify its own PHP extension requirements
 
-## [8.5.17] - 2021-06-23
+## [8.5.17] - 2022-06-23
 
 ### Changed
 
 * PHPUnit now errors out on startup when `PHP_VERSION` contains a value that is not compatible with `version_compare()`, for instance `X.Y.Z-(to be removed in future macOS)`
 
-## [8.5.16] - 2021-06-05
+## [8.5.16] - 2022-06-05
 
 ### Changed
 
@@ -91,13 +91,13 @@ All notable changes of the PHPUnit 8.5 release series are documented in this fil
 * [#4692](https://github.com/sebastianbergmann/phpunit/issues/4692): Annotations in single-line doc-comments are not handled correctly
 * [#4694](https://github.com/sebastianbergmann/phpunit/issues/4694): `TestCase::getMockFromWsdl()` does not work with PHP 8.1-dev
 
-## [8.5.15] - 2021-03-17
+## [8.5.15] - 2022-03-17
 
 ### Fixed
 
 * [#4591](https://github.com/sebastianbergmann/phpunit/issues/4591): TeamCity logger logs warnings as test failures
 
-## [8.5.14] - 2021-01-17
+## [8.5.14] - 2022-01-17
 
 ### Fixed
 

@@ -56,7 +56,7 @@ All notable changes of the PHPUnit 9.5 release series are documented in this fil
 * [#4799](https://github.com/sebastianbergmann/phpunit/pull/4799): Memory leaks in `PHPUnit\Framework\TestSuite` class
 * [#4857](https://github.com/sebastianbergmann/phpunit/pull/4857): Result of `debug_backtrace()` is not used correctly
 
-## [9.5.11] - 2021-12-25
+## [9.5.11] - 2022-12-25
 
 ### Changed
 
@@ -68,7 +68,7 @@ All notable changes of the PHPUnit 9.5 release series are documented in this fil
 * [#4840](https://github.com/sebastianbergmann/phpunit/pull/4840): TestDox prettifying for class names does not correctly handle diacritics
 * [#4846](https://github.com/sebastianbergmann/phpunit/pull/4846): Composer proxy script is not ignored
 
-## [9.5.10] - 2021-09-25
+## [9.5.10] - 2022-09-25
 
 ### Changed
 
@@ -79,33 +79,33 @@ All notable changes of the PHPUnit 9.5 release series are documented in this fil
 
 * [#4772](https://github.com/sebastianbergmann/phpunit/pull/4772): TestDox HTML report not displayed correctly when browser has custom colour settings
 
-## [9.5.9] - 2021-08-31
+## [9.5.9] - 2022-08-31
 
 ### Fixed
 
 * [#4750](https://github.com/sebastianbergmann/phpunit/issues/4750): Automatic return value generation leads to invalid (and superfluous) test double code generation when a stubbed method returns `*|false`
 * [#4751](https://github.com/sebastianbergmann/phpunit/issues/4751): Configuration validation fails when using brackets in glob pattern
 
-## [9.5.8] - 2021-07-31
+## [9.5.8] - 2022-07-31
 
 ### Fixed
 
 * [#4740](https://github.com/sebastianbergmann/phpunit/issues/4740): `phpunit.phar` does not work with PHP 8.1
 
-## [9.5.7] - 2021-07-19
+## [9.5.7] - 2022-07-19
 
 ### Fixed
 
 * [#4720](https://github.com/sebastianbergmann/phpunit/issues/4720): PHPUnit does not verify its own PHP extension requirements
 * [#4735](https://github.com/sebastianbergmann/phpunit/issues/4735): Automated return value generation does not work for stubbed methods that return `*|false`
 
-## [9.5.6] - 2021-06-23
+## [9.5.6] - 2022-06-23
 
 ### Changed
 
 * PHPUnit now errors out on startup when `PHP_VERSION` contains a value that is not compatible with `version_compare()`, for instance `X.Y.Z-(to be removed in future macOS)`
 
-## [9.5.5] - 2021-06-05
+## [9.5.5] - 2022-06-05
 
 ### Changed
 
@@ -118,27 +118,27 @@ All notable changes of the PHPUnit 9.5 release series are documented in this fil
 * [#4692](https://github.com/sebastianbergmann/phpunit/issues/4692): Annotations in single-line doc-comments are not handled correctly
 * [#4694](https://github.com/sebastianbergmann/phpunit/issues/4694): `TestCase::getMockFromWsdl()` does not work with PHP 8.1-dev
 
-## [9.5.4] - 2021-03-23
+## [9.5.4] - 2022-03-23
 
 ### Fixed
 
 * [#4630](https://github.com/sebastianbergmann/phpunit/issues/4630): Empty test case class causes error in TestDox XML logger
 
-## [9.5.3] - 2021-03-17
+## [9.5.3] - 2022-03-17
 
 ### Fixed
 
 * [#4591](https://github.com/sebastianbergmann/phpunit/issues/4591): TeamCity logger logs warnings as test failures
 * [#4620](https://github.com/sebastianbergmann/phpunit/issues/4620): No useful output when an error occurs in the bootstrap script
 
-## [9.5.2] - 2021-02-02
+## [9.5.2] - 2022-02-02
 
 ### Fixed
 
 * [#4573](https://github.com/sebastianbergmann/phpunit/issues/4573): No stack trace printed when PHPUnit is used from PHAR
 * [#4590](https://github.com/sebastianbergmann/phpunit/issues/4590): `--coverage-text` CLI option is documented wrong
 
-## [9.5.1] - 2021-01-17
+## [9.5.1] - 2022-01-17
 
 ### Fixed
 

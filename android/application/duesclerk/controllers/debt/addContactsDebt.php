@@ -5,7 +5,7 @@
 * This file adds contacts debts then returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 

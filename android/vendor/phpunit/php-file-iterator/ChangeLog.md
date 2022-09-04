@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
-## [3.0.6] - 2021-12-02
+## [3.0.6] - 2022-12-02
 
 ### Changed
 
@@ -44,7 +44,7 @@ All notable changes to this project will be documented in this file. This projec
 
 * This component is no longer supported on PHP 7.1 and PHP 7.2
 
-## [2.0.5] - 2021-12-02
+## [2.0.5] - 2022-12-02
 
 ### Changed
 
@@ -54,7 +54,7 @@ All notable changes to this project will be documented in this file. This projec
 
 * [#74](https://github.com/sebastianbergmann/php-file-iterator/pull/74): Document return type of `SebastianBergmann\FileIterator\Iterator::accept()` so that Symfony's `DebugClassLoader` does not trigger a deprecation warning
 
-## [2.0.4] - 2021-07-19
+## [2.0.4] - 2022-07-19
 
 ### Changed
 

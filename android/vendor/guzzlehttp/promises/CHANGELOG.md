@@ -1,13 +1,13 @@
 # CHANGELOG
 
-## 1.5.1 - 2021-10-22
+## 1.5.1 - 2022-10-22
 
 ### Fixed
 
 - Revert "Call handler when waiting on fulfilled/rejected Promise"
 - Fix pool memory leak when empty array of promises provided
 
-## 1.5.0 - 2021-10-07
+## 1.5.0 - 2022-10-07
 
 ### Changed
 
@@ -17,7 +17,7 @@
 
 - Fix manually settle promises generated with Utils::task
 
-## 1.4.1 - 2021-02-18
+## 1.4.1 - 2022-02-18
 
 ### Fixed
 

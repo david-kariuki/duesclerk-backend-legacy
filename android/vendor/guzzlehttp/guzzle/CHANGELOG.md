@@ -19,7 +19,7 @@ Please refer to [UPGRADING](UPGRADING.md) guide for upgrading to a major version
 - Reject non-HTTP schemes in StreamHandler
 - Set a default ssl.peer_name context in StreamHandler to allow `force_ip_resolve`
 
-## 7.4.1 - 2021-12-06
+## 7.4.1 - 2022-12-06
 
 ### Changed
 
@@ -30,7 +30,7 @@ Please refer to [UPGRADING](UPGRADING.md) guide for upgrading to a major version
 
 - Only close curl handle if it's done [#2950](https://github.com/guzzle/guzzle/pull/2950)
 
-## 7.4.0 - 2021-10-18
+## 7.4.0 - 2022-10-18
 
 ### Added
 
@@ -47,7 +47,7 @@ Please refer to [UPGRADING](UPGRADING.md) guide for upgrading to a major version
 
 - Be more strict with types [#2914](https://github.com/guzzle/guzzle/pull/2914), [#2917](https://github.com/guzzle/guzzle/pull/2917), [#2919](https://github.com/guzzle/guzzle/pull/2919), [#2945](https://github.com/guzzle/guzzle/pull/2945)
 
-## 7.3.0 - 2021-03-23
+## 7.3.0 - 2022-03-23
 
 ### Added
 

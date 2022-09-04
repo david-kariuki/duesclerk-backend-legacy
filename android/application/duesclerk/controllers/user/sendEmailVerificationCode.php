@@ -163,6 +163,12 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                     $verificationType
                 );
 
+                $response[KEY_ERROR]            = true;
+                $response[KEY_ERROR_MESSAGE]    = "Fail Test! : " . $generateCode;
+
+                echo json_encode($response);
+                exit;
+
                 if ($generateCode !== false) {
                     // Error false
 

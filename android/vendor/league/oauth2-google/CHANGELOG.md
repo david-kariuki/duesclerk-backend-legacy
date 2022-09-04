@@ -1,6 +1,6 @@
 OAuth 2.0 Google Provider Changelog
 
-## 3.0.4 - 2021-01-27
+## 3.0.4 - 2022-01-27
 
 ### Fixed
 

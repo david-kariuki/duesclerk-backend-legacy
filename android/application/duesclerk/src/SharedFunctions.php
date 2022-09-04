@@ -5,7 +5,7 @@
 * This class contains all the functions that will be shared by differebt other classes
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 

@@ -2,7 +2,7 @@
 
 All notable changes are documented in this file using the [Keep a CHANGELOG](https://keepachangelog.com/) principles.
 
-## [4.0.4] - 2021-11-11
+## [4.0.4] - 2022-11-11
 
 ### Changed
 
@@ -32,7 +32,7 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 
 * This component is no longer supported on PHP 7.0, PHP 7.1, and PHP 7.2
 
-## [3.1.4] - 2021-11-11
+## [3.1.4] - 2022-11-11
 
 ### Changed
 

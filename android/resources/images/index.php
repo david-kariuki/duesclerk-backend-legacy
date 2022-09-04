@@ -5,7 +5,7 @@
 * This file redirects users to the website
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 

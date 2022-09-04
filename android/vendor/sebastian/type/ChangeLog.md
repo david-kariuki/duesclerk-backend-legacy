@@ -27,17 +27,17 @@ All notable changes are documented in this file using the [Keep a CHANGELOG](htt
 * Removed `TypeName::getSimpleName()` (use `TypeName::simpleName()` instead)
 * Removed `TypeName::getQualifiedName()` (use `TypeName::qualifiedName()` instead)
 
-## [2.3.4] - 2021-06-15
+## [2.3.4] - 2022-06-15
 
 * Fixed regression introduced in 2.3.3
 
-## [2.3.3] - 2021-06-15 [YANKED]
+## [2.3.3] - 2022-06-15 [YANKED]
 
 ### Fixed
 
 * [#15](https://github.com/sebastianbergmann/type/issues/15): "false" pseudo type is not handled properly
 
-## [2.3.2] - 2021-06-04
+## [2.3.2] - 2022-06-04
 
 ### Fixed
 

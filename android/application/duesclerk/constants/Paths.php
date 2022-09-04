@@ -5,7 +5,7 @@
 * This file contains defined paths to required project resources
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -21,14 +21,14 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable MYSQLI erro
 
 
 // Project directory path
-define("PATH_DIRECTORY_PROJECT",    $_SERVER["DOCUMENT_ROOT"]   . "/android"    . "/");
+define("PATH_DIRECTORY_PROJECT",    $_SERVER["DOCUMENT_ROOT"] . "/duesclerk_php/android" . "/");
 
 // Resources directory path
-define("PATH_DIRECTORY_RESOURCES",  PATH_DIRECTORY_PROJECT      . "resources"   . "/");
+define("PATH_DIRECTORY_RESOURCES",  PATH_DIRECTORY_PROJECT . "resources" . "/");
 
 // Images directory paths
-define("PATH_DIRECTORY_IMAGES",     PATH_DIRECTORY_RESOURCES    . "images"      . "/");
-define("PATH_DIRECTORY_IMAGES_PHP_MAILER",    PATH_DIRECTORY_IMAGES . "php_mailer"  . "/");
+define("PATH_DIRECTORY_IMAGES", PATH_DIRECTORY_RESOURCES . "images" . "/");
+define("PATH_DIRECTORY_IMAGES_PHP_MAILER", PATH_DIRECTORY_IMAGES . "php_mailer" . "/");
 
 // Image paths
 define(

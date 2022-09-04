@@ -14,7 +14,7 @@ All notable changes in `sebastian/global-state` are documented in this file usin
 
 * The `$includeTraits` parameter of `SebastianBergmann\GlobalState\Snapshot::__construct()` is not respected
 
-## [5.0.3] - 2021-06-11
+## [5.0.3] - 2022-06-11
 
 ### Changed
 
