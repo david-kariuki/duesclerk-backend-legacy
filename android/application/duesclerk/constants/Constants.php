@@ -26,7 +26,6 @@ define("SUB_DOMAIN",                                "www.");
 define("ROOT_DOMAIN",                               "liniantt.com");
 define("ROOT_DOMAIN_WITH_SUB_DOMAIN",               SUB_DOMAIN . ROOT_DOMAIN);
 define("WEBSITE_URL",                               PROTOCOL . ROOT_DOMAIN_WITH_SUB_DOMAIN);
-define("EMAIL_SUB_DOMAIN",                         "liniantt.com");
 define("COMPANY_NAME",                              "DuesClerk");
 
 
