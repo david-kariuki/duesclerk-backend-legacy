@@ -5,7 +5,7 @@
 * This class contains all the list and grid functions required throught the project
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -20,23 +20,32 @@ error_reporting(E_ALL | E_NOTICE | E_STRICT); // eNable all error reporting
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable MYSQLI error reporting
 
 
+// Call project classes
+use duesclerk\database\DatabaseConnection;
+use duesclerk\constants\Constants;
+use duesclerk\src\DateTimeFunctions;
+use duesclerk\src\SharedFunctions;
+
+
 // Class declaration
 class ListGridFunctions{
 
     // Connection status value variable
     private $connectToDB;
-    private $keys;
+    private $constants;
 
 
     // Constructor
     function __construct() {
 
         // Create and initialize required classes objects
-        $connection = new Connection();
+        // Initialize database connection class instance
+        $connectionInstance = DatabaseConnection::getConnectionInstance();
 
-        // Initializing connection
-        $this->connectToDB 	= $connection->Connect();
-        $this->keys	= new Keys();
+        // Initialize connection object
+        $this->connectToDB      = $connectionInstance->getDatabaseConnection();
+
+        $this->constants        = new Constants();      // Initialize constants object
 
     }
 
@@ -55,7 +64,7 @@ class ListGridFunctions{
     public function emptyCountriesTable() {
 
         // Check ff table has data
-        $stmt = $this->connectToDB->prepare("SELECT * FROM {$this->keys->tableCountries}");
+        $stmt = $this->connectToDB->prepare("SELECT * FROM {$this->constants->valueOfConst(TABLE_COUNTRIES)}");
         $stmt->execute();
         $result = $stmt->get_result()->fetch_assoc();
         $stmt->close();
@@ -64,7 +73,7 @@ class ListGridFunctions{
             // Table not empty
 
             // Empty table
-            $stmt = $this->connectToDB->prepare("DELETE FROM {$this->keys->tableCountries}");
+            $stmt = $this->connectToDB->prepare("DELETE FROM {$this->constants->valueOfConst(TABLE_COUNTRIES)}");
 
             // Check if query executed
             if ($stmt->execute()) {
@@ -100,7 +109,7 @@ class ListGridFunctions{
     public function loadCountriesTable($countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag) {
 
         // Insert into table
-        $stmt = $this->connectToDB->prepare("INSERT INTO {$this->keys->tableCountries}(CountryId, CountryName, CountryCode, CountryAlpha2, CountryAlpha3, CountryFlag) VALUES( ?, ?, ?, ?, ?, ?)");
+        $stmt = $this->connectToDB->prepare("INSERT INTO {$this->constants->valueOfConst(TABLE_COUNTRIES)}(CountryId, CountryName, CountryCode, CountryAlpha2, CountryAlpha3, CountryFlag) VALUES( ?, ?, ?, ?, ?, ?)");
         $stmt->bind_param("ssssss", $countryId, $countryName, $countryCode, $countryAlpha2, $countryAlpha3, $countryFlag);
 
         // Check for query execution
@@ -131,7 +140,7 @@ class ListGridFunctions{
     public function fetchCountries() {
 
         // Get countries data
-        $stmt = $this->connectToDB->prepare("SELECT * FROM {$this->keys->tableCountries}");
+        $stmt = $this->connectToDB->prepare("SELECT * FROM {$this->constants->valueOfConst(TABLE_COUNTRIES)}");
         $stmt->execute();
         $result = $stmt->get_result();
         $stmt->close();

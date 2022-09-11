@@ -5,7 +5,7 @@
 * This file contains all the constants required for database connection
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -21,10 +21,10 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable MYSQLI erro
 
 
 // Database Configuration
-define("SERVER_HOST",          "localhost");
-define("SERVER_HOST_USERNAME", "duescler");
-define("SERVER_HOST_PASSWORD", "GnU?U^btY%1m.otKfw");
-define("DATABASE_NAME",        "duescler_db_duesclerk");
+define("SERVER_HOST",          "");
+define("SERVER_HOST_USERNAME", "");
+define("SERVER_HOST_PASSWORD", "");
+define("DATABASE_NAME",        "");
 
 
 // Class declaration for autoloaer visibility

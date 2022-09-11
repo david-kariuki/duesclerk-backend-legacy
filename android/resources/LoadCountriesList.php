@@ -5,7 +5,7 @@
 error_reporting(1);
 
 // Call autoloader fie
-require_once $_SERVER["DOCUMENT_ROOT"] . "/android/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/duesclerk_php/android/vendor/autoload.php";
 
 
 // Create Classes Objects

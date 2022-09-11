@@ -5,7 +5,7 @@
 * This file adds contacts debts then returns response in json
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -17,7 +17,7 @@ error_reporting(E_ALL | E_NOTICE | E_STRICT); // eNable all error reporting
 
 
 // Call autoloader file
-require_once $_SERVER["DOCUMENT_ROOT"] . "duesclerk_php/android/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/duesclerk_php/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\contact\ContactFunctions;

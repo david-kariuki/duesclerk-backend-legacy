@@ -5,7 +5,7 @@
 * This class contains all the mailing functions required throught the project
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 // Namespace declaration
@@ -917,7 +917,7 @@ class MailFunctions
         );
 
         // Get current date and time
-        $verificationCodeRequestTime 	=
+        $verificationCodeRequestTime =
         $this->dateTimeFunctions->getDefaultTimeZoneNumericalDateTime();
 
         // Insert Verification details
@@ -962,6 +962,7 @@ class MailFunctions
                 AND {$this->constants->valueOfConst(KEY_EMAIL_VERIFICATION)}
                 .{$this->constants->valueOfConst(FIELD_VERIFICATION_TYPE)} = ?"
             );
+
             $stmt->bind_param("sss", $userId, $emailAddress, $verificationType);
             $stmt->execute(); // Execute statement
             $verificationDetails = $stmt->get_result()->fetch_assoc(); // Get result array

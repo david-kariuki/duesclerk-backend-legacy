@@ -5,7 +5,7 @@
 * This class contains all the functions required to manage and process contacts
 *
 * @author David Kariuki (dk)
-* @copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 

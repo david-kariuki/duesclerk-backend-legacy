@@ -1,1947 +1,1947 @@
 <?xml version="1.0" encoding="utf-8"?>
 <countries>
   <country>
-        <countryId>AFG93</countryId>
-        <countryName>Afghanistan</countryName>
-        <countryCode>93</countryCode>
-        <countryAlpha2>AF</countryAlpha2>
-        <countryAlpha3>AFG</countryAlpha3>
-        <countryFlag>flag_afghanistan.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ALB355</countryId>
-        <countryName>Albania</countryName>
-        <countryCode>355</countryCode>
-        <countryAlpha2>AL</countryAlpha2>
-        <countryAlpha3>ALB</countryAlpha3>
-        <countryFlag>flag_albania.png</countryFlag>
-    </country>
-  <country>
-        <countryId>DZA213</countryId>
-        <countryName>Algeria</countryName>
-        <countryCode>213</countryCode>
-        <countryAlpha2>DZ</countryAlpha2>
-        <countryAlpha3>DZA</countryAlpha3>
-        <countryFlag>flag_algeria.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ASM1684</countryId>
-        <countryName>American Samoa</countryName>
-        <countryCode>1684</countryCode>
-        <countryAlpha2>AS</countryAlpha2>
-        <countryAlpha3>ASM</countryAlpha3>
-        <countryFlag>flag_american_samoa.png</countryFlag>
-    </country>
-  <country>
-        <countryId>AND376</countryId>
-        <countryName>Andorra</countryName>
-        <countryCode>376</countryCode>
-        <countryAlpha2>AD</countryAlpha2>
-        <countryAlpha3>AND</countryAlpha3>
-        <countryFlag>flag_andorra.png</countryFlag>
-    </country>
-  <country>
-        <countryId>AGO144</countryId>
-        <countryName>Angola</countryName>
-        <countryCode>244</countryCode>
-        <countryAlpha2>AO</countryAlpha2>
-        <countryAlpha3>AGO</countryAlpha3>
-        <countryFlag>flag_angola.png</countryFlag>
-    </country>
-  <country>
-        <countryId>AIA1264</countryId>
-        <countryName>Anguilla</countryName>
-        <countryCode>1264</countryCode>
-        <countryAlpha2>AI</countryAlpha2>
-        <countryAlpha3>AIA</countryAlpha3>
-        <countryFlag>flag_anguilla.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ATA672</countryId>
-        <countryName>Antarctica</countryName>
-        <countryCode>672</countryCode>
-        <countryAlpha2>AQ</countryAlpha2>
-        <countryAlpha3>ATA</countryAlpha3>
-        <countryFlag>flag_antarctica.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ATG1268</countryId>
-        <countryName>Antigua and Barbuda</countryName>
-        <countryCode>1268</countryCode>
-        <countryAlpha2>AG</countryAlpha2>
-        <countryAlpha3>ATG</countryAlpha3>
-        <countryFlag>flag_antigua_and_barbuda.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ARG54</countryId>
-        <countryName>Argentina</countryName>
-        <countryCode>54</countryCode>
-        <countryAlpha2>AR</countryAlpha2>
-        <countryAlpha3>ARG</countryAlpha3>
-        <countryFlag>flag_argentina.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ARM374</countryId>
-        <countryName>Armenia</countryName>
-        <countryCode>374</countryCode>
-        <countryAlpha2>AM</countryAlpha2>
-        <countryAlpha3>ARM</countryAlpha3>
-        <countryFlag>flag_armenia.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ABW297</countryId>
-        <countryName>Aruba</countryName>
-        <countryCode>297</countryCode>
-        <countryAlpha2>AW</countryAlpha2>
-        <countryAlpha3>ABW</countryAlpha3>
-        <countryFlag>flag_aruba.png</countryFlag>
-    </country>
-  <country>
-        <countryId>AUS61</countryId>
-        <countryName>Australia</countryName>
-        <countryCode>61</countryCode>
-        <countryAlpha2>AU</countryAlpha2>
-        <countryAlpha3>AUS</countryAlpha3>
-        <countryFlag>flag_australia.png</countryFlag>
+        <CountryId>AFG93</CountryId>
+        <CountryName>Afghanistan</CountryName>
+        <CountryCode>93</CountryCode>
+        <CountryAlpha2>AF</CountryAlpha2>
+        <CountryAlpha3>AFG</CountryAlpha3>
+        <CountryFlag>flag_afghanistan.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ALB355</CountryId>
+        <CountryName>Albania</CountryName>
+        <CountryCode>355</CountryCode>
+        <CountryAlpha2>AL</CountryAlpha2>
+        <CountryAlpha3>ALB</CountryAlpha3>
+        <CountryFlag>flag_albania.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>DZA213</CountryId>
+        <CountryName>Algeria</CountryName>
+        <CountryCode>213</CountryCode>
+        <CountryAlpha2>DZ</CountryAlpha2>
+        <CountryAlpha3>DZA</CountryAlpha3>
+        <CountryFlag>flag_algeria.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ASM1684</CountryId>
+        <CountryName>American Samoa</CountryName>
+        <CountryCode>1684</CountryCode>
+        <CountryAlpha2>AS</CountryAlpha2>
+        <CountryAlpha3>ASM</CountryAlpha3>
+        <CountryFlag>flag_american_samoa.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>AND376</CountryId>
+        <CountryName>Andorra</CountryName>
+        <CountryCode>376</CountryCode>
+        <CountryAlpha2>AD</CountryAlpha2>
+        <CountryAlpha3>AND</CountryAlpha3>
+        <CountryFlag>flag_andorra.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>AGO144</CountryId>
+        <CountryName>Angola</CountryName>
+        <CountryCode>244</CountryCode>
+        <CountryAlpha2>AO</CountryAlpha2>
+        <CountryAlpha3>AGO</CountryAlpha3>
+        <CountryFlag>flag_angola.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>AIA1264</CountryId>
+        <CountryName>Anguilla</CountryName>
+        <CountryCode>1264</CountryCode>
+        <CountryAlpha2>AI</CountryAlpha2>
+        <CountryAlpha3>AIA</CountryAlpha3>
+        <CountryFlag>flag_anguilla.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ATA672</CountryId>
+        <CountryName>Antarctica</CountryName>
+        <CountryCode>672</CountryCode>
+        <CountryAlpha2>AQ</CountryAlpha2>
+        <CountryAlpha3>ATA</CountryAlpha3>
+        <CountryFlag>flag_antarctica.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ATG1268</CountryId>
+        <CountryName>Antigua and Barbuda</CountryName>
+        <CountryCode>1268</CountryCode>
+        <CountryAlpha2>AG</CountryAlpha2>
+        <CountryAlpha3>ATG</CountryAlpha3>
+        <CountryFlag>flag_antigua_and_barbuda.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ARG54</CountryId>
+        <CountryName>Argentina</CountryName>
+        <CountryCode>54</CountryCode>
+        <CountryAlpha2>AR</CountryAlpha2>
+        <CountryAlpha3>ARG</CountryAlpha3>
+        <CountryFlag>flag_argentina.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ARM374</CountryId>
+        <CountryName>Armenia</CountryName>
+        <CountryCode>374</CountryCode>
+        <CountryAlpha2>AM</CountryAlpha2>
+        <CountryAlpha3>ARM</CountryAlpha3>
+        <CountryFlag>flag_armenia.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ABW297</CountryId>
+        <CountryName>Aruba</CountryName>
+        <CountryCode>297</CountryCode>
+        <CountryAlpha2>AW</CountryAlpha2>
+        <CountryAlpha3>ABW</CountryAlpha3>
+        <CountryFlag>flag_aruba.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>AUS61</CountryId>
+        <CountryName>Australia</CountryName>
+        <CountryCode>61</CountryCode>
+        <CountryAlpha2>AU</CountryAlpha2>
+        <CountryAlpha3>AUS</CountryAlpha3>
+        <CountryFlag>flag_australia.png</CountryFlag>
     </country>
   <country>
-        <countryId>AUT43</countryId>
-        <countryName>Austria</countryName>
-        <countryCode>43</countryCode>
-        <countryAlpha2>AT</countryAlpha2>
-        <countryAlpha3>AUT</countryAlpha3>
-        <countryFlag>flag_austria.png</countryFlag>
+        <CountryId>AUT43</CountryId>
+        <CountryName>Austria</CountryName>
+        <CountryCode>43</CountryCode>
+        <CountryAlpha2>AT</CountryAlpha2>
+        <CountryAlpha3>AUT</CountryAlpha3>
+        <CountryFlag>flag_austria.png</CountryFlag>
     </country>
   <country>
-        <countryId>AZE994</countryId>
-        <countryName>Azerbaijan</countryName>
-        <countryCode>994</countryCode>
-        <countryAlpha2>AZ</countryAlpha2>
-        <countryAlpha3>AZE</countryAlpha3>
-        <countryFlag>flag_azerbaijan.png</countryFlag>
+        <CountryId>AZE994</CountryId>
+        <CountryName>Azerbaijan</CountryName>
+        <CountryCode>994</CountryCode>
+        <CountryAlpha2>AZ</CountryAlpha2>
+        <CountryAlpha3>AZE</CountryAlpha3>
+        <CountryFlag>flag_azerbaijan.png</CountryFlag>
     </country>
   <country>
-        <countryId>BHS1242</countryId>
-        <countryName>Bahamas</countryName>
-        <countryCode>1242</countryCode>
-        <countryAlpha2>BS</countryAlpha2>
-        <countryAlpha3>BHS</countryAlpha3>
-        <countryFlag>flag_bahamas.png</countryFlag>
+        <CountryId>BHS1242</CountryId>
+        <CountryName>Bahamas</CountryName>
+        <CountryCode>1242</CountryCode>
+        <CountryAlpha2>BS</CountryAlpha2>
+        <CountryAlpha3>BHS</CountryAlpha3>
+        <CountryFlag>flag_bahamas.png</CountryFlag>
     </country>
   <country>
-        <countryId>BHR973</countryId>
-        <countryName>Bahrain</countryName>
-        <countryCode>973</countryCode>
-        <countryAlpha2>BH</countryAlpha2>
-        <countryAlpha3>BHR</countryAlpha3>
-        <countryFlag>flag_bahrain.png</countryFlag>
+        <CountryId>BHR973</CountryId>
+        <CountryName>Bahrain</CountryName>
+        <CountryCode>973</CountryCode>
+        <CountryAlpha2>BH</CountryAlpha2>
+        <CountryAlpha3>BHR</CountryAlpha3>
+        <CountryFlag>flag_bahrain.png</CountryFlag>
     </country>
   <country>
-        <countryId>BGD880</countryId>
-        <countryName>Bangladesh</countryName>
-        <countryCode>880</countryCode>
-        <countryAlpha2>BD</countryAlpha2>
-        <countryAlpha3>BGD</countryAlpha3>
-        <countryFlag>flag_bangladesh.png</countryFlag>
+        <CountryId>BGD880</CountryId>
+        <CountryName>Bangladesh</CountryName>
+        <CountryCode>880</CountryCode>
+        <CountryAlpha2>BD</CountryAlpha2>
+        <CountryAlpha3>BGD</CountryAlpha3>
+        <CountryFlag>flag_bangladesh.png</CountryFlag>
     </country>
   <country>
-        <countryId>BRB1246</countryId>
-        <countryName>Barbados</countryName>
-        <countryCode>1246</countryCode>
-        <countryAlpha2>BB</countryAlpha2>
-        <countryAlpha3>BRB</countryAlpha3>
-        <countryFlag>flag_barbados.png</countryFlag>
+        <CountryId>BRB1246</CountryId>
+        <CountryName>Barbados</CountryName>
+        <CountryCode>1246</CountryCode>
+        <CountryAlpha2>BB</CountryAlpha2>
+        <CountryAlpha3>BRB</CountryAlpha3>
+        <CountryFlag>flag_barbados.png</CountryFlag>
     </country>
   <country>
-        <countryId>BLR375</countryId>
-        <countryName>Belarus</countryName>
-        <countryCode>375</countryCode>
-        <countryAlpha2>BY</countryAlpha2>
-        <countryAlpha3>BLR</countryAlpha3>
-        <countryFlag>flag_belarus.png</countryFlag>
+        <CountryId>BLR375</CountryId>
+        <CountryName>Belarus</CountryName>
+        <CountryCode>375</CountryCode>
+        <CountryAlpha2>BY</CountryAlpha2>
+        <CountryAlpha3>BLR</CountryAlpha3>
+        <CountryFlag>flag_belarus.png</CountryFlag>
     </country>
   <country>
-        <countryId>BEL32</countryId>
-        <countryName>Belgium</countryName>
-        <countryCode>32</countryCode>
-        <countryAlpha2>BE</countryAlpha2>
-        <countryAlpha3>BEL</countryAlpha3>
-        <countryFlag>flag_belgium.png</countryFlag>
+        <CountryId>BEL32</CountryId>
+        <CountryName>Belgium</CountryName>
+        <CountryCode>32</CountryCode>
+        <CountryAlpha2>BE</CountryAlpha2>
+        <CountryAlpha3>BEL</CountryAlpha3>
+        <CountryFlag>flag_belgium.png</CountryFlag>
     </country>
   <country>
-        <countryId>BLZ501</countryId>
-        <countryName>Belize</countryName>
-        <countryCode>501</countryCode>
-        <countryAlpha2>BZ</countryAlpha2>
-        <countryAlpha3>BLZ</countryAlpha3>
-        <countryFlag>flag_belize.png</countryFlag>
+        <CountryId>BLZ501</CountryId>
+        <CountryName>Belize</CountryName>
+        <CountryCode>501</CountryCode>
+        <CountryAlpha2>BZ</CountryAlpha2>
+        <CountryAlpha3>BLZ</CountryAlpha3>
+        <CountryFlag>flag_belize.png</CountryFlag>
     </country>
   <country>
-        <countryId>BEN229</countryId>
-        <countryName>Benin</countryName>
-        <countryCode>229</countryCode>
-        <countryAlpha2>BJ</countryAlpha2>
-        <countryAlpha3>BEN</countryAlpha3>
-        <countryFlag>flag_benin.png</countryFlag>
+        <CountryId>BEN229</CountryId>
+        <CountryName>Benin</CountryName>
+        <CountryCode>229</CountryCode>
+        <CountryAlpha2>BJ</CountryAlpha2>
+        <CountryAlpha3>BEN</CountryAlpha3>
+        <CountryFlag>flag_benin.png</CountryFlag>
     </country>
   <country>
-        <countryId>BMU1441</countryId>
-        <countryName>Bermuda</countryName>
-        <countryCode>1441</countryCode>
-        <countryAlpha2>BM</countryAlpha2>
-        <countryAlpha3>BMU</countryAlpha3>
-        <countryFlag>flag_bermuda.png</countryFlag>
+        <CountryId>BMU1441</CountryId>
+        <CountryName>Bermuda</CountryName>
+        <CountryCode>1441</CountryCode>
+        <CountryAlpha2>BM</CountryAlpha2>
+        <CountryAlpha3>BMU</CountryAlpha3>
+        <CountryFlag>flag_bermuda.png</CountryFlag>
     </country>
   <country>
-        <countryId>BTN975</countryId>
-        <countryName>Bhutan</countryName>
-        <countryCode>975</countryCode>
-        <countryAlpha2>BT</countryAlpha2>
-        <countryAlpha3>BTN</countryAlpha3>
-        <countryFlag>flag_bhutan.png</countryFlag>
+        <CountryId>BTN975</CountryId>
+        <CountryName>Bhutan</CountryName>
+        <CountryCode>975</CountryCode>
+        <CountryAlpha2>BT</CountryAlpha2>
+        <CountryAlpha3>BTN</CountryAlpha3>
+        <CountryFlag>flag_bhutan.png</CountryFlag>
     </country>
   <country>
-        <countryId>BOL591</countryId>
-        <countryName>Bolivia</countryName>
-        <countryCode>591</countryCode>
-        <countryAlpha2>BO</countryAlpha2>
-        <countryAlpha3>BOL</countryAlpha3>
-        <countryFlag>flag_bolivia.png</countryFlag>
+        <CountryId>BOL591</CountryId>
+        <CountryName>Bolivia</CountryName>
+        <CountryCode>591</CountryCode>
+        <CountryAlpha2>BO</CountryAlpha2>
+        <CountryAlpha3>BOL</CountryAlpha3>
+        <CountryFlag>flag_bolivia.png</CountryFlag>
     </country>
   <country>
-        <countryId>BIH387</countryId>
-        <countryName>Bosnia and Herzegovina</countryName>
-        <countryCode>387</countryCode>
-        <countryAlpha2>BA</countryAlpha2>
-        <countryAlpha3>BIH</countryAlpha3>
-        <countryFlag>flag_bosnia_and_herzegovina.png</countryFlag>
+        <CountryId>BIH387</CountryId>
+        <CountryName>Bosnia and Herzegovina</CountryName>
+        <CountryCode>387</CountryCode>
+        <CountryAlpha2>BA</CountryAlpha2>
+        <CountryAlpha3>BIH</CountryAlpha3>
+        <CountryFlag>flag_bosnia_and_herzegovina.png</CountryFlag>
     </country>
   <country>
-        <countryId>BWA267</countryId>
-        <countryName>Botswana</countryName>
-        <countryCode>267</countryCode>
-        <countryAlpha2>BW</countryAlpha2>
-        <countryAlpha3>BWA</countryAlpha3>
-        <countryFlag>flag_botswana.png</countryFlag>
+        <CountryId>BWA267</CountryId>
+        <CountryName>Botswana</CountryName>
+        <CountryCode>267</CountryCode>
+        <CountryAlpha2>BW</CountryAlpha2>
+        <CountryAlpha3>BWA</CountryAlpha3>
+        <CountryFlag>flag_botswana.png</CountryFlag>
     </country>
   <country>
-        <countryId>BRA55</countryId>
-        <countryName>Brazil</countryName>
-        <countryCode>55</countryCode>
-        <countryAlpha2>BR</countryAlpha2>
-        <countryAlpha3>BRA</countryAlpha3>
-        <countryFlag>flag_brazil.png</countryFlag>
+        <CountryId>BRA55</CountryId>
+        <CountryName>Brazil</CountryName>
+        <CountryCode>55</CountryCode>
+        <CountryAlpha2>BR</CountryAlpha2>
+        <CountryAlpha3>BRA</CountryAlpha3>
+        <CountryFlag>flag_brazil.png</CountryFlag>
     </country>
   <country>
-        <countryId>IOT246</countryId>
-        <countryName>British Indian Ocean Territory</countryName>
-        <countryCode>246</countryCode>
-        <countryAlpha2>IO</countryAlpha2>
-        <countryAlpha3>IOT</countryAlpha3>
-        <countryFlag>flag_british_indian_ocean_territory.png</countryFlag>
+        <CountryId>IOT246</CountryId>
+        <CountryName>British Indian Ocean Territory</CountryName>
+        <CountryCode>246</CountryCode>
+        <CountryAlpha2>IO</CountryAlpha2>
+        <CountryAlpha3>IOT</CountryAlpha3>
+        <CountryFlag>flag_british_indian_ocean_territory.png</CountryFlag>
     </country>
   <country>
-        <countryId>VGB1284</countryId>
-        <countryName>British Virgin Islands</countryName>
-        <countryCode>1284</countryCode>
-        <countryAlpha2>VG</countryAlpha2>
-        <countryAlpha3>VGB</countryAlpha3>
-        <countryFlag>flag_british_virgin_islands.png</countryFlag>
+        <CountryId>VGB1284</CountryId>
+        <CountryName>British Virgin Islands</CountryName>
+        <CountryCode>1284</CountryCode>
+        <CountryAlpha2>VG</CountryAlpha2>
+        <CountryAlpha3>VGB</CountryAlpha3>
+        <CountryFlag>flag_british_virgin_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>BRN673</countryId>
-        <countryName>Brunei</countryName>
-        <countryCode>673</countryCode>
-        <countryAlpha2>BN</countryAlpha2>
-        <countryAlpha3>BRN</countryAlpha3>
-        <countryFlag>flag_brunei.png</countryFlag>
+        <CountryId>BRN673</CountryId>
+        <CountryName>Brunei</CountryName>
+        <CountryCode>673</CountryCode>
+        <CountryAlpha2>BN</CountryAlpha2>
+        <CountryAlpha3>BRN</CountryAlpha3>
+        <CountryFlag>flag_brunei.png</CountryFlag>
     </country>
   <country>
-        <countryId>BGR359</countryId>
-        <countryName>Bulgaria</countryName>
-        <countryCode>359</countryCode>
-        <countryAlpha2>BG</countryAlpha2>
-        <countryAlpha3>BGR</countryAlpha3>
-        <countryFlag>flag_bulgaria.png</countryFlag>
+        <CountryId>BGR359</CountryId>
+        <CountryName>Bulgaria</CountryName>
+        <CountryCode>359</CountryCode>
+        <CountryAlpha2>BG</CountryAlpha2>
+        <CountryAlpha3>BGR</CountryAlpha3>
+        <CountryFlag>flag_bulgaria.png</CountryFlag>
     </country>
   <country>
-        <countryId>BFA226</countryId>
-        <countryName>Burkina Faso</countryName>
-        <countryCode>226</countryCode>
-        <countryAlpha2>BF</countryAlpha2>
-        <countryAlpha3>BFA</countryAlpha3>
-        <countryFlag>flag_burkina_faso.png</countryFlag>
+        <CountryId>BFA226</CountryId>
+        <CountryName>Burkina Faso</CountryName>
+        <CountryCode>226</CountryCode>
+        <CountryAlpha2>BF</CountryAlpha2>
+        <CountryAlpha3>BFA</CountryAlpha3>
+        <CountryFlag>flag_burkina_faso.png</CountryFlag>
     </country>
   <country>
-        <countryId>BDI257</countryId>
-        <countryName>Burundi</countryName>
-        <countryCode>257</countryCode>
-        <countryAlpha2>BI</countryAlpha2>
-        <countryAlpha3>BDI</countryAlpha3>
-        <countryFlag>flag_burundi.png</countryFlag>
+        <CountryId>BDI257</CountryId>
+        <CountryName>Burundi</CountryName>
+        <CountryCode>257</CountryCode>
+        <CountryAlpha2>BI</CountryAlpha2>
+        <CountryAlpha3>BDI</CountryAlpha3>
+        <CountryFlag>flag_burundi.png</CountryFlag>
     </country>
   <country>
-        <countryId>KHM855</countryId>
-        <countryName>Cambodia</countryName>
-        <countryCode>855</countryCode>
-        <countryAlpha2>KH</countryAlpha2>
-        <countryAlpha3>KHM</countryAlpha3>
-        <countryFlag>flag_cambodia.png</countryFlag>
+        <CountryId>KHM855</CountryId>
+        <CountryName>Cambodia</CountryName>
+        <CountryCode>855</CountryCode>
+        <CountryAlpha2>KH</CountryAlpha2>
+        <CountryAlpha3>KHM</CountryAlpha3>
+        <CountryFlag>flag_cambodia.png</CountryFlag>
     </country>
   <country>
-        <countryId>CMR237</countryId>
-        <countryName>Cameroon</countryName>
-        <countryCode>237</countryCode>
-        <countryAlpha2>CM</countryAlpha2>
-        <countryAlpha3>CMR</countryAlpha3>
-        <countryFlag>flag_cameroon.png</countryFlag>
+        <CountryId>CMR237</CountryId>
+        <CountryName>Cameroon</CountryName>
+        <CountryCode>237</CountryCode>
+        <CountryAlpha2>CM</CountryAlpha2>
+        <CountryAlpha3>CMR</CountryAlpha3>
+        <CountryFlag>flag_cameroon.png</CountryFlag>
     </country>
   <country>
-        <countryId>CAN1</countryId>
-        <countryName>Canada</countryName>
-        <countryCode>1</countryCode>
-        <countryAlpha2>CA</countryAlpha2>
-        <countryAlpha3>CAN</countryAlpha3>
-        <countryFlag>flag_canada.png</countryFlag>
+        <CountryId>CAN1</CountryId>
+        <CountryName>Canada</CountryName>
+        <CountryCode>1</CountryCode>
+        <CountryAlpha2>CA</CountryAlpha2>
+        <CountryAlpha3>CAN</CountryAlpha3>
+        <CountryFlag>flag_canada.png</CountryFlag>
     </country>
   <country>
-        <countryId>CPV238</countryId>
-        <countryName>Cape Verde</countryName>
-        <countryCode>238</countryCode>
-        <countryAlpha2>CV</countryAlpha2>
-        <countryAlpha3>CPV</countryAlpha3>
-        <countryFlag>flag_cape_verde.png</countryFlag>
+        <CountryId>CPV238</CountryId>
+        <CountryName>Cape Verde</CountryName>
+        <CountryCode>238</CountryCode>
+        <CountryAlpha2>CV</CountryAlpha2>
+        <CountryAlpha3>CPV</CountryAlpha3>
+        <CountryFlag>flag_cape_verde.png</CountryFlag>
     </country>
   <country>
-        <countryId>CYM1345</countryId>
-        <countryName>Cayman Islands</countryName>
-        <countryCode>1345</countryCode>
-        <countryAlpha2>KY</countryAlpha2>
-        <countryAlpha3>CYM</countryAlpha3>
-        <countryFlag>flag_cayman_islands.png</countryFlag>
+        <CountryId>CYM1345</CountryId>
+        <CountryName>Cayman Islands</CountryName>
+        <CountryCode>1345</CountryCode>
+        <CountryAlpha2>KY</CountryAlpha2>
+        <CountryAlpha3>CYM</CountryAlpha3>
+        <CountryFlag>flag_cayman_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>CAF236</countryId>
-        <countryName>Central African Republic</countryName>
-        <countryCode>236</countryCode>
-        <countryAlpha2>CF</countryAlpha2>
-        <countryAlpha3>CAF</countryAlpha3>
-        <countryFlag>flag_central_african_republic.png</countryFlag>
+        <CountryId>CAF236</CountryId>
+        <CountryName>Central African Republic</CountryName>
+        <CountryCode>236</CountryCode>
+        <CountryAlpha2>CF</CountryAlpha2>
+        <CountryAlpha3>CAF</CountryAlpha3>
+        <CountryFlag>flag_central_african_republic.png</CountryFlag>
     </country>
   <country>
-        <countryId>TCD235</countryId>
-        <countryName>Chad</countryName>
-        <countryCode>235</countryCode>
-        <countryAlpha2>TD</countryAlpha2>
-        <countryAlpha3>TCD</countryAlpha3>
-        <countryFlag>flag_chad.png</countryFlag>
+        <CountryId>TCD235</CountryId>
+        <CountryName>Chad</CountryName>
+        <CountryCode>235</CountryCode>
+        <CountryAlpha2>TD</CountryAlpha2>
+        <CountryAlpha3>TCD</CountryAlpha3>
+        <CountryFlag>flag_chad.png</CountryFlag>
     </country>
   <country>
-        <countryId>CHL56</countryId>
-        <countryName>Chile</countryName>
-        <countryCode>56</countryCode>
-        <countryAlpha2>CL</countryAlpha2>
-        <countryAlpha3>CHL</countryAlpha3>
-        <countryFlag>flag_chile.png</countryFlag>
+        <CountryId>CHL56</CountryId>
+        <CountryName>Chile</CountryName>
+        <CountryCode>56</CountryCode>
+        <CountryAlpha2>CL</CountryAlpha2>
+        <CountryAlpha3>CHL</CountryAlpha3>
+        <CountryFlag>flag_chile.png</CountryFlag>
     </country>
   <country>
-        <countryId>CHN86</countryId>
-        <countryName>China</countryName>
-        <countryCode>86</countryCode>
-        <countryAlpha2>CN</countryAlpha2>
-        <countryAlpha3>CHN</countryAlpha3>
-        <countryFlag>flag_china.png</countryFlag>
+        <CountryId>CHN86</CountryId>
+        <CountryName>China</CountryName>
+        <CountryCode>86</CountryCode>
+        <CountryAlpha2>CN</CountryAlpha2>
+        <CountryAlpha3>CHN</CountryAlpha3>
+        <CountryFlag>flag_china.png</CountryFlag>
     </country>
   <country>
-        <countryId>CXR61</countryId>
-        <countryName>Christmas Island</countryName>
-        <countryCode>61</countryCode>
-        <countryAlpha2>CX</countryAlpha2>
-        <countryAlpha3>CXR</countryAlpha3>
-        <countryFlag>flag_christmas_island.png</countryFlag>
+        <CountryId>CXR61</CountryId>
+        <CountryName>Christmas Island</CountryName>
+        <CountryCode>61</CountryCode>
+        <CountryAlpha2>CX</CountryAlpha2>
+        <CountryAlpha3>CXR</CountryAlpha3>
+        <CountryFlag>flag_christmas_island.png</CountryFlag>
     </country>
   <country>
-        <countryId>CCK61</countryId>
-        <countryName>Cocos Islands</countryName>
-        <countryCode>61</countryCode>
-        <countryAlpha2>CC</countryAlpha2>
-        <countryAlpha3>CCK</countryAlpha3>
-        <countryFlag>flag_cocos_keeling_islands.png</countryFlag>
+        <CountryId>CCK61</CountryId>
+        <CountryName>Cocos Islands</CountryName>
+        <CountryCode>61</CountryCode>
+        <CountryAlpha2>CC</CountryAlpha2>
+        <CountryAlpha3>CCK</CountryAlpha3>
+        <CountryFlag>flag_cocos_keeling_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>COL57</countryId>
-        <countryName>Colombia</countryName>
-        <countryCode>57</countryCode>
-        <countryAlpha2>CO</countryAlpha2>
-        <countryAlpha3>COL</countryAlpha3>
-        <countryFlag>flag_colombia.png</countryFlag>
+        <CountryId>COL57</CountryId>
+        <CountryName>Colombia</CountryName>
+        <CountryCode>57</CountryCode>
+        <CountryAlpha2>CO</CountryAlpha2>
+        <CountryAlpha3>COL</CountryAlpha3>
+        <CountryFlag>flag_colombia.png</CountryFlag>
     </country>
   <country>
-        <countryId>COM269</countryId>
-        <countryName>Comoros</countryName>
-        <countryCode>269</countryCode>
-        <countryAlpha2>KM</countryAlpha2>
-        <countryAlpha3>COM</countryAlpha3>
-        <countryFlag>flag_comoros.png</countryFlag>
+        <CountryId>COM269</CountryId>
+        <CountryName>Comoros</CountryName>
+        <CountryCode>269</CountryCode>
+        <CountryAlpha2>KM</CountryAlpha2>
+        <CountryAlpha3>COM</CountryAlpha3>
+        <CountryFlag>flag_comoros.png</CountryFlag>
     </country>
   <country>
-        <countryId>COK682</countryId>
-        <countryName>Cook Islands</countryName>
-        <countryCode>682</countryCode>
-        <countryAlpha2>CK</countryAlpha2>
-        <countryAlpha3>COK</countryAlpha3>
-        <countryFlag>flag_cook_islands.png</countryFlag>
+        <CountryId>COK682</CountryId>
+        <CountryName>Cook Islands</CountryName>
+        <CountryCode>682</CountryCode>
+        <CountryAlpha2>CK</CountryAlpha2>
+        <CountryAlpha3>COK</CountryAlpha3>
+        <CountryFlag>flag_cook_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>CRI506</countryId>
-        <countryName>Costa Rica</countryName>
-        <countryCode>506</countryCode>
-        <countryAlpha2>CR</countryAlpha2>
-        <countryAlpha3>CRI</countryAlpha3>
-        <countryFlag>flag_costa_rica.png</countryFlag>
+        <CountryId>CRI506</CountryId>
+        <CountryName>Costa Rica</CountryName>
+        <CountryCode>506</CountryCode>
+        <CountryAlpha2>CR</CountryAlpha2>
+        <CountryAlpha3>CRI</CountryAlpha3>
+        <CountryFlag>flag_costa_rica.png</CountryFlag>
     </country>
   <country>
-        <countryId>HRV385</countryId>
-        <countryName>Croatia</countryName>
-        <countryCode>385</countryCode>
-        <countryAlpha2>HR</countryAlpha2>
-        <countryAlpha3>HRV</countryAlpha3>
-        <countryFlag>flag_croatia.png</countryFlag>
+        <CountryId>HRV385</CountryId>
+        <CountryName>Croatia</CountryName>
+        <CountryCode>385</CountryCode>
+        <CountryAlpha2>HR</CountryAlpha2>
+        <CountryAlpha3>HRV</CountryAlpha3>
+        <CountryFlag>flag_croatia.png</CountryFlag>
     </country>
   <country>
-        <countryId>CUB53</countryId>
-        <countryName>Cuba</countryName>
-        <countryCode>53</countryCode>
-        <countryAlpha2>CU</countryAlpha2>
-        <countryAlpha3>CUB</countryAlpha3>
-        <countryFlag>flag_cuba.png</countryFlag>
+        <CountryId>CUB53</CountryId>
+        <CountryName>Cuba</CountryName>
+        <CountryCode>53</CountryCode>
+        <CountryAlpha2>CU</CountryAlpha2>
+        <CountryAlpha3>CUB</CountryAlpha3>
+        <CountryFlag>flag_cuba.png</CountryFlag>
     </country>
   <country>
-        <countryId>CUW599</countryId>
-        <countryName>Curacao</countryName>
-        <countryCode>599</countryCode>
-        <countryAlpha2>CW</countryAlpha2>
-        <countryAlpha3>CUW</countryAlpha3>
-        <countryFlag>flag_of_curacao.png</countryFlag>
+        <CountryId>CUW599</CountryId>
+        <CountryName>Curacao</CountryName>
+        <CountryCode>599</CountryCode>
+        <CountryAlpha2>CW</CountryAlpha2>
+        <CountryAlpha3>CUW</CountryAlpha3>
+        <CountryFlag>flag_of_curacao.png</CountryFlag>
     </country>
   <country>
-        <countryId>CYP357</countryId>
-        <countryName>Cyprus</countryName>
-        <countryCode>357</countryCode>
-        <countryAlpha2>CY</countryAlpha2>
-        <countryAlpha3>CYP</countryAlpha3>
-        <countryFlag>flag_cyprus.png</countryFlag>
+        <CountryId>CYP357</CountryId>
+        <CountryName>Cyprus</CountryName>
+        <CountryCode>357</CountryCode>
+        <CountryAlpha2>CY</CountryAlpha2>
+        <CountryAlpha3>CYP</CountryAlpha3>
+        <CountryFlag>flag_cyprus.png</CountryFlag>
     </country>
   <country>
-        <countryId>CZE420</countryId>
-        <countryName>Czech Republic</countryName>
-        <countryCode>420</countryCode>
-        <countryAlpha2>CZ</countryAlpha2>
-        <countryAlpha3>CZE</countryAlpha3>
-        <countryFlag>flag_czech_republic.png</countryFlag>
+        <CountryId>CZE420</CountryId>
+        <CountryName>Czech Republic</CountryName>
+        <CountryCode>420</CountryCode>
+        <CountryAlpha2>CZ</CountryAlpha2>
+        <CountryAlpha3>CZE</CountryAlpha3>
+        <CountryFlag>flag_czech_republic.png</CountryFlag>
     </country>
   <country>
-        <countryId>COD243</countryId>
-        <countryName>Democratic Republic of the Congo</countryName>
-        <countryCode>243</countryCode>
-        <countryAlpha2>CD</countryAlpha2>
-        <countryAlpha3>COD</countryAlpha3>
-        <countryFlag>flag_democratic_republic_of_the_congo.png</countryFlag>
+        <CountryId>COD243</CountryId>
+        <CountryName>Democratic Republic of the Congo</CountryName>
+        <CountryCode>243</CountryCode>
+        <CountryAlpha2>CD</CountryAlpha2>
+        <CountryAlpha3>COD</CountryAlpha3>
+        <CountryFlag>flag_democratic_republic_of_the_congo.png</CountryFlag>
     </country>
   <country>
-        <countryId>DNK45</countryId>
-        <countryName>Denmark</countryName>
-        <countryCode>45</countryCode>
-        <countryAlpha2>DK</countryAlpha2>
-        <countryAlpha3>DNK</countryAlpha3>
-        <countryFlag>flag_denmark.png</countryFlag>
+        <CountryId>DNK45</CountryId>
+        <CountryName>Denmark</CountryName>
+        <CountryCode>45</CountryCode>
+        <CountryAlpha2>DK</CountryAlpha2>
+        <CountryAlpha3>DNK</CountryAlpha3>
+        <CountryFlag>flag_denmark.png</CountryFlag>
     </country>
   <country>
-        <countryId>DJI253</countryId>
-        <countryName>Djibouti</countryName>
-        <countryCode>253</countryCode>
-        <countryAlpha2>DJ</countryAlpha2>
-        <countryAlpha3>DJI</countryAlpha3>
-        <countryFlag>flag_djibouti.png</countryFlag>
+        <CountryId>DJI253</CountryId>
+        <CountryName>Djibouti</CountryName>
+        <CountryCode>253</CountryCode>
+        <CountryAlpha2>DJ</CountryAlpha2>
+        <CountryAlpha3>DJI</CountryAlpha3>
+        <CountryFlag>flag_djibouti.png</CountryFlag>
     </country>
   <country>
-        <countryId>DMA1767</countryId>
-        <countryName>Dominica</countryName>
-        <countryCode>1767</countryCode>
-        <countryAlpha2>DM</countryAlpha2>
-        <countryAlpha3>DMA</countryAlpha3>
-        <countryFlag>flag_dominica.png</countryFlag>
+        <CountryId>DMA1767</CountryId>
+        <CountryName>Dominica</CountryName>
+        <CountryCode>1767</CountryCode>
+        <CountryAlpha2>DM</CountryAlpha2>
+        <CountryAlpha3>DMA</CountryAlpha3>
+        <CountryFlag>flag_dominica.png</CountryFlag>
     </country>
   <country>
-        <countryId>DOM1809</countryId>
-        <countryName>Dominican Republic</countryName>
-        <countryCode>1809</countryCode>
-        <countryAlpha2>DO</countryAlpha2>
-        <countryAlpha3>DOM</countryAlpha3>
-        <countryFlag>flag_dominican_republic.png</countryFlag>
+        <CountryId>DOM1809</CountryId>
+        <CountryName>Dominican Republic</CountryName>
+        <CountryCode>1809</CountryCode>
+        <CountryAlpha2>DO</CountryAlpha2>
+        <CountryAlpha3>DOM</CountryAlpha3>
+        <CountryFlag>flag_dominican_republic.png</CountryFlag>
     </country>
   <country>
-        <countryId>DOM1829</countryId>
-        <countryName>Dominican Republic</countryName>
-        <countryCode>1829</countryCode>
-        <countryAlpha2>DO</countryAlpha2>
-        <countryAlpha3>DOM</countryAlpha3>
-        <countryFlag>flag_dominican_republic.png</countryFlag>
+        <CountryId>DOM1829</CountryId>
+        <CountryName>Dominican Republic</CountryName>
+        <CountryCode>1829</CountryCode>
+        <CountryAlpha2>DO</CountryAlpha2>
+        <CountryAlpha3>DOM</CountryAlpha3>
+        <CountryFlag>flag_dominican_republic.png</CountryFlag>
     </country>
   <country>
-        <countryId>DOM1849</countryId>
-        <countryName>Dominican Republic</countryName>
-        <countryCode>1849</countryCode>
-        <countryAlpha2>DO</countryAlpha2>
-        <countryAlpha3>DOM</countryAlpha3>
-        <countryFlag>flag_dominican_republic.png</countryFlag>
+        <CountryId>DOM1849</CountryId>
+        <CountryName>Dominican Republic</CountryName>
+        <CountryCode>1849</CountryCode>
+        <CountryAlpha2>DO</CountryAlpha2>
+        <CountryAlpha3>DOM</CountryAlpha3>
+        <CountryFlag>flag_dominican_republic.png</CountryFlag>
     </country>
   <country>
-        <countryId>TLS670</countryId>
-        <countryName>East Timor</countryName>
-        <countryCode>670</countryCode>
-        <countryAlpha2>TL</countryAlpha2>
-        <countryAlpha3>TLS</countryAlpha3>
-        <countryFlag>flag_east_timor.png</countryFlag>
+        <CountryId>TLS670</CountryId>
+        <CountryName>East Timor</CountryName>
+        <CountryCode>670</CountryCode>
+        <CountryAlpha2>TL</CountryAlpha2>
+        <CountryAlpha3>TLS</CountryAlpha3>
+        <CountryFlag>flag_east_timor.png</CountryFlag>
     </country>
   <country>
-        <countryId>ECU593</countryId>
-        <countryName>Ecuador</countryName>
-        <countryCode>593</countryCode>
-        <countryAlpha2>EC</countryAlpha2>
-        <countryAlpha3>ECU</countryAlpha3>
-        <countryFlag>flag_ecuador.png</countryFlag>
+        <CountryId>ECU593</CountryId>
+        <CountryName>Ecuador</CountryName>
+        <CountryCode>593</CountryCode>
+        <CountryAlpha2>EC</CountryAlpha2>
+        <CountryAlpha3>ECU</CountryAlpha3>
+        <CountryFlag>flag_ecuador.png</CountryFlag>
     </country>
   <country>
-        <countryId>EGY20</countryId>
-        <countryName>Egypt</countryName>
-        <countryCode>20</countryCode>
-        <countryAlpha2>EG</countryAlpha2>
-        <countryAlpha3>EGY</countryAlpha3>
-        <countryFlag>flag_egypt.png</countryFlag>
+        <CountryId>EGY20</CountryId>
+        <CountryName>Egypt</CountryName>
+        <CountryCode>20</CountryCode>
+        <CountryAlpha2>EG</CountryAlpha2>
+        <CountryAlpha3>EGY</CountryAlpha3>
+        <CountryFlag>flag_egypt.png</CountryFlag>
     </country>
   <country>
-        <countryId>SLV503</countryId>
-        <countryName>El Salvador</countryName>
-        <countryCode>503</countryCode>
-        <countryAlpha2>SV</countryAlpha2>
-        <countryAlpha3>SLV</countryAlpha3>
-        <countryFlag>flag_el_salvador.png</countryFlag>
+        <CountryId>SLV503</CountryId>
+        <CountryName>El Salvador</CountryName>
+        <CountryCode>503</CountryCode>
+        <CountryAlpha2>SV</CountryAlpha2>
+        <CountryAlpha3>SLV</CountryAlpha3>
+        <CountryFlag>flag_el_salvador.png</CountryFlag>
     </country>
   <country>
-        <countryId>GNQ240</countryId>
-        <countryName>Equatorial Guinea</countryName>
-        <countryCode>240</countryCode>
-        <countryAlpha2>GQ</countryAlpha2>
-        <countryAlpha3>GNQ</countryAlpha3>
-        <countryFlag>flag_equatorial_guinea.png</countryFlag>
+        <CountryId>GNQ240</CountryId>
+        <CountryName>Equatorial Guinea</CountryName>
+        <CountryCode>240</CountryCode>
+        <CountryAlpha2>GQ</CountryAlpha2>
+        <CountryAlpha3>GNQ</CountryAlpha3>
+        <CountryFlag>flag_equatorial_guinea.png</CountryFlag>
     </country>
   <country>
-        <countryId>ERI291</countryId>
-        <countryName>Eritrea</countryName>
-        <countryCode>291</countryCode>
-        <countryAlpha2>ER</countryAlpha2>
-        <countryAlpha3>ERI</countryAlpha3>
-        <countryFlag>flag_eritrea.png</countryFlag>
+        <CountryId>ERI291</CountryId>
+        <CountryName>Eritrea</CountryName>
+        <CountryCode>291</CountryCode>
+        <CountryAlpha2>ER</CountryAlpha2>
+        <CountryAlpha3>ERI</CountryAlpha3>
+        <CountryFlag>flag_eritrea.png</CountryFlag>
     </country>
   <country>
-        <countryId>EST372</countryId>
-        <countryName>Estonia</countryName>
-        <countryCode>372</countryCode>
-        <countryAlpha2>EE</countryAlpha2>
-        <countryAlpha3>EST</countryAlpha3>
-        <countryFlag>flag_estonia.png</countryFlag>
+        <CountryId>EST372</CountryId>
+        <CountryName>Estonia</CountryName>
+        <CountryCode>372</CountryCode>
+        <CountryAlpha2>EE</CountryAlpha2>
+        <CountryAlpha3>EST</CountryAlpha3>
+        <CountryFlag>flag_estonia.png</CountryFlag>
     </country>
   <country>
-        <countryId>ETH251</countryId>
-        <countryName>Ethiopia</countryName>
-        <countryCode>251</countryCode>
-        <countryAlpha2>ET</countryAlpha2>
-        <countryAlpha3>ETH</countryAlpha3>
-        <countryFlag>flag_ethiopia.png</countryFlag>
+        <CountryId>ETH251</CountryId>
+        <CountryName>Ethiopia</CountryName>
+        <CountryCode>251</CountryCode>
+        <CountryAlpha2>ET</CountryAlpha2>
+        <CountryAlpha3>ETH</CountryAlpha3>
+        <CountryFlag>flag_ethiopia.png</CountryFlag>
     </country>
   <country>
-        <countryId>FLK500</countryId>
-        <countryName>Falkland Islands</countryName>
-        <countryCode>500</countryCode>
-        <countryAlpha2>FK</countryAlpha2>
-        <countryAlpha3>FLK</countryAlpha3>
-        <countryFlag>flag_falkland_islands.png</countryFlag>
+        <CountryId>FLK500</CountryId>
+        <CountryName>Falkland Islands</CountryName>
+        <CountryCode>500</CountryCode>
+        <CountryAlpha2>FK</CountryAlpha2>
+        <CountryAlpha3>FLK</CountryAlpha3>
+        <CountryFlag>flag_falkland_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>FRO298</countryId>
-        <countryName>Faroe Islands</countryName>
-        <countryCode>298</countryCode>
-        <countryAlpha2>FO</countryAlpha2>
-        <countryAlpha3>FRO</countryAlpha3>
-        <countryFlag>flag_faroe_islands.png</countryFlag>
+        <CountryId>FRO298</CountryId>
+        <CountryName>Faroe Islands</CountryName>
+        <CountryCode>298</CountryCode>
+        <CountryAlpha2>FO</CountryAlpha2>
+        <CountryAlpha3>FRO</CountryAlpha3>
+        <CountryFlag>flag_faroe_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>FJI679</countryId>
-        <countryName>Fiji</countryName>
-        <countryCode>679</countryCode>
-        <countryAlpha2>FJ</countryAlpha2>
-        <countryAlpha3>FJI</countryAlpha3>
-        <countryFlag>flag_fiji.png</countryFlag>
+        <CountryId>FJI679</CountryId>
+        <CountryName>Fiji</CountryName>
+        <CountryCode>679</CountryCode>
+        <CountryAlpha2>FJ</CountryAlpha2>
+        <CountryAlpha3>FJI</CountryAlpha3>
+        <CountryFlag>flag_fiji.png</CountryFlag>
     </country>
   <country>
-        <countryId>FIN358</countryId>
-        <countryName>Finland</countryName>
-        <countryCode>358</countryCode>
-        <countryAlpha2>FI</countryAlpha2>
-        <countryAlpha3>FIN</countryAlpha3>
-        <countryFlag>flag_finland.png</countryFlag>
+        <CountryId>FIN358</CountryId>
+        <CountryName>Finland</CountryName>
+        <CountryCode>358</CountryCode>
+        <CountryAlpha2>FI</CountryAlpha2>
+        <CountryAlpha3>FIN</CountryAlpha3>
+        <CountryFlag>flag_finland.png</CountryFlag>
     </country>
   <country>
-        <countryId>FRA33</countryId>
-        <countryName>France</countryName>
-        <countryCode>33</countryCode>
-        <countryAlpha2>FR</countryAlpha2>
-        <countryAlpha3>FRA</countryAlpha3>
-        <countryFlag>flag_france.png</countryFlag>
+        <CountryId>FRA33</CountryId>
+        <CountryName>France</CountryName>
+        <CountryCode>33</CountryCode>
+        <CountryAlpha2>FR</CountryAlpha2>
+        <CountryAlpha3>FRA</CountryAlpha3>
+        <CountryFlag>flag_france.png</CountryFlag>
     </country>
   <country>
-        <countryId>PYF689</countryId>
-        <countryName>French Polynesia</countryName>
-        <countryCode>689</countryCode>
-        <countryAlpha2>PF</countryAlpha2>
-        <countryAlpha3>PYF</countryAlpha3>
-        <countryFlag>flag_french_polynesia.png</countryFlag>
+        <CountryId>PYF689</CountryId>
+        <CountryName>French Polynesia</CountryName>
+        <CountryCode>689</CountryCode>
+        <CountryAlpha2>PF</CountryAlpha2>
+        <CountryAlpha3>PYF</CountryAlpha3>
+        <CountryFlag>flag_french_polynesia.png</CountryFlag>
     </country>
   <country>
-        <countryId>GAB241</countryId>
-        <countryName>Gabon</countryName>
-        <countryCode>241</countryCode>
-        <countryAlpha2>GA</countryAlpha2>
-        <countryAlpha3>GAB</countryAlpha3>
-        <countryFlag>flag_gabon.png</countryFlag>
+        <CountryId>GAB241</CountryId>
+        <CountryName>Gabon</CountryName>
+        <CountryCode>241</CountryCode>
+        <CountryAlpha2>GA</CountryAlpha2>
+        <CountryAlpha3>GAB</CountryAlpha3>
+        <CountryFlag>flag_gabon.png</CountryFlag>
     </country>
   <country>
-        <countryId>GMB220</countryId>
-        <countryName>Gambia</countryName>
-        <countryCode>220</countryCode>
-        <countryAlpha2>GM</countryAlpha2>
-        <countryAlpha3>GMB</countryAlpha3>
-        <countryFlag>flag_gambia.png</countryFlag>
+        <CountryId>GMB220</CountryId>
+        <CountryName>Gambia</CountryName>
+        <CountryCode>220</CountryCode>
+        <CountryAlpha2>GM</CountryAlpha2>
+        <CountryAlpha3>GMB</CountryAlpha3>
+        <CountryFlag>flag_gambia.png</CountryFlag>
     </country>
   <country>
-        <countryId>GEO995</countryId>
-        <countryName>Georgia</countryName>
-        <countryCode>995</countryCode>
-        <countryAlpha2>GE</countryAlpha2>
-        <countryAlpha3>GEO</countryAlpha3>
-        <countryFlag>flag_georgia.png</countryFlag>
+        <CountryId>GEO995</CountryId>
+        <CountryName>Georgia</CountryName>
+        <CountryCode>995</CountryCode>
+        <CountryAlpha2>GE</CountryAlpha2>
+        <CountryAlpha3>GEO</CountryAlpha3>
+        <CountryFlag>flag_georgia.png</CountryFlag>
     </country>
   <country>
-        <countryId>DEU49</countryId>
-        <countryName>Germany</countryName>
-        <countryCode>49</countryCode>
-        <countryAlpha2>DE</countryAlpha2>
-        <countryAlpha3>DEU</countryAlpha3>
-        <countryFlag>flag_germany.png</countryFlag>
+        <CountryId>DEU49</CountryId>
+        <CountryName>Germany</CountryName>
+        <CountryCode>49</CountryCode>
+        <CountryAlpha2>DE</CountryAlpha2>
+        <CountryAlpha3>DEU</CountryAlpha3>
+        <CountryFlag>flag_germany.png</CountryFlag>
     </country>
   <country>
-        <countryId>GHA233</countryId>
-        <countryName>Ghana</countryName>
-        <countryCode>233</countryCode>
-        <countryAlpha2>GH</countryAlpha2>
-        <countryAlpha3>GHA</countryAlpha3>
-        <countryFlag>flag_ghana.png</countryFlag>
+        <CountryId>GHA233</CountryId>
+        <CountryName>Ghana</CountryName>
+        <CountryCode>233</CountryCode>
+        <CountryAlpha2>GH</CountryAlpha2>
+        <CountryAlpha3>GHA</CountryAlpha3>
+        <CountryFlag>flag_ghana.png</CountryFlag>
     </country>
   <country>
-        <countryId>GIB350</countryId>
-        <countryName>Gibraltar</countryName>
-        <countryCode>350</countryCode>
-        <countryAlpha2>GI</countryAlpha2>
-        <countryAlpha3>GIB</countryAlpha3>
-        <countryFlag>flag_gibraltar.png</countryFlag>
+        <CountryId>GIB350</CountryId>
+        <CountryName>Gibraltar</CountryName>
+        <CountryCode>350</CountryCode>
+        <CountryAlpha2>GI</CountryAlpha2>
+        <CountryAlpha3>GIB</CountryAlpha3>
+        <CountryFlag>flag_gibraltar.png</CountryFlag>
     </country>
   <country>
-        <countryId>GRC30</countryId>
-        <countryName>Greece</countryName>
-        <countryCode>30</countryCode>
-        <countryAlpha2>GR</countryAlpha2>
-        <countryAlpha3>GRC</countryAlpha3>
-        <countryFlag>flag_greece.png</countryFlag>
+        <CountryId>GRC30</CountryId>
+        <CountryName>Greece</CountryName>
+        <CountryCode>30</CountryCode>
+        <CountryAlpha2>GR</CountryAlpha2>
+        <CountryAlpha3>GRC</CountryAlpha3>
+        <CountryFlag>flag_greece.png</CountryFlag>
     </country>
   <country>
-        <countryId>GRL299</countryId>
-        <countryName>Greenland</countryName>
-        <countryCode>299</countryCode>
-        <countryAlpha2>GL</countryAlpha2>
-        <countryAlpha3>GRL</countryAlpha3>
-        <countryFlag>flag_greenland.png</countryFlag>
+        <CountryId>GRL299</CountryId>
+        <CountryName>Greenland</CountryName>
+        <CountryCode>299</CountryCode>
+        <CountryAlpha2>GL</CountryAlpha2>
+        <CountryAlpha3>GRL</CountryAlpha3>
+        <CountryFlag>flag_greenland.png</CountryFlag>
     </country>
   <country>
-        <countryId>GRD1473</countryId>
-        <countryName>Grenada</countryName>
-        <countryCode>1473</countryCode>
-        <countryAlpha2>GD</countryAlpha2>
-        <countryAlpha3>GRD</countryAlpha3>
-        <countryFlag>flag_grenada.png</countryFlag>
+        <CountryId>GRD1473</CountryId>
+        <CountryName>Grenada</CountryName>
+        <CountryCode>1473</CountryCode>
+        <CountryAlpha2>GD</CountryAlpha2>
+        <CountryAlpha3>GRD</CountryAlpha3>
+        <CountryFlag>flag_grenada.png</CountryFlag>
     </country>
   <country>
-        <countryId>GUM1671</countryId>
-        <countryName>Guam</countryName>
-        <countryCode>1671</countryCode>
-        <countryAlpha2>GU</countryAlpha2>
-        <countryAlpha3>GUM</countryAlpha3>
-        <countryFlag>flag_guam.png</countryFlag>
+        <CountryId>GUM1671</CountryId>
+        <CountryName>Guam</CountryName>
+        <CountryCode>1671</CountryCode>
+        <CountryAlpha2>GU</CountryAlpha2>
+        <CountryAlpha3>GUM</CountryAlpha3>
+        <CountryFlag>flag_guam.png</CountryFlag>
     </country>
   <country>
-        <countryId>GTM502</countryId>
-        <countryName>Guatemala</countryName>
-        <countryCode>502</countryCode>
-        <countryAlpha2>GT</countryAlpha2>
-        <countryAlpha3>GTM</countryAlpha3>
-        <countryFlag>flag_guatemala.png</countryFlag>
+        <CountryId>GTM502</CountryId>
+        <CountryName>Guatemala</CountryName>
+        <CountryCode>502</CountryCode>
+        <CountryAlpha2>GT</CountryAlpha2>
+        <CountryAlpha3>GTM</CountryAlpha3>
+        <CountryFlag>flag_guatemala.png</CountryFlag>
     </country>
   <country>
-        <countryId>GGY441481</countryId>
-        <countryName>Guernsey</countryName>
-        <countryCode>441481</countryCode>
-        <countryAlpha2>GG</countryAlpha2>
-        <countryAlpha3>GGY</countryAlpha3>
-        <countryFlag>flag_guernsey.png</countryFlag>
+        <CountryId>GGY441481</CountryId>
+        <CountryName>Guernsey</CountryName>
+        <CountryCode>441481</CountryCode>
+        <CountryAlpha2>GG</CountryAlpha2>
+        <CountryAlpha3>GGY</CountryAlpha3>
+        <CountryFlag>flag_guernsey.png</CountryFlag>
     </country>
   <country>
-        <countryId>GIN224</countryId>
-        <countryName>Guinea</countryName>
-        <countryCode>224</countryCode>
-        <countryAlpha2>GN</countryAlpha2>
-        <countryAlpha3>GIN</countryAlpha3>
-        <countryFlag>flag_guinea.png</countryFlag>
+        <CountryId>GIN224</CountryId>
+        <CountryName>Guinea</CountryName>
+        <CountryCode>224</CountryCode>
+        <CountryAlpha2>GN</CountryAlpha2>
+        <CountryAlpha3>GIN</CountryAlpha3>
+        <CountryFlag>flag_guinea.png</CountryFlag>
     </country>
   <country>
-        <countryId>GNB245</countryId>
-        <countryName>Guinea-Bissau</countryName>
-        <countryCode>245</countryCode>
-        <countryAlpha2>GW</countryAlpha2>
-        <countryAlpha3>GNB</countryAlpha3>
-        <countryFlag>flag_guinea_bissau.png</countryFlag>
+        <CountryId>GNB245</CountryId>
+        <CountryName>Guinea-Bissau</CountryName>
+        <CountryCode>245</CountryCode>
+        <CountryAlpha2>GW</CountryAlpha2>
+        <CountryAlpha3>GNB</CountryAlpha3>
+        <CountryFlag>flag_guinea_bissau.png</CountryFlag>
     </country>
   <country>
-        <countryId>GUY592</countryId>
-        <countryName>Guyana</countryName>
-        <countryCode>592</countryCode>
-        <countryAlpha2>GY</countryAlpha2>
-        <countryAlpha3>GUY</countryAlpha3>
-        <countryFlag>flag_guyana.png</countryFlag>
+        <CountryId>GUY592</CountryId>
+        <CountryName>Guyana</CountryName>
+        <CountryCode>592</CountryCode>
+        <CountryAlpha2>GY</CountryAlpha2>
+        <CountryAlpha3>GUY</CountryAlpha3>
+        <CountryFlag>flag_guyana.png</CountryFlag>
     </country>
   <country>
-        <countryId>HTI509</countryId>
-        <countryName>Haiti</countryName>
-        <countryCode>509</countryCode>
-        <countryAlpha2>HT</countryAlpha2>
-        <countryAlpha3>HTI</countryAlpha3>
-        <countryFlag>flag_haiti.png</countryFlag>
+        <CountryId>HTI509</CountryId>
+        <CountryName>Haiti</CountryName>
+        <CountryCode>509</CountryCode>
+        <CountryAlpha2>HT</CountryAlpha2>
+        <CountryAlpha3>HTI</CountryAlpha3>
+        <CountryFlag>flag_haiti.png</CountryFlag>
     </country>
   <country>
-        <countryId>HND504</countryId>
-        <countryName>Honduras</countryName>
-        <countryCode>504</countryCode>
-        <countryAlpha2>HN</countryAlpha2>
-        <countryAlpha3>HND</countryAlpha3>
-        <countryFlag>flag_honduras.png</countryFlag>
+        <CountryId>HND504</CountryId>
+        <CountryName>Honduras</CountryName>
+        <CountryCode>504</CountryCode>
+        <CountryAlpha2>HN</CountryAlpha2>
+        <CountryAlpha3>HND</CountryAlpha3>
+        <CountryFlag>flag_honduras.png</CountryFlag>
     </country>
   <country>
-        <countryId>HKG852</countryId>
-        <countryName>Hong Kong</countryName>
-        <countryCode>852</countryCode>
-        <countryAlpha2>HK</countryAlpha2>
-        <countryAlpha3>HKG</countryAlpha3>
-        <countryFlag>flag_hong_kong.png</countryFlag>
+        <CountryId>HKG852</CountryId>
+        <CountryName>Hong Kong</CountryName>
+        <CountryCode>852</CountryCode>
+        <CountryAlpha2>HK</CountryAlpha2>
+        <CountryAlpha3>HKG</CountryAlpha3>
+        <CountryFlag>flag_hong_kong.png</CountryFlag>
     </country>
   <country>
-        <countryId>HUN36</countryId>
-        <countryName>Hungary</countryName>
-        <countryCode>36</countryCode>
-        <countryAlpha2>HU</countryAlpha2>
-        <countryAlpha3>HUN</countryAlpha3>
-        <countryFlag>flag_hungary.png</countryFlag>
+        <CountryId>HUN36</CountryId>
+        <CountryName>Hungary</CountryName>
+        <CountryCode>36</CountryCode>
+        <CountryAlpha2>HU</CountryAlpha2>
+        <CountryAlpha3>HUN</CountryAlpha3>
+        <CountryFlag>flag_hungary.png</CountryFlag>
     </country>
   <country>
-        <countryId>ISL354</countryId>
-        <countryName>Iceland</countryName>
-        <countryCode>354</countryCode>
-        <countryAlpha2>IS</countryAlpha2>
-        <countryAlpha3>ISL</countryAlpha3>
-        <countryFlag>flag_iceland.png</countryFlag>
+        <CountryId>ISL354</CountryId>
+        <CountryName>Iceland</CountryName>
+        <CountryCode>354</CountryCode>
+        <CountryAlpha2>IS</CountryAlpha2>
+        <CountryAlpha3>ISL</CountryAlpha3>
+        <CountryFlag>flag_iceland.png</CountryFlag>
     </country>
   <country>
-        <countryId>IND91</countryId>
-        <countryName>India</countryName>
-        <countryCode>91</countryCode>
-        <countryAlpha2>IN</countryAlpha2>
-        <countryAlpha3>IND</countryAlpha3>
-        <countryFlag>flag_india.png</countryFlag>
+        <CountryId>IND91</CountryId>
+        <CountryName>India</CountryName>
+        <CountryCode>91</CountryCode>
+        <CountryAlpha2>IN</CountryAlpha2>
+        <CountryAlpha3>IND</CountryAlpha3>
+        <CountryFlag>flag_india.png</CountryFlag>
     </country>
   <country>
-        <countryId>IDN62</countryId>
-        <countryName>Indonesia</countryName>
-        <countryCode>62</countryCode>
-        <countryAlpha2>ID</countryAlpha2>
-        <countryAlpha3>IDN</countryAlpha3>
-        <countryFlag>flag_indonesia.png</countryFlag>
+        <CountryId>IDN62</CountryId>
+        <CountryName>Indonesia</CountryName>
+        <CountryCode>62</CountryCode>
+        <CountryAlpha2>ID</CountryAlpha2>
+        <CountryAlpha3>IDN</CountryAlpha3>
+        <CountryFlag>flag_indonesia.png</CountryFlag>
     </country>
   <country>
-        <countryId>IRN98</countryId>
-        <countryName>Iran</countryName>
-        <countryCode>98</countryCode>
-        <countryAlpha2>IR</countryAlpha2>
-        <countryAlpha3>IRN</countryAlpha3>
-        <countryFlag>flag_iran.png</countryFlag>
+        <CountryId>IRN98</CountryId>
+        <CountryName>Iran</CountryName>
+        <CountryCode>98</CountryCode>
+        <CountryAlpha2>IR</CountryAlpha2>
+        <CountryAlpha3>IRN</CountryAlpha3>
+        <CountryFlag>flag_iran.png</CountryFlag>
     </country>
   <country>
-        <countryId>IRQ964</countryId>
-        <countryName>Iraq</countryName>
-        <countryCode>964</countryCode>
-        <countryAlpha2>IQ</countryAlpha2>
-        <countryAlpha3>IRQ</countryAlpha3>
-        <countryFlag>flag_iraq.png</countryFlag>
+        <CountryId>IRQ964</CountryId>
+        <CountryName>Iraq</CountryName>
+        <CountryCode>964</CountryCode>
+        <CountryAlpha2>IQ</CountryAlpha2>
+        <CountryAlpha3>IRQ</CountryAlpha3>
+        <CountryFlag>flag_iraq.png</CountryFlag>
     </country>
   <country>
-        <countryId>IRL353</countryId>
-        <countryName>Ireland</countryName>
-        <countryCode>353</countryCode>
-        <countryAlpha2>IE</countryAlpha2>
-        <countryAlpha3>IRL</countryAlpha3>
-        <countryFlag>flag_ireland.png</countryFlag>
+        <CountryId>IRL353</CountryId>
+        <CountryName>Ireland</CountryName>
+        <CountryCode>353</CountryCode>
+        <CountryAlpha2>IE</CountryAlpha2>
+        <CountryAlpha3>IRL</CountryAlpha3>
+        <CountryFlag>flag_ireland.png</CountryFlag>
     </country>
   <country>
-        <countryId>IMN441624</countryId>
-        <countryName>Isle of Man</countryName>
-        <countryCode>441624</countryCode>
-        <countryAlpha2>IM</countryAlpha2>
-        <countryAlpha3>IMN</countryAlpha3>
-        <countryFlag>flag_isle_of_man.png</countryFlag>
+        <CountryId>IMN441624</CountryId>
+        <CountryName>Isle of Man</CountryName>
+        <CountryCode>441624</CountryCode>
+        <CountryAlpha2>IM</CountryAlpha2>
+        <CountryAlpha3>IMN</CountryAlpha3>
+        <CountryFlag>flag_isle_of_man.png</CountryFlag>
     </country>
   <country>
-        <countryId>ISR972</countryId>
-        <countryName>Israel</countryName>
-        <countryCode>972</countryCode>
-        <countryAlpha2>IL</countryAlpha2>
-        <countryAlpha3>ISR</countryAlpha3>
-        <countryFlag>flag_israel.png</countryFlag>
+        <CountryId>ISR972</CountryId>
+        <CountryName>Israel</CountryName>
+        <CountryCode>972</CountryCode>
+        <CountryAlpha2>IL</CountryAlpha2>
+        <CountryAlpha3>ISR</CountryAlpha3>
+        <CountryFlag>flag_israel.png</CountryFlag>
     </country>
   <country>
-        <countryId>ITA39</countryId>
-        <countryName>Italy</countryName>
-        <countryCode>39</countryCode>
-        <countryAlpha2>IT</countryAlpha2>
-        <countryAlpha3>ITA</countryAlpha3>
-        <countryFlag>flag_italy.png</countryFlag>
+        <CountryId>ITA39</CountryId>
+        <CountryName>Italy</CountryName>
+        <CountryCode>39</CountryCode>
+        <CountryAlpha2>IT</CountryAlpha2>
+        <CountryAlpha3>ITA</CountryAlpha3>
+        <CountryFlag>flag_italy.png</CountryFlag>
     </country>
   <country>
-        <countryId>CIV225</countryId>
-        <countryName>Ivory Coast</countryName>
-        <countryCode>225</countryCode>
-        <countryAlpha2>CI</countryAlpha2>
-        <countryAlpha3>CIV</countryAlpha3>
-        <countryFlag>flag_ivory_coast.png</countryFlag>
+        <CountryId>CIV225</CountryId>
+        <CountryName>Ivory Coast</CountryName>
+        <CountryCode>225</CountryCode>
+        <CountryAlpha2>CI</CountryAlpha2>
+        <CountryAlpha3>CIV</CountryAlpha3>
+        <CountryFlag>flag_ivory_coast.png</CountryFlag>
     </country>
   <country>
-        <countryId>JAM1876</countryId>
-        <countryName>Jamaica</countryName>
-        <countryCode>1876</countryCode>
-        <countryAlpha2>JM</countryAlpha2>
-        <countryAlpha3>JAM</countryAlpha3>
-        <countryFlag>flag_jamaica.png</countryFlag>
+        <CountryId>JAM1876</CountryId>
+        <CountryName>Jamaica</CountryName>
+        <CountryCode>1876</CountryCode>
+        <CountryAlpha2>JM</CountryAlpha2>
+        <CountryAlpha3>JAM</CountryAlpha3>
+        <CountryFlag>flag_jamaica.png</CountryFlag>
     </country>
   <country>
-        <countryId>JPN81</countryId>
-        <countryName>Japan</countryName>
-        <countryCode>81</countryCode>
-        <countryAlpha2>JP</countryAlpha2>
-        <countryAlpha3>JPN</countryAlpha3>
-        <countryFlag>flag_japan.png</countryFlag>
+        <CountryId>JPN81</CountryId>
+        <CountryName>Japan</CountryName>
+        <CountryCode>81</CountryCode>
+        <CountryAlpha2>JP</CountryAlpha2>
+        <CountryAlpha3>JPN</CountryAlpha3>
+        <CountryFlag>flag_japan.png</CountryFlag>
     </country>
   <country>
-        <countryId>JEY441534</countryId>
-        <countryName>Jersey</countryName>
-        <countryCode>441534</countryCode>
-        <countryAlpha2>JE</countryAlpha2>
-        <countryAlpha3>JEY</countryAlpha3>
-        <countryFlag>flag_jersey.png</countryFlag>
+        <CountryId>JEY441534</CountryId>
+        <CountryName>Jersey</CountryName>
+        <CountryCode>441534</CountryCode>
+        <CountryAlpha2>JE</CountryAlpha2>
+        <CountryAlpha3>JEY</CountryAlpha3>
+        <CountryFlag>flag_jersey.png</CountryFlag>
     </country>
   <country>
-        <countryId>JOR962</countryId>
-        <countryName>Jordan</countryName>
-        <countryCode>962</countryCode>
-        <countryAlpha2>JO</countryAlpha2>
-        <countryAlpha3>JOR</countryAlpha3>
-        <countryFlag>flag_jordan.png</countryFlag>
+        <CountryId>JOR962</CountryId>
+        <CountryName>Jordan</CountryName>
+        <CountryCode>962</CountryCode>
+        <CountryAlpha2>JO</CountryAlpha2>
+        <CountryAlpha3>JOR</CountryAlpha3>
+        <CountryFlag>flag_jordan.png</CountryFlag>
     </country>
   <country>
-        <countryId>KAZ7</countryId>
-        <countryName>Kazakhstan</countryName>
-        <countryCode>7</countryCode>
-        <countryAlpha2>KZ</countryAlpha2>
-        <countryAlpha3>KAZ</countryAlpha3>
-        <countryFlag>flag_kazakhstan.png</countryFlag>
+        <CountryId>KAZ7</CountryId>
+        <CountryName>Kazakhstan</CountryName>
+        <CountryCode>7</CountryCode>
+        <CountryAlpha2>KZ</CountryAlpha2>
+        <CountryAlpha3>KAZ</CountryAlpha3>
+        <CountryFlag>flag_kazakhstan.png</CountryFlag>
     </country>
   <country>
-        <countryId>KEN254</countryId>
-        <countryName>Kenya</countryName>
-        <countryCode>254</countryCode>
-        <countryAlpha2>KE</countryAlpha2>
-        <countryAlpha3>KEN</countryAlpha3>
-        <countryFlag>flag_kenya.png</countryFlag>
+        <CountryId>KEN254</CountryId>
+        <CountryName>Kenya</CountryName>
+        <CountryCode>254</CountryCode>
+        <CountryAlpha2>KE</CountryAlpha2>
+        <CountryAlpha3>KEN</CountryAlpha3>
+        <CountryFlag>flag_kenya.png</CountryFlag>
     </country>
   <country>
-        <countryId>KIR686</countryId>
-        <countryName>Kiribati</countryName>
-        <countryCode>686</countryCode>
-        <countryAlpha2>KI</countryAlpha2>
-        <countryAlpha3>KIR</countryAlpha3>
-        <countryFlag>flag_kiribati.png</countryFlag>
+        <CountryId>KIR686</CountryId>
+        <CountryName>Kiribati</CountryName>
+        <CountryCode>686</CountryCode>
+        <CountryAlpha2>KI</CountryAlpha2>
+        <CountryAlpha3>KIR</CountryAlpha3>
+        <CountryFlag>flag_kiribati.png</CountryFlag>
     </country>
   <country>
-        <countryId>XKX383</countryId>
-        <countryName>Kosovo</countryName>
-        <countryCode>383</countryCode>
-        <countryAlpha2>XK</countryAlpha2>
-        <countryAlpha3>XKX</countryAlpha3>
-        <countryFlag>flag_kosovo.png</countryFlag>
+        <CountryId>XKX383</CountryId>
+        <CountryName>Kosovo</CountryName>
+        <CountryCode>383</CountryCode>
+        <CountryAlpha2>XK</CountryAlpha2>
+        <CountryAlpha3>XKX</CountryAlpha3>
+        <CountryFlag>flag_kosovo.png</CountryFlag>
     </country>
   <country>
-        <countryId>KWT965</countryId>
-        <countryName>Kuwait</countryName>
-        <countryCode>965</countryCode>
-        <countryAlpha2>KW</countryAlpha2>
-        <countryAlpha3>KWT</countryAlpha3>
-        <countryFlag>flag_kuwait.png</countryFlag>
+        <CountryId>KWT965</CountryId>
+        <CountryName>Kuwait</CountryName>
+        <CountryCode>965</CountryCode>
+        <CountryAlpha2>KW</CountryAlpha2>
+        <CountryAlpha3>KWT</CountryAlpha3>
+        <CountryFlag>flag_kuwait.png</CountryFlag>
     </country>
   <country>
-        <countryId>KGZ996</countryId>
-        <countryName>Kyrgyzstan</countryName>
-        <countryCode>996</countryCode>
-        <countryAlpha2>KG</countryAlpha2>
-        <countryAlpha3>KGZ</countryAlpha3>
-        <countryFlag>flag_kyrgyzstan.png</countryFlag>
+        <CountryId>KGZ996</CountryId>
+        <CountryName>Kyrgyzstan</CountryName>
+        <CountryCode>996</CountryCode>
+        <CountryAlpha2>KG</CountryAlpha2>
+        <CountryAlpha3>KGZ</CountryAlpha3>
+        <CountryFlag>flag_kyrgyzstan.png</CountryFlag>
     </country>
   <country>
-        <countryId>LAO856</countryId>
-        <countryName>Laos</countryName>
-        <countryCode>856</countryCode>
-        <countryAlpha2>LA</countryAlpha2>
-        <countryAlpha3>LAO</countryAlpha3>
-        <countryFlag>flag_laos.png</countryFlag>
+        <CountryId>LAO856</CountryId>
+        <CountryName>Laos</CountryName>
+        <CountryCode>856</CountryCode>
+        <CountryAlpha2>LA</CountryAlpha2>
+        <CountryAlpha3>LAO</CountryAlpha3>
+        <CountryFlag>flag_laos.png</CountryFlag>
     </country>
   <country>
-        <countryId>LVA371</countryId>
-        <countryName>Latvia</countryName>
-        <countryCode>371</countryCode>
-        <countryAlpha2>LV</countryAlpha2>
-        <countryAlpha3>LVA</countryAlpha3>
-        <countryFlag>flag_latvia.png</countryFlag>
+        <CountryId>LVA371</CountryId>
+        <CountryName>Latvia</CountryName>
+        <CountryCode>371</CountryCode>
+        <CountryAlpha2>LV</CountryAlpha2>
+        <CountryAlpha3>LVA</CountryAlpha3>
+        <CountryFlag>flag_latvia.png</CountryFlag>
     </country>
   <country>
-        <countryId>LBN961</countryId>
-        <countryName>Lebanon</countryName>
-        <countryCode>961</countryCode>
-        <countryAlpha2>LB</countryAlpha2>
-        <countryAlpha3>LBN</countryAlpha3>
-        <countryFlag>flag_lebanon.png</countryFlag>
+        <CountryId>LBN961</CountryId>
+        <CountryName>Lebanon</CountryName>
+        <CountryCode>961</CountryCode>
+        <CountryAlpha2>LB</CountryAlpha2>
+        <CountryAlpha3>LBN</CountryAlpha3>
+        <CountryFlag>flag_lebanon.png</CountryFlag>
     </country>
   <country>
-        <countryId>LSO266</countryId>
-        <countryName>Lesotho</countryName>
-        <countryCode>266</countryCode>
-        <countryAlpha2>LS</countryAlpha2>
-        <countryAlpha3>LSO</countryAlpha3>
-        <countryFlag>flag_lesotho.png</countryFlag>
+        <CountryId>LSO266</CountryId>
+        <CountryName>Lesotho</CountryName>
+        <CountryCode>266</CountryCode>
+        <CountryAlpha2>LS</CountryAlpha2>
+        <CountryAlpha3>LSO</CountryAlpha3>
+        <CountryFlag>flag_lesotho.png</CountryFlag>
     </country>
   <country>
-        <countryId>LBR231</countryId>
-        <countryName>Liberia</countryName>
-        <countryCode>231</countryCode>
-        <countryAlpha2>LR</countryAlpha2>
-        <countryAlpha3>LBR</countryAlpha3>
-        <countryFlag>flag_liberia.png</countryFlag>
+        <CountryId>LBR231</CountryId>
+        <CountryName>Liberia</CountryName>
+        <CountryCode>231</CountryCode>
+        <CountryAlpha2>LR</CountryAlpha2>
+        <CountryAlpha3>LBR</CountryAlpha3>
+        <CountryFlag>flag_liberia.png</CountryFlag>
     </country>
   <country>
-        <countryId>LBY218</countryId>
-        <countryName>Libya</countryName>
-        <countryCode>218</countryCode>
-        <countryAlpha2>LY</countryAlpha2>
-        <countryAlpha3>LBY</countryAlpha3>
-        <countryFlag>flag_libya.png</countryFlag>
+        <CountryId>LBY218</CountryId>
+        <CountryName>Libya</CountryName>
+        <CountryCode>218</CountryCode>
+        <CountryAlpha2>LY</CountryAlpha2>
+        <CountryAlpha3>LBY</CountryAlpha3>
+        <CountryFlag>flag_libya.png</CountryFlag>
     </country>
   <country>
-        <countryId>LIE423</countryId>
-        <countryName>Liechtenstein</countryName>
-        <countryCode>423</countryCode>
-        <countryAlpha2>LI</countryAlpha2>
-        <countryAlpha3>LIE</countryAlpha3>
-        <countryFlag>flag_liechtenstein.png</countryFlag>
+        <CountryId>LIE423</CountryId>
+        <CountryName>Liechtenstein</CountryName>
+        <CountryCode>423</CountryCode>
+        <CountryAlpha2>LI</CountryAlpha2>
+        <CountryAlpha3>LIE</CountryAlpha3>
+        <CountryFlag>flag_liechtenstein.png</CountryFlag>
     </country>
   <country>
-        <countryId>LTU370</countryId>
-        <countryName>Lithuania</countryName>
-        <countryCode>370</countryCode>
-        <countryAlpha2>LT</countryAlpha2>
-        <countryAlpha3>LTU</countryAlpha3>
-        <countryFlag>flag_lithuania.png</countryFlag>
+        <CountryId>LTU370</CountryId>
+        <CountryName>Lithuania</CountryName>
+        <CountryCode>370</CountryCode>
+        <CountryAlpha2>LT</CountryAlpha2>
+        <CountryAlpha3>LTU</CountryAlpha3>
+        <CountryFlag>flag_lithuania.png</CountryFlag>
     </country>
   <country>
-        <countryId>LUX352</countryId>
-        <countryName>Luxembourg</countryName>
-        <countryCode>352</countryCode>
-        <countryAlpha2>LU</countryAlpha2>
-        <countryAlpha3>LUX</countryAlpha3>
-        <countryFlag>flag_luxembourg.png</countryFlag>
+        <CountryId>LUX352</CountryId>
+        <CountryName>Luxembourg</CountryName>
+        <CountryCode>352</CountryCode>
+        <CountryAlpha2>LU</CountryAlpha2>
+        <CountryAlpha3>LUX</CountryAlpha3>
+        <CountryFlag>flag_luxembourg.png</CountryFlag>
     </country>
   <country>
-        <countryId>MAC853</countryId>
-        <countryName>Macao</countryName>
-        <countryCode>853</countryCode>
-        <countryAlpha2>MO</countryAlpha2>
-        <countryAlpha3>MAC</countryAlpha3>
-        <countryFlag>flag_macao.png</countryFlag>
+        <CountryId>MAC853</CountryId>
+        <CountryName>Macao</CountryName>
+        <CountryCode>853</CountryCode>
+        <CountryAlpha2>MO</CountryAlpha2>
+        <CountryAlpha3>MAC</CountryAlpha3>
+        <CountryFlag>flag_macao.png</CountryFlag>
     </country>
   <country>
-        <countryId>MKD389</countryId>
-        <countryName>Macedonia</countryName>
-        <countryCode>389</countryCode>
-        <countryAlpha2>MK</countryAlpha2>
-        <countryAlpha3>MKD</countryAlpha3>
-        <countryFlag>flag_macedonia.png</countryFlag>
+        <CountryId>MKD389</CountryId>
+        <CountryName>Macedonia</CountryName>
+        <CountryCode>389</CountryCode>
+        <CountryAlpha2>MK</CountryAlpha2>
+        <CountryAlpha3>MKD</CountryAlpha3>
+        <CountryFlag>flag_macedonia.png</CountryFlag>
     </country>
   <country>
-        <countryId>MDG261</countryId>
-        <countryName>Madagascar</countryName>
-        <countryCode>261</countryCode>
-        <countryAlpha2>MG</countryAlpha2>
-        <countryAlpha3>MDG</countryAlpha3>
-        <countryFlag>flag_madagascar.png</countryFlag>
+        <CountryId>MDG261</CountryId>
+        <CountryName>Madagascar</CountryName>
+        <CountryCode>261</CountryCode>
+        <CountryAlpha2>MG</CountryAlpha2>
+        <CountryAlpha3>MDG</CountryAlpha3>
+        <CountryFlag>flag_madagascar.png</CountryFlag>
     </country>
   <country>
-        <countryId>MWI265</countryId>
-        <countryName>Malawi</countryName>
-        <countryCode>265</countryCode>
-        <countryAlpha2>MW</countryAlpha2>
-        <countryAlpha3>MWI</countryAlpha3>
-        <countryFlag>flag_malawi.png</countryFlag>
+        <CountryId>MWI265</CountryId>
+        <CountryName>Malawi</CountryName>
+        <CountryCode>265</CountryCode>
+        <CountryAlpha2>MW</CountryAlpha2>
+        <CountryAlpha3>MWI</CountryAlpha3>
+        <CountryFlag>flag_malawi.png</CountryFlag>
     </country>
   <country>
-        <countryId>MYS60</countryId>
-        <countryName>Malaysia</countryName>
-        <countryCode>60</countryCode>
-        <countryAlpha2>MY</countryAlpha2>
-        <countryAlpha3>MYS</countryAlpha3>
-        <countryFlag>flag_malaysia.png</countryFlag>
+        <CountryId>MYS60</CountryId>
+        <CountryName>Malaysia</CountryName>
+        <CountryCode>60</CountryCode>
+        <CountryAlpha2>MY</CountryAlpha2>
+        <CountryAlpha3>MYS</CountryAlpha3>
+        <CountryFlag>flag_malaysia.png</CountryFlag>
     </country>
   <country>
-        <countryId>MDV960</countryId>
-        <countryName>Maldives</countryName>
-        <countryCode>960</countryCode>
-        <countryAlpha2>MV</countryAlpha2>
-        <countryAlpha3>MDV</countryAlpha3>
-        <countryFlag>flag_maldives.png</countryFlag>
+        <CountryId>MDV960</CountryId>
+        <CountryName>Maldives</CountryName>
+        <CountryCode>960</CountryCode>
+        <CountryAlpha2>MV</CountryAlpha2>
+        <CountryAlpha3>MDV</CountryAlpha3>
+        <CountryFlag>flag_maldives.png</CountryFlag>
     </country>
   <country>
-        <countryId>MLI223</countryId>
-        <countryName>Mali</countryName>
-        <countryCode>223</countryCode>
-        <countryAlpha2>ML</countryAlpha2>
-        <countryAlpha3>MLI</countryAlpha3>
-        <countryFlag>flag_mali.png</countryFlag>
+        <CountryId>MLI223</CountryId>
+        <CountryName>Mali</CountryName>
+        <CountryCode>223</CountryCode>
+        <CountryAlpha2>ML</CountryAlpha2>
+        <CountryAlpha3>MLI</CountryAlpha3>
+        <CountryFlag>flag_mali.png</CountryFlag>
     </country>
   <country>
-        <countryId>MLT356</countryId>
-        <countryName>Malta</countryName>
-        <countryCode>356</countryCode>
-        <countryAlpha2>MT</countryAlpha2>
-        <countryAlpha3>MLT</countryAlpha3>
-        <countryFlag>flag_malta.png</countryFlag>
+        <CountryId>MLT356</CountryId>
+        <CountryName>Malta</CountryName>
+        <CountryCode>356</CountryCode>
+        <CountryAlpha2>MT</CountryAlpha2>
+        <CountryAlpha3>MLT</CountryAlpha3>
+        <CountryFlag>flag_malta.png</CountryFlag>
     </country>
   <country>
-        <countryId>MHL692</countryId>
-        <countryName>Marshall Islands</countryName>
-        <countryCode>692</countryCode>
-        <countryAlpha2>MH</countryAlpha2>
-        <countryAlpha3>MHL</countryAlpha3>
-        <countryFlag>flag_marshall_islands.png</countryFlag>
+        <CountryId>MHL692</CountryId>
+        <CountryName>Marshall Islands</CountryName>
+        <CountryCode>692</CountryCode>
+        <CountryAlpha2>MH</CountryAlpha2>
+        <CountryAlpha3>MHL</CountryAlpha3>
+        <CountryFlag>flag_marshall_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>MRT222</countryId>
-        <countryName>Mauritania</countryName>
-        <countryCode>222</countryCode>
-        <countryAlpha2>MR</countryAlpha2>
-        <countryAlpha3>MRT</countryAlpha3>
-        <countryFlag>flag_mauritania.png</countryFlag>
+        <CountryId>MRT222</CountryId>
+        <CountryName>Mauritania</CountryName>
+        <CountryCode>222</CountryCode>
+        <CountryAlpha2>MR</CountryAlpha2>
+        <CountryAlpha3>MRT</CountryAlpha3>
+        <CountryFlag>flag_mauritania.png</CountryFlag>
     </country>
   <country>
-        <countryId>MUS230</countryId>
-        <countryName>Mauritius</countryName>
-        <countryCode>230</countryCode>
-        <countryAlpha2>MU</countryAlpha2>
-        <countryAlpha3>MUS</countryAlpha3>
-        <countryFlag>flag_mauritius.png</countryFlag>
+        <CountryId>MUS230</CountryId>
+        <CountryName>Mauritius</CountryName>
+        <CountryCode>230</CountryCode>
+        <CountryAlpha2>MU</CountryAlpha2>
+        <CountryAlpha3>MUS</CountryAlpha3>
+        <CountryFlag>flag_mauritius.png</CountryFlag>
     </country>
   <country>
-        <countryId>MYT262</countryId>
-        <countryName>Mayotte</countryName>
-        <countryCode>262</countryCode>
-        <countryAlpha2>YT</countryAlpha2>
-        <countryAlpha3>MYT</countryAlpha3>
-        <countryFlag>flag_of_mayotte.png</countryFlag>
+        <CountryId>MYT262</CountryId>
+        <CountryName>Mayotte</CountryName>
+        <CountryCode>262</CountryCode>
+        <CountryAlpha2>YT</CountryAlpha2>
+        <CountryAlpha3>MYT</CountryAlpha3>
+        <CountryFlag>flag_of_mayotte.png</CountryFlag>
     </country>
   <country>
-        <countryId>MEX52</countryId>
-        <countryName>Mexico</countryName>
-        <countryCode>52</countryCode>
-        <countryAlpha2>MX</countryAlpha2>
-        <countryAlpha3>MEX</countryAlpha3>
-        <countryFlag>flag_mexico.png</countryFlag>
+        <CountryId>MEX52</CountryId>
+        <CountryName>Mexico</CountryName>
+        <CountryCode>52</CountryCode>
+        <CountryAlpha2>MX</CountryAlpha2>
+        <CountryAlpha3>MEX</CountryAlpha3>
+        <CountryFlag>flag_mexico.png</CountryFlag>
     </country>
   <country>
-        <countryId>FSM691</countryId>
-        <countryName>Micronesia</countryName>
-        <countryCode>691</countryCode>
-        <countryAlpha2>FM</countryAlpha2>
-        <countryAlpha3>FSM</countryAlpha3>
-        <countryFlag>flag_micronesia.png</countryFlag>
+        <CountryId>FSM691</CountryId>
+        <CountryName>Micronesia</CountryName>
+        <CountryCode>691</CountryCode>
+        <CountryAlpha2>FM</CountryAlpha2>
+        <CountryAlpha3>FSM</CountryAlpha3>
+        <CountryFlag>flag_micronesia.png</CountryFlag>
     </country>
   <country>
-        <countryId>MDA373</countryId>
-        <countryName>Moldova</countryName>
-        <countryCode>373</countryCode>
-        <countryAlpha2>MD</countryAlpha2>
-        <countryAlpha3>MDA</countryAlpha3>
-        <countryFlag>flag_moldova.png</countryFlag>
+        <CountryId>MDA373</CountryId>
+        <CountryName>Moldova</CountryName>
+        <CountryCode>373</CountryCode>
+        <CountryAlpha2>MD</CountryAlpha2>
+        <CountryAlpha3>MDA</CountryAlpha3>
+        <CountryFlag>flag_moldova.png</CountryFlag>
     </country>
   <country>
-        <countryId>MCO377</countryId>
-        <countryName>Monaco</countryName>
-        <countryCode>377</countryCode>
-        <countryAlpha2>MC</countryAlpha2>
-        <countryAlpha3>MCO</countryAlpha3>
-        <countryFlag>flag_monaco.png</countryFlag>
+        <CountryId>MCO377</CountryId>
+        <CountryName>Monaco</CountryName>
+        <CountryCode>377</CountryCode>
+        <CountryAlpha2>MC</CountryAlpha2>
+        <CountryAlpha3>MCO</CountryAlpha3>
+        <CountryFlag>flag_monaco.png</CountryFlag>
     </country>
   <country>
-        <countryId>MNG976</countryId>
-        <countryName>Mongolia</countryName>
-        <countryCode>976</countryCode>
-        <countryAlpha2>MN</countryAlpha2>
-        <countryAlpha3>MNG</countryAlpha3>
-        <countryFlag>flag_mongolia.png</countryFlag>
+        <CountryId>MNG976</CountryId>
+        <CountryName>Mongolia</CountryName>
+        <CountryCode>976</CountryCode>
+        <CountryAlpha2>MN</CountryAlpha2>
+        <CountryAlpha3>MNG</CountryAlpha3>
+        <CountryFlag>flag_mongolia.png</CountryFlag>
     </country>
   <country>
-        <countryId>MNE382</countryId>
-        <countryName>Montenegro</countryName>
-        <countryCode>382</countryCode>
-        <countryAlpha2>ME</countryAlpha2>
-        <countryAlpha3>MNE</countryAlpha3>
-        <countryFlag>flag_montenegro.png</countryFlag>
+        <CountryId>MNE382</CountryId>
+        <CountryName>Montenegro</CountryName>
+        <CountryCode>382</CountryCode>
+        <CountryAlpha2>ME</CountryAlpha2>
+        <CountryAlpha3>MNE</CountryAlpha3>
+        <CountryFlag>flag_montenegro.png</CountryFlag>
     </country>
   <country>
-        <countryId>MSR1664</countryId>
-        <countryName>Montserrat</countryName>
-        <countryCode>1664</countryCode>
-        <countryAlpha2>MS</countryAlpha2>
-        <countryAlpha3>MSR</countryAlpha3>
-        <countryFlag>flag_montserrat.png</countryFlag>
+        <CountryId>MSR1664</CountryId>
+        <CountryName>Montserrat</CountryName>
+        <CountryCode>1664</CountryCode>
+        <CountryAlpha2>MS</CountryAlpha2>
+        <CountryAlpha3>MSR</CountryAlpha3>
+        <CountryFlag>flag_montserrat.png</CountryFlag>
     </country>
   <country>
-        <countryId>MAR212</countryId>
-        <countryName>Morocco</countryName>
-        <countryCode>212</countryCode>
-        <countryAlpha2>MA</countryAlpha2>
-        <countryAlpha3>MAR</countryAlpha3>
-        <countryFlag>flag_morocco.png</countryFlag>
+        <CountryId>MAR212</CountryId>
+        <CountryName>Morocco</CountryName>
+        <CountryCode>212</CountryCode>
+        <CountryAlpha2>MA</CountryAlpha2>
+        <CountryAlpha3>MAR</CountryAlpha3>
+        <CountryFlag>flag_morocco.png</CountryFlag>
     </country>
   <country>
-        <countryId>MOZ258</countryId>
-        <countryName>Mozambique</countryName>
-        <countryCode>258</countryCode>
-        <countryAlpha2>MZ</countryAlpha2>
-        <countryAlpha3>MOZ</countryAlpha3>
-        <countryFlag>flag_mozambique.png</countryFlag>
+        <CountryId>MOZ258</CountryId>
+        <CountryName>Mozambique</CountryName>
+        <CountryCode>258</CountryCode>
+        <CountryAlpha2>MZ</CountryAlpha2>
+        <CountryAlpha3>MOZ</CountryAlpha3>
+        <CountryFlag>flag_mozambique.png</CountryFlag>
     </country>
   <country>
-        <countryId>MMR95</countryId>
-        <countryName>Myanmar</countryName>
-        <countryCode>95</countryCode>
-        <countryAlpha2>MM</countryAlpha2>
-        <countryAlpha3>MMR</countryAlpha3>
-        <countryFlag>flag_myanmar.png</countryFlag>
+        <CountryId>MMR95</CountryId>
+        <CountryName>Myanmar</CountryName>
+        <CountryCode>95</CountryCode>
+        <CountryAlpha2>MM</CountryAlpha2>
+        <CountryAlpha3>MMR</CountryAlpha3>
+        <CountryFlag>flag_myanmar.png</CountryFlag>
     </country>
   <country>
-        <countryId>NAM264</countryId>
-        <countryName>Namibia</countryName>
-        <countryCode>264</countryCode>
-        <countryAlpha2>NA</countryAlpha2>
-        <countryAlpha3>NAM</countryAlpha3>
-        <countryFlag>flag_namibia.png</countryFlag>
+        <CountryId>NAM264</CountryId>
+        <CountryName>Namibia</CountryName>
+        <CountryCode>264</CountryCode>
+        <CountryAlpha2>NA</CountryAlpha2>
+        <CountryAlpha3>NAM</CountryAlpha3>
+        <CountryFlag>flag_namibia.png</CountryFlag>
     </country>
   <country>
-        <countryId>NRU674</countryId>
-        <countryName>Nauru</countryName>
-        <countryCode>674</countryCode>
-        <countryAlpha2>NR</countryAlpha2>
-        <countryAlpha3>NRU</countryAlpha3>
-        <countryFlag>flag_nauru.png</countryFlag>
+        <CountryId>NRU674</CountryId>
+        <CountryName>Nauru</CountryName>
+        <CountryCode>674</CountryCode>
+        <CountryAlpha2>NR</CountryAlpha2>
+        <CountryAlpha3>NRU</CountryAlpha3>
+        <CountryFlag>flag_nauru.png</CountryFlag>
     </country>
   <country>
-        <countryId>NPL977</countryId>
-        <countryName>Nepal</countryName>
-        <countryCode>977</countryCode>
-        <countryAlpha2>NP</countryAlpha2>
-        <countryAlpha3>NPL</countryAlpha3>
-        <countryFlag>flag_nepal.png</countryFlag>
+        <CountryId>NPL977</CountryId>
+        <CountryName>Nepal</CountryName>
+        <CountryCode>977</CountryCode>
+        <CountryAlpha2>NP</CountryAlpha2>
+        <CountryAlpha3>NPL</CountryAlpha3>
+        <CountryFlag>flag_nepal.png</CountryFlag>
     </country>
   <country>
-        <countryId>NLD31</countryId>
-        <countryName>Netherlands</countryName>
-        <countryCode>31</countryCode>
-        <countryAlpha2>NL</countryAlpha2>
-        <countryAlpha3>NLD</countryAlpha3>
-        <countryFlag>flag_netherlands.png</countryFlag>
+        <CountryId>NLD31</CountryId>
+        <CountryName>Netherlands</CountryName>
+        <CountryCode>31</CountryCode>
+        <CountryAlpha2>NL</CountryAlpha2>
+        <CountryAlpha3>NLD</CountryAlpha3>
+        <CountryFlag>flag_netherlands.png</CountryFlag>
     </country>
   <country>
-        <countryId>ANT599</countryId>
-        <countryName>Netherlands Antilles</countryName>
-        <countryCode>599</countryCode>
-        <countryAlpha2>AN</countryAlpha2>
-        <countryAlpha3>ANT</countryAlpha3>
-        <countryFlag>flag_netherlands_antilles.png</countryFlag>
+        <CountryId>ANT599</CountryId>
+        <CountryName>Netherlands Antilles</CountryName>
+        <CountryCode>599</CountryCode>
+        <CountryAlpha2>AN</CountryAlpha2>
+        <CountryAlpha3>ANT</CountryAlpha3>
+        <CountryFlag>flag_netherlands_antilles.png</CountryFlag>
     </country>
   <country>
-        <countryId>NCL687</countryId>
-        <countryName>New Caledonia</countryName>
-        <countryCode>687</countryCode>
-        <countryAlpha2>NC</countryAlpha2>
-        <countryAlpha3>NCL</countryAlpha3>
-        <countryFlag>flag_new_caledonia.png</countryFlag>
+        <CountryId>NCL687</CountryId>
+        <CountryName>New Caledonia</CountryName>
+        <CountryCode>687</CountryCode>
+        <CountryAlpha2>NC</CountryAlpha2>
+        <CountryAlpha3>NCL</CountryAlpha3>
+        <CountryFlag>flag_new_caledonia.png</CountryFlag>
     </country>
   <country>
-        <countryId>NZL64</countryId>
-        <countryName>New Zealand</countryName>
-        <countryCode>64</countryCode>
-        <countryAlpha2>NZ</countryAlpha2>
-        <countryAlpha3>NZL</countryAlpha3>
-        <countryFlag>flag_new_zealand.png</countryFlag>
+        <CountryId>NZL64</CountryId>
+        <CountryName>New Zealand</CountryName>
+        <CountryCode>64</CountryCode>
+        <CountryAlpha2>NZ</CountryAlpha2>
+        <CountryAlpha3>NZL</CountryAlpha3>
+        <CountryFlag>flag_new_zealand.png</CountryFlag>
     </country>
   <country>
-        <countryId>NIC505</countryId>
-        <countryName>Nicaragua</countryName>
-        <countryCode>505</countryCode>
-        <countryAlpha2>NI</countryAlpha2>
-        <countryAlpha3>NIC</countryAlpha3>
-        <countryFlag>flag_nicaragua.png</countryFlag>
+        <CountryId>NIC505</CountryId>
+        <CountryName>Nicaragua</CountryName>
+        <CountryCode>505</CountryCode>
+        <CountryAlpha2>NI</CountryAlpha2>
+        <CountryAlpha3>NIC</CountryAlpha3>
+        <CountryFlag>flag_nicaragua.png</CountryFlag>
     </country>
   <country>
-        <countryId>NER227</countryId>
-        <countryName>Niger</countryName>
-        <countryCode>227</countryCode>
-        <countryAlpha2>NE</countryAlpha2>
-        <countryAlpha3>NER</countryAlpha3>
-        <countryFlag>flag_niger.png</countryFlag>
+        <CountryId>NER227</CountryId>
+        <CountryName>Niger</CountryName>
+        <CountryCode>227</CountryCode>
+        <CountryAlpha2>NE</CountryAlpha2>
+        <CountryAlpha3>NER</CountryAlpha3>
+        <CountryFlag>flag_niger.png</CountryFlag>
     </country>
   <country>
-        <countryId>NGA234</countryId>
-        <countryName>Nigeria</countryName>
-        <countryCode>234</countryCode>
-        <countryAlpha2>NG</countryAlpha2>
-        <countryAlpha3>NGA</countryAlpha3>
-        <countryFlag>flag_nigeria.png</countryFlag>
+        <CountryId>NGA234</CountryId>
+        <CountryName>Nigeria</CountryName>
+        <CountryCode>234</CountryCode>
+        <CountryAlpha2>NG</CountryAlpha2>
+        <CountryAlpha3>NGA</CountryAlpha3>
+        <CountryFlag>flag_nigeria.png</CountryFlag>
     </country>
   <country>
-        <countryId>NIU683</countryId>
-        <countryName>Niue</countryName>
-        <countryCode>683</countryCode>
-        <countryAlpha2>NU</countryAlpha2>
-        <countryAlpha3>NIU</countryAlpha3>
-        <countryFlag>flag_niue.png</countryFlag>
+        <CountryId>NIU683</CountryId>
+        <CountryName>Niue</CountryName>
+        <CountryCode>683</CountryCode>
+        <CountryAlpha2>NU</CountryAlpha2>
+        <CountryAlpha3>NIU</CountryAlpha3>
+        <CountryFlag>flag_niue.png</CountryFlag>
     </country>
   <country>
-        <countryId>PRK850</countryId>
-        <countryName>North Korea</countryName>
-        <countryCode>850</countryCode>
-        <countryAlpha2>KP</countryAlpha2>
-        <countryAlpha3>PRK</countryAlpha3>
-        <countryFlag>flag_north_korea.png</countryFlag>
+        <CountryId>PRK850</CountryId>
+        <CountryName>North Korea</CountryName>
+        <CountryCode>850</CountryCode>
+        <CountryAlpha2>KP</CountryAlpha2>
+        <CountryAlpha3>PRK</CountryAlpha3>
+        <CountryFlag>flag_north_korea.png</CountryFlag>
     </country>
   <country>
-        <countryId>MNP1670</countryId>
-        <countryName>Northern Mariana Islands</countryName>
-        <countryCode>1670</countryCode>
-        <countryAlpha2>MP</countryAlpha2>
-        <countryAlpha3>MNP</countryAlpha3>
-        <countryFlag>flag_northern_mariana_islands.png</countryFlag>
+        <CountryId>MNP1670</CountryId>
+        <CountryName>Northern Mariana Islands</CountryName>
+        <CountryCode>1670</CountryCode>
+        <CountryAlpha2>MP</CountryAlpha2>
+        <CountryAlpha3>MNP</CountryAlpha3>
+        <CountryFlag>flag_northern_mariana_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>NOR47</countryId>
-        <countryName>Norway</countryName>
-        <countryCode>47</countryCode>
-        <countryAlpha2>NO</countryAlpha2>
-        <countryAlpha3>NOR</countryAlpha3>
-        <countryFlag>flag_norway.png</countryFlag>
+        <CountryId>NOR47</CountryId>
+        <CountryName>Norway</CountryName>
+        <CountryCode>47</CountryCode>
+        <CountryAlpha2>NO</CountryAlpha2>
+        <CountryAlpha3>NOR</CountryAlpha3>
+        <CountryFlag>flag_norway.png</CountryFlag>
     </country>
   <country>
-        <countryId>OMN968</countryId>
-        <countryName>Oman</countryName>
-        <countryCode>968</countryCode>
-        <countryAlpha2>OM</countryAlpha2>
-        <countryAlpha3>OMN</countryAlpha3>
-        <countryFlag>flag_oman.png</countryFlag>
+        <CountryId>OMN968</CountryId>
+        <CountryName>Oman</CountryName>
+        <CountryCode>968</CountryCode>
+        <CountryAlpha2>OM</CountryAlpha2>
+        <CountryAlpha3>OMN</CountryAlpha3>
+        <CountryFlag>flag_oman.png</CountryFlag>
     </country>
   <country>
-        <countryId>PAK92</countryId>
-        <countryName>Pakistan</countryName>
-        <countryCode>92</countryCode>
-        <countryAlpha2>PK</countryAlpha2>
-        <countryAlpha3>PAK</countryAlpha3>
-        <countryFlag>flag_pakistan.png</countryFlag>
+        <CountryId>PAK92</CountryId>
+        <CountryName>Pakistan</CountryName>
+        <CountryCode>92</CountryCode>
+        <CountryAlpha2>PK</CountryAlpha2>
+        <CountryAlpha3>PAK</CountryAlpha3>
+        <CountryFlag>flag_pakistan.png</CountryFlag>
     </country>
   <country>
-        <countryId>PLW680</countryId>
-        <countryName>Palau</countryName>
-        <countryCode>680</countryCode>
-        <countryAlpha2>PW</countryAlpha2>
-        <countryAlpha3>PLW</countryAlpha3>
-        <countryFlag>flag_palau.png</countryFlag>
+        <CountryId>PLW680</CountryId>
+        <CountryName>Palau</CountryName>
+        <CountryCode>680</CountryCode>
+        <CountryAlpha2>PW</CountryAlpha2>
+        <CountryAlpha3>PLW</CountryAlpha3>
+        <CountryFlag>flag_palau.png</CountryFlag>
     </country>
   <country>
-        <countryId>PSE970</countryId>
-        <countryName>Palestine</countryName>
-        <countryCode>970</countryCode>
-        <countryAlpha2>PS</countryAlpha2>
-        <countryAlpha3>PSE</countryAlpha3>
-        <countryFlag>flag_palestine.png</countryFlag>
+        <CountryId>PSE970</CountryId>
+        <CountryName>Palestine</CountryName>
+        <CountryCode>970</CountryCode>
+        <CountryAlpha2>PS</CountryAlpha2>
+        <CountryAlpha3>PSE</CountryAlpha3>
+        <CountryFlag>flag_palestine.png</CountryFlag>
     </country>
   <country>
-        <countryId>PAN507</countryId>
-        <countryName>Panama</countryName>
-        <countryCode>507</countryCode>
-        <countryAlpha2>PA</countryAlpha2>
-        <countryAlpha3>PAN</countryAlpha3>
-        <countryFlag>flag_panama.png</countryFlag>
+        <CountryId>PAN507</CountryId>
+        <CountryName>Panama</CountryName>
+        <CountryCode>507</CountryCode>
+        <CountryAlpha2>PA</CountryAlpha2>
+        <CountryAlpha3>PAN</CountryAlpha3>
+        <CountryFlag>flag_panama.png</CountryFlag>
     </country>
   <country>
-        <countryId>PNG675</countryId>
-        <countryName>Papua New Guinea</countryName>
-        <countryCode>675</countryCode>
-        <countryAlpha2>PG</countryAlpha2>
-        <countryAlpha3>PNG</countryAlpha3>
-        <countryFlag>flag_papua_new_guinea.png</countryFlag>
+        <CountryId>PNG675</CountryId>
+        <CountryName>Papua New Guinea</CountryName>
+        <CountryCode>675</CountryCode>
+        <CountryAlpha2>PG</CountryAlpha2>
+        <CountryAlpha3>PNG</CountryAlpha3>
+        <CountryFlag>flag_papua_new_guinea.png</CountryFlag>
     </country>
   <country>
-        <countryId>PRY595</countryId>
-        <countryName>Paraguay</countryName>
-        <countryCode>595</countryCode>
-        <countryAlpha2>PY</countryAlpha2>
-        <countryAlpha3>PRY</countryAlpha3>
-        <countryFlag>flag_paraguay.png</countryFlag>
+        <CountryId>PRY595</CountryId>
+        <CountryName>Paraguay</CountryName>
+        <CountryCode>595</CountryCode>
+        <CountryAlpha2>PY</CountryAlpha2>
+        <CountryAlpha3>PRY</CountryAlpha3>
+        <CountryFlag>flag_paraguay.png</CountryFlag>
     </country>
   <country>
-        <countryId>PER51</countryId>
-        <countryName>Peru</countryName>
-        <countryCode>51</countryCode>
-        <countryAlpha2>PE</countryAlpha2>
-        <countryAlpha3>PER</countryAlpha3>
-        <countryFlag>flag_peru.png</countryFlag>
+        <CountryId>PER51</CountryId>
+        <CountryName>Peru</CountryName>
+        <CountryCode>51</CountryCode>
+        <CountryAlpha2>PE</CountryAlpha2>
+        <CountryAlpha3>PER</CountryAlpha3>
+        <CountryFlag>flag_peru.png</CountryFlag>
     </country>
   <country>
-        <countryId>PHL63</countryId>
-        <countryName>Philippines</countryName>
-        <countryCode>63</countryCode>
-        <countryAlpha2>PH</countryAlpha2>
-        <countryAlpha3>PHL</countryAlpha3>
-        <countryFlag>flag_philippines.png</countryFlag>
+        <CountryId>PHL63</CountryId>
+        <CountryName>Philippines</CountryName>
+        <CountryCode>63</CountryCode>
+        <CountryAlpha2>PH</CountryAlpha2>
+        <CountryAlpha3>PHL</CountryAlpha3>
+        <CountryFlag>flag_philippines.png</CountryFlag>
     </country>
   <country>
-        <countryId>PCN64</countryId>
-        <countryName>Pitcairn</countryName>
-        <countryCode>64</countryCode>
-        <countryAlpha2>PN</countryAlpha2>
-        <countryAlpha3>PCN</countryAlpha3>
-        <countryFlag>flag_pitcairn_islands.png</countryFlag>
+        <CountryId>PCN64</CountryId>
+        <CountryName>Pitcairn</CountryName>
+        <CountryCode>64</CountryCode>
+        <CountryAlpha2>PN</CountryAlpha2>
+        <CountryAlpha3>PCN</CountryAlpha3>
+        <CountryFlag>flag_pitcairn_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>POL48</countryId>
-        <countryName>Poland</countryName>
-        <countryCode>48</countryCode>
-        <countryAlpha2>PL</countryAlpha2>
-        <countryAlpha3>POL</countryAlpha3>
-        <countryFlag>flag_poland.png</countryFlag>
+        <CountryId>POL48</CountryId>
+        <CountryName>Poland</CountryName>
+        <CountryCode>48</CountryCode>
+        <CountryAlpha2>PL</CountryAlpha2>
+        <CountryAlpha3>POL</CountryAlpha3>
+        <CountryFlag>flag_poland.png</CountryFlag>
     </country>
   <country>
-        <countryId>PRT351</countryId>
-        <countryName>Portugal</countryName>
-        <countryCode>351</countryCode>
-        <countryAlpha2>PT</countryAlpha2>
-        <countryAlpha3>PRT</countryAlpha3>
-        <countryFlag>flag_portugal.png</countryFlag>
+        <CountryId>PRT351</CountryId>
+        <CountryName>Portugal</CountryName>
+        <CountryCode>351</CountryCode>
+        <CountryAlpha2>PT</CountryAlpha2>
+        <CountryAlpha3>PRT</CountryAlpha3>
+        <CountryFlag>flag_portugal.png</CountryFlag>
     </country>
   <country>
-        <countryId>PRI1787</countryId>
-        <countryName>Puerto Rico</countryName>
-        <countryCode>1787</countryCode>
-        <countryAlpha2>PR</countryAlpha2>
-        <countryAlpha3>PRI</countryAlpha3>
-        <countryFlag>flag_puerto_rico.png</countryFlag>
+        <CountryId>PRI1787</CountryId>
+        <CountryName>Puerto Rico</CountryName>
+        <CountryCode>1787</CountryCode>
+        <CountryAlpha2>PR</CountryAlpha2>
+        <CountryAlpha3>PRI</CountryAlpha3>
+        <CountryFlag>flag_puerto_rico.png</CountryFlag>
     </country>
   <country>
-        <countryId>PRI1939</countryId>
-        <countryName>Puerto Rico</countryName>
-        <countryCode>1939</countryCode>
-        <countryAlpha2>PR</countryAlpha2>
-        <countryAlpha3>PRI</countryAlpha3>
-        <countryFlag>flag_puerto_rico.png</countryFlag>
+        <CountryId>PRI1939</CountryId>
+        <CountryName>Puerto Rico</CountryName>
+        <CountryCode>1939</CountryCode>
+        <CountryAlpha2>PR</CountryAlpha2>
+        <CountryAlpha3>PRI</CountryAlpha3>
+        <CountryFlag>flag_puerto_rico.png</CountryFlag>
     </country>
   <country>
-        <countryId>QAT974</countryId>
-        <countryName>Qatar</countryName>
-        <countryCode>974</countryCode>
-        <countryAlpha2>QA</countryAlpha2>
-        <countryAlpha3>QAT</countryAlpha3>
-        <countryFlag>flag_qatar.png</countryFlag>
+        <CountryId>QAT974</CountryId>
+        <CountryName>Qatar</CountryName>
+        <CountryCode>974</CountryCode>
+        <CountryAlpha2>QA</CountryAlpha2>
+        <CountryAlpha3>QAT</CountryAlpha3>
+        <CountryFlag>flag_qatar.png</CountryFlag>
     </country>
   <country>
-        <countryId>COG242</countryId>
-        <countryName>Republic of the Congo</countryName>
-        <countryCode>242</countryCode>
-        <countryAlpha2>CG</countryAlpha2>
-        <countryAlpha3>COG</countryAlpha3>
-        <countryFlag>flag_republic_of_the_congo.png</countryFlag>
+        <CountryId>COG242</CountryId>
+        <CountryName>Republic of the Congo</CountryName>
+        <CountryCode>242</CountryCode>
+        <CountryAlpha2>CG</CountryAlpha2>
+        <CountryAlpha3>COG</CountryAlpha3>
+        <CountryFlag>flag_republic_of_the_congo.png</CountryFlag>
     </country>
   <country>
-        <countryId>REU262</countryId>
-        <countryName>Reunion</countryName>
-        <countryCode>262</countryCode>
-        <countryAlpha2>RE</countryAlpha2>
-        <countryAlpha3>REU</countryAlpha3>
-        <countryFlag>flag_reunion.png</countryFlag>
+        <CountryId>REU262</CountryId>
+        <CountryName>Reunion</CountryName>
+        <CountryCode>262</CountryCode>
+        <CountryAlpha2>RE</CountryAlpha2>
+        <CountryAlpha3>REU</CountryAlpha3>
+        <CountryFlag>flag_reunion.png</CountryFlag>
     </country>
   <country>
-        <countryId>ROU40</countryId>
-        <countryName>Romania</countryName>
-        <countryCode>40</countryCode>
-        <countryAlpha2>RO</countryAlpha2>
-        <countryAlpha3>ROU</countryAlpha3>
-        <countryFlag>flag_romania.png</countryFlag>
+        <CountryId>ROU40</CountryId>
+        <CountryName>Romania</CountryName>
+        <CountryCode>40</CountryCode>
+        <CountryAlpha2>RO</CountryAlpha2>
+        <CountryAlpha3>ROU</CountryAlpha3>
+        <CountryFlag>flag_romania.png</CountryFlag>
     </country>
   <country>
-        <countryId>RUS7</countryId>
-        <countryName>Russia</countryName>
-        <countryCode>7</countryCode>
-        <countryAlpha2>RU</countryAlpha2>
-        <countryAlpha3>RUS</countryAlpha3>
-        <countryFlag>flag_russian_federation.png</countryFlag>
+        <CountryId>RUS7</CountryId>
+        <CountryName>Russia</CountryName>
+        <CountryCode>7</CountryCode>
+        <CountryAlpha2>RU</CountryAlpha2>
+        <CountryAlpha3>RUS</CountryAlpha3>
+        <CountryFlag>flag_russian_federation.png</CountryFlag>
     </country>
   <country>
-        <countryId>RWA250</countryId>
-        <countryName>Rwanda</countryName>
-        <countryCode>250</countryCode>
-        <countryAlpha2>RW</countryAlpha2>
-        <countryAlpha3>RWA</countryAlpha3>
-        <countryFlag>flag_rwanda.png</countryFlag>
+        <CountryId>RWA250</CountryId>
+        <CountryName>Rwanda</CountryName>
+        <CountryCode>250</CountryCode>
+        <CountryAlpha2>RW</CountryAlpha2>
+        <CountryAlpha3>RWA</CountryAlpha3>
+        <CountryFlag>flag_rwanda.png</CountryFlag>
     </country>
   <country>
-        <countryId>BLM590</countryId>
-        <countryName>Saint Barthelemy</countryName>
-        <countryCode>590</countryCode>
-        <countryAlpha2>BL</countryAlpha2>
-        <countryAlpha3>BLM</countryAlpha3>
-        <countryFlag>flag_saint_barthelemy.png</countryFlag>
+        <CountryId>BLM590</CountryId>
+        <CountryName>Saint Barthelemy</CountryName>
+        <CountryCode>590</CountryCode>
+        <CountryAlpha2>BL</CountryAlpha2>
+        <CountryAlpha3>BLM</CountryAlpha3>
+        <CountryFlag>flag_saint_barthelemy.png</CountryFlag>
     </country>
   <country>
-        <countryId>SHN290</countryId>
-        <countryName>Saint Helena</countryName>
-        <countryCode>290</countryCode>
-        <countryAlpha2>SH</countryAlpha2>
-        <countryAlpha3>SHN</countryAlpha3>
-        <countryFlag>flag_saint_helena.png</countryFlag>
+        <CountryId>SHN290</CountryId>
+        <CountryName>Saint Helena</CountryName>
+        <CountryCode>290</CountryCode>
+        <CountryAlpha2>SH</CountryAlpha2>
+        <CountryAlpha3>SHN</CountryAlpha3>
+        <CountryFlag>flag_saint_helena.png</CountryFlag>
     </country>
   <country>
-        <countryId>KNA1869</countryId>
-        <countryName>Saint Kitts and Nevis</countryName>
-        <countryCode>1869</countryCode>
-        <countryAlpha2>KN</countryAlpha2>
-        <countryAlpha3>KNA</countryAlpha3>
-        <countryFlag>flag_saint_kitts_and_nevis.png</countryFlag>
+        <CountryId>KNA1869</CountryId>
+        <CountryName>Saint Kitts and Nevis</CountryName>
+        <CountryCode>1869</CountryCode>
+        <CountryAlpha2>KN</CountryAlpha2>
+        <CountryAlpha3>KNA</CountryAlpha3>
+        <CountryFlag>flag_saint_kitts_and_nevis.png</CountryFlag>
     </country>
   <country>
-        <countryId>LCA1758</countryId>
-        <countryName>Saint Lucia</countryName>
-        <countryCode>1758</countryCode>
-        <countryAlpha2>LC</countryAlpha2>
-        <countryAlpha3>LCA</countryAlpha3>
-        <countryFlag>flag_saint_lucia.png</countryFlag>
+        <CountryId>LCA1758</CountryId>
+        <CountryName>Saint Lucia</CountryName>
+        <CountryCode>1758</CountryCode>
+        <CountryAlpha2>LC</CountryAlpha2>
+        <CountryAlpha3>LCA</CountryAlpha3>
+        <CountryFlag>flag_saint_lucia.png</CountryFlag>
     </country>
   <country>
-        <countryId>MAF590</countryId>
-        <countryName>Saint Martin</countryName>
-        <countryCode>590</countryCode>
-        <countryAlpha2>MF</countryAlpha2>
-        <countryAlpha3>MAF</countryAlpha3>
-        <countryFlag>flag_saint_martin.png</countryFlag>
+        <CountryId>MAF590</CountryId>
+        <CountryName>Saint Martin</CountryName>
+        <CountryCode>590</CountryCode>
+        <CountryAlpha2>MF</CountryAlpha2>
+        <CountryAlpha3>MAF</CountryAlpha3>
+        <CountryFlag>flag_saint_martin.png</CountryFlag>
     </country>
   <country>
-        <countryId>SPM508</countryId>
-        <countryName>Saint Pierre and Miquelon</countryName>
-        <countryCode>508</countryCode>
-        <countryAlpha2>PM</countryAlpha2>
-        <countryAlpha3>SPM</countryAlpha3>
-        <countryFlag>flag_saint_pierre_miquelon.png</countryFlag>
+        <CountryId>SPM508</CountryId>
+        <CountryName>Saint Pierre and Miquelon</CountryName>
+        <CountryCode>508</CountryCode>
+        <CountryAlpha2>PM</CountryAlpha2>
+        <CountryAlpha3>SPM</CountryAlpha3>
+        <CountryFlag>flag_saint_pierre_miquelon.png</CountryFlag>
     </country>
   <country>
-        <countryId>VCT1784</countryId>
-        <countryName>Saint Vincent and the Grenadines</countryName>
-        <countryCode>1784</countryCode>
-        <countryAlpha2>VC</countryAlpha2>
-        <countryAlpha3>VCT</countryAlpha3>
-        <countryFlag>flag_saint_vicent_and_the_grenadines.png</countryFlag>
+        <CountryId>VCT1784</CountryId>
+        <CountryName>Saint Vincent and the Grenadines</CountryName>
+        <CountryCode>1784</CountryCode>
+        <CountryAlpha2>VC</CountryAlpha2>
+        <CountryAlpha3>VCT</CountryAlpha3>
+        <CountryFlag>flag_saint_vicent_and_the_grenadines.png</CountryFlag>
     </country>
   <country>
-        <countryId>WSM685</countryId>
-        <countryName>Samoa</countryName>
-        <countryCode>685</countryCode>
-        <countryAlpha2>WS</countryAlpha2>
-        <countryAlpha3>WSM</countryAlpha3>
-        <countryFlag>flag_samoa.png</countryFlag>
+        <CountryId>WSM685</CountryId>
+        <CountryName>Samoa</CountryName>
+        <CountryCode>685</CountryCode>
+        <CountryAlpha2>WS</CountryAlpha2>
+        <CountryAlpha3>WSM</CountryAlpha3>
+        <CountryFlag>flag_samoa.png</CountryFlag>
     </country>
   <country>
-        <countryId>SMR378</countryId>
-        <countryName>San Marino</countryName>
-        <countryCode>378</countryCode>
-        <countryAlpha2>SM</countryAlpha2>
-        <countryAlpha3>SMR</countryAlpha3>
-        <countryFlag>flag_san_marino.png</countryFlag>
+        <CountryId>SMR378</CountryId>
+        <CountryName>San Marino</CountryName>
+        <CountryCode>378</CountryCode>
+        <CountryAlpha2>SM</CountryAlpha2>
+        <CountryAlpha3>SMR</CountryAlpha3>
+        <CountryFlag>flag_san_marino.png</CountryFlag>
     </country>
   <country>
-        <countryId>STP239</countryId>
-        <countryName>Sao Tome and Principe</countryName>
-        <countryCode>239</countryCode>
-        <countryAlpha2>ST</countryAlpha2>
-        <countryAlpha3>STP</countryAlpha3>
-        <countryFlag>flag_sao_tome_and_principe.png</countryFlag>
+        <CountryId>STP239</CountryId>
+        <CountryName>Sao Tome and Principe</CountryName>
+        <CountryCode>239</CountryCode>
+        <CountryAlpha2>ST</CountryAlpha2>
+        <CountryAlpha3>STP</CountryAlpha3>
+        <CountryFlag>flag_sao_tome_and_principe.png</CountryFlag>
     </country>
   <country>
-        <countryId>SAU966</countryId>
-        <countryName>Saudi Arabia</countryName>
-        <countryCode>966</countryCode>
-        <countryAlpha2>SA</countryAlpha2>
-        <countryAlpha3>SAU</countryAlpha3>
-        <countryFlag>flag_saudi_arabia.png</countryFlag>
+        <CountryId>SAU966</CountryId>
+        <CountryName>Saudi Arabia</CountryName>
+        <CountryCode>966</CountryCode>
+        <CountryAlpha2>SA</CountryAlpha2>
+        <CountryAlpha3>SAU</CountryAlpha3>
+        <CountryFlag>flag_saudi_arabia.png</CountryFlag>
     </country>
   <country>
-        <countryId>SEN221</countryId>
-        <countryName>Senegal</countryName>
-        <countryCode>221</countryCode>
-        <countryAlpha2>SN</countryAlpha2>
-        <countryAlpha3>SEN</countryAlpha3>
-        <countryFlag>flag_senegal.png</countryFlag>
+        <CountryId>SEN221</CountryId>
+        <CountryName>Senegal</CountryName>
+        <CountryCode>221</CountryCode>
+        <CountryAlpha2>SN</CountryAlpha2>
+        <CountryAlpha3>SEN</CountryAlpha3>
+        <CountryFlag>flag_senegal.png</CountryFlag>
     </country>
   <country>
-        <countryId>SRB381</countryId>
-        <countryName>Serbia</countryName>
-        <countryCode>381</countryCode>
-        <countryAlpha2>RS</countryAlpha2>
-        <countryAlpha3>SRB</countryAlpha3>
-        <countryFlag>flag_serbia.png</countryFlag>
+        <CountryId>SRB381</CountryId>
+        <CountryName>Serbia</CountryName>
+        <CountryCode>381</CountryCode>
+        <CountryAlpha2>RS</CountryAlpha2>
+        <CountryAlpha3>SRB</CountryAlpha3>
+        <CountryFlag>flag_serbia.png</CountryFlag>
     </country>
   <country>
-        <countryId>SYC248</countryId>
-        <countryName>Seychelles</countryName>
-        <countryCode>248</countryCode>
-        <countryAlpha2>SC</countryAlpha2>
-        <countryAlpha3>SYC</countryAlpha3>
-        <countryFlag>flag_seychelles.png</countryFlag>
+        <CountryId>SYC248</CountryId>
+        <CountryName>Seychelles</CountryName>
+        <CountryCode>248</CountryCode>
+        <CountryAlpha2>SC</CountryAlpha2>
+        <CountryAlpha3>SYC</CountryAlpha3>
+        <CountryFlag>flag_seychelles.png</CountryFlag>
     </country>
   <country>
-        <countryId>SLE232</countryId>
-        <countryName>Sierra Leone</countryName>
-        <countryCode>232</countryCode>
-        <countryAlpha2>SL</countryAlpha2>
-        <countryAlpha3>SLE</countryAlpha3>
-        <countryFlag>flag_sierra_leone.png</countryFlag>
+        <CountryId>SLE232</CountryId>
+        <CountryName>Sierra Leone</CountryName>
+        <CountryCode>232</CountryCode>
+        <CountryAlpha2>SL</CountryAlpha2>
+        <CountryAlpha3>SLE</CountryAlpha3>
+        <CountryFlag>flag_sierra_leone.png</CountryFlag>
     </country>
   <country>
-        <countryId>SGP65</countryId>
-        <countryName>Singapore</countryName>
-        <countryCode>65</countryCode>
-        <countryAlpha2>SG</countryAlpha2>
-        <countryAlpha3>SGP</countryAlpha3>
-        <countryFlag>flag_singapore.png</countryFlag>
+        <CountryId>SGP65</CountryId>
+        <CountryName>Singapore</CountryName>
+        <CountryCode>65</CountryCode>
+        <CountryAlpha2>SG</CountryAlpha2>
+        <CountryAlpha3>SGP</CountryAlpha3>
+        <CountryFlag>flag_singapore.png</CountryFlag>
     </country>
   <country>
-        <countryId>SXM1721</countryId>
-        <countryName>Sint Maarten</countryName>
-        <countryCode>1721</countryCode>
-        <countryAlpha2>SX</countryAlpha2>
-        <countryAlpha3>SXM</countryAlpha3>
-        <countryFlag>flag_sint_maarten.png</countryFlag>
+        <CountryId>SXM1721</CountryId>
+        <CountryName>Sint Maarten</CountryName>
+        <CountryCode>1721</CountryCode>
+        <CountryAlpha2>SX</CountryAlpha2>
+        <CountryAlpha3>SXM</CountryAlpha3>
+        <CountryFlag>flag_sint_maarten.png</CountryFlag>
     </country>
   <country>
-        <countryId>SVK421</countryId>
-        <countryName>Slovakia</countryName>
-        <countryCode>421</countryCode>
-        <countryAlpha2>SK</countryAlpha2>
-        <countryAlpha3>SVK</countryAlpha3>
-        <countryFlag>flag_slovakia.png</countryFlag>
+        <CountryId>SVK421</CountryId>
+        <CountryName>Slovakia</CountryName>
+        <CountryCode>421</CountryCode>
+        <CountryAlpha2>SK</CountryAlpha2>
+        <CountryAlpha3>SVK</CountryAlpha3>
+        <CountryFlag>flag_slovakia.png</CountryFlag>
     </country>
   <country>
-        <countryId>SVN386</countryId>
-        <countryName>Slovenia</countryName>
-        <countryCode>386</countryCode>
-        <countryAlpha2>SI</countryAlpha2>
-        <countryAlpha3>SVN</countryAlpha3>
-        <countryFlag>flag_slovenia.png</countryFlag>
+        <CountryId>SVN386</CountryId>
+        <CountryName>Slovenia</CountryName>
+        <CountryCode>386</CountryCode>
+        <CountryAlpha2>SI</CountryAlpha2>
+        <CountryAlpha3>SVN</CountryAlpha3>
+        <CountryFlag>flag_slovenia.png</CountryFlag>
     </country>
   <country>
-        <countryId>SLB677</countryId>
-        <countryName>Solomon Islands</countryName>
-        <countryCode>677</countryCode>
-        <countryAlpha2>SB</countryAlpha2>
-        <countryAlpha3>SLB</countryAlpha3>
-        <countryFlag>flag_soloman_islands.png</countryFlag>
+        <CountryId>SLB677</CountryId>
+        <CountryName>Solomon Islands</CountryName>
+        <CountryCode>677</CountryCode>
+        <CountryAlpha2>SB</CountryAlpha2>
+        <CountryAlpha3>SLB</CountryAlpha3>
+        <CountryFlag>flag_soloman_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>SOM252</countryId>
-        <countryName>Somalia</countryName>
-        <countryCode>252</countryCode>
-        <countryAlpha2>SO</countryAlpha2>
-        <countryAlpha3>SOM</countryAlpha3>
-        <countryFlag>flag_somalia.png</countryFlag>
+        <CountryId>SOM252</CountryId>
+        <CountryName>Somalia</CountryName>
+        <CountryCode>252</CountryCode>
+        <CountryAlpha2>SO</CountryAlpha2>
+        <CountryAlpha3>SOM</CountryAlpha3>
+        <CountryFlag>flag_somalia.png</CountryFlag>
     </country>
   <country>
-        <countryId>ZAF27</countryId>
-        <countryName>South Africa</countryName>
-        <countryCode>27</countryCode>
-        <countryAlpha2>ZA</countryAlpha2>
-        <countryAlpha3>ZAF</countryAlpha3>
-        <countryFlag>flag_south_africa.png</countryFlag>
+        <CountryId>ZAF27</CountryId>
+        <CountryName>South Africa</CountryName>
+        <CountryCode>27</CountryCode>
+        <CountryAlpha2>ZA</CountryAlpha2>
+        <CountryAlpha3>ZAF</CountryAlpha3>
+        <CountryFlag>flag_south_africa.png</CountryFlag>
     </country>
   <country>
-        <countryId>KOR82</countryId>
-        <countryName>South Korea</countryName>
-        <countryCode>82</countryCode>
-        <countryAlpha2>KR</countryAlpha2>
-        <countryAlpha3>KOR</countryAlpha3>
-        <countryFlag>flag_south_korea.png</countryFlag>
+        <CountryId>KOR82</CountryId>
+        <CountryName>South Korea</CountryName>
+        <CountryCode>82</CountryCode>
+        <CountryAlpha2>KR</CountryAlpha2>
+        <CountryAlpha3>KOR</CountryAlpha3>
+        <CountryFlag>flag_south_korea.png</CountryFlag>
     </country>
   <country>
-        <countryId>SSD211</countryId>
-        <countryName>South Sudan</countryName>
-        <countryCode>211</countryCode>
-        <countryAlpha2>SS</countryAlpha2>
-        <countryAlpha3>SSD</countryAlpha3>
-        <countryFlag>flag_south_sudan.png</countryFlag>
+        <CountryId>SSD211</CountryId>
+        <CountryName>South Sudan</CountryName>
+        <CountryCode>211</CountryCode>
+        <CountryAlpha2>SS</CountryAlpha2>
+        <CountryAlpha3>SSD</CountryAlpha3>
+        <CountryFlag>flag_south_sudan.png</CountryFlag>
     </country>
   <country>
-        <countryId>ESP34</countryId>
-        <countryName>Spain</countryName>
-        <countryCode>34</countryCode>
-        <countryAlpha2>ES</countryAlpha2>
-        <countryAlpha3>ESP</countryAlpha3>
-        <countryFlag>flag_spain.png</countryFlag>
+        <CountryId>ESP34</CountryId>
+        <CountryName>Spain</CountryName>
+        <CountryCode>34</CountryCode>
+        <CountryAlpha2>ES</CountryAlpha2>
+        <CountryAlpha3>ESP</CountryAlpha3>
+        <CountryFlag>flag_spain.png</CountryFlag>
     </country>
   <country>
-        <countryId>LKA94</countryId>
-        <countryName>Sri Lanka</countryName>
-        <countryCode>94</countryCode>
-        <countryAlpha2>LK</countryAlpha2>
-        <countryAlpha3>LKA</countryAlpha3>
-        <countryFlag>flag_sri_lanka.png</countryFlag>
+        <CountryId>LKA94</CountryId>
+        <CountryName>Sri Lanka</CountryName>
+        <CountryCode>94</CountryCode>
+        <CountryAlpha2>LK</CountryAlpha2>
+        <CountryAlpha3>LKA</CountryAlpha3>
+        <CountryFlag>flag_sri_lanka.png</CountryFlag>
     </country>
   <country>
-        <countryId>SDN249</countryId>
-        <countryName>Sudan</countryName>
-        <countryCode>249</countryCode>
-        <countryAlpha2>SD</countryAlpha2>
-        <countryAlpha3>SDN</countryAlpha3>
-        <countryFlag>flag_sudan.png</countryFlag>
+        <CountryId>SDN249</CountryId>
+        <CountryName>Sudan</CountryName>
+        <CountryCode>249</CountryCode>
+        <CountryAlpha2>SD</CountryAlpha2>
+        <CountryAlpha3>SDN</CountryAlpha3>
+        <CountryFlag>flag_sudan.png</CountryFlag>
     </country>
   <country>
-        <countryId>SUR597</countryId>
-        <countryName>Suriname</countryName>
-        <countryCode>597</countryCode>
-        <countryAlpha2>SR</countryAlpha2>
-        <countryAlpha3>SUR</countryAlpha3>
-        <countryFlag>flag_suriname.png</countryFlag>
+        <CountryId>SUR597</CountryId>
+        <CountryName>Suriname</CountryName>
+        <CountryCode>597</CountryCode>
+        <CountryAlpha2>SR</CountryAlpha2>
+        <CountryAlpha3>SUR</CountryAlpha3>
+        <CountryFlag>flag_suriname.png</CountryFlag>
     </country>
   <country>
-        <countryId>SJM47</countryId>
-        <countryName>Svalbard and Jan Mayen</countryName>
-        <countryCode>47</countryCode>
-        <countryAlpha2>SJ</countryAlpha2>
-        <countryAlpha3>SJM</countryAlpha3>
-        <countryFlag>flag_svalbard_and_jan_mayen.png</countryFlag>
+        <CountryId>SJM47</CountryId>
+        <CountryName>Svalbard and Jan Mayen</CountryName>
+        <CountryCode>47</CountryCode>
+        <CountryAlpha2>SJ</CountryAlpha2>
+        <CountryAlpha3>SJM</CountryAlpha3>
+        <CountryFlag>flag_svalbard_and_jan_mayen.png</CountryFlag>
     </country>
   <country>
-        <countryId>SWZ268</countryId>
-        <countryName>Swaziland</countryName>
-        <countryCode>268</countryCode>
-        <countryAlpha2>SZ</countryAlpha2>
-        <countryAlpha3>SWZ</countryAlpha3>
-        <countryFlag>flag_swaziland.png</countryFlag>
+        <CountryId>SWZ268</CountryId>
+        <CountryName>Swaziland</CountryName>
+        <CountryCode>268</CountryCode>
+        <CountryAlpha2>SZ</CountryAlpha2>
+        <CountryAlpha3>SWZ</CountryAlpha3>
+        <CountryFlag>flag_swaziland.png</CountryFlag>
     </country>
   <country>
-        <countryId>SWE46</countryId>
-        <countryName>Sweden</countryName>
-        <countryCode>46</countryCode>
-        <countryAlpha2>SE</countryAlpha2>
-        <countryAlpha3>SWE</countryAlpha3>
-        <countryFlag>flag_sweden.png</countryFlag>
+        <CountryId>SWE46</CountryId>
+        <CountryName>Sweden</CountryName>
+        <CountryCode>46</CountryCode>
+        <CountryAlpha2>SE</CountryAlpha2>
+        <CountryAlpha3>SWE</CountryAlpha3>
+        <CountryFlag>flag_sweden.png</CountryFlag>
     </country>
   <country>
-        <countryId>CHE41</countryId>
-        <countryName>Switzerland</countryName>
-        <countryCode>41</countryCode>
-        <countryAlpha2>CH</countryAlpha2>
-        <countryAlpha3>CHE</countryAlpha3>
-        <countryFlag>flag_switzerland.png</countryFlag>
+        <CountryId>CHE41</CountryId>
+        <CountryName>Switzerland</CountryName>
+        <CountryCode>41</CountryCode>
+        <CountryAlpha2>CH</CountryAlpha2>
+        <CountryAlpha3>CHE</CountryAlpha3>
+        <CountryFlag>flag_switzerland.png</CountryFlag>
     </country>
   <country>
-        <countryId>SYR963</countryId>
-        <countryName>Syria</countryName>
-        <countryCode>963</countryCode>
-        <countryAlpha2>SY</countryAlpha2>
-        <countryAlpha3>SYR</countryAlpha3>
-        <countryFlag>flag_syria.png</countryFlag>
+        <CountryId>SYR963</CountryId>
+        <CountryName>Syria</CountryName>
+        <CountryCode>963</CountryCode>
+        <CountryAlpha2>SY</CountryAlpha2>
+        <CountryAlpha3>SYR</CountryAlpha3>
+        <CountryFlag>flag_syria.png</CountryFlag>
     </country>
   <country>
-        <countryId>TWN886</countryId>
-        <countryName>Taiwan</countryName>
-        <countryCode>886</countryCode>
-        <countryAlpha2>TW</countryAlpha2>
-        <countryAlpha3>TWN</countryAlpha3>
-        <countryFlag>flag_taiwan.png</countryFlag>
+        <CountryId>TWN886</CountryId>
+        <CountryName>Taiwan</CountryName>
+        <CountryCode>886</CountryCode>
+        <CountryAlpha2>TW</CountryAlpha2>
+        <CountryAlpha3>TWN</CountryAlpha3>
+        <CountryFlag>flag_taiwan.png</CountryFlag>
     </country>
   <country>
-        <countryId>TJK992</countryId>
-        <countryName>Tajikistan</countryName>
-        <countryCode>992</countryCode>
-        <countryAlpha2>TJ</countryAlpha2>
-        <countryAlpha3>TJK</countryAlpha3>
-        <countryFlag>flag_tajikistan.png</countryFlag>
+        <CountryId>TJK992</CountryId>
+        <CountryName>Tajikistan</CountryName>
+        <CountryCode>992</CountryCode>
+        <CountryAlpha2>TJ</CountryAlpha2>
+        <CountryAlpha3>TJK</CountryAlpha3>
+        <CountryFlag>flag_tajikistan.png</CountryFlag>
     </country>
   <country>
-        <countryId>TZA255</countryId>
-        <countryName>Tanzania</countryName>
-        <countryCode>255</countryCode>
-        <countryAlpha2>TZ</countryAlpha2>
-        <countryAlpha3>TZA</countryAlpha3>
-        <countryFlag>flag_tanzania.png</countryFlag>
+        <CountryId>TZA255</CountryId>
+        <CountryName>Tanzania</CountryName>
+        <CountryCode>255</CountryCode>
+        <CountryAlpha2>TZ</CountryAlpha2>
+        <CountryAlpha3>TZA</CountryAlpha3>
+        <CountryFlag>flag_tanzania.png</CountryFlag>
     </country>
   <country>
-        <countryId>THA66</countryId>
-        <countryName>Thailand</countryName>
-        <countryCode>66</countryCode>
-        <countryAlpha2>TH</countryAlpha2>
-        <countryAlpha3>THA</countryAlpha3>
-        <countryFlag>flag_thailand.png</countryFlag>
+        <CountryId>THA66</CountryId>
+        <CountryName>Thailand</CountryName>
+        <CountryCode>66</CountryCode>
+        <CountryAlpha2>TH</CountryAlpha2>
+        <CountryAlpha3>THA</CountryAlpha3>
+        <CountryFlag>flag_thailand.png</CountryFlag>
     </country>
   <country>
-        <countryId>TGO228</countryId>
-        <countryName>Togo</countryName>
-        <countryCode>228</countryCode>
-        <countryAlpha2>TG</countryAlpha2>
-        <countryAlpha3>TGO</countryAlpha3>
-        <countryFlag>flag_togo.png</countryFlag>
+        <CountryId>TGO228</CountryId>
+        <CountryName>Togo</CountryName>
+        <CountryCode>228</CountryCode>
+        <CountryAlpha2>TG</CountryAlpha2>
+        <CountryAlpha3>TGO</CountryAlpha3>
+        <CountryFlag>flag_togo.png</CountryFlag>
     </country>
   <country>
-        <countryId>TKL690</countryId>
-        <countryName>Tokelau</countryName>
-        <countryCode>690</countryCode>
-        <countryAlpha2>TK</countryAlpha2>
-        <countryAlpha3>TKL</countryAlpha3>
-        <countryFlag>flag_tokelau.png</countryFlag>
+        <CountryId>TKL690</CountryId>
+        <CountryName>Tokelau</CountryName>
+        <CountryCode>690</CountryCode>
+        <CountryAlpha2>TK</CountryAlpha2>
+        <CountryAlpha3>TKL</CountryAlpha3>
+        <CountryFlag>flag_tokelau.png</CountryFlag>
     </country>
   <country>
-        <countryId>TON676</countryId>
-        <countryName>Tonga</countryName>
-        <countryCode>676</countryCode>
-        <countryAlpha2>TO</countryAlpha2>
-        <countryAlpha3>TON</countryAlpha3>
-        <countryFlag>flag_tonga.png</countryFlag>
+        <CountryId>TON676</CountryId>
+        <CountryName>Tonga</CountryName>
+        <CountryCode>676</CountryCode>
+        <CountryAlpha2>TO</CountryAlpha2>
+        <CountryAlpha3>TON</CountryAlpha3>
+        <CountryFlag>flag_tonga.png</CountryFlag>
     </country>
   <country>
-        <countryId>TTO1868</countryId>
-        <countryName>Trinidad and Tobago</countryName>
-        <countryCode>1868</countryCode>
-        <countryAlpha2>TT</countryAlpha2>
-        <countryAlpha3>TTO</countryAlpha3>
-        <countryFlag>flag_trinidad_and_tobago.png</countryFlag>
+        <CountryId>TTO1868</CountryId>
+        <CountryName>Trinidad and Tobago</CountryName>
+        <CountryCode>1868</CountryCode>
+        <CountryAlpha2>TT</CountryAlpha2>
+        <CountryAlpha3>TTO</CountryAlpha3>
+        <CountryFlag>flag_trinidad_and_tobago.png</CountryFlag>
     </country>
   <country>
-        <countryId>TUN216</countryId>
-        <countryName>Tunisia</countryName>
-        <countryCode>216</countryCode>
-        <countryAlpha2>TN</countryAlpha2>
-        <countryAlpha3>TUN</countryAlpha3>
-        <countryFlag>flag_tunisia.png</countryFlag>
+        <CountryId>TUN216</CountryId>
+        <CountryName>Tunisia</CountryName>
+        <CountryCode>216</CountryCode>
+        <CountryAlpha2>TN</CountryAlpha2>
+        <CountryAlpha3>TUN</CountryAlpha3>
+        <CountryFlag>flag_tunisia.png</CountryFlag>
     </country>
   <country>
-        <countryId>TUR90</countryId>
-        <countryName>Turkey</countryName>
-        <countryCode>90</countryCode>
-        <countryAlpha2>TR</countryAlpha2>
-        <countryAlpha3>TUR</countryAlpha3>
-        <countryFlag>flag_turkey.png</countryFlag>
+        <CountryId>TUR90</CountryId>
+        <CountryName>Turkey</CountryName>
+        <CountryCode>90</CountryCode>
+        <CountryAlpha2>TR</CountryAlpha2>
+        <CountryAlpha3>TUR</CountryAlpha3>
+        <CountryFlag>flag_turkey.png</CountryFlag>
     </country>
   <country>
-        <countryId>TKM993</countryId>
-        <countryName>Turkmenistan</countryName>
-        <countryCode>993</countryCode>
-        <countryAlpha2>TM</countryAlpha2>
-        <countryAlpha3>TKM</countryAlpha3>
-        <countryFlag>flag_turkmenistan.png</countryFlag>
+        <CountryId>TKM993</CountryId>
+        <CountryName>Turkmenistan</CountryName>
+        <CountryCode>993</CountryCode>
+        <CountryAlpha2>TM</CountryAlpha2>
+        <CountryAlpha3>TKM</CountryAlpha3>
+        <CountryFlag>flag_turkmenistan.png</CountryFlag>
     </country>
   <country>
-        <countryId>TCA1649</countryId>
-        <countryName>Turks and Caicos Islands</countryName>
-        <countryCode>1649</countryCode>
-        <countryAlpha2>TC</countryAlpha2>
-        <countryAlpha3>TCA</countryAlpha3>
-        <countryFlag>flag_turks_and_caicos_islands.png</countryFlag>
+        <CountryId>TCA1649</CountryId>
+        <CountryName>Turks and Caicos Islands</CountryName>
+        <CountryCode>1649</CountryCode>
+        <CountryAlpha2>TC</CountryAlpha2>
+        <CountryAlpha3>TCA</CountryAlpha3>
+        <CountryFlag>flag_turks_and_caicos_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>TUV688</countryId>
-        <countryName>Tuvalu</countryName>
-        <countryCode>688</countryCode>
-        <countryAlpha2>TV</countryAlpha2>
-        <countryAlpha3>TUV</countryAlpha3>
-        <countryFlag>flag_tuvalu.png</countryFlag>
+        <CountryId>TUV688</CountryId>
+        <CountryName>Tuvalu</CountryName>
+        <CountryCode>688</CountryCode>
+        <CountryAlpha2>TV</CountryAlpha2>
+        <CountryAlpha3>TUV</CountryAlpha3>
+        <CountryFlag>flag_tuvalu.png</CountryFlag>
     </country>
   <country>
-        <countryId>VIR1340</countryId>
-        <countryName>U.S. Virgin Islands</countryName>
-        <countryCode>1340</countryCode>
-        <countryAlpha2>VI</countryAlpha2>
-        <countryAlpha3>VIR</countryAlpha3>
-        <countryFlag>flag_us_virgin_islands.png</countryFlag>
+        <CountryId>VIR1340</CountryId>
+        <CountryName>U.S. Virgin Islands</CountryName>
+        <CountryCode>1340</CountryCode>
+        <CountryAlpha2>VI</CountryAlpha2>
+        <CountryAlpha3>VIR</CountryAlpha3>
+        <CountryFlag>flag_us_virgin_islands.png</CountryFlag>
     </country>
   <country>
-        <countryId>UGA256</countryId>
-        <countryName>Uganda</countryName>
-        <countryCode>256</countryCode>
-        <countryAlpha2>UG</countryAlpha2>
-        <countryAlpha3>UGA</countryAlpha3>
-        <countryFlag>flag_uganda.png</countryFlag>
+        <CountryId>UGA256</CountryId>
+        <CountryName>Uganda</CountryName>
+        <CountryCode>256</CountryCode>
+        <CountryAlpha2>UG</CountryAlpha2>
+        <CountryAlpha3>UGA</CountryAlpha3>
+        <CountryFlag>flag_uganda.png</CountryFlag>
     </country>
   <country>
-        <countryId>UKR380</countryId>
-        <countryName>Ukraine</countryName>
-        <countryCode>380</countryCode>
-        <countryAlpha2>UA</countryAlpha2>
-        <countryAlpha3>UKR</countryAlpha3>
-        <countryFlag>flag_ukraine.png</countryFlag>
+        <CountryId>UKR380</CountryId>
+        <CountryName>Ukraine</CountryName>
+        <CountryCode>380</CountryCode>
+        <CountryAlpha2>UA</CountryAlpha2>
+        <CountryAlpha3>UKR</CountryAlpha3>
+        <CountryFlag>flag_ukraine.png</CountryFlag>
     </country>
   <country>
-        <countryId>ARE971</countryId>
-        <countryName>United Arab Emirates</countryName>
-        <countryCode>971</countryCode>
-        <countryAlpha2>AE</countryAlpha2>
-        <countryAlpha3>ARE</countryAlpha3>
-        <countryFlag>flag_united_arab_emirates.png</countryFlag>
+        <CountryId>ARE971</CountryId>
+        <CountryName>United Arab Emirates</CountryName>
+        <CountryCode>971</CountryCode>
+        <CountryAlpha2>AE</CountryAlpha2>
+        <CountryAlpha3>ARE</CountryAlpha3>
+        <CountryFlag>flag_united_arab_emirates.png</CountryFlag>
     </country>
   <country>
-        <countryId>GBR44</countryId>
-        <countryName>United Kingdom</countryName>
-        <countryCode>44</countryCode>
-        <countryAlpha2>GB</countryAlpha2>
-        <countryAlpha3>GBR</countryAlpha3>
-        <countryFlag>flag_united_kingdom.png</countryFlag>
-    </country>
-  <country>
-        <countryId>USA1</countryId>
-        <countryName>United States</countryName>
-        <countryCode>1</countryCode>
-        <countryAlpha2>US</countryAlpha2>
-        <countryAlpha3>USA</countryAlpha3>
-        <countryFlag>flag_united_states_of_america.png</countryFlag>
-    </country>
-  <country>
-        <countryId>URY598</countryId>
-        <countryName>Uruguay</countryName>
-        <countryCode>598</countryCode>
-        <countryAlpha2>UY</countryAlpha2>
-        <countryAlpha3>URY</countryAlpha3>
-        <countryFlag>flag_uruguay.png</countryFlag>
-    </country>
-  <country>
-        <countryId>UZB998</countryId>
-        <countryName>Uzbekistan</countryName>
-        <countryCode>998</countryCode>
-        <countryAlpha2>UZ</countryAlpha2>
-        <countryAlpha3>UZB</countryAlpha3>
-        <countryFlag>flag_uzbekistan.png</countryFlag>
-    </country>
-  <country>
-        <countryId>VUT678</countryId>
-        <countryName>Vanuatu</countryName>
-        <countryCode>678</countryCode>
-        <countryAlpha2>VU</countryAlpha2>
-        <countryAlpha3>VUT</countryAlpha3>
-        <countryFlag>flag_vanuatu.png</countryFlag>
-    </country>
-  <country>
-        <countryId>VAT379</countryId>
-        <countryName>Vatican</countryName>
-        <countryCode>379</countryCode>
-        <countryAlpha2>VA</countryAlpha2>
-        <countryAlpha3>VAT</countryAlpha3>
-        <countryFlag>flag_vatican_city.png</countryFlag>
-    </country>
-  <country>
-        <countryId>VEN58</countryId>
-        <countryName>Venezuela</countryName>
-        <countryCode>58</countryCode>
-        <countryAlpha2>VE</countryAlpha2>
-        <countryAlpha3>VEN</countryAlpha3>
-        <countryFlag>flag_venezuela.png</countryFlag>
-    </country>
-  <country>
-        <countryId>VNM84</countryId>
-        <countryName>Vietnam</countryName>
-        <countryCode>84</countryCode>
-        <countryAlpha2>VN</countryAlpha2>
-        <countryAlpha3>VNM</countryAlpha3>
-        <countryFlag>flag_vietnam.png</countryFlag>
-    </country>
-  <country>
-        <countryId>WLF681</countryId>
-        <countryName>Wallis and Futuna</countryName>
-        <countryCode>681</countryCode>
-        <countryAlpha2>WF</countryAlpha2>
-        <countryAlpha3>WLF</countryAlpha3>
-        <countryFlag>flag_wallis_and_futuna.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ESH212</countryId>
-        <countryName>Western Sahara</countryName>
-        <countryCode>212</countryCode>
-        <countryAlpha2>EH</countryAlpha2>
-        <countryAlpha3>ESH</countryAlpha3>
-        <countryFlag>flag_western_sahara.png</countryFlag>
-    </country>
-  <country>
-        <countryId>YEM967</countryId>
-        <countryName>Yemen</countryName>
-        <countryCode>967</countryCode>
-        <countryAlpha2>YE</countryAlpha2>
-        <countryAlpha3>YEM</countryAlpha3>
-        <countryFlag>flag_yemen.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ZMB260</countryId>
-        <countryName>Zambia</countryName>
-        <countryCode>260</countryCode>
-        <countryAlpha2>ZM</countryAlpha2>
-        <countryAlpha3>ZMB</countryAlpha3>
-        <countryFlag>flag_zambia.png</countryFlag>
-    </country>
-  <country>
-        <countryId>ZWE263</countryId>
-        <countryName>Zimbabwe</countryName>
-        <countryCode>263</countryCode>
-        <countryAlpha2>ZW</countryAlpha2>
-        <countryAlpha3>ZWE</countryAlpha3>
-        <countryFlag>flag_zimbabwe.png</countryFlag>
+        <CountryId>GBR44</CountryId>
+        <CountryName>United Kingdom</CountryName>
+        <CountryCode>44</CountryCode>
+        <CountryAlpha2>GB</CountryAlpha2>
+        <CountryAlpha3>GBR</CountryAlpha3>
+        <CountryFlag>flag_united_kingdom.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>USA1</CountryId>
+        <CountryName>United States</CountryName>
+        <CountryCode>1</CountryCode>
+        <CountryAlpha2>US</CountryAlpha2>
+        <CountryAlpha3>USA</CountryAlpha3>
+        <CountryFlag>flag_united_states_of_america.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>URY598</CountryId>
+        <CountryName>Uruguay</CountryName>
+        <CountryCode>598</CountryCode>
+        <CountryAlpha2>UY</CountryAlpha2>
+        <CountryAlpha3>URY</CountryAlpha3>
+        <CountryFlag>flag_uruguay.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>UZB998</CountryId>
+        <CountryName>Uzbekistan</CountryName>
+        <CountryCode>998</CountryCode>
+        <CountryAlpha2>UZ</CountryAlpha2>
+        <CountryAlpha3>UZB</CountryAlpha3>
+        <CountryFlag>flag_uzbekistan.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>VUT678</CountryId>
+        <CountryName>Vanuatu</CountryName>
+        <CountryCode>678</CountryCode>
+        <CountryAlpha2>VU</CountryAlpha2>
+        <CountryAlpha3>VUT</CountryAlpha3>
+        <CountryFlag>flag_vanuatu.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>VAT379</CountryId>
+        <CountryName>Vatican</CountryName>
+        <CountryCode>379</CountryCode>
+        <CountryAlpha2>VA</CountryAlpha2>
+        <CountryAlpha3>VAT</CountryAlpha3>
+        <CountryFlag>flag_vatican_city.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>VEN58</CountryId>
+        <CountryName>Venezuela</CountryName>
+        <CountryCode>58</CountryCode>
+        <CountryAlpha2>VE</CountryAlpha2>
+        <CountryAlpha3>VEN</CountryAlpha3>
+        <CountryFlag>flag_venezuela.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>VNM84</CountryId>
+        <CountryName>Vietnam</CountryName>
+        <CountryCode>84</CountryCode>
+        <CountryAlpha2>VN</CountryAlpha2>
+        <CountryAlpha3>VNM</CountryAlpha3>
+        <CountryFlag>flag_vietnam.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>WLF681</CountryId>
+        <CountryName>Wallis and Futuna</CountryName>
+        <CountryCode>681</CountryCode>
+        <CountryAlpha2>WF</CountryAlpha2>
+        <CountryAlpha3>WLF</CountryAlpha3>
+        <CountryFlag>flag_wallis_and_futuna.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ESH212</CountryId>
+        <CountryName>Western Sahara</CountryName>
+        <CountryCode>212</CountryCode>
+        <CountryAlpha2>EH</CountryAlpha2>
+        <CountryAlpha3>ESH</CountryAlpha3>
+        <CountryFlag>flag_western_sahara.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>YEM967</CountryId>
+        <CountryName>Yemen</CountryName>
+        <CountryCode>967</CountryCode>
+        <CountryAlpha2>YE</CountryAlpha2>
+        <CountryAlpha3>YEM</CountryAlpha3>
+        <CountryFlag>flag_yemen.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ZMB260</CountryId>
+        <CountryName>Zambia</CountryName>
+        <CountryCode>260</CountryCode>
+        <CountryAlpha2>ZM</CountryAlpha2>
+        <CountryAlpha3>ZMB</CountryAlpha3>
+        <CountryFlag>flag_zambia.png</CountryFlag>
+    </country>
+  <country>
+        <CountryId>ZWE263</CountryId>
+        <CountryName>Zimbabwe</CountryName>
+        <CountryCode>263</CountryCode>
+        <CountryAlpha2>ZW</CountryAlpha2>
+        <CountryAlpha3>ZWE</CountryAlpha3>
+        <CountryFlag>flag_zimbabwe.png</CountryFlag>
     </country>
 </countries>

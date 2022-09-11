@@ -5,7 +5,7 @@
 * This class contains all the constants required by all project files
 *
 * @author David Kariuki (dk)
-* @copyright Copyright (c) 2020 - 2021 David Kariuki (dk) All Rights Reserved.
+* @copyright Copyright (c) 2020 - 2022 David Kariuki (dk) All Rights Reserved.
 */
 
 
@@ -23,7 +23,7 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable MYSQLI erro
 // Website and domain details
 define("PROTOCOL",                                  "https://");
 define("SUB_DOMAIN",                                "www.");
-define("ROOT_DOMAIN",                               "duesclerk.com");
+define("ROOT_DOMAIN",                               "liniantt.com");
 define("ROOT_DOMAIN_WITH_SUB_DOMAIN",               SUB_DOMAIN . ROOT_DOMAIN);
 define("WEBSITE_URL",                               PROTOCOL . ROOT_DOMAIN_WITH_SUB_DOMAIN);
 define("COMPANY_NAME",                              "DuesClerk");

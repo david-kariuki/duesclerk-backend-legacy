@@ -12,7 +12,7 @@
 error_reporting(1); // Enable Error Reporting
 
 // Call autoloader fie
-require_once $_SERVER["DOCUMENT_ROOT"] . "duesclerk_php/android/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/duesclerk_php/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\debt\DebtFunctions;

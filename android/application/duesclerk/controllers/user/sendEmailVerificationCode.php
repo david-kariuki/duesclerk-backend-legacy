@@ -17,7 +17,7 @@ error_reporting(E_ALL | E_NOTICE | E_STRICT); // eNable all error reporting
 
 
 // Call autoloader fie
-require_once $_SERVER["DOCUMENT_ROOT"] . "duesclerk_php/android/vendor/autoload.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . "/duesclerk_php/android/vendor/autoload.php";
 
 // Call required functions classes
 use duesclerk\user\UserAccountFunctions;
@@ -162,6 +162,12 @@ if (isset($_POST[FIELD_VERIFICATION_TYPE])
                     $emailAddress,
                     $verificationType
                 );
+
+                $response[KEY_ERROR]            = true;
+                $response[KEY_ERROR_MESSAGE]    = "Fail Test! : " . $generateCode;
+
+                echo json_encode($response);
+                exit;
 
                 if ($generateCode !== false) {
                     // Error false
