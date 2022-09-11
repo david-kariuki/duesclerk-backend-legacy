@@ -21,10 +21,10 @@ mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT); // Enable MYSQLI erro
 
 
 // Database Configuration
-define("SERVER_HOST",          "localhost");
-define("SERVER_HOST_USERNAME", "liniantt");
-define("SERVER_HOST_PASSWORD", "kRST#Bj|T(wM*g.j{u");
-define("DATABASE_NAME",        "liniantt_db_duesclerk");
+define("SERVER_HOST",          "");
+define("SERVER_HOST_USERNAME", "");
+define("SERVER_HOST_PASSWORD", "");
+define("DATABASE_NAME",        "");
 
 
 // Class declaration for autoloaer visibility

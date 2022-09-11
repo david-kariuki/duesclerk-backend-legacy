@@ -26,9 +26,9 @@ define("EMAIL_ADDRESS_SUPPORT_USERNAME",    "support@"  . ROOT_DOMAIN);
 define("EMAIL_ADDRESS_NO_REPLY_USERNAME",   "noreply@" . ROOT_DOMAIN);
 
 // SMTP Email address passwords
-define("EMAIL_ADDRESS_INFO_PASSWORD",       "U-s2t-{m5Bt9hf%%ad");
-define("EMAIL_ADDRESS_SUPPORT_PASSWORD",    "ZqT_GH.0#$}QTKrh70");
-define("EMAIL_ADDRESS_NO_REPLY_PASSWORD",   "6-Y2f;.=J3~%~T+aTi");
+define("EMAIL_ADDRESS_INFO_PASSWORD",       "");
+define("EMAIL_ADDRESS_SUPPORT_PASSWORD",    "");
+define("EMAIL_ADDRESS_NO_REPLY_PASSWORD",   "");
 
 // Set main(mail) and backup SMTP(webdisk) servers.
 define("MAIL_HOST",         "mail." . ROOT_DOMAIN . ";" . "webdisk." . ROOT_DOMAIN);
